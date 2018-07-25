@@ -3,10 +3,13 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import { routeConfig } from './routeConfig'
+import { updateCurrentPage } from './Store/actions/global.action'
 
 class App extends React.Component {
   componentDidMount() {
     console.log(this.props)
+    const store = this.props
+    store.dispatch(updateCurrentPage('/about'))
   }
   render() {
     return (
