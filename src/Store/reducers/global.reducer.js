@@ -1,5 +1,5 @@
-import { actionTypes } from '../actions/global.action'
-import { initialGlobalState } from '../states/global.state'
+import { actionTypes } from '../actions/global.action';
+import { initialGlobalState } from '../states/global.state';
 
 export const globalReducer = (state = initialGlobalState, action = {}) => {
   switch (action.type) {
@@ -10,21 +10,21 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
       return {
         ...state,
         ...{currentPage: action.data}
-      }
+      };
     case actionTypes.GET_CURRENT_PAGE:
-      let currentPage = '/'
+      let currentPage = '/';
       if (typeof window !== 'undefined'){
         currentPage = window.localStorage.getItem('currentPage') || '/'
       }
       return {
         ...state,
         ...{currentPage: currentPage}
-      }
+      };
     default:
       return state
   }
-}
+};
 
 export const globalState = {
   globalReducer: initialGlobalState
-}
+};

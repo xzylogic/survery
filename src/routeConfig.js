@@ -1,11 +1,15 @@
-import Home from './Pages/Home'
-import About from './Pages/About'
+import Un_implants from './Pages/Un_implants';
+import Implants from './Pages/Implants';
+import Querys from './Pages/Querys/Querys';
 
 export const routeConfig = [{
-  path: '/',
-  component: Home,
+  path: '/implants',
+  component: Implants,
   exact: true
 }, {
-  path: '/about',
-  component: About
-}]
+  path: '/un_implants',
+  component: Un_implants
+},{
+  path: '/implants/:id',
+  component: Querys
+}];

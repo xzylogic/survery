@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-class Home extends React.Component {
+class Un_implants extends React.Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default Un_implants;

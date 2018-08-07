@@ -1,28 +1,44 @@
-.App {
-  text-align: center;
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; font-family: PingFangSC-Regular;}
+h1, h2, h3, h4, h5, h6{ font-size:100%; }
+address, cite, dfn, em, var { font-style:normal; }
+code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+ul, ol { list-style:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; }
+sup { vertical-align:text-top; }
+sub{ vertical-align:text-bottom; }
+legend { color:#000; }
+fieldset, img { border:0; }
+table { border-collapse:collapse; border-spacing:0; }
+.blue_btn{
+    /*font-family: PingFangSC-Regular;*/
+    background-color: #0CB8F5;
+    border: 1px solid #0CB7F5;
+    border-radius: 0.08rem;
+    width:5rem;
+    height:0.88rem;
+    line-height:0.88rem;
+    font-size: 0.38rem;
+    text-align:center;
+    margin: 0 auto;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.white_btn{
+    /*font-family: PingFangSC-Regular;*/
+    background-color: #FFFFFF;
+    border: 1px solid #0CB7F5;
+    border-radius: 0.08rem;
+    width:5rem;
+    height:0.88rem;
+    line-height:0.88rem;
+    font-size: 0.38rem;
+    text-align:center;
+    margin: 0 auto;
 }
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.whiteColor{
+    color: #FFFFFF;
+    display: block;
 }
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.blueColor{
+    color: #0CB8F5;
+    display: block;
 }
