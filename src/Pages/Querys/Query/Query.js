@@ -37,6 +37,16 @@ class Query extends React.Component {
     localStorage.setItem('inputValue'+[this.props.id],inputValue);
   }
 
+  componentDidUpdate(){
+    //存储数据
+    let getValue = localStorage.getItem('inputValue'+[this.props.id]);
+    let inputVal = document.getElementsByTagName("input");
+    for(let i=0;i<inputVal.length;i++){
+      if(inputVal[i].value === getValue){
+        inputVal[i].setAttribute('checked','checked');
+      }
+    }
+  }
   render() {
     let id = this.props.id;//获取当前url参数
     let length = this.props.query.length;
@@ -60,7 +70,7 @@ class Query extends React.Component {
 
 
     if(id === 1 || id ===9 || id ===10 || id === 56){
-      query_content = <input type="text" className="inputText" defaultValue="" onChange={this.inputHandler}/>
+      query_content = <input type="text" className="inputText" onChange={this.inputHandler}/>
     }else if(id === 2){
       query_content = (
         <div onClick={this.inputHandler}>
@@ -81,18 +91,19 @@ class Query extends React.Component {
     }else if(id === 3){
       query_content = (
           <div>
-            <div className="date-picker-list" style={{ backgroundColor: 'white' }}>
+            <List className="date-picker-list" style={{ backgroundColor: 'white' }}>
               <DatePicker
                   mode="date"
-                  title="Select Date"
+                  title=""
                   extra="Optional"
                   value={this.state.date}
+                  // onChange={async(date) => {console.log(date);await this.setState({date: date});await console.log(this.state.date)}}
                   onChange={date => this.setState({ date })}
               >
-                {/*<List.Item arrow="horizontal">Date</List.Item>*/}
-                <input type="text" className="inputText" arrow="horizontal" defaultValue={this.state.date.toISOString().slice(0,10)}/>
+                {/*<List.Item arrow="horizontal">出生日期</List.Item>*/}
+                <input type="text" className="inputText" arrow="horizontal" value={this.state.date.toISOString().slice(0,10)} readOnly/>
               </DatePicker>
-            </div>
+            </List>
           </div>
       )
     }else if(id === 4){
@@ -135,9 +146,9 @@ class Query extends React.Component {
                 return null;
               }else{
                 return (
-                    <div key={index} className="select">
+                    <div key={index} className="select" onClick={this.inputHandler}>
                       <Link to={`/querys/${id}`}>
-                        <input type="radio" id={'selectRadio'+index} defaultValue={option.degree} onClick={this.inputHandler}/>
+                        <input type="radio" id={'selectRadio'+index} defaultValue={option.degree}/>
                         <label htmlFor={'selectRadio'+index}>{option.degree}</label>
                       </Link>
                     </div>
@@ -187,7 +198,6 @@ class Query extends React.Component {
     }
     return (
         <div>
-
           <div className="title">
             <div className="progress-container" style={{marginTop:'0.36rem',height:'0.36rem'}}>
               <Progress percent={this.props.percent} position="normal" style={{borderRadius:'1rem'}}/>

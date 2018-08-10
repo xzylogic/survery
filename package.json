@@ -23,7 +23,7 @@
   "devDependencies": {
     "babel-plugin-import": "^1.8.0",
     "css-loader": "^1.0.0",
-    "less": "^3.8.0",
+    "less": "^2.7.2",
     "less-loader": "^4.1.0",
     "react-app-rewire-less": "^2.1.2",
     "react-app-rewired": "^1.5.2",
