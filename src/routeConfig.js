@@ -1,19 +1,20 @@
 import Home from './Pages/Home/Home';
-import Implants from './Pages/Implants';
+import Implant from './Pages/Implant/Implant';
 import Un_implants from './Pages/Un_implants';
 import Querys from './Pages/Querys/Querys';
 
+// const setTitle = (title) => document.title = title;
 export const routeConfig = [{
   path: '/',
   component: Home,
-  exact: true
+  exact: true,
 }, {
-  path: '/implants',
-  component: Implants,
+  path: '/implant',
+  component: Implant,
 }, {
   path: '/un_implants',
-  component: Un_implants
+  component: Un_implants,
 },{
-  path: '/implants/:id',
-  component: Querys
+  path: '/querys/:id',
+  component: Querys,
 }];

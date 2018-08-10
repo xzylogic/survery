@@ -32,45 +32,45 @@
 	"title": "文化水平",
 	"category": "basic",
 	"option": [{
-		"education": "大专及以下"
+		"degree": "大专及以下"
 	}, {
-		"education": "本科"
+		"degree": "本科"
 	}, {
-		"education": "研究生及以上"
+		"degree": "研究生及以上"
 	}]
 }, {
 	"type": "selection",
 	"title": "目前婚姻情况",
 	"category": "basic",
 	"option": [{
-		"marriage": "已婚"
+		"degree": "已婚"
 	}, {
-		"marriage": "离婚"
+		"degree": "离婚"
 	}, {
-		"marriage": "丧偶"
+		"degree": "丧偶"
 	}, {
-		"marriage": "未婚"
+		"degree": "未婚"
 	}]
 }, {
 	"type": "checkbox",
 	"title": "既往病史(多选)",
 	"category": "basic",
 	"option": [{
-		"medical": "高血压"
+		"degree": "高血压"
 	}, {
-		"medical": "高血脂"
+		"degree": "高血脂"
 	}, {
-		"medical": "糖尿病"
+		"degree": "糖尿病"
 	}, {
-		"medical": "冠心病家族史"
+		"degree": "冠心病家族史"
 	}, {
-		"medical": "脑血管疾病"
+		"degree": "脑血管疾病"
 	}, {
-		"medical": "慢性阻塞性肺病"
+		"degree": "慢性阻塞性肺病"
 	}, {
-		"medical": "骨骼系统疾病"
+		"degree": "骨骼系统疾病"
 	}, {
-		"medical": "其他脏器疾病"
+		"degree": "其他脏器疾病"
 	}]
 }, {
 	"type": "input",
@@ -994,4 +994,10 @@
 		"degree": "中度焦虑或抑郁",
 		"score": 3
 	}]
+}, {
+	"id": 46,
+	"type": "input",
+	"title": "健康状况1-100",
+	"category": "EQ-5D",
+	"option": null
 }]
