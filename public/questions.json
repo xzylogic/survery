@@ -1,10 +1,12 @@
 [{
-	"type": "input",
+  "type": "input",
+  "key": "name",
 	"title": "请输入你的姓名",
 	"category": "basic",
 	"option": null
 }, {
-	"type": "selection",
+  "type": "selection",
+  "key": "sex",
 	"title": "你的性别",
 	"category": "basic",
 	"option": [{
@@ -14,21 +16,25 @@
 	}]
 }, {
 	"type": "input",
+  "key": "birthday",
 	"title": "请选择你的出生年月",
 	"category": "basic",
 	"option": null
 }, {
 	"type": "input",
+  "key": "height",
 	"title": "你的身高",
 	"category": "basic",
 	"option": null
 }, {
-	"type": "input",
+  "type": "input",
+  "key": "weight",
 	"title": "你的体重",
 	"category": "basic",
 	"option": null
 }, {
-	"type": "selection",
+  "type": "selection",
+  "key": "education",
 	"title": "文化水平",
 	"category": "basic",
 	"option": [{
@@ -40,6 +46,7 @@
 	}]
 }, {
 	"type": "selection",
+  "key": "marriage",
 	"title": "目前婚姻情况",
 	"category": "basic",
 	"option": [{
@@ -53,6 +60,7 @@
 	}]
 }, {
 	"type": "checkbox",
+  "key": "degree",
 	"title": "既往病史(多选)",
 	"category": "basic",
 	"option": [{
@@ -73,12 +81,14 @@
 		"degree": "其他脏器疾病"
 	}]
 }, {
-	"type": "input",
+  "type": "input",
+  "key": "date",
 	"title": "最后一次支架手术时间",
 	"category": "basic",
 	"option": null
 }, {
 	"type": "input",
+  "key": "hospital",
 	"title": "最后一次支架手术医院",
 	"category": "basic",
 	"option": null

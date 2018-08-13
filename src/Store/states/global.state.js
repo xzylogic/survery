@@ -1,3 +1,5 @@
 export const initialGlobalState = {
-  currentPage: '/'
+  currentPage: '/',
+  questions: [],
+  inputValue: {}
 };

@@ -1,28 +1,29 @@
-import { put, takeLatest, call, select } from 'redux-saga/effects'
+import { put, takeLatest, call, select } from 'redux-saga/effects';
+import * as axios from 'axios';
 
-import { actionTypes } from '../actions/global.action'
+import { actionTypes, updateQuestionsAction } from '../actions/global.action';
 
-// const PATH = {
-//   login: '/api/login',
-// }
+const PATH = {
+  getQuestions: '../questions.json',
+};
 
-// const loginService = (data) => {
-//   return HttpHostService.post(`${PATH.login}`, data)
-// }
+const getQuestionsService = async () => {
+  const service = await axios.get(`${PATH.getQuestions}`);
+  const data = await service.data;
+  return data;
+}
 
-// function* login(actions) {
-//   const loginRes = yield call(loginService, actions.data)
-//   if (loginRes) {
-//     yield put(authLogin({accessToken: loginRes.accessToken}))
-//     yield put(getCurrentPage())
-//     const { currentPage } = yield select((state) => state.globalReducer)
-//     yield Router.replace(currentPage)
-//   }
-// }
+function* loadQuestions() {
+  try {
+    const data = yield call(getQuestionsService);
+    if (data) {
+      yield put(updateQuestionsAction(data));
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
 export const globalSaga = [
-  // takeLatest(actionTypes.LOGIN, login),
-  // takeLatest(actionTypes.REGISTER, register),
-  // takeLatest(actionTypes.GET_CODE, getCode),
-  // takeLatest(actionTypes.GETBACK_PASSWORD, getbackPassword)
-]
+  takeLatest(actionTypes.LOAD_QUESTIONS, loadQuestions)
+];

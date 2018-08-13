@@ -12,6 +12,7 @@ module.exports = function override(config, env) {
   config = rewireLess.withLoaderOptions({
     modifyVars: {
       '@hd':'0.02rem',
+      '@fill-body': '#fff',
       '@brand-primary': '#0CB7F5'
     },
   })(config, env)
