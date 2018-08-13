@@ -34,7 +34,17 @@ class Query extends React.Component {
   }
   inputHandler = (e) => {
     let inputValue = e.target.value;
-    localStorage.setItem('inputValue'+[this.props.id],inputValue);
+    localStorage.setItem('inputValue' + [this.props.id], inputValue);
+    if(this.props.id === 7){
+      let inputCheckbox = document.getElementsByTagName("input");
+      let check_val = [];
+      for(let k in inputCheckbox){
+        if(inputCheckbox[k].checked) {
+          check_val.push(inputCheckbox[k].value);
+        }
+      }
+      localStorage.setItem('inputValue' + [this.props.id], check_val);
+    }
   }
   componentDidUpdate(){
     //获取数据
