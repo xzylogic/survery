@@ -58,3 +58,29 @@ label{
     font-size: 0.4rem;
     color: #666666;
 }
+.basic{
+    display: inline-block;
+    font-size: 0.32rem;
+    color: #666666;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    position: absolute;
+    right: 4%;
+}
+.query_end{
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+.query_end img{
+    width: 2rem;
+    height: 2rem;
+}
+.query_end p{
+    width: 65%;
+    margin: 0.5rem auto;
+    font-size: 0.36rem;
+    color: #666666;
+    line-height: 0.5rem;
+    /*line-height: 1.6rem;*/
+}

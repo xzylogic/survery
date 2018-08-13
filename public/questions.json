@@ -997,7 +997,7 @@
 }, {
 	"id": 46,
 	"type": "input",
-	"title": "健康状况1-100",
+	"title": "目前的健康状况(0-100分)",
 	"category": "EQ-5D",
 	"option": null
 }]

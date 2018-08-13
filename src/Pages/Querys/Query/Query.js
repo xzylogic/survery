@@ -36,9 +36,8 @@ class Query extends React.Component {
     let inputValue = e.target.value;
     localStorage.setItem('inputValue'+[this.props.id],inputValue);
   }
-
   componentDidUpdate(){
-    //存储数据
+    //获取数据
     let getValue = localStorage.getItem('inputValue'+[this.props.id]);
     let inputVal = document.getElementsByTagName("input");
     for(let i=0;i<inputVal.length;i++){
@@ -55,34 +54,35 @@ class Query extends React.Component {
     id = id+1;//下一题
     let query_title=null,
         query_content=null,
+        query_percent = (
+            <div className="progress-container" style={{marginTop:'0.36rem',height:'0.36rem'}}>
+              <Progress percent={this.props.percent} position="normal" style={{borderRadius:'1rem'}}/>
+            </div>
+        ),
         query_button = null;//页面显示的内容
 
     if(index<=0){
       index = 0;
     }
 
-
-    if(id >= (length+1)){
-      return query_content = (<div>调查完成！</div>);
-    }else{
+    if(id < (length+1)){
       query_title = <p className="title_header">{this.props.query[id-1].title}</p>;
     }
 
-
-    if(id === 1 || id ===9 || id ===10 || id === 56){
+    if(id === 1 || id ===9 || id ===10){
       query_content = <input type="text" className="inputText" onChange={this.inputHandler}/>
     }else if(id === 2){
       query_content = (
         <div onClick={this.inputHandler}>
           <div className="female">
             <Link to={`/querys/${id}`}>
-              <input type="radio" id="female" name="sex" defaultValue="女"/>
+              <input type="radio" id="female" name="sex" value="女"/>
               <label htmlFor="female">女</label>
             </Link>
           </div>
           <div className="male">
             <Link to={`/querys/${id}`}>
-              <input type="radio" id="male" name="sex" defaultValue="男"/>
+              <input type="radio" id="male" name="sex" value="男"/>
               <label htmlFor="male">男</label>
             </Link>
           </div>
@@ -101,7 +101,7 @@ class Query extends React.Component {
                   onChange={date => this.setState({ date })}
               >
                 {/*<List.Item arrow="horizontal">出生日期</List.Item>*/}
-                <input type="text" className="inputText" arrow="horizontal" value={this.state.date.toISOString().slice(0,10)} readOnly/>
+                <input type="text" className="inputText" arrow="horizontal" value={this.state.date.toISOString().slice(0,10)} onChange={this.inputHandler} />
               </DatePicker>
             </List>
           </div>
@@ -109,13 +109,19 @@ class Query extends React.Component {
     }else if(id === 4){
       query_content = (
           <div>
-            <input type="text" onChange={this.inputHandler} defaultValue=""/>身高
+            <input type="text" onChange={this.inputHandler} defaultValue=""/><span className="basic">厘米</span>
           </div>
       )
     }else if(id === 5){
       query_content = (
           <div>
-            <input type="text" onChange={this.inputHandler} defaultValue=""/>体重
+            <input type="text" onChange={this.inputHandler} defaultValue=""/><span className="basic">体重</span>
+          </div>
+      )
+    }else if(id === 56){
+      query_content = (
+          <div>
+            <input type="text" onChange={this.inputHandler} defaultValue=""/><span className="basic">分</span>
           </div>
       )
     }else if(id === 8){
@@ -128,7 +134,7 @@ class Query extends React.Component {
                 }else{
                   return (
                       <div key={index} onClick={this.inputHandler} className="select">
-                          <input type="checkbox" id={'selectCheckBox'+index} defaultValue={option.degree}/>
+                          <input type="checkbox" id={'selectCheckBox'+index} value={option.degree}/>
                           <label htmlFor={'selectCheckBox'+index}>{option.degree}</label>
                       </div>
                   )
@@ -137,6 +143,32 @@ class Query extends React.Component {
             }
           </div>
       )
+    }else if(id === (length+1)){
+      return query_content = (
+          <div className="title">
+            {query_percent}
+            <div className="query_end">
+              <img src="" alt="调查完成"/>
+              <p>调查已完成，感谢你的参与。</p>
+              <Link to={`/querys/${id}`} className="blue_btn whiteColor">确定</Link>
+            </div>
+          </div>
+
+      );
+    }else if(id >= (length+2)){
+      return query_content = (
+          <div className="title">
+            {query_percent}
+            <div className="query_end">
+              <img src="" alt="是否实名"/>
+              <p>调查已完成，你尚未实名， 实名后可查阅全部病史</p>
+              <button className="blue_btn whiteColor">立即实名</button>
+              <br/><br/>
+              <button className="white_btn blueColor">暂不实名</button>
+            </div>
+          </div>
+
+      );
     }else{
       query_content = (
         <div>
@@ -148,7 +180,7 @@ class Query extends React.Component {
                 return (
                     <div key={index} className="select" onClick={this.inputHandler}>
                       <Link to={`/querys/${id}`}>
-                        <input type="radio" id={'selectRadio'+index} defaultValue={option.degree}/>
+                        <input type="radio" id={'selectRadio'+index} value={option.degree}/>
                         <label htmlFor={'selectRadio'+index}>{option.degree}</label>
                       </Link>
                     </div>
@@ -199,9 +231,7 @@ class Query extends React.Component {
     return (
         <div>
           <div className="title">
-            <div className="progress-container" style={{marginTop:'0.36rem',height:'0.36rem'}}>
-              <Progress percent={this.props.percent} position="normal" style={{borderRadius:'1rem'}}/>
-            </div>
+            {query_percent}
             {query_title}
             {query_content}
           </div>

@@ -17,6 +17,9 @@ class Querys extends React.Component {
   render() {
     let id=parseInt(this.props.match.params.id);
     let percent = Math.round(parseFloat(id / 56 * 100));
+    if(percent>=100){
+      percent = 100
+    }
     document.title = `已完成 ${percent}%`;
       return (
           <div>

@@ -8,6 +8,7 @@ class Home extends React.Component {
     super(props);
   }
   render() {
+    {document.title = "问卷调查"}
     const app_text = {
       width:'5.86rem',
       height:'1rem',
@@ -18,7 +19,6 @@ class Home extends React.Component {
     };
     return (
         <div>
-          {document.title = "问卷调查"}
           <p style={app_text}>本次调查<br/>仅针对曾植入过心脏支架的用户</p>
           <ul>
             <li className="blue_btn" style={{marginTop:'0.64rem'}}>

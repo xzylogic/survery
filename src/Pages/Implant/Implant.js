@@ -9,9 +9,9 @@ class Implant extends React.Component {
     super(props);
   }
   render() {
+    {document.title = "调查知情说明"}
     return (
         <div>
-          {document.title = "调查知情说明"}
           <p className="explain">此次调查主要目的是了解冠心病支架术后人群的生活质量特征，探讨处于术后不同病程阶段的生活质量变化趋势。在调查过程中，我们将严格遵守保护个人的私密信息，任何文章或调查研究结果中，不会出现姓名、住院号等个人信息，也严禁任何人公开或是用于商业行为。
             <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             调查表一人一卷，以现场问卷方式和网络填写为主，取得填表人同意后，住院期间收回纸质问卷，电子问卷直接进入数据库留存。
