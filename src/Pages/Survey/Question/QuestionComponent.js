@@ -1,17 +1,35 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { List, InputItem } from 'antd-mobile'
+import { withRouter } from 'react-router'
+import { List, InputItem, Radio, DatePicker, Button, Checkbox } from 'antd-mobile'
 
 import './QuestionComponent.css'
 
 import { updateInputValueAction, appendInputValueAction } from '../../../Store/actions/global.action'
 
-const RenderQuestion = (question, inputValue, onChange) => {
-  console.log(inputValue[question.key])
+const RenderNextButton = (type, id, onPush) => {
+  if (type === 'selection') {
+    return (
+      <Button type='ghost' onClick={onPush.bind(this, `/querys/${id - 1}`)}>上一题</Button>
+    )
+  } else if (type !== 'selection' && id === 0) {
+    return (
+      <Button type='primary' onClick={onPush.bind(this, `/querys/${id + 1}`)}>下一题</Button>
+    )
+  } else if (type !== 'selection' && id !== 0 ) {
+    return (
+      <div>
+        <Button type='ghost' style={{width: '47%', float: 'left'}} onClick={onPush.bind(this, `/querys/${id - 1}`)}>上一题</Button>
+        <Button type='primary' style={{width: '47%', float: 'right'}} onClick={onPush.bind(this, `/querys/${id + 1}`)}>下一题</Button>
+      </div>
+    )
+  }
+}
+
+const RenderQuestion = ({question, inputValue, onChange, id, onPush}) => {
   switch (question.type) {
     case 'input': 
-      return (
+      return question.category === 'basic' ? (
         <React.Fragment>
           <p className='title_header'>{question.title}</p>
           <List style={{background: '#f5f5f9'}}>
@@ -19,8 +37,102 @@ const RenderQuestion = (question, inputValue, onChange) => {
               type={question.inputType || 'text'}
               value={inputValue[question.key]}
               onChange={onChange}
+              extra={question.extra}
             ></InputItem>
           </List>
+          <div style={{position: 'fixed', bottom: 0, left: 0, right: 0, padding: '.44rem', height: '1.82rem'}}> 
+            {RenderNextButton(question.type, id, onPush)}
+          </div>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <p className='title_header'>{question.title}</p>
+          <List style={{background: '#f5f5f9'}}>
+            <InputItem
+              type={question.inputType || 'text'}
+              value={inputValue[question.key] && inputValue[question.key][question.id]}
+              onChange={onChange}
+              extra={question.extra}
+            ></InputItem>
+          </List>
+          <div style={{position: 'fixed', bottom: 0, left: 0, right: 0, padding: '.44rem', height: '1.82rem'}}> 
+            {RenderNextButton(question.type, id, onPush)}
+          </div>
+        </React.Fragment>
+      );
+    case 'date': 
+      return (
+        <React.Fragment>
+          <p className='title_header'>{question.title}</p>
+          <List style={{background: '#f5f5f9'}}>
+            <DatePicker
+              mode="date"
+              title=""
+              value={inputValue[question.key]}
+              onChange={onChange}
+              >
+                <List.Item arrow="horizontal">出生年月</List.Item>
+              </DatePicker>
+          </List>
+          <div style={{position: 'fixed', bottom: 0, left: 0, right: 0, padding: '.44rem', height: '1.82rem'}}> 
+            {RenderNextButton(question.type, id, onPush)}
+          </div>
+        </React.Fragment>
+      );
+    case 'selection': 
+      return question.category === 'basic' ? (
+          <React.Fragment>
+            <p className='title_header'>{question.title}</p>
+            <List style={{background: '#f5f5f9'}}>
+              {question.option.map(opt => (
+                <Radio.RadioItem 
+                  key={opt.score} 
+                  checked={opt.score === inputValue[question.key]} 
+                  onClick={onChange.bind(this, opt.score)}
+                >
+                  {opt.degree}
+                </Radio.RadioItem>
+              ))}
+            </List>
+            <div style={{position: 'fixed', bottom: 0, left: 0, right: 0, padding: '.44rem', height: '1.82rem'}}> 
+              {RenderNextButton(question.type, id, onPush)}
+            </div>
+          </React.Fragment>) : (
+          <React.Fragment>
+            <p className='title_header'>{question.title}</p>
+            <List style={{background: '#f5f5f9'}}>
+              {question.option.map(opt => (
+                <Radio.RadioItem 
+                  key={opt.score} 
+                  checked={opt.score === (inputValue[question.key] && inputValue[question.key][question.id])} 
+                  onClick={onChange.bind(this, opt.score)}
+                >
+                  {opt.degree}
+                </Radio.RadioItem>
+              ))}
+            </List>
+            <div style={{position: 'fixed', bottom: 0, left: 0, right: 0, padding: '.44rem', height: '1.82rem'}}> 
+              {RenderNextButton(question.type, id, onPush)}
+            </div>
+          </React.Fragment>)
+    case 'checkbox': 
+      return (
+        <React.Fragment>
+          <p className='title_header'>{question.title}</p>
+          <List style={{background: '#f5f5f9'}}>
+            {question.option.map(opt => {return (
+              <Checkbox.CheckboxItem 
+                key={opt.score} 
+                onClick={onChange.bind(this, opt.score)} 
+                checked={inputValue[question.key] && Array.isArray(inputValue[question.key]) && inputValue[question.key].indexOf(opt.score) > -1}
+              >
+                {opt.degree}
+              </Checkbox.CheckboxItem>
+            )})}
+          </List>
+          <div style={{position: 'fixed', bottom: 0, left: 0, right: 0, padding: '.44rem', height: '1.82rem'}}> 
+            {RenderNextButton(question.type, id, onPush)}
+          </div>
         </React.Fragment>
       );
     default: 
@@ -29,37 +141,51 @@ const RenderQuestion = (question, inputValue, onChange) => {
 }
 
 class Index extends React.Component {
-  componentDidUpdate(){
-    //获取数据
-    let getValue = localStorage.getItem('inputValue'+[this.props.id]);
-    let inputVal = document.getElementsByTagName("input");
-    for(let i=0;i<inputVal.length;i++){
-      inputVal[i].checked=false;
-      if(inputVal[i].value === getValue){
-        inputVal[i].checked=true;
+
+  handleChange = (value) => {
+    const store = this.props
+    const question = this.props.question
+    const id = this.props.id
+    if (question.category === 'basic') {
+      if (question.type === 'checkbox') {
+        store.dispatch(appendInputValueAction(question.key, value))
+      } else {
+        store.dispatch(updateInputValueAction(question.key, value))
+      }
+      if (question.type === 'selection') {
+        this.props.history.push(`/querys/${id + 1}`)
+      }
+    }
+    if (question.category === 'survey') {
+      store.dispatch(appendInputValueAction(question.key, value, question.id))
+      if (question.type === 'selection') {
+        this.props.history.push(`/querys/${id + 1}`)
       }
     }
   }
 
-  handleChange = (value) => {
-    console.log(value)
-    const store = this.props
-    const question = this.props.question
-    if (question.category === 'basic') {
-      store.dispatch(updateInputValueAction(question.key, value))
-    }
+  handlePush = (router) => {
+    this.props.history.push(router)
   }
 
   render() {
     const { globalReducer } = this.props
     const { inputValue } = globalReducer
     const question = this.props.question
+    const id = this.props.id
     return (
         <div>
-          { question && inputValue ? RenderQuestion(question, inputValue, this.handleChange) : ''}
+          { question && inputValue ? 
+              <RenderQuestion 
+                question={question} 
+                id={id}
+                inputValue={inputValue}
+                onChange={this.handleChange}
+                onPush={this.handlePush}
+              /> : ''}
         </div>
     )
   }
 }
 
-export default connect(state => state)(Index)
+export default withRouter(connect(state => state)(Index))

@@ -10,12 +10,14 @@
 	"title": "你的性别",
 	"category": "basic",
 	"option": [{
-		"sex": "男"
+    "score": "男",
+		"degree": "男"
 	}, {
-		"sex": "女"
-	}]
+    "score": "女",
+		"degree": "女"
+  }]
 }, {
-	"type": "input",
+	"type": "date",
   "key": "birthday",
 	"title": "请选择你的出生年月",
 	"category": "basic",
@@ -24,12 +26,14 @@
 	"type": "input",
   "key": "height",
 	"title": "你的身高",
-	"category": "basic",
+  "category": "basic",
+  "extra": "厘米",
 	"option": null
 }, {
   "type": "input",
   "key": "weight",
-	"title": "你的体重",
+  "title": "你的体重",
+  "extra": "千克",
 	"category": "basic",
 	"option": null
 }, {
@@ -38,10 +42,13 @@
 	"title": "文化水平",
 	"category": "basic",
 	"option": [{
+    "score": "大专及以下",
 		"degree": "大专及以下"
 	}, {
+    "score": "本科",
 		"degree": "本科"
 	}, {
+    "score": "研究生及以上",
 		"degree": "研究生及以上"
 	}]
 }, {
@@ -50,13 +57,17 @@
 	"title": "目前婚姻情况",
 	"category": "basic",
 	"option": [{
-		"degree": "已婚"
+    "score": "已婚",
+    "degree": "已婚"
 	}, {
-		"degree": "离婚"
+    "score": "离婚",
+    "degree": "离婚"
 	}, {
-		"degree": "丧偶"
+    "score": "丧偶",
+    "degree": "丧偶"
 	}, {
-		"degree": "未婚"
+    "score": "未婚",
+    "degree": "未婚"
 	}]
 }, {
 	"type": "checkbox",
@@ -64,24 +75,32 @@
 	"title": "既往病史(多选)",
 	"category": "basic",
 	"option": [{
+		"score": "高血压",
 		"degree": "高血压"
 	}, {
+		"score": "高血脂",
 		"degree": "高血脂"
 	}, {
+		"score": "糖尿病",
 		"degree": "糖尿病"
 	}, {
+		"score": "冠心病家族史",
 		"degree": "冠心病家族史"
 	}, {
+		"score": "脑血管疾病",
 		"degree": "脑血管疾病"
 	}, {
+		"score": "慢性阻塞性肺病",
 		"degree": "慢性阻塞性肺病"
 	}, {
+		"score": "骨骼系统疾病",
 		"degree": "骨骼系统疾病"
 	}, {
+		"score": "其他脏器疾病",
 		"degree": "其他脏器疾病"
 	}]
 }, {
-  "type": "input",
+  "type": "date",
   "key": "date",
 	"title": "最后一次支架手术时间",
 	"category": "basic",
@@ -96,7 +115,8 @@
 	"id": 1,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致自己穿衣的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -120,7 +140,8 @@
 	"id": 2,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致室内走路的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -144,7 +165,8 @@
 	"id": 3,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致淋浴的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -168,7 +190,8 @@
 	"id": 4,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致爬坡或楼梯(三层且不停)的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -192,7 +215,8 @@
 	"id": 5,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致户外活动或提杂物的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -216,7 +240,8 @@
 	"id": 6,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致轻快步行一段路(一公里)的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -240,7 +265,8 @@
 	"id": 7,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致慢跑(一公里)的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -264,7 +290,8 @@
 	"id": 8,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致提起或移动重物的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -288,7 +315,8 @@
 	"id": 9,
 	"type": "selection",
 	"title": "过去1个月内，由于胸痛、胸部紧榨感和心绞痛所致剧烈运动(如游泳或打球)的受限程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "重度受限",
 		"score": 1
@@ -312,7 +340,8 @@
 	"id": 10,
 	"type": "selection",
 	"title": "与1个月前比较，作最大强度的活动时，胸痛、胸部紧榨感和心绞痛的发作情况",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "明显增加",
 		"score": 1
@@ -333,7 +362,8 @@
 	"id": 11,
 	"type": "selection",
 	"title": "过去1个月内，胸痛、胸部紧榨感和心绞痛的平均发作次数",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "多于或等于4次/天",
 		"score": 1
@@ -357,7 +387,8 @@
 	"id": 12,
 	"type": "selection",
 	"title": "过去1个月内，胸痛、胸部紧榨感和心绞痛服用硝基药物(如硝酸甘油)平均次数",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "多于或等于4次/天",
 		"score": 1
@@ -381,7 +412,8 @@
 	"id": 13,
 	"type": "selection",
 	"title": "因胸痛、胸部紧榨感和心绞痛遵守医嘱服药带来的烦恼",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "严重",
 		"score": 1
@@ -405,7 +437,8 @@
 	"id": 14,
 	"type": "selection",
 	"title": "对治疗胸痛、胸部紧榨感和心绞痛的各种措施的满意程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "不满意",
 		"score": 1
@@ -426,7 +459,8 @@
 	"id": 15,
 	"type": "selection",
 	"title": "对医生就胸痛、胸部紧榨感和心绞痛的解释满意程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "不满意",
 		"score": 1
@@ -447,7 +481,8 @@
 	"id": 16,
 	"type": "selection",
 	"title": "总的来说，对目前胸痛、胸部紧榨感和心绞痛的治疗满意程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "不满意",
 		"score": 1
@@ -468,7 +503,8 @@
 	"id": 17,
 	"type": "selection",
 	"title": "过去4周内，胸痛、胸部紧榨感和心绞痛影响生活乐趣的程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "不满意",
 		"score": 1
@@ -489,7 +525,8 @@
 	"id": 18,
 	"type": "selection",
 	"title": "在您的未来生活中如果还有胸痛、胸部紧榨感和心绞痛，您会感觉怎样",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "不满意",
 		"score": 1
@@ -510,7 +547,8 @@
 	"id": 19,
 	"type": "selection",
 	"title": "对心脏病发作和突然死亡的担心程度",
-	"category": "SAQ",
+	"category": "survey",
+	"key": "SAQ",
 	"option": [{
 		"degree": "一直担心",
 		"score": 1
@@ -531,7 +569,8 @@
 	"id": 20,
 	"type": "selection",
 	"title": "总体而言，你认为你的健康状况如何？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "极好",
 		"score": 1
@@ -552,7 +591,8 @@
 	"id": 21,
 	"type": "selection",
 	"title": "这些活动对你的健康状况有影响吗？诸如搬桌子、搞卫生、耕地、打保龄球或高尔夫球。",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "限制很多",
 		"score": 1
@@ -567,7 +607,8 @@
 	"id": 22,
 	"type": "selection",
 	"title": "爬几段楼梯，现在对你的健康状况有限制吗？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "限制很多",
 		"score": 1
@@ -582,7 +623,8 @@
 	"id": 23,
 	"type": "selection",
 	"title": "在过去1个月，由于身体原因，有多少时间是你不能完成你想做的工作或日常活动？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "所有时间",
 		"score": 1
@@ -603,7 +645,8 @@
 	"id": 24,
 	"type": "selection",
 	"title": "在过去1个月，由于身体原因，有多少时间是你做工作或日常活动不如平时仔细？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "所有时间",
 		"score": 1
@@ -624,7 +667,8 @@
 	"id": 25,
 	"type": "selection",
 	"title": "在过去1个月，由于情感原因（如焦虑或心情差），有多少时间是你不能完成你想做的工作或日常活动？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "所有时间",
 		"score": 1
@@ -645,7 +689,8 @@
 	"id": 26,
 	"type": "selection",
 	"title": "在过去1个月，由于情感原因（如焦虑或心情差），有多少时间是你做工作或日常活动不如平时仔细？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "所有时间",
 		"score": 1
@@ -666,7 +711,8 @@
 	"id": 27,
 	"type": "selection",
 	"title": "在过去1个月，疼痛在多大程度上妨碍你的正常工作及家务劳动？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "不影响",
 		"score": 1
@@ -687,7 +733,8 @@
 	"id": 28,
 	"type": "selection",
 	"title": "在过去1个月，你感觉有多长时间是平静的？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "所有时间",
 		"score": 1
@@ -708,7 +755,8 @@
 	"id": 29,
 	"type": "selection",
 	"title": "在过去1个月，你有多长时间是精力充沛的？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "所有时间",
 		"score": 1
@@ -729,7 +777,8 @@
 	"id": 30,
 	"type": "selection",
 	"title": "在过去1个月，你有多长时间感觉心灰意冷？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "所有时间",
 		"score": 1
@@ -750,7 +799,8 @@
 	"id": 31,
 	"type": "selection",
 	"title": "在过去1个月，你的健康状况或情感问题有多长时间影响了你的社交活动（例如访友，探亲等）？",
-	"category": "SF-12",
+	"category": "survey",
+	"key": "SF-12",
 	"option": [{
 		"degree": "所有时间",
 		"score": 1
@@ -771,7 +821,8 @@
 	"id": 32,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“做事时提不起劲或没有兴趣”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -789,7 +840,8 @@
 	"id": 33,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“感到心情低落, 沮丧或绝望”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -807,7 +859,8 @@
 	"id": 34,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“入睡困难、睡不安或睡得过多”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -825,7 +878,8 @@
 	"id": 35,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“感觉疲倦或没有活力”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -843,7 +897,8 @@
 	"id": 36,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“食欲不振或吃太多”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -861,7 +916,8 @@
 	"id": 37,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“觉得自己很糟或觉得自己很失败，或让自己、家人失望”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -879,7 +935,8 @@
 	"id": 38,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“对事物专注有困难，例如看报纸或看电视时”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -897,7 +954,8 @@
 	"id": 39,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“行动或说话速度缓慢到别人已经察觉？或刚好相反——变得比平日更烦躁或坐立不安，动来动去”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -915,7 +973,8 @@
 	"id": 40,
 	"type": "selection",
 	"title": "在过去的两周里，你生活中出现“有不如死掉或用某种方式伤害自己的念头”的频率有多少？",
-	"category": "PHQ-9",
+	"category": "survey",
+	"key": "PHQ-9",
 	"option": [{
 		"degree": "没有",
 		"score": 0
@@ -933,7 +992,8 @@
 	"id": 41,
 	"type": "selection",
 	"title": "目前的活动能力",
-	"category": "EQ-5D",
+	"category": "survey",
+	"key": "EQ-5D",
 	"option": [{
 		"degree": "走路没问题",
 		"score": 1
@@ -948,7 +1008,8 @@
 	"id": 42,
 	"type": "selection",
 	"title": "目前的自理能力",
-	"category": "EQ-5D",
+	"category": "survey",
+	"key": "EQ-5D",
 	"option": [{
 		"degree": "可以完全自理",
 		"score": 1
@@ -963,7 +1024,8 @@
 	"id": 43,
 	"type": "selection",
 	"title": "目前的日常活动能力(如，工作、学习、家务、家庭或闲暇活动)",
-	"category": "EQ-5D",
+	"category": "survey",
+	"key": "EQ-5D",
 	"option": [{
 		"degree": "进行日常活动没有问题",
 		"score": 1
@@ -978,7 +1040,8 @@
 	"id": 44,
 	"type": "selection",
 	"title": "目前的疼痛或不舒适情况",
-	"category": "EQ-5D",
+	"category": "survey",
+	"key": "EQ-5D",
 	"option": [{
 		"degree": "没有疼痛或不舒适",
 		"score": 1
@@ -993,7 +1056,8 @@
 	"id": 45,
 	"type": "selection",
 	"title": "目前的焦虑或抑郁情况",
-	"category": "EQ-5D",
+	"category": "survey",
+	"key": "EQ-5D",
 	"option": [{
 		"degree": "不焦虑或抑郁",
 		"score": 1
@@ -1006,8 +1070,9 @@
 	}]
 }, {
 	"id": 46,
-	"type": "input",
+  "type": "input",
 	"title": "目前的健康状况(0-100分)",
-	"category": "EQ-5D",
-	"option": null
+	"category": "survey",
+	"key": "EQ-5D",
+  "option": null
 }]

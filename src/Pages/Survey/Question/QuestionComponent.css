@@ -84,3 +84,10 @@ label{
   line-height: 0.5rem;
   /*line-height: 1.6rem;*/
 }
+
+.my-radio .am-radio {
+  padding: 2.5px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  margin-right: 5px;
+}

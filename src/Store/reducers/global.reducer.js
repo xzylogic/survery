@@ -34,10 +34,17 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
       };
     case actionTypes.APPEND_INPUT_VALUE:
       let originDataB = state.inputValue;
-      if (originDataB[action.key] && Array.isArray(originDataB[action.key])) {
-        originDataB[action.key].append(action.value);
+      if (!action.id && originDataB[action.key] && Array.isArray(originDataB[action.key]) && originDataB[action.key].indexOf(action.value) === -1) {
+        originDataB[action.key].push(action.value);
+      } else if (!action.id && originDataB[action.key] && Array.isArray(originDataB[action.key]) && originDataB[action.key].indexOf(action.value) > -1)  {
+        originDataB[action.key].splice(originDataB[action.key].indexOf(action.value), 1);
+      } else if (action.id && originDataB[action.key])  {
+        originDataB[action.key][action.id] = action.value;
+      } else if (action.id && !originDataB[action.key])  {
+        originDataB[action.key] = {};
+        originDataB[action.key][action.id] = action.value;
       } else {
-        originDataB[action.key] = [action.value];
+        originDataB[action.key]= [action.value];
       }
       return {
         ...state,

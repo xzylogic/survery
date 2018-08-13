@@ -18,7 +18,7 @@ class Index extends React.Component {
   render() {
     const { globalReducer } = this.props;
     const { questions } = globalReducer;
-    const id = parseInt(this.props.match.params.id);
+    const id = Number(this.props.match.params.id);
     let percent = Math.round(parseFloat(id / 56 * 100));
     if ( percent >= 100 ) {
       percent = 100;
@@ -30,7 +30,7 @@ class Index extends React.Component {
           <Progress percent={percent} position="normal" style={{borderRadius:'1rem'}}/>
         </div>        
         {
-          <QuestionComponent question={questions[id]} id={id} percent={percent}/> 
+          <QuestionComponent question={questions[id]} id={id} percent={percent} end={id === questions.length - 1} /> 
         }
       </div>
     )

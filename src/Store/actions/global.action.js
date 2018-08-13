@@ -61,11 +61,12 @@ export const updateInputValueAction = (key, value) => {
 /**
  * 
  */
-export const appendInputValueAction = (key, value) => {
+export const appendInputValueAction = (key, value, id) => {
   return {
     type: actionTypes.APPEND_INPUT_VALUE,
     key: key,
-    value: value
+    value: value,
+    id: id
   }
 };
 
