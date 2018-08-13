@@ -41,8 +41,9 @@ class Query extends React.Component {
     let getValue = localStorage.getItem('inputValue'+[this.props.id]);
     let inputVal = document.getElementsByTagName("input");
     for(let i=0;i<inputVal.length;i++){
+      inputVal[i].checked=false;
       if(inputVal[i].value === getValue){
-        inputVal[i].setAttribute('checked','checked');
+        inputVal[i].checked=true;
       }
     }
   }
