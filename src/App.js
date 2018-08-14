@@ -14,7 +14,7 @@ class App extends React.Component {
   }
   render() {
     return (
-        <Router>
+        <Router basename='/survey'>
           <Switch>
             { routeConfig.map((route, i) => <Route key={i} {...route} />) }
           </Switch>

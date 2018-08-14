@@ -2,6 +2,7 @@
   "name": "disease-survey",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://pci.violetqqy.com/survey",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.8.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "less": "^2.7.2",
     "less-loader": "^4.1.0",
