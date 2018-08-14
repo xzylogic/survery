@@ -9,6 +9,8 @@ export const actionTypes = {
   SURVEY_STORE_LOCAL: 'SURVEY_STORE_LOCAL',
   SURVER_GET_LOCAL: 'SURVER_GET_LOCAL',
   SURVER_UPDATE_LOCAL: 'SURVER_UPDATE_LOCAL',
+  GET_USER_INFO: 'GET_USER_INFO',
+  UPDATE_USER_INFO: 'UPDATE_USER_INFO'
 };
 
 /**
@@ -111,6 +113,26 @@ export const appendInputValueAction = (key, value, id) => {
 export const saveSurveyAction = (data) => {
   return {
     type: actionTypes.SAVE_SURVEY,
+    data: data
+  }
+};
+
+/**
+ *
+ */
+export const getUserInfo = (data) => {
+  return {
+    type: actionTypes.GET_USER_INFO,
+    data: data
+  }
+};
+
+/**
+ *
+ */
+export const updateUserInfo = (data) => {
+  return {
+    type: actionTypes.UPDATE_USER_INFO,
     data: data
   }
 };

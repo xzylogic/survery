@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Progress, Button } from 'antd-mobile';
 
 import QuestionComponent from './Question/QuestionComponent';
-import { loadQuestionsAction, surveyGetLocalAction, saveSurveyAction } from '../../Store/actions/global.action';
+import { loadQuestionsAction, surveyGetLocalAction, saveSurveyAction, getUserInfo } from '../../Store/actions/global.action';
 
 const formatData = (data) => {
     let keys = Object.keys(data)
@@ -22,6 +22,8 @@ class Index extends React.Component {
   componentWillMount() {
     const store = this.props;
     const { questions } = store.globalReducer;
+    store.dispatch(getUserInfo(2438))
+
     if (Array.isArray(questions) && questions.length === 0) {
       store.dispatch(loadQuestionsAction());
     }
@@ -53,6 +55,7 @@ class Index extends React.Component {
   render() {
     const { globalReducer } = this.props;
     const { questions } = globalReducer;
+    const { userInfo } = globalReducer;
     const id = Number(this.props.match.params.id);
     const length = questions && questions.length;
     let percent = Math.round(parseFloat(id / length * 100));
@@ -66,13 +69,13 @@ class Index extends React.Component {
           <Progress percent={percent} position="normal" style={{borderRadius:'1rem'}}/>
       </div>        
         {
-          <QuestionComponent question={questions[id]} id={id} percent={percent} /> 
+          <QuestionComponent question={questions[id]} id={id} percent={percent} userInfo={userInfo}/>
         }
       </div>
     ) : (
       <div className="title">    
         <div className="query_end">
-          <img src="" alt="调查完成"/>
+          <img src="../../Image/img_完成@3x.png" alt="调查完成"/>
           <p>调查已完成，感谢你的参与。</p>
           <Button type='primary' onClick={this.handleSubmit}>确定</Button>
         </div>

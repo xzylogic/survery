@@ -91,3 +91,28 @@ label{
   border-radius: 50%;
   margin-right: 5px;
 }
+.am-list-item .am-list-line .am-list-content{
+  margin-left: 0.9rem;
+}
+.am-list .am-list-item.am-radio-item .am-list-line .am-list-extra .am-radio-inner{
+  left: 0.2rem;
+}
+.am-radio-inner::before{
+  content: "\a0"; /*不换行空格*/
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0.4rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  border-radius: 50%;
+  border: 2px solid #BBBBBB;
+  position: relative;
+  bottom: 0.2rem;
+  margin-left: -0.09rem;
+  /*width: 0.4rem;*/
+  /*height: 0.4rem;*/
+  /*border-color: #ffffff;*/
+  /*background-color: #0CB7F5;*/
+  /*border-radius: 50%;*/
+}

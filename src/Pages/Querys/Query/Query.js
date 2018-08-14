@@ -159,7 +159,7 @@ class Query extends React.Component {
           <div className="title">
             {query_percent}
             <div className="query_end">
-              <img src="" alt="调查完成"/>
+              <img src="../../../Image/img_完成@3x.png" alt="调查完成"/>
               <p>调查已完成，感谢你的参与。</p>
               <Link to={`/querys/${id}`} className="blue_btn whiteColor">确定</Link>
             </div>
@@ -171,7 +171,7 @@ class Query extends React.Component {
           <div className="title">
             {query_percent}
             <div className="query_end">
-              <img src="" alt="是否实名"/>
+              <img src="../../../Image/img_未实名@3x.png" alt="是否实名"/>
               <p>调查已完成，你尚未实名， 实名后可查阅全部病史</p>
               <button className="blue_btn whiteColor">立即实名</button>
               <br/><br/>
