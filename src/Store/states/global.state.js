@@ -1,6 +1,7 @@
 export const initialGlobalState = {
-  currentPage: '/',
+  currentPage: 0,
+  agree: false,
   questions: [],
   userInfo:{},
   inputValue: {}
-};
+}

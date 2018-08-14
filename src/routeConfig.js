@@ -1,21 +1,15 @@
-import Home from './Pages/Home/Home';
-import Implant from './Pages/Implant/Implant';
-import Un_implants from './Pages/Un_implants';
-import Querys from './Pages/Querys/Querys';
-import Survey from './Pages/Survey/Survey'
+import Home from './Pages/Home'
+import Question from './Pages/Question'
+import Success from './Pages/Success'
 
-// const setTitle = (title) => document.title = title;
 export const routeConfig = [{
   path: '/',
   component: Home,
   exact: true,
 }, {
-  path: '/implant',
-  component: Implant,
+  path: '/question/:id',
+  component: Question,
 }, {
-  path: '/un_implants',
-  component: Un_implants,
-},{
-  path: '/querys/:id',
-  component: Survey,
-}];
+  path: '/success',
+  component: Success,
+}]

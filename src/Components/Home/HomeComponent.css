@@ -1,0 +1,14 @@
+.home__container {
+  padding: 1rem 0;
+}
+
+.home__title {
+  font-size: 0.36rem;
+  color: #666;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.home__button {
+  padding: .5rem 1rem 0;
+}

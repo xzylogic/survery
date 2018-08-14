@@ -2,7 +2,8 @@
   "name": "disease-survey",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://pci.violetqqy.com/survey",
+  "homepage": "https://pci.violetqqy.com/survey",
+  "proxy": "https://pci.violetqqy.com/",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

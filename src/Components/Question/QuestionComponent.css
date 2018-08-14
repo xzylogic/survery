@@ -1,0 +1,58 @@
+.agree__container {
+  padding: .6rem .3rem;
+  line-height: .45rem;
+}
+
+.agree__content {
+  font-size: .32rem;
+  text-indent: .64rem;
+  color: #666;
+  padding-bottom: .6rem;
+}
+
+.agree__extra {
+  font-size: .28rem;
+  color: #2a2a3a;
+  padding: .6rem 0;
+}
+
+.agree__buttons {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: .6rem .3rem;
+}
+
+.agree__button {
+  display: block !important;
+  float: left !important;
+  width: calc(50% - .6rem) !important;
+  margin: 0 .3rem !important;
+}
+
+.question__container {
+  padding: .3rem;
+}
+
+.question__title {
+  font-size: .4rem;
+  color: #333;
+  line-height: .56rem;
+  padding: .3rem 0;
+}
+
+.question__bottons {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: .6rem .3rem;
+}
+
+.question__botton {
+  display: block !important;
+  float: left !important;
+  width: calc(50% - .6rem) !important;
+  margin: 0 .3rem !important;
+}

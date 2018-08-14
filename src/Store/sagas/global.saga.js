@@ -1,14 +1,29 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 import * as axios from 'axios';
 
-import { actionTypes, updateQuestionsAction, updateInputValueAction, appendInputValueAction, surveyUpdateLocalAction, updateUserInfo } from '../actions/global.action';
+import { 
+  actionTypes, updateQuestionsAction, 
+  updateInputValueAction, appendInputValueAction, 
+  surveyUpdateLocalAction, updateUserInfo, 
+  updateCurrentPageAction
+} from '../actions/global.action'
 
 const PATH = {
-  getQuestions: '../questions.json',
-  saveSurvey: 'http://10.2.10.10/pci-micro/api/ruijin/save',
-  getUserInfo: 'http://10.2.10.10/pci-micro/api/ruijin/userInfo',
+  getQuestions: `${process.env.PUBLIC_URL}/static/questions.json`,
+  saveSurvey: '/pci-micro/api/ruijin/save',
+  getUserInfo: '/pci-micro/api/ruijin/userInfo',
 
-};
+}
+
+function* saveCurrentPage(actions) {
+  yield call([localStorage, 'setItem'], 'currentPage', actions.data)
+  yield put(updateCurrentPageAction(actions.data))
+}
+
+function* getCurrentPage() {
+  const page = yield call([localStorage, 'getItem'], 'currentPage')
+  yield put(updateCurrentPageAction(page || 0))
+}
 
 const getQuestionsService = async () => {
   const service = await axios.get(`${PATH.getQuestions}`);
@@ -46,9 +61,9 @@ function* loadUserInfo(actions) {
 }
 
 function* surveyStoreLocal(actions) {
-  if (actions.option == 'update') {
+  if (actions.option === 'update') {
     yield put(updateInputValueAction(actions.key, actions.value))
-  } else if (actions.option == 'append') {
+  } else if (actions.option === 'append') {
     yield put(appendInputValueAction(actions.key, actions.value, actions.id))
   }
   const { inputValue } = yield select(state => state.globalReducer)
@@ -74,6 +89,8 @@ function* saveSurvey(actions) {
 }
 
 export const globalSaga = [
+  takeLatest(actionTypes.SAVE_CURRENT_PAGE, saveCurrentPage),
+  takeLatest(actionTypes.GET_CURRENT_PAGE, getCurrentPage),
   takeLatest(actionTypes.LOAD_QUESTIONS, loadQuestions),
   takeLatest(actionTypes.SURVEY_STORE_LOCAL, surveyStoreLocal),
   takeLatest(actionTypes.SURVER_GET_LOCAL, surveyGetLocal),

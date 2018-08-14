@@ -1,0 +1,22 @@
+.success__container {
+  padding: .3rem;
+}
+
+.success__image {
+  text-align: center;
+  padding: .3rem 0;
+}
+
+.success__content {
+  width: 6rem;
+  margin: 0 auto;
+  padding: .3rem 0;
+  font-size: .36rem;
+  line-height: .5rem;
+  color: #666;
+  text-align: center;
+}
+
+.success__buttons {
+  padding: .3rem .7rem;
+}
