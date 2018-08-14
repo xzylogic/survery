@@ -144,10 +144,27 @@ const RenderQuestion = ({question, inputValue, onChange, id, onPush}) => {
 }
 
 class Index extends React.Component {
-
+  componentWillMount(){
+    const store = this.props
+    const question = this.props.question
+    const userInfo = this.props.userInfo
+    console.log(userInfo.validate)
+    if(userInfo.validate){
+      if(question.key === "name"){
+        store.dispatch(surveyStoreLocalAction('update', question.key, userInfo.name))
+      }
+      if(question.key === "birthday"){
+        store.dispatch(surveyStoreLocalAction('update', question.key, userInfo.birthday))
+      }
+      if(question.key === "sex"){
+        store.dispatch(surveyStoreLocalAction('update', question.key, userInfo.sex))
+      }
+    }
+  }
   handleChange = (value, date) => {
     const store = this.props
     const question = this.props.question
+    // const userInfo = this.props.userInfo
     const id = this.props.id
     if (value === true && date) {
       value = moment(date).format('YYYY-MM-DD')
@@ -157,6 +174,17 @@ class Index extends React.Component {
         store.dispatch(surveyStoreLocalAction('append', question.key, value))
       } else {
         store.dispatch(surveyStoreLocalAction('update', question.key, value))
+        // if(userInfo.validate){
+        //   if(question.key === "name"){
+        //     store.dispatch(surveyStoreLocalAction('update', question.key, userInfo.name))
+        //   }
+        //   if(question.key === "birthday"){
+        //     store.dispatch(surveyStoreLocalAction('update', question.key, userInfo.birthday))
+        //   }
+        //   if(question.key === "sex"){
+        //     store.dispatch(surveyStoreLocalAction('update', question.key, userInfo.sex))
+        //   }
+        // }
       }
       if (question.type === 'selection') {
         this.props.history.push(`/querys/${id + 1}`)
@@ -178,11 +206,13 @@ class Index extends React.Component {
     const { globalReducer } = this.props
     const { inputValue } = globalReducer
     const question = this.props.question
+    const userInfo = this.props.userInfo
     const id = this.props.id
     return (
         <div>
           { question && inputValue ? 
-              <RenderQuestion 
+              <RenderQuestion
+                userInfo={userInfo}
                 question={question} 
                 id={id}
                 inputValue={inputValue}

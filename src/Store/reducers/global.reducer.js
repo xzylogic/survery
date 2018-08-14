@@ -20,6 +20,11 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
         ...state,
         ...{currentPage: currentPage}
       };
+    case actionTypes.UPDATE_USER_INFO:
+      return {
+        ...state,
+        ...{userInfo: action.data}
+      };
     case actionTypes.UPDATE_QUESTIONS:
       return {
         ...state,
