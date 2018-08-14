@@ -2,10 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { List, InputItem, Radio, DatePicker, Button, Checkbox } from 'antd-mobile'
+import * as moment from 'moment'
 
 import './QuestionComponent.css'
 
-import { updateInputValueAction, appendInputValueAction } from '../../../Store/actions/global.action'
+import { surveyStoreLocalAction } from '../../../Store/actions/global.action'
 
 const RenderNextButton = (type, id, onPush) => {
   if (type === 'selection') {
@@ -68,8 +69,10 @@ const RenderQuestion = ({question, inputValue, onChange, id, onPush}) => {
             <DatePicker
               mode="date"
               title=""
-              value={inputValue[question.key]}
-              onChange={onChange}
+              value={inputValue[question.key] && new Date(inputValue[question.key])}
+              onChange={onChange.bind(this, true)}
+              minDate={question.minDate || new Date(1850,1,1)}
+              maxDate={question.maxDate || new Date()}
               >
                 <List.Item arrow="horizontal">出生年月</List.Item>
               </DatePicker>
@@ -142,22 +145,25 @@ const RenderQuestion = ({question, inputValue, onChange, id, onPush}) => {
 
 class Index extends React.Component {
 
-  handleChange = (value) => {
+  handleChange = (value, date) => {
     const store = this.props
     const question = this.props.question
     const id = this.props.id
+    if (value === true && date) {
+      value = moment(date).format('YYYY-MM-DD')
+    }
     if (question.category === 'basic') {
       if (question.type === 'checkbox') {
-        store.dispatch(appendInputValueAction(question.key, value))
+        store.dispatch(surveyStoreLocalAction('append', question.key, value))
       } else {
-        store.dispatch(updateInputValueAction(question.key, value))
+        store.dispatch(surveyStoreLocalAction('update', question.key, value))
       }
       if (question.type === 'selection') {
         this.props.history.push(`/querys/${id + 1}`)
       }
     }
     if (question.category === 'survey') {
-      store.dispatch(appendInputValueAction(question.key, value, question.id))
+      store.dispatch(surveyStoreLocalAction('append', question.key, value, question.id))
       if (question.type === 'selection') {
         this.props.history.push(`/querys/${id + 1}`)
       }

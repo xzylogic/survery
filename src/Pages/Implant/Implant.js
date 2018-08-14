@@ -1,12 +1,18 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import { Link } from 'react-router-dom';
 
 import './Implant.css';
 // import {updateCurrentPage} from "../../Store/actions/global.action";
+import { surveyGetLocalAction } from '../../Store/actions/global.action'
 
 class Implant extends React.Component {
   constructor(props){
     super(props);
+  }
+  componentWillMount(){
+    const store = this.props
+    store.dispatch(surveyGetLocalAction())
   }
   render() {
     {document.title = "调查知情说明"}
@@ -34,4 +40,4 @@ class Implant extends React.Component {
   }
 }
 
-export default Implant;
+export default connect(state => state)(Implant);

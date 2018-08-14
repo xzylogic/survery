@@ -25,6 +25,11 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
         ...state,
         ...{questions: action.data}
       };
+    case actionTypes.SURVER_UPDATE_LOCAL:
+      return {
+        ...state,
+        ...{inputValue: action.data}
+      };
     case actionTypes.UPDATE_INPUT_VALUE:
       let originDataA = state.inputValue;
       originDataA[action.key] = action.value;
