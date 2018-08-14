@@ -101,10 +101,12 @@ export const saveSurveyAction = (data) => {
   }
 }
 
-export const getUserInfo = (data) => {
+export const getUserInfo = (agent, id, code) => {
   return {
     type: actionTypes.GET_USER_INFO,
-    data: data
+    agent: agent,
+    id: id,
+    code: code
   }
 }
 

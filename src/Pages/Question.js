@@ -34,16 +34,22 @@ class Index extends React.Component {
     const percent = last === 0 ? 100 : Math.round(parseFloat(id / (last + 1) * 100))
     document.title = `已完成${percent}%`
 
-    return questions[id] && inputValue ? 
-      <QuestionComponent 
-        question={questions[id]} 
-        inputValue={inputValue} 
-        id={id} 
-        percent={percent}
-        ifStart={ifStart} 
-        ifEnd={ifEnd} 
-        agree={agree} 
-      /> : ''
+    return (
+      <React.Fragment>
+        {
+          questions[id] && inputValue ? 
+            <QuestionComponent 
+              question={questions[id]} 
+              inputValue={inputValue} 
+              id={id} 
+              percent={percent}
+              ifStart={ifStart} 
+              ifEnd={ifEnd} 
+              agree={agree} 
+            /> : ''
+        }
+    </React.Fragment>
+    )
   }
 }
 

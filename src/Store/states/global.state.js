@@ -3,5 +3,7 @@ export const initialGlobalState = {
   agree: false,
   questions: [],
   userInfo:{},
-  inputValue: {}
+  inputValue: {},
+  userId: '',
+  openId: ''
 }
