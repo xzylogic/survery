@@ -59,7 +59,7 @@ function* loadUserInfo(actions) {
         data.data.birthday && (yield put(updateInputValueAction('birthday', data.data.birthday)))
       }
     } else if (actions.agent === 'wechat' && !actions.id && actions.code) {
-      console.log(code)
+      console.log( actions.code)
       // window.location.href = 'http://www.baidu.com'
     } else if (actions.agent === 'wechat' && !actions.id && !actions.code) {
       throw new Error('no openid')
