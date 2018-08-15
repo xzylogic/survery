@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
-import { Progress, Toast } from 'antd-mobile'
+import { Progress, Toast, Modal } from 'antd-mobile'
 import * as moment from 'moment'
 
 import './QuestionComponent.css'
@@ -67,15 +67,24 @@ class Index extends React.Component {
     submitData.phq && (submitData.phq = formatData(submitData.phq))
     submitData.eq && (submitData.eq = formatData(submitData.eq))
 
-    submitData.userId = userId
-    submitData.openId = openId
+    userId && (submitData.userId = userId)
+    openId && (submitData.openId = openId)
 
-    store.dispatch(saveSurveyAction(submitData, () => {
-      router.push(`/success${userId ? `?userId=${userId}`: ''}`)
-    }, error => {
-      Toast.info(error)
-      this.setState({submit: false})
-    }))
+    if (userId || openId) {
+      store.dispatch(saveSurveyAction(submitData, () => {
+        router.push(`/success${userId ? `?userId=${userId}`: ''}`)
+      }, error => {
+        Toast.info(error)
+        this.setState({submit: false})
+      }))
+    } else {
+
+      Modal.alert('页面出错啦', '点击确定刷新重试', [
+        { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+        { text: '确定', onPress: () => window.location.href = '/survey' },
+      ])
+
+    }
   }
 
   handleClick = (type, event) => {

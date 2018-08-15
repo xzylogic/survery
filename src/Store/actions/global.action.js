@@ -119,12 +119,13 @@ export const saveSurveyAction = (data, callback, errorHandler) => {
   }
 }
 
-export const getUserInfo = (agent, id, code) => {
+export const getUserInfo = (agent, id, code, errorback) => {
   return {
     type: actionTypes.GET_USER_INFO,
     agent: agent,
     id: id,
-    code: code
+    code: code,
+    errorback: errorback
   }
 }
 

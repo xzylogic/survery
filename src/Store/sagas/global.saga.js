@@ -4,10 +4,10 @@ import {
   actionTypes, updateQuestionsAction, 
   updateInputValueAction, appendInputValueAction, 
   surveyUpdateLocalAction, updateUserInfo, 
-  updateCurrentPageAction, updateOpenIdAction
+  updateCurrentPageAction, updateOpenIdAction, updateUserIdAction
 } from '../actions/global.action'
 
-import { HttpToastService, HttpCatchService, HttpOriginService, HttpHandlerService } from '../../Utilities/HttpService'
+import { HttpCatchService, HttpOriginService, HttpHandlerService } from '../../Utilities/HttpService'
 import { GetRedirectUrl } from '../../Utilities'
 
 const PATH = {
@@ -53,6 +53,10 @@ const getOpenId = (code) => {
 function* loadUserInfo(actions) {
   try {
     if (actions.agent && actions.id) {
+      actions.agent === 'wechat' &&  (yield call([localStorage, 'setItem'], 'openId', actions.id))
+      actions.agent === 'wechat' &&  (yield put(updateOpenIdAction(actions.id)))
+      actions.agent === 'app' &&  (yield put(updateUserIdAction(actions.id)))
+
       const data = yield call(getUserInfoData, actions.agent, actions.id)
       if (data) {
         yield put(updateUserInfo(data))
@@ -60,20 +64,31 @@ function* loadUserInfo(actions) {
         data.sex && (yield put(updateInputValueAction('sex', data.sex)))
         data.birthday && (yield put(updateInputValueAction('birthday', data.birthday)))
       }
+
     } else if (actions.agent === 'wechat' && !actions.id && actions.code) {
-      const data = yield call(getOpenId, actions.code)
-      if (data && data.openid) {
-        yield call([localStorage, 'setItem'], 'openId', data.openid)
-        yield put(updateOpenIdAction(data.openid))
+
+      const code = yield call(getOpenId, actions.code)
+      if (code && code.openid) {
+        yield call([localStorage, 'setItem'], 'openId', code.openid)
+        yield put(updateOpenIdAction(code.openid))
+
+        const data = yield call(getUserInfoData, actions.agent, code.openid)
+        if (data) {
+          yield put(updateUserInfo(data))
+          data.name && (yield put(updateInputValueAction('name', data.name)))
+          data.sex && (yield put(updateInputValueAction('sex', data.sex)))
+          data.birthday && (yield put(updateInputValueAction('birthday', data.birthday)))
+        }
+
       }
     } else if (actions.agent === 'wechat' && !actions.id && !actions.code) {
       const redirect = GetRedirectUrl(window.location.href)
       window.location.href = redirect
     } else if (actions.agent === 'app' && !actions.id) {
-      window.location.href = '/error'
+      actions.errorback('没用用户ID')
     } 
   } catch (error) {
-    window.location.href = '/error'
+    actions.errorback(error)
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
 
@@ -9,18 +9,26 @@ import { GetArgsFromHref, GetBrowserType } from './Utilities'
 import { getUserInfo, updateUserIdAction } from './Store/actions/global.action'
 
 class PrivateRoute extends React.Component {
+  state = {
+    ifError: false
+  }
   componentWillMount() {
     const { store, type, location } = this.props
     switch(type) {
       case 'wechat':
         const code = GetArgsFromHref(location.search, 'code')
         const openId = window.localStorage.getItem('openId') || store.globalReducer.openId
-        store.dispatch(getUserInfo('wechat', openId, code))
+        store.dispatch(getUserInfo('wechat', openId, code, error => {
+          console.log(error)
+          this.setState({ifError: true})
+        }))
         return
       case 'app':
         const userId = GetArgsFromHref(location.search, 'userId') || store.globalReducer.userId
-        store.dispatch(updateUserIdAction(userId))
-        store.dispatch(getUserInfo('app', userId))
+        store.dispatch(getUserInfo('app', userId, null, error => {
+          console.log(error)
+          this.setState({ifError: true})
+        }))
         return
       default:
         return
@@ -28,12 +36,12 @@ class PrivateRoute extends React.Component {
   }
 
   render() {
-    const { type, ...rest } = this.props
+    const { type, location, ...rest } = this.props
     switch(type) {
       case 'wechat':
-        return <Route {...rest} />
+        return this.state.ifError === true ? <Redirect to={{pathname: '/error'}} /> : <Route {...rest} />
       case 'app':
-        return <Route {...rest} />
+        return this.state.ifError === true ? <Redirect to={{pathname: '/error', search: location.search}} /> : <Route {...rest} />
       default:
         return 'You should open this link inside wechat app or pciuser app!'
     }
