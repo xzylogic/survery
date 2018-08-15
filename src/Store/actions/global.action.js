@@ -1,5 +1,7 @@
 export const actionTypes = {
   UPDATE_CURRENT_PAGE: 'UPDATE_CURRENT_PAGE',
+  UPDATE_USERID: 'UPDATE_USERID',
+  UPDATE_OPENID: 'UPDATE_OPENID',
   SAVE_CURRENT_PAGE: 'SAVE_CURRENT_PAGE',
   GET_CURRENT_PAGE: 'GET_CURRENT_PAGE',
   LOAD_QUESTIONS: 'LOAD_QUESTIONS',
@@ -18,6 +20,20 @@ export const actionTypes = {
 export const updateCurrentPageAction = (data) => {
   return {
     type: actionTypes.UPDATE_CURRENT_PAGE,
+    data: data
+  }
+}
+
+export const updateUserIdAction = (data) => {
+  return {
+    type: actionTypes.UPDATE_USERID,
+    data: data
+  }
+}
+
+export const updateOpenIdAction = (data) => {
+  return {
+    type: actionTypes.UPDATE_OPENID,
     data: data
   }
 }

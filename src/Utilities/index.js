@@ -17,5 +17,16 @@ export const GetArgsFromHref = (sHref, sArgName) => {
   return retval
 }
 
-export const isWeixinBrowser = (/micromessenger/i).test(navigator.userAgent)
-export const isAPPBrowser = (/pciuser/i).test(navigator.userAgent)
+export const GetBrowserType = () => {
+  let type = 'app'
+  const isWeixinBrowser = (/micromessenger/i).test(navigator.userAgent)
+  const isAppBrowser = (/pciuser/i).test(navigator.userAgent)
+  isWeixinBrowser && (type = 'wechat')
+  isAppBrowser && (type = 'app')
+  return type
+}
+
+export const GetRedirectUrl = (url) => {
+  const redirectUri = encodeURI(url)
+  return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${process.env.REACT_APP_APPID}&redirect_uri=${redirectUri}&response_type=code&scope=snsapi_base#wechat_redirect`
+}

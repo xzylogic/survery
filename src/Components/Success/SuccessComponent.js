@@ -15,6 +15,7 @@ class Index extends React.Component {
   }
 
   render() {
+    document.title = '已完成100%'
     const { globalReducer } = this.props
     const validate = globalReducer.userInfo && globalReducer.userInfo.validate
     return validate ? (

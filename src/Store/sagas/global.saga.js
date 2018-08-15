@@ -5,14 +5,17 @@ import {
   actionTypes, updateQuestionsAction, 
   updateInputValueAction, appendInputValueAction, 
   surveyUpdateLocalAction, updateUserInfo, 
-  updateCurrentPageAction
+  updateCurrentPageAction,
+  updateOpenIdAction, updateUserIdAction
 } from '../actions/global.action'
+
+import { GetRedirectUrl } from '../../Utilities'
 
 const PATH = {
   getQuestions: `${process.env.PUBLIC_URL}/static/questions.json`,
   saveSurvey: '/pci-micro/api/ruijin/save',
   getUserInfo: '/pci-micro/api/ruijin/userInfo',
-
+  getOpenId: '/pci-micro/api/micro/snsToken'
 }
 
 function* saveCurrentPage(actions) {
@@ -48,6 +51,12 @@ const getUserInfoData = async (agent, id) => {
   return data
 }
 
+const getOpenId = async (code) => {
+  const datas = await axios.get(`${PATH.getOpenId}?code=${code}`)
+  const data = await datas.data
+  return data
+}
+
 function* loadUserInfo(actions) {
   try {
     if (actions.agent && actions.id) {
@@ -59,17 +68,19 @@ function* loadUserInfo(actions) {
         data.data.birthday && (yield put(updateInputValueAction('birthday', data.data.birthday)))
       }
     } else if (actions.agent === 'wechat' && !actions.id && actions.code) {
-      console.log( actions.code)
-      // window.location.href = 'http://www.baidu.com'
+      const data = yield call(getOpenId, actions.code)
+      if (data.code === 0 && data.data && data.data.openid) {
+        yield call([localStorage, 'setItem'], 'openId', data.data.openid)
+        yield put(updateOpenIdAction(data.data.openid))
+      }
     } else if (actions.agent === 'wechat' && !actions.id && !actions.code) {
-      throw new Error('no openid')
-      // window.location.href = 'http://www.baidu.com'
+      const redirect = GetRedirectUrl(window.location.href)
+      window.location.href = redirect
     } else if (actions.agent === 'app' && !actions.id) {
-      throw new Error('no userid')
-      // window.location.href = 'http://www.baidu.com'
+      window.location.href = '/error'
     } 
   } catch (error) {
-    throw new Error(error)
+    window.location.href = '/error'
   }
 }
 

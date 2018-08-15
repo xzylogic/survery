@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import './App.css'
 
-import { routeConfig } from './routeConfig'
-import { GetArgsFromHref } from './Utilities'
-import { getUserInfo } from './Store/actions/global.action'
+import { routeConfig, staticRouteConfig } from './routeConfig'
+import { GetArgsFromHref, GetBrowserType } from './Utilities'
+import { getUserInfo, updateUserIdAction } from './Store/actions/global.action'
 
 class PrivateRoute extends React.Component {
   componentWillMount() {
@@ -14,11 +14,12 @@ class PrivateRoute extends React.Component {
     switch(type) {
       case 'wechat':
         const code = GetArgsFromHref(location.search, 'code')
-        const openId = window.localStorage.getItem('openId')
+        const openId = window.localStorage.getItem('openId') || store.globalReducer.openId
         store.dispatch(getUserInfo('wechat', openId, code))
         return
       case 'app':
-        const userId = GetArgsFromHref(location.search, 'userId')
+        const userId = GetArgsFromHref(location.search, 'userId') || store.globalReducer.userId
+        store.dispatch(updateUserIdAction(userId))
         store.dispatch(getUserInfo('app', userId))
         return
       default:
@@ -28,7 +29,6 @@ class PrivateRoute extends React.Component {
 
   render() {
     const { type, store, ...rest } = this.props
-    console.log(Object.keys(store.globalReducer.userInfo).length)
     switch(type) {
       case 'wechat':
         return <Route {...rest} />
@@ -42,10 +42,12 @@ class PrivateRoute extends React.Component {
 
 class App extends React.Component {
   render() {
+    const type = GetBrowserType()
     return (
       <Router basename='/survey'>
         <Switch>
-          { routeConfig.map((route, i) => <PrivateRoute key={i} {...route} type='wechat' store={this.props} />) }
+          { routeConfig.map((route, i) => <PrivateRoute key={i} {...route} type={type} store={this.props} />) }
+          { staticRouteConfig.map((route, i) => <Route key={i} {...route} />) }
         </Switch>
       </Router>
     )

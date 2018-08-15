@@ -6,18 +6,16 @@ import { Button } from 'antd-mobile'
 import { submitAgreementAction } from '../../Store/actions/global.action'
 
 class Index extends React.Component {
-  componentWillMount() {
-    document.title = '调查知情说明'
-  }
-
   handleAgree = () => {
     const store = this.props
     store.dispatch(submitAgreementAction())
   }
 
   handleReject = () => {
+    const store = this.props
     const router = this.props.history
-    router.push('/')
+    const { userId } = store.globalReducer
+    router.push(`/${userId ? `?userId=${userId}`: ''}`)
   }
 
   render() {

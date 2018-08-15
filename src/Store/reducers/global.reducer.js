@@ -8,6 +8,16 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
         ...state,
         ...{currentPage: action.data}
       };
+    case actionTypes.UPDATE_USERID:
+      return {
+        ...state,
+        ...{userId: action.data}
+      };
+    case actionTypes.UPDATE_OPENID:
+      return {
+        ...state,
+        ...{openId: action.data}
+      };
     case actionTypes.UPDATE_USER_INFO:
       return {
         ...state,

@@ -32,7 +32,6 @@ class Index extends React.Component {
     const ifStart = (id === 0)
     const ifEnd = (id === last)
     const percent = last === 0 ? 100 : Math.round(parseFloat(id / (last + 1) * 100))
-    document.title = `已完成${percent}%`
 
     return (
       <React.Fragment>

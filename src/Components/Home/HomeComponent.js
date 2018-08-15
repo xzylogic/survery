@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Button } from 'antd-mobile'
 
@@ -6,8 +7,10 @@ import './HomeComponent.css'
 
 class Index extends React.Component {
   handleImplant = () => {
+    const store = this.props
     const router = this.props.history
-    router.push('/question/0')
+    const { userId } = store.globalReducer
+    router.push(`/question/0${userId ? `?userId=${userId}`: ''}`)
   }
 
   handleUnImplant = () => {
@@ -15,6 +18,7 @@ class Index extends React.Component {
   }
 
   render() {
+    document.title = "问卷调查"
     return (
       <div className='home__container'>
         <p className='home__title'>本次调查<br/>仅针对曾植入过心脏支架的用户</p>
@@ -29,4 +33,4 @@ class Index extends React.Component {
   }
 }
 
-export default withRouter(Index)
+export default withRouter(connect(state => state)(Index))

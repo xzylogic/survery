@@ -24,10 +24,12 @@ const formatData = (data) => {
 }
 
 class Index extends React.Component {
+
   handleChange = (value, date) => {
     const store = this.props
     const router = this.props.history
     const { question, id } = this.props
+    const { userId } = store.globalReducer
 
     if (value === true && date) {
       value = moment(date).format('YYYY-MM-DD')
@@ -39,21 +41,21 @@ class Index extends React.Component {
         store.dispatch(surveyStoreLocalAction('append', question.key, value)) :
         store.dispatch(surveyStoreLocalAction('update', question.key, value))
 
-      question.type === 'selection' && router.push(`/question/${id + 1}`)
+      question.type === 'selection' && router.push(`/question/${id + 1}${userId ? `?userId=${userId}`: ''}`)
     }
 
     if (question.category === 'survey') {
 
       store.dispatch(surveyStoreLocalAction('append', question.key, value, question.id))
 
-      question.type === 'selection' && router.push(`/question/${id + 1}`)
+      question.type === 'selection' && router.push(`/question/${id + 1}${userId ? `?userId=${userId}`: ''}`)
     }
   }
 
   handleSubmit = () => {
     console.log('complete')
     const store = this.props
-    const { inputValue } = store.globalReducer
+    const { inputValue, userId, openId } = store.globalReducer
     let submitData = Object.assign({}, inputValue)
 
     submitData.saq && (submitData.saq = formatData(submitData.saq))
@@ -61,19 +63,22 @@ class Index extends React.Component {
     submitData.phq && (submitData.phq = formatData(submitData.phq))
     submitData.eq && (submitData.eq = formatData(submitData.eq))
 
-    submitData.userId = '2419'
+    submitData.userId = userId
+    submitData.openId = openId
     store.dispatch(saveSurveyAction(submitData))
   }
 
   handleClick = (type) => {
+    const store = this.props
     const { id } = this.props
     const router = this.props.history
+    const { userId } = store.globalReducer
     switch(type) {
       case 'previous':
-        router.push(`/question/${id - 1}`)
+        router.push(`/question/${id - 1}${userId ? `?userId=${userId}`: ''}`)
         return
       case 'next':
-        router.push(`/question/${id + 1}`)
+        router.push(`/question/${id + 1}${userId ? `?userId=${userId}`: ''}`)
         return
       case 'submit':
         this.handleSubmit()
@@ -85,6 +90,8 @@ class Index extends React.Component {
 
   render() {
     const { question, inputValue, ifStart, ifEnd, agree, percent } = this.props
+    console.log(agree)
+    document.title = agree ? `已完成${percent}%` : '调查知情说明'
     return agree ? (
       <div className='question__container'>
         <Progress percent={percent} position='normal'/>

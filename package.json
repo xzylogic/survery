@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://pci.violetqqy.com/survey",
-  "proxy": "https://pci.violetqqy.com/",
+  "proxy": "https://pci.violetqqy.com",
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired start",
+    "build": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired build && cp -r build ./survey",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject"
   },

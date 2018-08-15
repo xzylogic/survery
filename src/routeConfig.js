@@ -1,6 +1,7 @@
 import Home from './Pages/Home'
 import Question from './Pages/Question'
 import Success from './Pages/Success'
+import Error from './Pages/Error'
 
 export const routeConfig = [{
   path: '/',
@@ -12,4 +13,9 @@ export const routeConfig = [{
 }, {
   path: '/success',
   component: Success,
+}]
+
+export const staticRouteConfig = [{
+  path: '/error',
+  component: Error
 }]
