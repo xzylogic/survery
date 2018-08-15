@@ -14,3 +14,8 @@ export const HandlerError = async (error, handler) => {
     handler(error.message)
   }
 }
+
+export const CatchError = async (error) => {
+  console.log(error.message)
+  throw new Error(error.message)
+}

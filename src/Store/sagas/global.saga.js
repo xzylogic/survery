@@ -1,14 +1,13 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
-import * as axios from 'axios';
 
 import { 
   actionTypes, updateQuestionsAction, 
   updateInputValueAction, appendInputValueAction, 
   surveyUpdateLocalAction, updateUserInfo, 
-  updateCurrentPageAction,
-  updateOpenIdAction, updateUserIdAction
+  updateCurrentPageAction, updateOpenIdAction
 } from '../actions/global.action'
 
+import { HttpToastService, HttpCatchService, HttpOriginService } from '../../Utilities/HttpService'
 import { GetRedirectUrl } from '../../Utilities'
 
 const PATH = {
@@ -29,9 +28,7 @@ function* getCurrentPage() {
 }
 
 const getQuestionsService = async () => {
-  const service = await axios.get(`${PATH.getQuestions}`);
-  const data = await service.data;
-  return data;
+  return HttpOriginService.get(`${PATH.getQuestions}`)
 }
 
 function* loadQuestions() {
@@ -41,20 +38,16 @@ function* loadQuestions() {
       yield put(updateQuestionsAction(data));
     }
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error)
   }
 }
 
-const getUserInfoData = async (agent, id) => {
-  const datas = await axios.get(`${PATH.getUserInfo}?${agent === 'app' ? 'userId' : 'openId'}=${id}`)
-  const data = await datas.data
-  return data
+const getUserInfoData = (agent, id) => {
+  return HttpCatchService.get(`${PATH.getUserInfo}?${agent === 'app' ? 'userId' : 'openId'}=${id}`)
 }
 
-const getOpenId = async (code) => {
-  const datas = await axios.get(`${PATH.getOpenId}?code=${code}`)
-  const data = await datas.data
-  return data
+const getOpenId = (code) => {
+  return HttpCatchService.get(`${PATH.getOpenId}?code=${code}`)
 }
 
 function* loadUserInfo(actions) {
@@ -101,14 +94,15 @@ function* surveyGetLocal() {
   }
 }
 
+const saveSurveyService = (data) => {
+  return HttpToastService.post(`${PATH.saveSurvey}`, data)
+}
+
 function* saveSurvey(actions) {
-  try {
-    const res = yield call([axios, 'post'], PATH.saveSurvey, actions.data)
-    if (res) { 
-      console.log(res)
-    }
-  } catch (error) {
-    throw new Error(error)
+  const { userId } = yield select(state => state.globalReducer)
+  const res = yield call(saveSurveyService, actions.data)
+  if (res) { 
+    window.location.href = `/success${userId ? `userId=${userId}` : ''}`
   }
 }
 

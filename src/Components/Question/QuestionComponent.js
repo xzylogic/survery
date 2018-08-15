@@ -90,7 +90,6 @@ class Index extends React.Component {
 
   render() {
     const { question, inputValue, ifStart, ifEnd, agree, percent } = this.props
-    console.log(agree)
     document.title = agree ? `已完成${percent}%` : '调查知情说明'
     return agree ? (
       <div className='question__container'>
