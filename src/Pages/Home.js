@@ -6,11 +6,6 @@ import HomeComponent from '../Components/Home/HomeComponent'
 
 class Index extends React.Component {
 
-  componentDidMount() {
-    const store = this.props
-    console.log(store.globalReducer)
-  }
-
   render() {
     const store = this.props
     const { location } = this.props

@@ -6,7 +6,7 @@
   "proxy": "https://pci.violetqqy.com",
   "scripts": {
     "start": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired start",
-    "build": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired build && cp -r build ./survey",
+    "build": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired build && cp -r ./build/** ./survey/",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject"
   },

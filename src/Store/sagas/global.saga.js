@@ -7,7 +7,7 @@ import {
   updateCurrentPageAction, updateOpenIdAction
 } from '../actions/global.action'
 
-import { HttpToastService, HttpCatchService, HttpOriginService } from '../../Utilities/HttpService'
+import { HttpToastService, HttpCatchService, HttpOriginService, HttpHandlerService } from '../../Utilities/HttpService'
 import { GetRedirectUrl } from '../../Utilities'
 
 const PATH = {
@@ -94,15 +94,14 @@ function* surveyGetLocal() {
   }
 }
 
-const saveSurveyService = (data) => {
-  return HttpToastService.post(`${PATH.saveSurvey}`, data)
+const saveSurveyService = (data, errorHandler) => {
+  return HttpHandlerService.post(`${PATH.saveSurvey}`, data, {}, errorHandler)
 }
 
 function* saveSurvey(actions) {
-  const { userId } = yield select(state => state.globalReducer)
-  const res = yield call(saveSurveyService, actions.data)
+  const res = yield call(saveSurveyService, actions.data, actions.errorHandler)
   if (res) { 
-    window.location.href = `/success${userId ? `userId=${userId}` : ''}`
+    actions.callback()
   }
 }
 

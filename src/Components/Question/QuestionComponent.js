@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom' 
-import { Progress } from 'antd-mobile'
+import { Progress, Toast } from 'antd-mobile'
 import * as moment from 'moment'
 
 import './QuestionComponent.css'
@@ -24,6 +24,9 @@ const formatData = (data) => {
 }
 
 class Index extends React.Component {
+  state = {
+    submit: false
+  }
 
   handleChange = (value, date) => {
     const store = this.props
@@ -55,6 +58,7 @@ class Index extends React.Component {
   handleSubmit = () => {
     console.log('complete')
     const store = this.props
+    const router = this.props.history
     const { inputValue, userId, openId } = store.globalReducer
     let submitData = Object.assign({}, inputValue)
 
@@ -65,26 +69,36 @@ class Index extends React.Component {
 
     submitData.userId = userId
     submitData.openId = openId
-    store.dispatch(saveSurveyAction(submitData))
+
+    store.dispatch(saveSurveyAction(submitData, () => {
+      router.push(`/success${userId ? `?userId=${userId}`: ''}`)
+    }, error => {
+      Toast.info(error)
+      this.setState({submit: false})
+    }))
   }
 
-  handleClick = (type) => {
+  handleClick = (type, event) => {
+    event.preventDefault()
+    event.stopPropagation()
     const store = this.props
     const { id } = this.props
     const router = this.props.history
     const { userId } = store.globalReducer
+    console.log(type)
     switch(type) {
       case 'previous':
         router.push(`/question/${id - 1}${userId ? `?userId=${userId}`: ''}`)
-        return
+        return false
       case 'next':
         router.push(`/question/${id + 1}${userId ? `?userId=${userId}`: ''}`)
-        return
+        return false
       case 'submit':
-        this.handleSubmit()
-        return
+        this.state.submit === false && this.handleSubmit()
+        this.setState({submit: true})
+        return false
       default:
-       return
+       return false
     }
   }
 

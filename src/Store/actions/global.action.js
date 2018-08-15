@@ -110,10 +110,12 @@ export const appendInputValueAction = (key, value, id) => {
   }
 }
 
-export const saveSurveyAction = (data) => {
+export const saveSurveyAction = (data, callback, errorHandler) => {
   return {
     type: actionTypes.SAVE_SURVEY,
-    data: data
+    data: data,
+    callback: callback,
+    errorHandler: errorHandler
   }
 }
 
