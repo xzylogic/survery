@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { Button } from 'antd-mobile'
 
 import { submitAgreementAction } from '../../Store/actions/global.action'
+import { GetBrowserType } from '../../Utilities'
 
 class Index extends React.Component {
   handleAgree = () => {
@@ -12,10 +13,17 @@ class Index extends React.Component {
   }
 
   handleReject = () => {
-    const store = this.props
-    const router = this.props.history
-    const { userId } = store.globalReducer
-    router.push(`/${userId ? `?userId=${userId}`: ''}`)
+    console.log('reject')
+    switch(GetBrowserType()) {
+      case 'wechat': 
+        window.wx.closeWindow()
+        return
+      case 'app':
+        window.location.href = 'patientpci://patient/main'
+        return
+      default:
+        return
+    }
   }
 
   render() {

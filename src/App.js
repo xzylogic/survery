@@ -6,7 +6,7 @@ import './App.css'
 
 import { routeConfig, staticRouteConfig } from './routeConfig'
 import { GetArgsFromHref, GetBrowserType } from './Utilities'
-import { getUserInfo, updateUserIdAction } from './Store/actions/global.action'
+import { getUserInfo } from './Store/actions/global.action'
 
 class PrivateRoute extends React.Component {
   state = {

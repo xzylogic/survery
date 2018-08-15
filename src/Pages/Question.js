@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import QuestionComponent from '../Components/Question/QuestionComponent'
-import { loadQuestionsAction, surveyGetLocalAction, saveCurrentPageAction } from '../Store/actions/global.action'
+import { loadQuestionsAction, surveyGetLocalAction, saveCurrentPageAction, loadJsSDKAction } from '../Store/actions/global.action'
 
 class Index extends React.Component {
 
@@ -17,11 +17,17 @@ class Index extends React.Component {
     }
     store.dispatch(surveyGetLocalAction())
     store.dispatch(saveCurrentPageAction(id))
-    
+    store.dispatch(loadJsSDKAction())
+
     router.listen((route) => {
       const id = !isNaN(Number(route.pathname.split('/')[2])) ? Number(route.pathname.split('/')[2]) : 0
       store.dispatch(saveCurrentPageAction(id))
+      store.dispatch(loadJsSDKAction())
     })
+  
+    // window.onbeforeunload = function() { 
+    //   return '问卷尚未填写完成，您确定要离开？'
+    // }
   }
  
   render() {

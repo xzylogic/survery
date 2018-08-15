@@ -14,7 +14,8 @@ const PATH = {
   getQuestions: `${process.env.PUBLIC_URL}/static/questions.json`,
   saveSurvey: '/pci-micro/api/ruijin/save',
   getUserInfo: '/pci-micro/api/ruijin/userInfo',
-  getOpenId: '/pci-micro/api/micro/snsToken'
+  getOpenId: '/pci-micro/api/micro/snsToken',
+  jssdk: '/pci-micro/api/micro/jsTicket'
 }
 
 function* saveCurrentPage(actions) {
@@ -60,6 +61,7 @@ function* loadUserInfo(actions) {
       const data = yield call(getUserInfoData, actions.agent, actions.id)
       if (data) {
         yield put(updateUserInfo(data))
+        data.userId && (yield put(updateUserIdAction(data.userId)))
         data.name && (yield put(updateInputValueAction('name', data.name)))
         data.sex && (yield put(updateInputValueAction('sex', data.sex)))
         data.birthday && (yield put(updateInputValueAction('birthday', data.birthday)))
@@ -75,6 +77,7 @@ function* loadUserInfo(actions) {
         const data = yield call(getUserInfoData, actions.agent, code.openid)
         if (data) {
           yield put(updateUserInfo(data))
+          data.userId && (yield put(updateUserIdAction(data.userId)))
           data.name && (yield put(updateInputValueAction('name', data.name)))
           data.sex && (yield put(updateInputValueAction('sex', data.sex)))
           data.birthday && (yield put(updateInputValueAction('birthday', data.birthday)))
@@ -120,6 +123,27 @@ function* saveSurvey(actions) {
   }
 }
 
+const jssdkService = (url) => {
+  return HttpCatchService.post(`${PATH.jssdk}`, {url: url})
+}
+
+function* loadJSSDK() {
+  const url = window.location.href
+  const res = yield call(jssdkService, url)
+  if (res && typeof window.wx !== 'undefined') {
+    window.wx.config({
+      debug: false, 
+      appId: res.appId, 
+      timestamp: res.timestamp,
+      nonceStr: res.nonceStr,
+      signature: res.signature,
+      jsApiList: ['closeWindow', 'hideAllNonBaseMenuItem']
+    })
+
+    window.wx.hideAllNonBaseMenuItem()
+  }
+}
+
 export const globalSaga = [
   takeLatest(actionTypes.SAVE_CURRENT_PAGE, saveCurrentPage),
   takeLatest(actionTypes.GET_CURRENT_PAGE, getCurrentPage),
@@ -128,4 +152,5 @@ export const globalSaga = [
   takeLatest(actionTypes.SURVER_GET_LOCAL, surveyGetLocal),
   takeLatest(actionTypes.SAVE_SURVEY, saveSurvey),
   takeLatest(actionTypes.GET_USER_INFO, loadUserInfo),
+  takeLatest(actionTypes.LOAD_JSSDK, loadJSSDK),
 ];

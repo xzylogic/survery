@@ -5,6 +5,8 @@ import { Button } from 'antd-mobile'
 
 import './HomeComponent.css'
 
+import { GetBrowserType } from '../../Utilities'
+
 class Index extends React.Component {
   handleImplant = () => {
     const store = this.props
@@ -14,7 +16,16 @@ class Index extends React.Component {
   }
 
   handleUnImplant = () => {
-    console.log('close')
+    switch(GetBrowserType()) {
+      case 'wechat': 
+        window.wx.closeWindow()
+        return
+      case 'app':
+        window.location.href = 'patientpci://patient/main'
+        return
+      default:
+        return
+    }
   }
 
   render() {

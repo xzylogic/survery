@@ -70,7 +70,7 @@ class Index extends React.Component {
     userId && (submitData.userId = userId)
     openId && (submitData.openId = openId)
 
-    if (userId || openId) {
+    if ((userId && openId) || userId) {
       store.dispatch(saveSurveyAction(submitData, () => {
         router.push(`/success${userId ? `?userId=${userId}`: ''}`)
       }, error => {

@@ -5,13 +5,35 @@ import { Button, Progress, WhiteSpace } from 'antd-mobile'
 
 import './SuccessComponent.css'
 
+import { GetBrowserType } from '../../Utilities'
+
 class Index extends React.Component {
   handleComplete = () => {
     console.log('complete')
+    switch(GetBrowserType()) {
+      case 'wechat': 
+        window.wx.closeWindow()
+        return
+      case 'app':
+        window.location.href = 'patientpci://patient/main'
+        return
+      default:
+        return
+    }
   }
 
   handleValidate = () => {
     console.log('validate')
+    switch(GetBrowserType()) {
+      case 'wechat': 
+        window.location.href = '/pci-wechat/EMR'
+        return
+      case 'app':
+        window.location.href = 'patientpci://patient/auth'
+        return
+      default:
+        return
+    }
   }
 
   render() {

@@ -14,7 +14,14 @@ export const actionTypes = {
   SURVER_GET_LOCAL: 'SURVER_GET_LOCAL',
   SURVER_UPDATE_LOCAL: 'SURVER_UPDATE_LOCAL',
   GET_USER_INFO: 'GET_USER_INFO',
-  UPDATE_USER_INFO: 'UPDATE_USER_INFO'
+  UPDATE_USER_INFO: 'UPDATE_USER_INFO',
+  LOAD_JSSDK: 'LOAD_JSSDK'
+}
+
+export const loadJsSDKAction = () => {
+  return {
+    type: actionTypes.LOAD_JSSDK
+  }
 }
 
 export const updateCurrentPageAction = (data) => {

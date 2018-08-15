@@ -4,7 +4,13 @@ import { withRouter, Redirect } from 'react-router-dom'
 
 import HomeComponent from '../Components/Home/HomeComponent'
 
+import { loadJsSDKAction } from '../Store/actions/global.action'
+
 class Index extends React.Component {
+  componentWillMount() {
+    const store = this.props
+    store.dispatch(loadJsSDKAction())
+  }
 
   render() {
     const store = this.props
