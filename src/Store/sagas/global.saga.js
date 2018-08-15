@@ -54,17 +54,17 @@ function* loadUserInfo(actions) {
   try {
     if (actions.agent && actions.id) {
       const data = yield call(getUserInfoData, actions.agent, actions.id)
-      if (data.code===0 && data.data ) {
-        yield put(updateUserInfo(data.data))
-        data.data.name && (yield put(updateInputValueAction('name', data.data.name)))
-        data.data.sex && (yield put(updateInputValueAction('sex', data.data.sex)))
-        data.data.birthday && (yield put(updateInputValueAction('birthday', data.data.birthday)))
+      if (data) {
+        yield put(updateUserInfo(data))
+        data.name && (yield put(updateInputValueAction('name', data.name)))
+        data.sex && (yield put(updateInputValueAction('sex', data.sex)))
+        data.birthday && (yield put(updateInputValueAction('birthday', data.birthday)))
       }
     } else if (actions.agent === 'wechat' && !actions.id && actions.code) {
       const data = yield call(getOpenId, actions.code)
-      if (data.code === 0 && data.data && data.data.openid) {
-        yield call([localStorage, 'setItem'], 'openId', data.data.openid)
-        yield put(updateOpenIdAction(data.data.openid))
+      if (data && data.openid) {
+        yield call([localStorage, 'setItem'], 'openId', data.openid)
+        yield put(updateOpenIdAction(data.openid))
       }
     } else if (actions.agent === 'wechat' && !actions.id && !actions.code) {
       const redirect = GetRedirectUrl(window.location.href)

@@ -28,7 +28,7 @@ class PrivateRoute extends React.Component {
   }
 
   render() {
-    const { type, store, ...rest } = this.props
+    const { type, ...rest } = this.props
     switch(type) {
       case 'wechat':
         return <Route {...rest} />
