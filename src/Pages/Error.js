@@ -5,6 +5,7 @@ import { Button, WingBlank, WhiteSpace, Icon } from 'antd-mobile'
 class Index extends React.Component {
 
   render() {
+    const { location } = this.props
     const router = this.props.history
     return (
       <div style={{padding: '.6rem'}}>
@@ -14,7 +15,7 @@ class Index extends React.Component {
         <h3 style={{color: 'red', textAlign: 'center', padding: '.3rem', fontSize: '.38rem'}}>页面出错了</h3>
         <WingBlank>
           <WhiteSpace size='lg' />
-          <Button type='primary' onClick={() => router.push('/')}>重试</Button>
+          <Button type='primary' onClick={() => router.push(`/${location.search}`)}>重试</Button>
           <WhiteSpace size='lg' />
         </WingBlank>
       </div>

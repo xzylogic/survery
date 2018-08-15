@@ -1,7 +1,11 @@
 import React from 'react'
-import { List, InputItem, DatePicker, Radio, Checkbox } from 'antd-mobile'
+import { List, InputItem, DatePicker, Radio, Checkbox, Modal } from 'antd-mobile'
 
 class Index extends React.Component {
+  state = {
+    modal: false
+  }
+  
   render() {
     const { question, inputValue, onChange } = this.props
     switch(question.type) {
@@ -69,7 +73,20 @@ class Index extends React.Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <p className='question__title'>{question.title}</p>
+            <p className='question__title'>
+              {question.title}
+              {question.extraTitle ? 
+                <a onClick={() => this.setState({modal: true})}>
+                  <i style={{
+                    textDecoration: 'underline', 
+                    background: `url(${process.env.PUBLIC_URL}/images/icon_tip@3x.png) no-repeat right center`,
+                    backgroundSize: '.45rem',
+                    display: 'inline-block',
+                    paddingRight: '.6rem'
+                    }}
+                  >{question.extraTitle}</i>
+                </a> : ''}
+            </p>
             <List style={{background: '#f5f5f9'}}>
               {
                 question.option.map(opt => (
@@ -82,6 +99,24 @@ class Index extends React.Component {
                   </Radio.RadioItem>
                 ))}
             </List>
+            <Modal
+              visible={this.state.modal}
+              transparent
+              maskClosable
+              onClose={() => this.setState({modal: false})}
+              footer={[{ text: '我知道了', onPress: () => this.setState({modal: false}) }]}
+              >
+                <div style={{textAlign: 'left', fontSize: '.36rem', color: '#666'}}>
+                  <p style={{color: '#333'}}>重度受限</p>
+                  <p style={{paddingBottom: '.3rem'}}>由于心绞痛导致不能活动</p>
+                  <p style={{color: '#333'}}>中度受限</p>
+                  <p style={{paddingBottom: '.3rem'}}>由于心绞痛导致活动减少，甚至放弃</p>
+                  <p style={{color: '#333'}}>轻度受限</p>
+                  <p style={{paddingBottom: '.3rem'}}>由于心绞痛导致活动出现改变，但不到“中度”的程度</p>
+                  <p style={{color: '#333'}}>稍受限</p>
+                  <p style={{paddingBottom: '.3rem'}}>有心绞痛，但是活动的量和方式几乎没有改变</p>
+                </div>
+            </Modal>
           </React.Fragment>
         )
       case 'checkbox': 
