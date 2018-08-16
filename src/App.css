@@ -11,3 +11,6 @@ sub{ vertical-align:text-bottom; }
 legend { color:#000; }
 fieldset, img { border:0; }
 table { border-collapse:collapse; border-spacing:0; }
+html, body {
+  font-size: 50px;
+}

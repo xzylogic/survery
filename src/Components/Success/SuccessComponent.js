@@ -44,7 +44,7 @@ class Index extends React.Component {
       <div className='success__container'>
         <Progress percent={100} position='normal' /> 
         <div className='success__image'>
-          <img src={`${process.env.PUBLIC_URL}/images/img_complete@3x.png`} alt="调查完成"/>
+          <img style={{width: '2rem'}} src={`${process.env.PUBLIC_URL}/images/img_complete@3x.png`} alt="调查完成"/>
         </div>
         <p className='success__content'>调查已完成，感谢你的参与。</p>
         <div className='success__buttons'>
@@ -55,7 +55,7 @@ class Index extends React.Component {
       <div className='success__container'>
         <Progress percent={100} position='normal' /> 
         <div className='success__image'>
-          <img src={`${process.env.PUBLIC_URL}/images/img_unauth@3x.png`} alt="调查完成"/>
+          <img style={{width: '2rem'}} src={`${process.env.PUBLIC_URL}/images/img_unauth@3x.png`} alt="调查完成"/>
         </div>
         <p className='success__content'>调查已完成，你尚未实名，实名后可查阅全部病史。</p>
         <div className='success__buttons'>
