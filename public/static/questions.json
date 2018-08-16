@@ -2,7 +2,10 @@
 	"category": "basic",
   "key": "name",
 	"title": "请输入你的姓名",
-  "type": "input"
+  "type": "input",
+  "inputType": "text",
+  "maxLength": "10",
+  "nullMsg": "姓名不能为空"
 }, {
 	"category": "basic",
   "key": "sex",
@@ -26,13 +29,23 @@
   "key": "height",
 	"title": "你的身高",
 	"type": "input",
-  "extra": "厘米"
+  "inputType": "number",
+  "maxLength": "3",
+  "extra": "厘米",
+  "nullMsg": "身高不能为空",
+	"validation": "/\\d/",
+	"validationMsg": "请输入正确的身高"
 }, {
 	"category": "basic",
   "key": "weight",
   "title": "你的体重",
   "type": "input",
-  "extra": "千克"
+  "inputType": "number",
+  "maxLength": "3",
+  "extra": "公斤",
+  "nullMsg": "体重不能为空",
+	"validation": "/\\d/",
+	"validationMsg": "请输入正确的体重"
 }, {
 	"category": "basic",
   "key": "education",
@@ -106,7 +119,10 @@
 	"category": "basic",
   "key": "hospital",
 	"title": "最后一次支架手术医院",
-	"type": "input"
+	"type": "input",
+  "inputType": "text",
+  "maxLength": "20",
+  "nullMsg": "手术医院不能为空"
 }, {
 	"category": "survey",
 	"id": 1,
@@ -1079,6 +1095,9 @@
 	"key": "eq",
 	"title": "目前的健康状况(0-100分)",
 	"type": "input",
+  "inputType": "number",
+  "maxLength": "3",
+  "nullMsg": "健康状况不能为空",
 	"validation": "/\\d/",
 	"validationMsg": "请输入[0-100]之间的数字"
 }]

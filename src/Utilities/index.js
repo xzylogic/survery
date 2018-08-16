@@ -18,7 +18,7 @@ export const GetArgsFromHref = (sHref, sArgName) => {
 }
 
 export const GetBrowserType = () => {
-  let type = 'app'
+  let type = ''
   const isWeixinBrowser = (/micromessenger/i).test(navigator.userAgent)
   const isAppBrowser = (/pciuser/i).test(navigator.userAgent)
   isWeixinBrowser && (type = 'wechat')

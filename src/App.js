@@ -17,6 +17,8 @@ class PrivateRoute extends React.Component {
     switch(type) {
       case 'wechat':
         const code = GetArgsFromHref(location.search, 'code')
+        // const openId = 'ozg0N1G0E9TneBFdhQGL-GchMktU'
+        // window.localStorage.setItem('inputValue', JSON.stringify({}))
         const openId = window.localStorage.getItem('openId') || store.globalReducer.openId
         store.dispatch(getUserInfo('wechat', openId, code, error => {
           console.log(error)

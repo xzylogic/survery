@@ -1,9 +1,15 @@
 import React from 'react'
-import { List, InputItem, DatePicker, Radio, Checkbox, Modal } from 'antd-mobile'
+import { List, InputItem, DatePicker, Radio, Checkbox, Modal, Toast } from 'antd-mobile'
 
 class Index extends React.Component {
   state = {
     modal: false
+  }
+
+  onErrorClick = (question) => {
+    if (question.error === true) {
+      Toast.info(question.isNull ? question.nullMsg : question.validationMsg)
+    }
   }
   
   render() {
@@ -19,6 +25,9 @@ class Index extends React.Component {
                 value={inputValue[question.key]}
                 onChange={onChange}
                 extra={question.extra}
+                maxLength={question.maxLength || 100}
+                error={question.error === true}
+                onErrorClick={this.onErrorClick.bind(this, question)}
               ></InputItem>
             </List>
           </React.Fragment>
@@ -31,6 +40,9 @@ class Index extends React.Component {
                 value={inputValue[question.key] && inputValue[question.key][question.id]}
                 onChange={onChange}
                 extra={question.extra}
+                maxLength={question.maxLength || 100}
+                error={question.error === true}
+                onErrorClick={this.onErrorClick.bind(this, question)}
               ></InputItem>
             </List>
           </React.Fragment>

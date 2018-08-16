@@ -15,7 +15,7 @@ class Index extends React.Component {
         <h3 style={{color: 'red', textAlign: 'center', padding: '.3rem', fontSize: '.38rem'}}>页面出错了</h3>
         <WingBlank>
           <WhiteSpace size='lg' />
-          <Button type='primary' onClick={() => router.push(`/${location.search}`)}>重试</Button>
+          <Button type='primary' onClick={() => window.location.href = `/${location.search}`}>重试</Button>
           <WhiteSpace size='lg' />
         </WingBlank>
       </div>

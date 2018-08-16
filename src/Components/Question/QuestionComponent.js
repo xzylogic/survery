@@ -34,6 +34,14 @@ class Index extends React.Component {
     const { question, id } = this.props
     const { userId } = store.globalReducer
 
+    if (!value) {
+      question.error = true
+      question.isNull = true
+    } else {
+      question.error = false
+      question.isNull = false
+    }
+
     if (value === true && date) {
       value = moment(date).format('YYYY-MM-DD')
     }
@@ -52,6 +60,11 @@ class Index extends React.Component {
       store.dispatch(surveyStoreLocalAction('append', question.key, value, question.id))
 
       question.type === 'selection' && router.push(`/question/${id + 1}${userId ? `?userId=${userId}`: ''}`)
+
+      // 特殊健康状况
+      if (question.type === 'input') {
+        store.dispatch(surveyStoreLocalAction('update', question.id, value))
+      }
     }
   }
 
@@ -124,7 +137,10 @@ class Index extends React.Component {
           onClicK={this.handleClick}
         />
         <div className='question__bottons'>
-          <RenderButtons type={question.type} ifStart={ifStart} ifEnd={ifEnd} onClick={this.handleClick} />
+          <RenderButtons
+            disabled={question.error || !inputValue[question.key] || (inputValue[question.key] && inputValue[question.key].length === 0) || (question.category ==='survey' && question.type === 'input' && !inputValue[question.id])} 
+            type={question.type} ifStart={ifStart} ifEnd={ifEnd} onClick={this.handleClick} 
+          />
         </div>
       </div>
     ) : (
