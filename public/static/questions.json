@@ -31,7 +31,7 @@
 	"type": "input",
   "inputType": "number",
   "maxLength": "3",
-  "extra": "厘米",
+  "extra": "cm",
   "nullMsg": "身高不能为空",
 	"validation": "/\\d/",
 	"validationMsg": "请输入正确的身高"
@@ -42,7 +42,7 @@
   "type": "input",
   "inputType": "number",
   "maxLength": "3",
-  "extra": "公斤",
+  "extra": "kg",
   "nullMsg": "体重不能为空",
 	"validation": "/\\d/",
 	"validationMsg": "请输入正确的体重"
