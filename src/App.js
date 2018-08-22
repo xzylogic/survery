@@ -54,7 +54,7 @@ class App extends React.Component {
   render() {
     const type = GetBrowserType()
     return (
-      <Router basename='/survey'>
+      <Router basename='/disease-survey'>
         <Switch>
           { routeConfig.map((route, i) => <PrivateRoute key={i} {...route} type={type} store={this.props} />) }
           { staticRouteConfig.map((route, i) => <Route key={i} {...route} />) }
