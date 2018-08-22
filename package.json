@@ -8,7 +8,7 @@
     "start": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired start",
     "build": "npm run build:prod",
     "build:test": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired build && cp -r ./build/** ./survey/",
-    "build:prod": "cross-env REACT_APP_APPID=wx017488f36de81e22 react-app-rewired build && cp -r ./build/** ./survey/",
+    "build:prod": "cross-env REACT_APP_APPID=wx017488f36de81e22 react-app-rewired build && cp -r ./build/** ./disease-survey/",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject"
   },

@@ -10,6 +10,8 @@
 /build
 /survey/*
 !/survey/WEB-INF/
+!/disease-survey/*
+!/disease-survey/WEB-INF/
 
 # misc
 .DS_Store
