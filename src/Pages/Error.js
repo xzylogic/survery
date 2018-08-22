@@ -6,7 +6,6 @@ class Index extends React.Component {
 
   render() {
     const { location } = this.props
-    const router = this.props.history
     return (
       <div style={{padding: '.6rem'}}>
         <div style={{color: 'red', textAlign: 'center'}}>

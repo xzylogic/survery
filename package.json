@@ -2,7 +2,7 @@
   "name": "disease-survey",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://www.qcxin.com/survey",
+  "homepage": "https://www.qcxin.com/disease-survey",
   "proxy": "https://www.qcxin.com",
   "scripts": {
     "start": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired start",
