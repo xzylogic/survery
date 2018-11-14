@@ -1,6 +1,7 @@
 import Home from './Pages/Home'
 import Question from './Pages/Question'
 import Success from './Pages/Success'
+import Survey from './Pages/Survey'
 import Error from './Pages/Error'
 
 export const routeConfig = [{
@@ -13,6 +14,9 @@ export const routeConfig = [{
 }, {
   path: '/success',
   component: Success,
+}, {
+  path: '/survey',
+  component: Survey,
 }]
 
 export const staticRouteConfig = [{
