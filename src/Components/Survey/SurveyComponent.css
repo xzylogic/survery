@@ -8,6 +8,24 @@ html:not([data-scale]) .am-list-body::after{
   border: 1px solid lightskyblue;
 }
 
+.submit{
+  padding: 0 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.surveyError{
+  font-size: 0.36rem;
+  line-height: 1.8;
+  color: red;
+}
+
+.dashed{
+  height: 0;
+  padding: 0.3rem 0;
+  border-top: 1px dashed darkgray;
+}
+
 /*.am-list {*/
   /*padding: 0.5rem 0;*/
 /*}*/
@@ -58,6 +76,22 @@ html:not([data-scale]) .am-list-body::after{
   letter-spacing: 1px;
 }
 
+.info_content i{
+  font-size: 0.35rem;
+  color: gray;
+}
+
 .info_content span{
   color: red;
+}
+
+.dsa_id{
+  font-size: 0.36rem;
+  line-height: 2.5;
+}
+
+.dsa_title{
+  font-size: 0.3rem;
+  color: darkgray;
+  line-height: 2.2;
 }

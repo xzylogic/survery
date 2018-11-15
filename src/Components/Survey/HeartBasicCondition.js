@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { List, InputItem, Toast, Radio, WhiteSpace, Picker } from 'antd-mobile'
+import { List, InputItem, Radio, WhiteSpace } from 'antd-mobile'
 import { createForm } from 'rc-form';
 
 import {ifHeartSurgery, ifThoracotomy} from './SurveyData'
@@ -20,52 +20,41 @@ class HeartBasicCondition extends React.Component {
         <List>
           <p className='info_content'>病房床位数（单位：张）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('wardBedsNumber', {rules: [{required: true, message: '请输入病房床位数'}]})}
-            type="text"
+            {...getFieldProps('wardBedsNumber', {onChange: (value) => onChangeHandler('wardBedsNumber', value), rules: [{required: true, message: '请输入病房床位数'}]})}
+            type="number"
             value={inputValue.wardBedsNumber || ''}
-            // placeholder="input your phone"
-            // error={this.state.hasError}
-            // onErrorClick={this.onErrorClick}
-            error={isFieldTouched('wardBedsNumber') && getFieldError('wardBedsNumber')}
-            onErrorClick={() => Toast.info(getFieldError('wardBedsNumber'))}
-            onChange={onChangeHandler.bind(this, 'wardBedsNumber')}
           />
+          {isFieldTouched('wardBedsNumber') && getFieldError('wardBedsNumber') ? <p className='surveyError'>{getFieldError('wardBedsNumber')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>CCU床位数（单位：张）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('CCuBedsNumber', {rules: [{required: true, message: '请输入CCU床位数'}]})}
-            type="text"
-            value={inputValue.CCuBedsNumber || ''}
-            error={isFieldTouched('CCuBedsNumber') && getFieldError('CCuBedsNumber')}
-            onErrorClick={() => Toast.info(getFieldError('CCuBedsNumber'))}
-            onChange={onChangeHandler.bind(this, 'CCuBedsNumber')}
+            {...getFieldProps('CCUBedsNumber', {onChange: (value) => onChangeHandler('CCUBedsNumber', value), rules: [{required: true, message: '请输入CCU床位数'}]})}
+            type="number"
+            value={inputValue.CCUBedsNumber || ''}
           />
+          {isFieldTouched('CCUBedsNumber') && getFieldError('CCUBedsNumber') ? <p className='surveyError'>{getFieldError('CCUBedsNumber')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>医师人数（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('doctorNumber', {rules: [{required: true, message: '请输入医师人数'}]})}
-            type="text"
+            {...getFieldProps('doctorNumber', {onChange: (value) => onChangeHandler('doctorNumber', value), rules: [{required: true, message: '请输入医师人数'}]})}
+            type="number"
             value={inputValue.doctorNumber || ''}
-            error={isFieldTouched('doctorNumber') && getFieldError('doctorNumber')}
-            onErrorClick={() => Toast.info(getFieldError('doctorNumber'))}
-            onChange={onChangeHandler.bind(this, 'doctorNumber')}
           />
+          {isFieldTouched('doctorNumber') && getFieldError('doctorNumber') ? <p className='surveyError'>{getFieldError('doctorNumber')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>护士人数（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('nurseNumber', {rules: [{required: true, message: '请输入护士人数'}]})}
-            type="text"
+            {...getFieldProps('nurseNumber', {onChange: (value) => onChangeHandler('nurseNumber', value), rules: [{required: true, message: '请输入护士人数'}]})}
+            type="number"
             value={inputValue.nurseNumber || ''}
-            error={isFieldTouched('nurseNumber') && getFieldError('nurseNumber')}
-            onErrorClick={() => Toast.info(getFieldError('nurseNumber'))}
-            onChange={onChangeHandler.bind(this, 'nurseNumber')}
           />
+          {isFieldTouched('nurseNumber') && getFieldError('nurseNumber') ? <p className='surveyError'>{getFieldError('nurseNumber')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -82,6 +71,7 @@ class HeartBasicCondition extends React.Component {
               {i.label}
             </RadioItem>
           ))}
+          {isFieldTouched('ifHeartSurgery') && getFieldError('ifHeartSurgery') ? <p className='surveyError'>{getFieldError('ifHeartSurgery')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -100,6 +90,7 @@ class HeartBasicCondition extends React.Component {
                   {i.label}
                 </RadioItem>
               ))}
+              {isFieldTouched('ifThoracotomy') && getFieldError('ifThoracotomy') ? <p className='surveyError'>{getFieldError('ifThoracotomy')}</p>:''}
 
               <WhiteSpace size="lg" />
 

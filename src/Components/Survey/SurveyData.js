@@ -76,8 +76,50 @@ export const pipeBelongDepartment = [
   {label: '其他科室', value: '3'},
 ];
 
+export const pipeHospitalLocation = [
+  {label: '和普通病房同一层楼', value: '0'},
+  {label: '和CCU同一层楼', value: '1'},
+  {label: '和病房同楼不同层', value: '2'},
+  {label: '和病房不同楼，但有快速通道', value: '3'},
+  {label: '和病房不同楼，需要户外转运病人', value: '4'},
+];
+
 /**
  *
- * DSA数据(数字减影血管造影机)
+ * otherEquipNumber数据(其他设备数量数据)
  */
 
+export const otherEquipNumber = [
+  {label: 'IABP（单位：台）', value: '0'},
+  {label: 'IVUS（单位：台）', value: '1'},
+  {label: 'OCT（单位：台）', value: '2'},
+  {label: 'FFR（单位：台）', value: '3'},
+  {label: '电生理记录仪（单位：台）', value: '4'},
+  {label: '旋磨仪（单位：台）', value: '5'},
+  {label: '呼吸机（单位：台）', value: '6'},
+  {label: '射频消融仪（单位：台）', value: '7'},
+  {label: '冷冻消融仪（单位：台）', value: '8'},
+  {label: 'Carto系统(单位：套）', value: '9'},
+  {label: 'Ensite系统(单位：套）', value: '10'},
+  {label: '电生理刺激仪（单位：台）', value: '11'},
+  {label: '起搏器分析仪（单位：台）', value: '12'},
+  {label: '麻醉机（单位：台）', value: '13'},
+];
+
+export const pipeFlowLevel = [
+  {label: '无', value: '0'},
+  {label: '有', value: '1'},
+];
+
+export const flowLevel = [
+  {label: '百级', value: '0'},
+  {label: '千级', value: '1'},
+  {label: '万级', value: '2'},
+];
+
+export const groupSurgeryDoctorsOperationScope = [
+  {label: '心血管内科/内科', value: '0'},
+  {label: '心外科', value: '1'},
+  {label: '中医科', value: '2'},
+  {label: '其他学科', value: '3'},
+];
