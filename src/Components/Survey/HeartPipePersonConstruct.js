@@ -18,6 +18,12 @@ class HeartPipePersonConstruct extends React.Component {
       ['电生理组人数', 'ELE_TotalNumber', 'ELE_DoctorNumber', 'ELE_MasterNumber', 'ELE_seniorGradeNumber', 'ELE_mediumGradeNumber', 'ELE_SurgeryDoctorsOperationScope', 'ELE_otherSubject', 'ELE_currentInvolveEmergencySurgeryNumber'],
       ['结构性心脏病介入组人数', 'CON_TotalNumber', 'CON_DoctorNumber', 'CON_MasterNumber', 'CON_seniorGradeNumber', 'CON_mediumGradeNumber', 'CON_SurgeryDoctorsOperationScope', 'CON_otherSubject', 'CON_currentInvolveEmergencySurgeryNumber']
     ];
+    const nurse_skill_personKindList = [
+      ['总护士人数（单位：人）', 'totalNurseNumber', '护士人才架构（单位：人）', 'nurse_juniorDegree', 'nurse_bachelorDegree', 'nurse_masterDegree', 'nurse_doctorDegree', 'nurse_seniorDegree', 'nurse_mediumDegree',
+        '隶属学科及人数（可多选）', 'nurse_cardiovascular', 'nurse_cardiac', 'nurse_radiology', 'nurse_otherSubject', 'nurse_option1'],
+      ['技术员人数', 'totalSkillNumber', '技术员人才架构（单位：人）', 'skill_juniorDegree', 'skill_bachelorDegree', 'skill_masterDegree', 'skill_doctorDegree', 'skill_seniorDegree', 'skill_mediumDegree',
+        '隶属学科及人数（可多选）', 'skill_cardiovascular', 'skill_cardiac', 'skill_radiology', 'skill_otherSubject', 'skill_option1'],
+    ];
 
     let eachGroupNumber = eachGroupNumberLsit.map((personValue, index) => {
       return (
@@ -111,6 +117,135 @@ class HeartPipePersonConstruct extends React.Component {
         </div>
       )
     });
+    let nurse_skill_person = nurse_skill_personKindList.map((personValue, index) => {
+      return (
+        <div key={index}>
+          <p className='info_content'>{personValue[0]}<span>*</span> </p>
+          <InputItem
+            {...getFieldProps(personValue[1], {onChange: (value) => onChangeHandler(personValue[1], value), rules: [{required: true, message: '请输入总护士人数'}]})}
+            type="number"
+            value={inputValue[personValue[1]] || ''}
+          />
+          {isFieldTouched[personValue[1]] && getFieldError[personValue[1]] ? <p className='surveyError'>{getFieldError[personValue[1]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='info_content'>{personValue[2]}<span>*</span> </p>
+          <p className='dsa_title'>专科</p>
+          <InputItem
+            {...getFieldProps(personValue[3], {onChange: (value) => onChangeHandler(personValue[3], value), rules: [{required: true, message: '请输入专科人数'}]})}
+            type="number"
+            value={inputValue[personValue[3]] || ''}
+          />
+          {isFieldTouched[personValue[3]] && getFieldError[personValue[3]] ? <p className='surveyError'>{getFieldError[personValue[3]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>本科</p>
+          <InputItem
+            {...getFieldProps(personValue[4], {onChange: (value) => onChangeHandler(personValue[4], value), rules: [{required: true, message: '请输入本科人数'}]})}
+            type="number"
+            value={inputValue[personValue[4]] || ''}
+          />
+          {isFieldTouched[personValue[4]] && getFieldError[personValue[4]] ? <p className='surveyError'>{getFieldError[personValue[4]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>硕士</p>
+          <InputItem
+            {...getFieldProps(personValue[5], {onChange: (value) => onChangeHandler(personValue[5], value), rules: [{required: true, message: '请输入硕士人数'}]})}
+            type="number"
+            value={inputValue[personValue[5]] || ''}
+          />
+          {isFieldTouched[personValue[5]] && getFieldError[personValue[5]] ? <p className='surveyError'>{getFieldError[personValue[5]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>博士</p>
+          <InputItem
+            {...getFieldProps(personValue[6], {onChange: (value) => onChangeHandler(personValue[6], value), rules: [{required: true, message: '请输入博士人数'}]})}
+            type="number"
+            value={inputValue[personValue[6]] || ''}
+          />
+          {isFieldTouched[personValue[6]] && getFieldError[personValue[6]] ? <p className='surveyError'>{getFieldError[personValue[6]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>高级职称</p>
+          <InputItem
+            {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(personValue[7], value), rules: [{required: true, message: '请输入高级职称人数'}]})}
+            type="number"
+            value={inputValue[personValue[7]] || ''}
+          />
+          {isFieldTouched[personValue[7]] && getFieldError[personValue[7]] ? <p className='surveyError'>{getFieldError[personValue[7]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>中级职称</p>
+          <InputItem
+            {...getFieldProps(personValue[8], {onChange: (value) => onChangeHandler(personValue[8], value), rules: [{required: true, message: '请输入中级职称人数'}]})}
+            type="number"
+            value={inputValue[personValue[8]] || ''}
+          />
+          {isFieldTouched[personValue[8]] && getFieldError[personValue[8]] ? <p className='surveyError'>{getFieldError[personValue[8]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+
+          <p className='info_content'>{personValue[9]}</p>
+          <p className='dsa_title'>心血管内科</p>
+          <InputItem
+            {...getFieldProps(personValue[10], {onChange: (value) => onChangeHandler(personValue[10], value), rules: [{required: true, message: '请输入专科人数'}]})}
+            type="number"
+            value={inputValue[personValue[10]] || ''}
+          />
+          {isFieldTouched[personValue[10]] && getFieldError[personValue[10]] ? <p className='surveyError'>{getFieldError[personValue[10]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>心外科</p>
+          <InputItem
+            {...getFieldProps(personValue[11], {onChange: (value) => onChangeHandler(personValue[11], value), rules: [{required: true, message: '请输入本科人数'}]})}
+            type="number"
+            value={inputValue[personValue[11]] || ''}
+          />
+          {isFieldTouched[personValue[11]] && getFieldError[personValue[11]] ? <p className='surveyError'>{getFieldError[personValue[11]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>放射科</p>
+          <InputItem
+            {...getFieldProps(personValue[12], {onChange: (value) => onChangeHandler(personValue[12], value), rules: [{required: true, message: '请输入硕士人数'}]})}
+            type="number"
+            value={inputValue[personValue[12]] || ''}
+          />
+          {isFieldTouched[personValue[12]] && getFieldError[personValue[12]] ? <p className='surveyError'>{getFieldError[personValue[12]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>其他学科：</p>
+          <InputItem
+            {...getFieldProps(personValue[13], {onChange: (value) => onChangeHandler(personValue[13], value), rules: [{required: true, message: '请输入中级职称人数'}]})}
+            type="number"
+            value={inputValue[personValue[13]] || ''}
+          />
+          {isFieldTouched[personValue[13]] && getFieldError[personValue[13]] ? <p className='surveyError'>{getFieldError[personValue[13]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>选项1</p>
+          <InputItem
+            {...getFieldProps(personValue[14], {onChange: (value) => onChangeHandler(personValue[14], value), rules: [{required: true, message: '请输入中级职称人数'}]})}
+            type="number"
+            value={inputValue[personValue[14]] || ''}
+          />
+          {isFieldTouched[personValue[14]] && getFieldError[personValue[14]] ? <p className='surveyError'>{getFieldError[personValue[14]]}</p>:''}
+
+          <WhiteSpace size="lg" />
+        </div>
+      )
+    })
+
 
     return (
       <React.Fragment>
@@ -166,6 +301,133 @@ class HeartPipePersonConstruct extends React.Component {
           {eachGroupNumber}
 
           <WhiteSpace size="lg" />
+
+          {nurse_skill_person}
+
+          {/*<p className='info_content'>总护士人数（单位：人）<span>*</span> </p>
+          <InputItem
+              {...getFieldProps('totalNurseNumber', {onChange: (value) => onChangeHandler('totalNurseNumber', value), rules: [{required: true, message: '请输入总护士人数'}]})}
+            type="number"
+            value={inputValue.totalNurseNumber || ''}
+          />
+          {isFieldTouched('totalNurseNumber') && getFieldError('totalNurseNumber') ? <p className='surveyError'>{getFieldError('totalNurseNumber')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='info_content'>护士人才架构（单位：人）<span>*</span> </p>
+          <p className='dsa_title'>专科</p>
+          <InputItem
+            {...getFieldProps('nurse_juniorDegree', {onChange: (value) => onChangeHandler('nurse_juniorDegree', value), rules: [{required: true, message: '请输入专科人数'}]})}
+            type="number"
+            value={inputValue.nurse_juniorDegree || ''}
+          />
+          {isFieldTouched('nurse_juniorDegree') && getFieldError('nurse_juniorDegree') ? <p className='surveyError'>{getFieldError('nurse_juniorDegree')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>本科</p>
+          <InputItem
+            {...getFieldProps('nurse_bachelorDegree', {onChange: (value) => onChangeHandler('nurse_bachelorDegree', value), rules: [{required: true, message: '请输入本科人数'}]})}
+            type="number"
+            value={inputValue.nurse_bachelorDegree || ''}
+          />
+          {isFieldTouched('nurse_bachelorDegree') && getFieldError('nurse_bachelorDegree') ? <p className='surveyError'>{getFieldError('nurse_bachelorDegree')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>硕士</p>
+          <InputItem
+            {...getFieldProps('nurse_masterDegree', {onChange: (value) => onChangeHandler('nurse_masterDegree', value), rules: [{required: true, message: '请输入硕士人数'}]})}
+            type="number"
+            value={inputValue.nurse_masterDegree || ''}
+          />
+          {isFieldTouched('nurse_masterDegree') && getFieldError('nurse_masterDegree') ? <p className='surveyError'>{getFieldError('nurse_masterDegree')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>博士</p>
+          <InputItem
+            {...getFieldProps('nurse_doctorDegree', {onChange: (value) => onChangeHandler('nurse_doctorDegree', value), rules: [{required: true, message: '请输入博士人数'}]})}
+            type="number"
+            value={inputValue.nurse_doctorDegree || ''}
+          />
+          {isFieldTouched('nurse_doctorDegree') && getFieldError('nurse_doctorDegree') ? <p className='surveyError'>{getFieldError('nurse_doctorDegree')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>高级职称</p>
+          <InputItem
+            {...getFieldProps('nurse_seniorDegree', {onChange: (value) => onChangeHandler('nurse_seniorDegree', value), rules: [{required: true, message: '请输入高级职称人数'}]})}
+            type="number"
+            value={inputValue.nurse_seniorDegree || ''}
+          />
+          {isFieldTouched('nurse_seniorDegree') && getFieldError('nurse_seniorDegree') ? <p className='surveyError'>{getFieldError('nurse_seniorDegree')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>中级职称</p>
+          <InputItem
+            {...getFieldProps('nurse_mediumDegree', {onChange: (value) => onChangeHandler('nurse_mediumDegree', value), rules: [{required: true, message: '请输入中级职称人数'}]})}
+            type="number"
+            value={inputValue.nurse_mediumDegree || ''}
+          />
+          {isFieldTouched('nurse_mediumDegree') && getFieldError('nurse_mediumDegree') ? <p className='surveyError'>{getFieldError('nurse_mediumDegree')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+
+
+          <p className='info_content'>隶属学科及人数（可多选）</p>
+          <p className='dsa_title'>心血管内科</p>
+          <InputItem
+            {...getFieldProps('belong_cardiovascular', {onChange: (value) => onChangeHandler('belong_cardiovascular', value), rules: [{required: true, message: '请输入专科人数'}]})}
+            type="number"
+            value={inputValue.belong_cardiovascular || ''}
+          />
+          {isFieldTouched('belong_cardiovascular') && getFieldError('belong_cardiovascular') ? <p className='surveyError'>{getFieldError('belong_cardiovascular')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>心外科</p>
+          <InputItem
+            {...getFieldProps('belong_cardiac', {onChange: (value) => onChangeHandler('belong_cardiac', value), rules: [{required: true, message: '请输入本科人数'}]})}
+            type="number"
+            value={inputValue.belong_cardiac || ''}
+          />
+          {isFieldTouched('belong_cardiac') && getFieldError('belong_cardiac') ? <p className='surveyError'>{getFieldError('belong_cardiac')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>放射科</p>
+          <InputItem
+            {...getFieldProps('belong_radiology', {onChange: (value) => onChangeHandler('belong_radiology', value), rules: [{required: true, message: '请输入硕士人数'}]})}
+            type="number"
+            value={inputValue.belong_radiology || ''}
+          />
+          {isFieldTouched('belong_radiology') && getFieldError('belong_radiology') ? <p className='surveyError'>{getFieldError('belong_radiology')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>其他学科：</p>
+          <InputItem
+            {...getFieldProps('belong_otherSubject', {onChange: (value) => onChangeHandler('belong_otherSubject', value), rules: [{required: true, message: '请输入中级职称人数'}]})}
+            type="number"
+            value={inputValue.belong_otherSubject || ''}
+          />
+          {isFieldTouched('belong_otherSubject') && getFieldError('belong_otherSubject') ? <p className='surveyError'>{getFieldError('belong_otherSubject')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='dsa_title'>选项1</p>
+          <InputItem
+            {...getFieldProps('belong_option1', {onChange: (value) => onChangeHandler('belong_option1', value), rules: [{required: true, message: '请输入中级职称人数'}]})}
+            type="number"
+            value={inputValue.belong_option1 || ''}
+          />
+          {isFieldTouched('belong_option1') && getFieldError('belong_option1') ? <p className='surveyError'>{getFieldError('belong_option1')}</p>:''}
+
+          <WhiteSpace size="lg" />*/}
+
         </List>
       </React.Fragment>
     )

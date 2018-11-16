@@ -10,6 +10,7 @@ import HeartBasicCondition from './HeartBasicCondition';
 import HeartPipeHardwareCondition from './HeartPipeHardwareCondition';
 import DSA from './DSA';
 import HeartPipePersonConstruct from './HeartPipePersonConstruct';
+import WorkLoad2017 from './WorkLoad2017';
 import { hospitalGrade, hospitalOrganizationKind, hospitalKind, hospitalKindBelong, hospitalOldArea} from './SurveyData';
 
 class BasicInformation extends React.Component {
@@ -176,6 +177,7 @@ class BasicInformation extends React.Component {
         <HeartPipeHardwareCondition onChangeHandler={this.onChangeHandler} />
         <DSA onChangeHandler={this.onChangeHandler} />
         <HeartPipePersonConstruct onChangeHandler={this.onChangeHandler} />
+        <WorkLoad2017 onChangeHandler={this.onChangeHandler} />
 
         <WhiteSpace size="lg" />
 

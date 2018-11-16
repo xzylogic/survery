@@ -123,3 +123,46 @@ export const groupSurgeryDoctorsOperationScope = [
   {label: '中医科', value: '2'},
   {label: '其他学科', value: '3'},
 ];
+
+/**
+ *
+ * WordLoad2017数据(2017工作量)
+ */
+
+export const pciOperation = [
+  {label: '未开展', value: '0'},
+  {label: '已开展', value: '1'},
+];
+
+export const operaCheckWay = [
+  {label: '纸质版', value: '0'},
+  {label: '电脑版', value: '1'},
+];
+
+export const pipeNumberWork = [
+  {label: '可以满足', value: '0'},
+  {label: '不能满足', value: '1'},
+];
+
+export const pipePersonShortage = [
+  {label: '手术医师', value: '0'},
+  {label: '专科护士', value: '1'},
+  {label: '放射技师', value: '2'},
+  {label: '工勤人员', value: '3'},
+];
+
+export const pipeOverTime = [
+  {label: '经常（＞3次/周）', value: '0'},
+  {label: '偶尔（＜2次/周）', value: '1'},
+  {label: '几乎不加班', value: '2'},
+];
+
+export const CHDCheckOtherOffice = [
+  {label: '无', value: '0'},
+  {label: '是', value: '1'},
+];
+
+export const cardiacCheckOtherOffice = [
+  {label: '无', value: '0'},
+  {label: '是', value: '1'},
+];
