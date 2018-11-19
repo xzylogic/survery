@@ -4,14 +4,14 @@ import { withRouter } from 'react-router-dom'
 import {List, InputItem, Picker, WhiteSpace, DatePicker, Button} from 'antd-mobile'
 import { createForm } from 'rc-form';
 import moment from 'moment'
-import {surveyStoreLocalAction} from "../../Store/actions/global.action";
+import {surveyStoreLocalAction} from "../../Store/actions/survey.action";
 
+import { hospitalGrade, hospitalOrganizationKind, hospitalKind, hospitalKindBelong, hospitalOldArea} from './SurveyData';
 import HeartBasicCondition from './HeartBasicCondition';
 import HeartPipeHardwareCondition from './HeartPipeHardwareCondition';
 import DSA from './DSA';
 import HeartPipePersonConstruct from './HeartPipePersonConstruct';
 import WorkLoad2017 from './WorkLoad2017';
-import { hospitalGrade, hospitalOrganizationKind, hospitalKind, hospitalKindBelong, hospitalOldArea} from './SurveyData';
 
 class BasicInformation extends React.Component {
 
@@ -40,6 +40,14 @@ class BasicInformation extends React.Component {
     }
   }
 
+  // checkError = (key) => {
+  //   const {isFieldTouched, getFieldError} = this.props.form;
+  //   console.log(key)
+  //   let errMes = isFieldTouched(key) && getFieldError(key) ? <p className='surveyError'>{getFieldError(key)}</p>:'';
+  //   return errMes
+  //   isFieldTouched(key) && getFieldError(key);
+  // }
+
   submit = () => {
     // const store = this.props;
     const {validateFields} = this.props.form; //isFieldTouched, getFieldError
@@ -61,15 +69,6 @@ class BasicInformation extends React.Component {
       }
     });
   }
-
-  // checkError = (key) => {
-  //   const { getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
-  //   return (
-  //     <div>
-  //       {isFieldTouched[key] && getFieldError[key] ? <p className='surveyError'>{getFieldError[key]}</p>:''}
-  //     </div>
-  //   )
-  // }
 
   render() {
     const { globalReducer:{ inputValue } } = this.props;
@@ -96,7 +95,7 @@ class BasicInformation extends React.Component {
             {...getFieldProps('hospitalGrade', {onChange: (value) => this.onChangeHandler('hospitalGrade', value), rules: [{required: true, message: '请选择医院的等级'}]})}
             value={inputValue.hospitalGrade || ''}
             data={hospitalGrade}
-            onDismiss={getFieldError('hospitalGrade')}
+            // onDismiss={this.checkError.bind(this, 'hospitalGrade')}
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>

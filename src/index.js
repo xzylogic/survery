@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import SecondApp from './SecondApp'
 // import App from './App'
-import configureStore from './Store'
+// import configureStore from './Store'
+import SecondApp from './SecondApp'
+import configureStore from './Store/survey'
 import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(

@@ -37,7 +37,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[1]] || ''}
           />
-          {isFieldTouched[personValue[1]] && getFieldError[personValue[1]] ? <p className='surveyError'>{getFieldError[personValue[1]]}</p>:''}
+          {isFieldTouched(personValue[1]) && getFieldError(personValue[1]) ? <p className='surveyError'>{getFieldError(personValue[1])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -47,7 +47,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[2]] || ''}
           />
-          {isFieldTouched[personValue[2]] && getFieldError[personValue[2]] ? <p className='surveyError'>{getFieldError[personValue[2]]}</p>:''}
+          {isFieldTouched(personValue[2]) && getFieldError(personValue[2]) ? <p className='surveyError'>{getFieldError(personValue[2])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -57,7 +57,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[3]] || ''}
           />
-          {isFieldTouched[personValue[3]] && getFieldError[personValue[3]] ? <p className='surveyError'>{getFieldError[personValue[3]]}</p>:''}
+          {isFieldTouched(personValue[3]) && getFieldError(personValue[3]) ? <p className='surveyError'>{getFieldError(personValue[3])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -67,7 +67,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[4]] || ''}
           />
-          {isFieldTouched[personValue[4]] && getFieldError[personValue[4]] ? <p className='surveyError'>{getFieldError[personValue[4]]}</p>:''}
+          {isFieldTouched(personValue[4]) && getFieldError(personValue[4]) ? <p className='surveyError'>{getFieldError(personValue[4])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -77,12 +77,12 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[5]] || ''}
           />
-          {isFieldTouched[personValue[5]] && getFieldError[personValue[5]] ? <p className='surveyError'>{getFieldError[personValue[5]]}</p>:''}
+          {isFieldTouched(personValue[5]) && getFieldError(personValue[5]) ? <p className='surveyError'>{getFieldError(personValue[5])}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>组内手术医师的执业范围<i>（可多选）</i> <span>*</span> </p>
-          {groupSurgeryDoctorsOperationScope.map((i, index) => (
+          {groupSurgeryDoctorsOperationScope.map(i => (
             <div key={i.value}>
               <CheckboxItem
                 // {...getFieldProps('groupSurgeryDoctorsOperationScope', {onChange: () => onChangeHandler('groupSurgeryDoctorsOperationScope', i.value,  'survey', i.value)})}
@@ -92,7 +92,8 @@ class HeartPipePersonConstruct extends React.Component {
               >
                 {i.label}
               </CheckboxItem>
-              {(inputValue[personValue[6]] && inputValue[personValue[6]][i.value]) === '3' ? (
+              {/*{console.log(personValue[6], '++++++++++++++',inputValue[personValue[6]])}*/}
+              {inputValue[personValue[6]] && i.value === '3' && inputValue[personValue[6]].indexOf(i.value) > -1 ? (
                 <InputItem
                   {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(personValue[7], value), rules: [{required: true, message: '请输入其他学科'}]})}
                   type="number"
@@ -110,7 +111,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[8]] || ''}
           />
-          {isFieldTouched[personValue[8]] && getFieldError[personValue[8]] ? <p className='surveyError'>{getFieldError[personValue[8]]}</p>:''}
+          {isFieldTouched(personValue[8]) && getFieldError(personValue[8]) ? <p className='surveyError'>{getFieldError(personValue[8])}</p>:''}
 
           <WhiteSpace size="lg" />
           <WhiteSpace size="lg" />
@@ -126,7 +127,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[1]] || ''}
           />
-          {isFieldTouched[personValue[1]] && getFieldError[personValue[1]] ? <p className='surveyError'>{getFieldError[personValue[1]]}</p>:''}
+          {isFieldTouched(personValue[1]) && getFieldError(personValue[1]) ? <p className='surveyError'>{getFieldError(personValue[1])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -137,7 +138,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[3]] || ''}
           />
-          {isFieldTouched[personValue[3]] && getFieldError[personValue[3]] ? <p className='surveyError'>{getFieldError[personValue[3]]}</p>:''}
+          {isFieldTouched(personValue[3]) && getFieldError(personValue[3]) ? <p className='surveyError'>{getFieldError(personValue[3])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -147,7 +148,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[4]] || ''}
           />
-          {isFieldTouched[personValue[4]] && getFieldError[personValue[4]] ? <p className='surveyError'>{getFieldError[personValue[4]]}</p>:''}
+          {isFieldTouched(personValue[4]) && getFieldError(personValue[4]) ? <p className='surveyError'>{getFieldError(personValue[4])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -157,7 +158,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[5]] || ''}
           />
-          {isFieldTouched[personValue[5]] && getFieldError[personValue[5]] ? <p className='surveyError'>{getFieldError[personValue[5]]}</p>:''}
+          {isFieldTouched(personValue[5]) && getFieldError(personValue[5]) ? <p className='surveyError'>{getFieldError(personValue[5])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -167,7 +168,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[6]] || ''}
           />
-          {isFieldTouched[personValue[6]] && getFieldError[personValue[6]] ? <p className='surveyError'>{getFieldError[personValue[6]]}</p>:''}
+          {isFieldTouched(personValue[6]) && getFieldError(personValue[6]) ? <p className='surveyError'>{getFieldError(personValue[6])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -177,7 +178,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[7]] || ''}
           />
-          {isFieldTouched[personValue[7]] && getFieldError[personValue[7]] ? <p className='surveyError'>{getFieldError[personValue[7]]}</p>:''}
+          {isFieldTouched(personValue[7]) && getFieldError(personValue[7]) ? <p className='surveyError'>{getFieldError(personValue[7])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -187,7 +188,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[8]] || ''}
           />
-          {isFieldTouched[personValue[8]] && getFieldError[personValue[8]] ? <p className='surveyError'>{getFieldError[personValue[8]]}</p>:''}
+          {isFieldTouched(personValue[8]) && getFieldError(personValue[8]) ? <p className='surveyError'>{getFieldError(personValue[8])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -199,7 +200,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[10]] || ''}
           />
-          {isFieldTouched[personValue[10]] && getFieldError[personValue[10]] ? <p className='surveyError'>{getFieldError[personValue[10]]}</p>:''}
+          {isFieldTouched(personValue[10]) && getFieldError(personValue[10]) ? <p className='surveyError'>{getFieldError(personValue[10])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -209,7 +210,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[11]] || ''}
           />
-          {isFieldTouched[personValue[11]] && getFieldError[personValue[11]] ? <p className='surveyError'>{getFieldError[personValue[11]]}</p>:''}
+          {isFieldTouched(personValue[11]) && getFieldError(personValue[11]) ? <p className='surveyError'>{getFieldError(personValue[11])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -219,7 +220,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[12]] || ''}
           />
-          {isFieldTouched[personValue[12]] && getFieldError[personValue[12]] ? <p className='surveyError'>{getFieldError[personValue[12]]}</p>:''}
+          {isFieldTouched(personValue[12]) && getFieldError(personValue[12]) ? <p className='surveyError'>{getFieldError(personValue[12])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -229,7 +230,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[13]] || ''}
           />
-          {isFieldTouched[personValue[13]] && getFieldError[personValue[13]] ? <p className='surveyError'>{getFieldError[personValue[13]]}</p>:''}
+          {isFieldTouched(personValue[13]) && getFieldError(personValue[13]) ? <p className='surveyError'>{getFieldError(personValue[13])}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -239,7 +240,7 @@ class HeartPipePersonConstruct extends React.Component {
             type="number"
             value={inputValue[personValue[14]] || ''}
           />
-          {isFieldTouched[personValue[14]] && getFieldError[personValue[14]] ? <p className='surveyError'>{getFieldError[personValue[14]]}</p>:''}
+          {isFieldTouched(personValue[14]) && getFieldError(personValue[14]) ? <p className='surveyError'>{getFieldError(personValue[14])}</p>:''}
 
           <WhiteSpace size="lg" />
         </div>

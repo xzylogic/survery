@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import SurveyComponent from '../Components/Survey/SurveyComponent'
-import {surveyGetLocalAction} from "../Store/actions/global.action";
+import {surveyGetLocalAction} from "../Store/actions/survey.action";
 
 
 class Survey extends React.Component {

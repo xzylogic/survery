@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { List, InputItem, WhiteSpace, Checkbox, Radio } from 'antd-mobile'
 import { createForm } from 'rc-form';
 
-import {pipeFlowLevel, otherEquipNumber, ifThoracotomy, flowLevel} from './SurveyData'
+import {pipeFlowLevel, otherEquipNumber, flowLevel} from './SurveyData'
 
 const CheckboxItem = Checkbox.CheckboxItem;
 const RadioItem = Radio.RadioItem;
@@ -20,38 +20,40 @@ class HeartPipeHardwareCondition extends React.Component {
       <React.Fragment>
         <List>
           <p className='info_content'>数字减影血管造影机</p>
-          {/*<div>
-            <p className='dsa_id'>1</p>
-            <p className='dsa_title'>品牌、型号</p>
-            <InputItem
-              {...getFieldProps(`DSABrandModel`, {rules: [{required: true}]})}
-              type="text"
-              value={inputValue.DSABrandModel || ''}
-              onChange={onChangeHandler.bind(this, `DSABrandModel`)}
-            />
-            <p className='dsa_title'>安装年月（例：2018.4）</p>
-            <InputItem
-              {...getFieldProps(`DSAInstallTime`, {rules: [{required: true}]})}
-              type="text"
-              value={inputValue.DSAInstallTime || ''}
-              onChange={onChangeHandler.bind(this, `DSAInstallTime`)}
-            />
-          </div>*/}
+          {/*<div>*/}
+            {/*<p className='dsa_id'>1</p>*/}
+            {/*<p className='dsa_title'>品牌、型号</p>*/}
+            {/*<InputItem*/}
+              {/*{...getFieldProps(`DSABrandModel1`)}*/}
+              {/*type="text"*/}
+              {/*value={inputValue.DSABrandModel1 || ''}*/}
+              {/*onChange={onChangeHandler.bind(this, `DSABrandModel1`)}*/}
+            {/*/>*/}
+            {/*<p className='dsa_title'>安装年月（例：2018.4）</p>*/}
+            {/*<InputItem*/}
+              {/*{...getFieldProps(`DSAInstallTime1`)}*/}
+              {/*type="text"*/}
+              {/*value={inputValue.DSAInstallTime1 || ''}*/}
+              {/*onChange={onChangeHandler.bind(this, `DSAInstallTime1`)}*/}
+            {/*/>*/}
+          {/*</div>*/}
           {DSANumber.map((index) => {
             return (
               <div key={index}>
                 <p className='dsa_id'>{index}</p>
                 <p className='dsa_title'>品牌、型号</p>
                 <InputItem
+                  {...getFieldProps(`DSABrandModel${index}`, {onChange: (value) => onChangeHandler(`DSABrandModel${index}`, value)})}
                   type="text"
-                  value={inputValue.DSABrandModel && inputValue.DSABrandModel[index]}
-                  onChange={onChangeHandler.bind(this, `DSABrandModel${index}`)}
+                  value={inputValue[`DSABrandModel${index}`]}
+                  // onChange={onChangeHandler.bind(this, 'DSABrandModel')}
                 />
                 <p className='dsa_title'>安装年月（例：2018.4）</p>
                 <InputItem
+                  {...getFieldProps(`DSAInstallTime${index}`, {onChange: (value) => onChangeHandler(`DSAInstallTime${index}`, value)})}
                   type="text"
-                  value={inputValue.DSAInstallTime && inputValue.DSAInstallTime[index]}
-                  onChange={onChangeHandler.bind(this, `DSAInstallTime${index}`)}
+                  value={inputValue[`DSAInstallTime${index}`]}
+                  // onChange={onChangeHandler.bind(this, 'DSAInstallTime')}
                 />
               </div>
             )
@@ -70,11 +72,11 @@ class HeartPipeHardwareCondition extends React.Component {
               >
                 {i.label}
               </CheckboxItem>
-              {(inputValue.otherEquipNumber && inputValue.otherEquipNumber[i.value]) === i.value ? (
+              {inputValue.otherEquipNumber && inputValue.otherEquipNumber.indexOf(i.value) > -1 ? (
                 <InputItem
-                  {...getFieldProps('otherSubject', {onChange: (value) => onChangeHandler('otherSubject', value), rules: [{required: true, message: '请输入其他学科'}]})}
+                  {...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler(`otherEquipNumber${i.value}`, value), rules: [{required: true, message: '请输入其他学科'}]})}
                   type="number"
-                  value={inputValue.otherSubject || ''}
+                  value={inputValue[`otherEquipNumber${i.value}`] || ''}
                 />
               ) : ''}
             </div>
