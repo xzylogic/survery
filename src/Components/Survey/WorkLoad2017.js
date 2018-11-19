@@ -15,12 +15,12 @@ class WorkLoad2017 extends React.Component {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
     const { getFieldProps, getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
     const workLoadList = [
-      ['PCI手术', 'PCI', 'PCI_operaCount', 'PCI_emergencyCount', 'PCI_sickKindRate', 'PCI_averageInHospital', 'PCI_averageOperaCost', 'PCI_cureRate', 'PCI_diedRate'],
-      ['起搏器手术', 'DDD', 'DDD_operaCount', 'DDD_emergencyCount', 'DDD_sickKindRate', 'DDD_averageInHospital', 'DDD_averageOperaCost', 'DDD_cureRate', 'DDD_diedRate'],
-      ['射频消融术', 'RF', 'RF_operaCount', 'RF_emergencyCount', 'RF_sickKindRate', 'RF_averageInHospital', 'RF_averageOperaCost', 'RF_cureRate', 'RF_diedRate'],
-      ['先心病介入', 'ACHD', 'ACHD_operaCount', 'ACHD_emergencyCount', 'ACHD_sickKindRate', 'ACHD_averageInHospital', 'ACHD_averageOperaCost', 'ACHD_cureRate', 'ACHD_diedRate'],
-      ['左心耳封堵术', 'LAA', 'LAA_operaCount', 'LAA_emergencyCount', 'LAA_sickKindRate', 'LAA_averageInHospital', 'LAA_averageOperaCost', 'LAA_cureRate', 'LAA_diedRate'],
-      ['经皮主动脉瓣膜置换/成形术', 'PCN', 'PCN_operaCount', 'PCN_emergencyCount', 'PCN_sickKindRate', 'PCN_averageInHospital', 'PCN_averageOperaCost', 'PCN_cureRate', 'PCN_diedRate']
+      ['PCI手术', 'PCI', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
+      ['起搏器手术', 'DDD', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
+      ['射频消融术', 'RF', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
+      ['先心病介入', 'ACHD', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
+      ['左心耳封堵术', 'LAA', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
+      ['经皮主动脉瓣膜置换/成形术', 'PCN', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate']
     ];
     let workLoad = workLoadList.map((operation, index) => {
       return (
@@ -46,9 +46,9 @@ class WorkLoad2017 extends React.Component {
             <List>
               <p className='info_content'>手术量（单位：例）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[2], {onChange: (value) => onChangeHandler(operation[2], value), rules: [{required: true, message: '请输入手术量'}]})}
+                {...getFieldProps(operation[2], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[2]), rules: [{required: true, message: '请输入手术量'}]})}
                 type="text"
-                value={inputValue[operation[2]] || ''}
+                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[2]]}
               />
               {isFieldTouched(operation[2]) && getFieldError(operation[2]) ? <p className='surveyError'>{getFieldError(operation[2])}</p>:''}
 
@@ -56,9 +56,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>其中，急诊手术量（单位：例）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[3], {onChange: (value) => onChangeHandler(operation[3], value), rules: [{required: true, message: '请输入急诊手术量'}]})}
+                {...getFieldProps(operation[3], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[3]), rules: [{required: true, message: '请输入急诊手术量'}]})}
                 type="text"
-                value={inputValue[operation[3]] || ''}
+                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[3]]}
               />
               {isFieldTouched(operation[3]) && getFieldError(operation[3]) ? <p className='surveyError'>{getFieldError(operation[3])}</p>:''}
 
@@ -66,9 +66,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>病种比例（收治此类病人数/住院总人次数）（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[4], {onChange: (value) => onChangeHandler(operation[4], value), rules: [{required: true, message: '请输入病种比例'}]})}
+                {...getFieldProps(operation[4], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[4]), rules: [{required: true, message: '请输入病种比例'}]})}
                 type="text"
-                value={inputValue[operation[4]] || ''}
+                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[4]]}
               />
               {isFieldTouched(operation[4]) && getFieldError(operation[4]) ? <p className='surveyError'>{getFieldError(operation[4])}</p>:''}
 
@@ -76,9 +76,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>平均住院日（单位：日）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[5], {onChange: (value) => onChangeHandler(operation[5], value), rules: [{required: true, message: '请输入平均住院日'}]})}
+                {...getFieldProps(operation[5], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[5]), rules: [{required: true, message: '请输入平均住院日'}]})}
                 type="text"
-                value={inputValue[operation[5]] || ''}
+                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[5]]}
               />
               {isFieldTouched(operation[5]) && getFieldError(operation[5]) ? <p className='surveyError'>{getFieldError(operation[5])}</p>:''}
 
@@ -86,9 +86,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>平均手术费用（单位：元）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[6], {onChange: (value) => onChangeHandler(operation[6], value), rules: [{required: true, message: '请输入平均手术费用'}]})}
+                {...getFieldProps(operation[6], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[6]), rules: [{required: true, message: '请输入平均手术费用'}]})}
                 type="text"
-                value={inputValue[operation[6]] || ''}
+                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[6]]}
               />
               {isFieldTouched(operation[6]) && getFieldError(operation[6]) ? <p className='surveyError'>{getFieldError(operation[6])}</p>:''}
 
@@ -96,9 +96,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>治愈率（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[7], {onChange: (value) => onChangeHandler(operation[7], value), rules: [{required: true, message: '请输入治愈率'}]})}
+                {...getFieldProps(operation[7], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[7]), rules: [{required: true, message: '请输入治愈率'}]})}
                 type="text"
-                value={inputValue[operation[7]] || ''}
+                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[7]]}
               />
               {isFieldTouched(operation[7]) && getFieldError(operation[7]) ? <p className='surveyError'>{getFieldError(operation[7])}</p>:''}
 
@@ -106,9 +106,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>死亡率（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[8], {onChange: (value) => onChangeHandler(operation[8], value), rules: [{required: true, message: '请输入死亡率'}]})}
+                {...getFieldProps(operation[8], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[8]), rules: [{required: true, message: '请输入死亡率'}]})}
                 type="text"
-                value={inputValue[operation[8]] || ''}
+                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[8]]}
               />
               {isFieldTouched(operation[8]) && getFieldError(operation[8]) ? <p className='surveyError'>{getFieldError(operation[8])}</p>:''}
 
