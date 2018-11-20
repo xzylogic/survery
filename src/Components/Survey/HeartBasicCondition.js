@@ -75,7 +75,7 @@ class HeartBasicCondition extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          {inputValue.ifHeartSurgery === '1' ? (
+          {inputValue.ifHeartSurgery === '有' ? (
             <List>
               <p className='info_content'>是否开展过开胸手术？<span>*</span></p>
               {ifThoracotomy.map(i => (

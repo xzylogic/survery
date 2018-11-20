@@ -4,7 +4,15 @@ import { withRouter } from 'react-router-dom'
 import { List, InputItem, Radio, WhiteSpace, Checkbox } from 'antd-mobile'
 import { createForm } from 'rc-form';
 
-import {pciOperation, operaCheckWay, pipeNumberWork, pipePersonShortage, pipeOverTime, CHDCheckOtherOffice, cardiacCheckOtherOffice} from './SurveyData'
+import {
+  pciOperation,
+  operaCheckWay,
+  pipeNumberWork,
+  pipePersonShortage,
+  pipeOverTime,
+  CHDCheckOtherOffice,
+  cardiacCheckOtherOffice,
+} from './SurveyData'
 
 const RadioItem = Radio.RadioItem;
 const CheckboxItem = Checkbox.CheckboxItem;
@@ -42,7 +50,7 @@ class WorkLoad2017 extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          {inputValue[operation[1]] === '1' ? (
+          {inputValue[operation[1]] === '已开展' ? (
             <List>
               <p className='info_content'>手术量（单位：例）<span>*</span></p>
               <InputItem
@@ -202,35 +210,78 @@ class WorkLoad2017 extends React.Component {
 
           <p className='info_content'>4、冠心病造影检查除了心脏科是否其他科室也开展？<span>*</span> </p>
           {CHDCheckOtherOffice.map(i => (
-            <CheckboxItem
-              {...getFieldProps('CHDCheckOtherOffice', {rules: [{required: true, message: '请选择冠心病造影检查除了心脏科是否其他科室也开展？'}]})}
-              key={i.value}
-              checked={i.value === inputValue.CHDCheckOtherOffice}
-              // error={isFieldTouched('CHDCheckOtherOffice') && getFieldError('CHDCheckOtherOffice')}
-              // onErrorClick={() => Toast.info(getFieldError('CHDCheckOtherOffice'))}
-              onChange={onChangeHandler.bind(this, 'CHDCheckOtherOffice', i.value)}
-            >
-              {i.label}
-            </CheckboxItem>
+            <div key={i.value}>
+              <RadioItem
+                {...getFieldProps('CHDCheckOtherOffice', {rules: [{required: true, message: '请选择冠心病造影检查除了心脏科是否其他科室也开展？'}]})}
+                key={i.value}
+                checked={i.value === inputValue.CHDCheckOtherOffice}
+                // error={isFieldTouched('CHDCheckOtherOffice') && getFieldError('CHDCheckOtherOffice')}
+                // onErrorClick={() => Toast.info(getFieldError('CHDCheckOtherOffice'))}
+                onChange={onChangeHandler.bind(this, 'CHDCheckOtherOffice', i.value)}
+              >
+                {i.label}
+              </RadioItem>
+            </div>
           ))}
           {isFieldTouched('CHDCheckOtherOffice') && getFieldError('CHDCheckOtherOffice') ? <p className='surveyError'>{getFieldError('CHDCheckOtherOffice')}</p>:''}
+
+          {inputValue.CHDCheckOtherOffice === '是' ? (
+            <List>
+              <p className='info_content'>冠心病造影检查还有哪科室开展？<span>*</span></p>
+              <InputItem
+                {...getFieldProps('CHDCheck_other', {onChange: (value) => onChangeHandler('CHDCheck_other', value), rules: [{required: true, message: '请输入冠心病造影检查还有哪科室开展'}]})}
+                type="text"
+                value={inputValue.CHDCheck_other || ''}
+              />
+              {isFieldTouched('CHDCheck_other') && getFieldError('CHDCheck_other') ? <p className='surveyError'>{getFieldError('CHDCheck_other')}</p>:''}
+
+              <WhiteSpace size="lg" />
+
+              <p className='info_content'>其他科室每周造影检查数量？（例/周）<span>*</span></p>
+              <InputItem
+                {...getFieldProps('CHDCheck_otherWeekNumber', {onChange: (value) => onChangeHandler('CHDCheck_otherWeekNumber', value), rules: [{required: true, message: '请输入其他科室每周造影检查数量'}]})}
+                type="number"
+                value={inputValue.CHDCheck_otherWeekNumber || ''}
+              />
+              {isFieldTouched('CHDCheck_otherWeekNumber') && getFieldError('CHDCheck_otherWeekNumber') ? <p className='surveyError'>{getFieldError('CHDCheck_otherWeekNumber')}</p>:''}
+
+              <WhiteSpace size="lg" />
+
+            </List>
+          ) : ''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>5、心脏介入治疗除了心脏科是否其他科室也开展？<span>*</span> </p>
           {cardiacCheckOtherOffice.map(i => (
-            <RadioItem
-              {...getFieldProps('cardiacCheckOtherOffice', {rules: [{required: true, message: '请选择心脏介入治疗除了心脏科是否其他科室也开展？'}]})}
-              key={i.value}
-              checked={i.value === inputValue.cardiacCheckOtherOffice}
-              // error={isFieldTouched('cardiacCheckOtherOffice') && getFieldError('cardiacCheckOtherOffice')}
-              // onErrorClick={() => Toast.info(getFieldError('cardiacCheckOtherOffice'))}
-              onChange={onChangeHandler.bind(this, 'cardiacCheckOtherOffice', i.value)}
-            >
-              {i.label}
-            </RadioItem>
+            <div key={i.value}>
+              <RadioItem
+                {...getFieldProps('cardiacCheckOtherOffice', {rules: [{required: true, message: '请选择心脏介入治疗除了心脏科是否其他科室也开展？'}]})}
+                key={i.value}
+                checked={i.value === inputValue.cardiacCheckOtherOffice}
+                // error={isFieldTouched('cardiacCheckOtherOffice') && getFieldError('cardiacCheckOtherOffice')}
+                // onErrorClick={() => Toast.info(getFieldError('cardiacCheckOtherOffice'))}
+                onChange={onChangeHandler.bind(this, 'cardiacCheckOtherOffice', i.value)}
+              >
+                {i.label}
+              </RadioItem>
+            </div>
           ))}
           {isFieldTouched('cardiacCheckOtherOffice') && getFieldError('cardiacCheckOtherOffice') ? <p className='surveyError'>{getFieldError('cardiacCheckOtherOffice')}</p>:''}
+
+          {inputValue.cardiacCheckOtherOffice === '是' ? (
+            <List>
+              <p className='info_content'>心脏介入治疗其他哪科室也开展？<span>*</span></p>
+              <InputItem
+                {...getFieldProps('cardiacCheck_other', {onChange: (value) => onChangeHandler('cardiacCheck_other', value), rules: [{required: true, message: '请输入冠心病造影检查还有哪科室开展'}]})}
+                type="text"
+                value={inputValue.cardiacCheck_other || ''}
+              />
+              {isFieldTouched('cardiacCheck_other') && getFieldError('cardiacCheck_other') ? <p className='surveyError'>{getFieldError('cardiacCheck_other')}</p>:''}
+
+              <WhiteSpace size="lg" />
+            </List>
+          ) : ''}
 
           <WhiteSpace size="lg" />
 

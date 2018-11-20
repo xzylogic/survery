@@ -93,10 +93,10 @@ class HeartPipePersonConstruct extends React.Component {
                 {i.label}
               </CheckboxItem>
               {/*{console.log(personValue[6], '++++++++++++++',inputValue[personValue[6]])}*/}
-              {inputValue[personValue[6]] && i.value === '3' && inputValue[personValue[6]].indexOf(i.value) > -1 ? (
+              {inputValue[personValue[6]] && i.value === '其他学科' && inputValue[personValue[6]].indexOf(i.value) > -1 ? (
                 <InputItem
                   {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(personValue[7], value), rules: [{required: true, message: '请输入其他学科'}]})}
-                  type="number"
+                  type="text"
                   value={inputValue[personValue[7]] || ''}
                 />
               ) : ''}

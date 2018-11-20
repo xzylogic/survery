@@ -43,16 +43,16 @@ class HeartPipeHardwareCondition extends React.Component {
                 <p className='dsa_id'>{index}</p>
                 <p className='dsa_title'>品牌、型号</p>
                 <InputItem
-                  {...getFieldProps(`DSABrandModel${index}`, {onChange: (value) => onChangeHandler(`DSABrandModel${index}`, value)})}
+                  {...getFieldProps(`DSABrandModel${index}`, {onChange: (value) => onChangeHandler('DSA', value, 'survey', `DSABrandModel${index}`)})}
                   type="text"
-                  value={inputValue[`DSABrandModel${index}`]}
+                  value={inputValue['DSA'] && inputValue['DSA'][`DSABrandModel${index}`]}
                   // onChange={onChangeHandler.bind(this, 'DSABrandModel')}
                 />
                 <p className='dsa_title'>安装年月（例：2018.4）</p>
                 <InputItem
-                  {...getFieldProps(`DSAInstallTime${index}`, {onChange: (value) => onChangeHandler(`DSAInstallTime${index}`, value)})}
+                  {...getFieldProps(`DSAInstallTime${index}`, {onChange: (value) => onChangeHandler('DSA', value, 'survey', `DSAInstallTime${index}`)})}
                   type="text"
-                  value={inputValue[`DSAInstallTime${index}`]}
+                  value={inputValue['DSA'] && inputValue['DSA'][`DSAInstallTime${index}`]}
                   // onChange={onChangeHandler.bind(this, 'DSAInstallTime')}
                 />
               </div>
@@ -62,7 +62,7 @@ class HeartPipeHardwareCondition extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>其他设备数量<i>（多选）</i> <span>*</span> </p>
-          {otherEquipNumber.map((i, index) => (
+          {otherEquipNumber.map((i) => (
             <div key={i.value}>
               <CheckboxItem
                 // {...getFieldProps('otherEquipNumber', {onChange: () => onChangeHandler('otherEquipNumber', i.value,  'survey', i.value)})}
@@ -73,14 +73,46 @@ class HeartPipeHardwareCondition extends React.Component {
                 {i.label}
               </CheckboxItem>
               {inputValue.otherEquipNumber && inputValue.otherEquipNumber.indexOf(i.value) > -1 ? (
-                <InputItem
-                  {...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler(`otherEquipNumber${i.value}`, value), rules: [{required: true, message: '请输入其他学科'}]})}
-                  type="number"
-                  value={inputValue[`otherEquipNumber${i.value}`] || ''}
-                />
+                <div key={i.value}>
+                  <InputItem
+                    {...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler('otherEquipNumberValue', value, 'survey', `otherEquipNumber${i.value}`), rules: [{required: true, message: '请输入其他设备数量'}]})}
+                    type="number"
+                    value={inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`]}
+                  />
+                  {isFieldTouched(`otherEquipNumber${i.value}`) && getFieldError(`otherEquipNumber${i.value}`) ? <p className='surveyError'>{getFieldError(`otherEquipNumber${i.value}`)}</p>:''}
+                </div>
               ) : ''}
             </div>
           ))}
+
+          {/*<p className='info_content'>其他设备数量<i>（多选）</i> <span>*</span> </p>*/}
+          {/*{otherEquipNumber.map(i => (*/}
+            {/*<div key={i.value}>*/}
+              {/*<CheckboxItem*/}
+                {/*// {...getFieldProps('otherEquipNumber', {onChange: () => onChangeHandler('otherEquipNumber', i.value,  'survey', i.value)})}*/}
+                {/*// checked={i.value === (inputValue.otherEquipNumber && inputValue.otherEquipNumber[i.value])}  //  (typeof inputValue['otherEquipNumber'] === "object")*/}
+                {/*checked={inputValue.otherEquipNumber && inputValue['otherEquipNumber'][i.value]}*/}
+                {/*onClick={onChangeHandler.bind(this, 'otherEquipNumber', i.value, 'survey', i.value)}*/}
+              {/*>*/}
+                {/*{i.label}*/}
+              {/*</CheckboxItem>*/}
+              {/*{*/}
+                {/*Object.keys(inputValue['otherEquipNumber']).forEach(key => {*/}
+                  {/*return key === i.value ? (*/}
+                    {/*<div>*/}
+                      {/*{console.log('true')}*/}
+                      {/*<InputItem*/}
+                        {/*{...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler('otherEquipNumber', value, 'survey', i.value), rules: [{required: true, message: '请输入其他设备数量'}]})}*/}
+                        {/*type="number"*/}
+                        {/*value={inputValue['otherEquipNumber'] && inputValue['otherEquipNumber'][i.value]}*/}
+                      {/*/>*/}
+                      {/*{isFieldTouched(`otherEquipNumber${i.value}`) && getFieldError(`otherEquipNumber${i.value}`) ? <p className='surveyError'>{getFieldError(`otherEquipNumber${i.value}`)}</p>:''}*/}
+                    {/*</div>*/}
+                  {/*) : ''*/}
+                {/*})*/}
+              {/*}*/}
+            {/*</div>*/}
+          {/*))}*/}
 
           <WhiteSpace size="lg" />
 
@@ -99,7 +131,7 @@ class HeartPipeHardwareCondition extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          {inputValue.pipeFlowLevel === '1' ? (
+          {inputValue.pipeFlowLevel === '有' ? (
             <List>
               <p className='info_content'>层流级别 <span>*</span></p>
               {flowLevel.map(i => (

@@ -42,14 +42,29 @@ class HeartPipeHardwareCondition extends React.Component {
 
           <p className='info_content'>导管室隶属部门 <span>*</span> </p>
           {pipeBelongDepartment.map(i => (
-            <RadioItem
-              {...getFieldProps('pipeBelongDepartment', {rules: [{required: true, message: '请选择导管室隶属部门'}]})}
-              key={i.value}
-              checked={i.value === inputValue.pipeBelongDepartment}
-              onChange={onChangeHandler.bind(this, 'pipeBelongDepartment', i.value)}
-            >
-              {i.label}
-            </RadioItem>
+            <div key={i.value}>
+              <RadioItem
+                {...getFieldProps('pipeBelongDepartment', {rules: [{required: true, message: '请选择导管室隶属部门'}]})}
+                key={i.value}
+                checked={i.value === inputValue.pipeBelongDepartment}
+                onChange={onChangeHandler.bind(this, 'pipeBelongDepartment', i.value)}
+              >
+                {i.label}
+              </RadioItem>
+
+              {inputValue.pipeBelongDepartment && i.value === '其他科室' && inputValue['pipeBelongDepartment'].indexOf(i.value) > -1 ? (
+                <div>
+                  <InputItem
+                    {...getFieldProps('pipeBelongDepartment_other', {onChange: (value) => onChangeHandler('pipeBelongDepartment_other', value), rules: [{required: true, message: '请输入其他科室'}]})}
+                    type="text"
+                    value={inputValue.pipeBelongDepartment_other || ''}
+                  />
+                  {isFieldTouched('pipeBelongDepartment_other') && getFieldError('pipeBelongDepartment_other') ? <p className='surveyError'>{getFieldError('pipeBelongDepartment_other')}</p>:''}
+
+                  <WhiteSpace size="lg" />
+                </div>
+              ) : ''}
+            </div>
           ))}
           {isFieldTouched('pipeBelongDepartment') && getFieldError('pipeBelongDepartment') ? <p className='surveyError'>{getFieldError('pipeBelongDepartment')}</p>:''}
 
