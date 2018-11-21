@@ -12,7 +12,7 @@ import HeartBasicCondition from './HeartBasicCondition';
 import HeartPipeHardwareCondition from './HeartPipeHardwareCondition';
 import DSA from './DSA';
 import HeartPipePersonConstruct from './HeartPipePersonConstruct';
-import WorkLoad2017 from './WorkLoad2017';
+import WorkLoad2018 from './WorkLoad2018';
 
 class BasicInformation extends React.Component {
 
@@ -205,7 +205,7 @@ class BasicInformation extends React.Component {
         <HeartPipeHardwareCondition onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError} />
         <DSA onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>
         <HeartPipePersonConstruct onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>
-        <WorkLoad2017 onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>
+        <WorkLoad2018 onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>
 
         <WhiteSpace size="lg" />
 

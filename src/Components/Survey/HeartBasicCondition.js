@@ -66,10 +66,12 @@ class HeartBasicCondition extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>是否有心外科 <span>*</span> </p>
+          <p className='info_content'>是否有心胸外科 <span>*</span> </p>
           {ifHeartSurgery.map(i => (
             <RadioItem
-              {...getFieldProps('ifHeartSurgery', {rules: [{required: true, message: '请选择是否有心外科'}]})}
+              {...getFieldProps('ifHeartSurgery', {
+                initialValue: inputValue.ifHeartSurgery || '',
+                rules: [{required: true, message: '请选择是否有心外科'}]})}
               key={i.value}
               checked={i.value === inputValue.ifHeartSurgery}
               // error={isFieldTouched('ifHeartSurgery') && getFieldError('ifHeartSurgery')}
@@ -88,7 +90,9 @@ class HeartBasicCondition extends React.Component {
               <p className='info_content'>是否开展过开胸手术？<span>*</span></p>
               {ifThoracotomy.map(i => (
                 <RadioItem
-                  {...getFieldProps('ifThoracotomy', {rules: [{required: true, message: '请选择是否有心外科'}]})}
+                  {...getFieldProps('ifThoracotomy', {
+                    initialValue: inputValue.ifThoracotomy || '',
+                    rules: [{required: true, message: '请选择是否有心外科'}]})}
                   key={i.value}
                   checked={i.value === inputValue.ifThoracotomy}
                   // error={isFieldTouched('ifThoracotomy') && getFieldError('ifThoracotomy')}

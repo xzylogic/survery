@@ -152,6 +152,22 @@ export const pciOperation = [
 export const operaCheckWay = [
   {label: '纸质版', value: '纸质版'},
   {label: '电脑版', value: '电脑版'},
+  {label: '医院构建下的系统', value: '医院构建下的系统'},
+  {label: '专业开发的系统', value: '专业开发的系统'},
+  {label: 'excel数据库', value: 'excel数据库'},
+];
+
+export const videoDataManageWay = [
+  {label: '放射科管理', value: '放射科管理'},
+  {label: '导管室管理', value: '导管室管理'},
+  {label: '医院统一管理', value: '医院统一管理'},
+];
+
+export const videoDataCarryMediumWay = [
+  {label: '光盘', value: '光盘'},
+  {label: '独立服务器（云存储）', value: '独立服务器（云存储）'},
+  {label: 'PACS', value: 'PACS'},
+  {label: '其他', value: '其他'},
 ];
 
 export const pipeNumberWork = [

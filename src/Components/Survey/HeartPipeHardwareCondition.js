@@ -44,7 +44,9 @@ class HeartPipeHardwareCondition extends React.Component {
           {pipeBelongDepartment.map(i => (
             <div key={i.value}>
               <RadioItem
-                {...getFieldProps('pipeBelongDepartment', {rules: [{required: true, message: '请选择导管室隶属部门'}]})}
+                {...getFieldProps('pipeBelongDepartment', {
+                  initialValue: inputValue.pipeBelongDepartment || '',
+                  rules: [{required: true, message: '请选择导管室隶属部门'}]})}
                 key={i.value}
                 checked={i.value === inputValue.pipeBelongDepartment}
                 onChange={onChangeHandler.bind(this, 'pipeBelongDepartment', i.value)}
@@ -73,7 +75,9 @@ class HeartPipeHardwareCondition extends React.Component {
           <p className='info_content'>导管室在医院内的地理位置 <span>*</span> </p>
           {pipeHospitalLocation.map(i => (
             <RadioItem
-              {...getFieldProps('pipeHospitalLocation', {rules: [{required: true, message: '请选择导管室隶属部门'}]})}
+              {...getFieldProps('pipeHospitalLocation', {
+                initialValue: inputValue.pipeHospitalLocation || '',
+                rules: [{required: true, message: '请选择导管室隶属部门'}]})}
               key={i.value}
               checked={i.value === inputValue.pipeHospitalLocation}
               // error={isFieldTouched('pipeHospitalLocation') && getFieldError('pipeHospitalLocation')}

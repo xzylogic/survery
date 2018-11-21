@@ -15,7 +15,7 @@ class HeartPipeHardwareCondition extends React.Component {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
     const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
 
-    const DSANumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const DSANumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     return (
       <React.Fragment>
         <List>
@@ -65,7 +65,9 @@ class HeartPipeHardwareCondition extends React.Component {
           {otherEquipNumber.map((i) => (
             <div key={i.value}>
               <CheckboxItem
-                // {...getFieldProps('otherEquipNumber', {onChange: () => onChangeHandler('otherEquipNumber', i.value,  'survey', i.value)})}
+                {...getFieldProps('otherEquipNumber', {
+                  initialValue: inputValue.otherEquipNumber || '',
+                  rules: [{required: true, message: '请选择其他设备数量'}]})}
                 // checked={i.value === (inputValue.otherEquipNumber && inputValue.otherEquipNumber[i.value])}
                 checked={inputValue.otherEquipNumber && Array.isArray(inputValue.otherEquipNumber) && inputValue.otherEquipNumber.indexOf(i.value) > -1}
                 onClick={onChangeHandler.bind(this, 'otherEquipNumber', i.value,  'checkbox')}
@@ -86,6 +88,7 @@ class HeartPipeHardwareCondition extends React.Component {
               ) : ''}
             </div>
           ))}
+          {isFieldTouched('otherEquipNumber') && getFieldError('otherEquipNumber') ? <p className='surveyError'>{getFieldError('otherEquipNumber')}</p>:''}
 
           {/*<p className='info_content'>其他设备数量<i>（多选）</i> <span>*</span> </p>*/}
           {/*{otherEquipNumber.map(i => (*/}
@@ -121,7 +124,9 @@ class HeartPipeHardwareCondition extends React.Component {
           <p className='info_content'>导管室层流级别 <span>*</span> </p>
           {pipeFlowLevel.map(i => (
             <RadioItem
-              {...getFieldProps('pipeFlowLevel', {rules: [{required: true, message: '请选择导管室层流级别'}]})}
+              {...getFieldProps('pipeFlowLevel', {
+                initialValue: inputValue.pipeFlowLevel || '',
+                rules: [{required: true, message: '请选择导管室层流级别'}]})}
               key={i.value}
               checked={i.value === inputValue.pipeFlowLevel}
               onChange={onChangeHandler.bind(this, 'pipeFlowLevel', i.value)}
@@ -138,7 +143,9 @@ class HeartPipeHardwareCondition extends React.Component {
               <p className='info_content'>层流级别 <span>*</span></p>
               {flowLevel.map(i => (
                 <RadioItem
-                  {...getFieldProps('flowLevel', {rules: [{required: true, message: '请选择层流级别'}]})}
+                  {...getFieldProps('flowLevel', {
+                    initialValue: inputValue.flowLevel || '',
+                    rules: [{required: true, message: '请选择层流级别'}]})}
                   key={i.value}
                   checked={i.value === inputValue.flowLevel}
                   onChange={onChangeHandler.bind(this, 'flowLevel', i.value)}

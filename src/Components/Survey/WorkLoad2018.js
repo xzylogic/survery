@@ -12,12 +12,14 @@ import {
   pipeOverTime,
   CHDCheckOtherOffice,
   cardiacCheckOtherOffice,
+  videoDataManageWay,
+  videoDataCarryMediumWay,
 } from './SurveyData'
 
 const RadioItem = Radio.RadioItem;
 const CheckboxItem = Checkbox.CheckboxItem;
 
-class WorkLoad2017 extends React.Component {
+class WorkLoad2018 extends React.Component {
 
   render() {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
@@ -143,7 +145,7 @@ class WorkLoad2017 extends React.Component {
 
     return (
       <React.Fragment>
-        <p className='info_title'>四、2017年工作量</p>
+        <p className='info_title'>四、2018年工作量（2018年1月~2018年11月）</p>
         <List>
 
           {workLoad}
@@ -151,11 +153,12 @@ class WorkLoad2017 extends React.Component {
           <p className='info_title'>五、数据管理</p>
           <WhiteSpace size="lg" />
           <p className='info_title'>1.手术登记</p>
-
           <p className='info_content'>手术登记方式 <span>*</span> </p>
           {operaCheckWay.map(i => (
             <RadioItem
-              {...getFieldProps('operaCheckWay', {rules: [{required: true, message: '请选择手术登记方式'}]})}
+              {...getFieldProps('operaCheckWay', {
+                initialValue: inputValue.operaCheckWay || '',
+                rules: [{required: true, message: '请选择手术登记方式'}]})}
               key={i.value}
               checked={i.value === inputValue.operaCheckWay}
               // error={isFieldTouched('operaCheckWay') && getFieldError('operaCheckWay')}
@@ -169,13 +172,69 @@ class WorkLoad2017 extends React.Component {
 
           <WhiteSpace size="lg" />
 
+          <p className='info_title'>2.影像资料</p>
+          <p className='info_content'>影像资料管理方式 <span>*</span> </p>
+          {videoDataManageWay.map(i => (
+            <RadioItem
+              {...getFieldProps('videoDataManageWay', {
+                initialValue: inputValue.videoDataManageWay || '',
+                rules: [{required: true, message: '请选择影像资料管理方式'}]})}
+              key={i.value}
+              checked={i.value === inputValue.videoDataManageWay}
+              // error={isFieldTouched('videoDataManageWay') && getFieldError('videoDataManageWay')}
+              // onErrorClick={() => Toast.info(getFieldError('videoDataManageWay'))}
+              onChange={onChangeHandler.bind(this, 'videoDataManageWay', i.value)}
+            >
+              {i.label}
+            </RadioItem>
+          ))}
+          {isFieldTouched('videoDataManageWay') && getFieldError('videoDataManageWay') ? <p className='surveyError'>{getFieldError('videoDataManageWay')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
+          <p className='info_content'>影像资料承载媒介 <span>*</span> </p>
+          {videoDataCarryMediumWay.map(i => (
+            <div key={i.value}>
+              <RadioItem
+                {...getFieldProps('videoDataCarryMediumWay', {
+                  initialValue: inputValue.videoDataCarryMediumWay || '',
+                  rules: [{required: true, message: '请选择影像资料承载媒介'}]})}
+                key={i.value}
+                checked={i.value === inputValue.videoDataCarryMediumWay}
+                onChange={onChangeHandler.bind(this, 'videoDataCarryMediumWay', i.value)}
+              >
+                {i.label}
+              </RadioItem>
+
+              {inputValue.videoDataCarryMediumWay && i.value === '其他' && inputValue['videoDataCarryMediumWay'].indexOf(i.value) > -1 ? (
+                <div>
+                  <InputItem
+                    {...getFieldProps('videoDataCarryMediumWay_other', {onChange: (value) => onChangeHandler('videoDataCarryMediumWay_other', value),
+                      initialValue: inputValue.videoDataCarryMediumWay_other || '',
+                      rules: [{required: true, message: '请输入其他影像资料承载媒介'}]})}
+                    type="text"
+                    value={inputValue.videoDataCarryMediumWay_other || ''}
+                  />
+                  {isFieldTouched('videoDataCarryMediumWay_other') && getFieldError('videoDataCarryMediumWay_other') ? <p className='surveyError'>{getFieldError('videoDataCarryMediumWay_other')}</p>:''}
+
+                  <WhiteSpace size="lg" />
+                </div>
+              ) : ''}
+            </div>
+          ))}
+          {isFieldTouched('videoDataCarryMediumWay') && getFieldError('videoDataCarryMediumWay') ? <p className='surveyError'>{getFieldError('videoDataCarryMediumWay')}</p>:''}
+
+          <WhiteSpace size="lg" />
+
           <p className='info_title'>六、建议意见</p>
           <WhiteSpace size="lg" />
 
           <p className='info_content'>1、目前导管室的数量能够满足您科的工作量吗？<span>*</span> </p>
           {pipeNumberWork.map(i => (
             <RadioItem
-              {...getFieldProps('pipeNumberWork', {rules: [{required: true, message: '请选择目前导管室的数量能够满足您科的工作量吗？'}]})}
+              {...getFieldProps('pipeNumberWork', {
+                initialValue: inputValue.pipeNumberWork || '',
+                rules: [{required: true, message: '请选择目前导管室的数量能够满足您科的工作量吗？'}]})}
               key={i.value}
               checked={i.value === inputValue.pipeNumberWork}
               // error={isFieldTouched('pipeNumberWork') && getFieldError('pipeNumberWork')}
@@ -208,7 +267,9 @@ class WorkLoad2017 extends React.Component {
           <p className='info_content'>3、导管室工作经常加班吗？<span>*</span> </p>
           {pipeOverTime.map(i => (
             <RadioItem
-              {...getFieldProps('pipeOverTime', {rules: [{required: true, message: '请选择导管室工作经常加班吗？'}]})}
+              {...getFieldProps('pipeOverTime', {
+                initialValue: inputValue.pipeOverTime || '',
+                rules: [{required: true, message: '请选择导管室工作经常加班吗？'}]})}
               key={i.value}
               checked={i.value === inputValue.pipeOverTime}
               // error={isFieldTouched('pipeOverTime') && getFieldError('pipeOverTime')}
@@ -226,7 +287,9 @@ class WorkLoad2017 extends React.Component {
           {CHDCheckOtherOffice.map(i => (
             <div key={i.value}>
               <RadioItem
-                {...getFieldProps('CHDCheckOtherOffice', {rules: [{required: true, message: '请选择冠心病造影检查除了心脏科是否其他科室也开展？'}]})}
+                {...getFieldProps('CHDCheckOtherOffice', {
+                  initialValue: inputValue.CHDCheckOtherOffice || '',
+                  rules: [{required: true, message: '请选择冠心病造影检查除了心脏科是否其他科室也开展？'}]})}
                 key={i.value}
                 checked={i.value === inputValue.CHDCheckOtherOffice}
                 // error={isFieldTouched('CHDCheckOtherOffice') && getFieldError('CHDCheckOtherOffice')}
@@ -274,7 +337,9 @@ class WorkLoad2017 extends React.Component {
           {cardiacCheckOtherOffice.map(i => (
             <div key={i.value}>
               <RadioItem
-                {...getFieldProps('cardiacCheckOtherOffice', {rules: [{required: true, message: '请选择心脏介入治疗除了心脏科是否其他科室也开展？'}]})}
+                {...getFieldProps('cardiacCheckOtherOffice', {
+                  initialValue: inputValue.cardiacCheckOtherOffice || '',
+                  rules: [{required: true, message: '请选择心脏介入治疗除了心脏科是否其他科室也开展？'}]})}
                 key={i.value}
                 checked={i.value === inputValue.cardiacCheckOtherOffice}
                 // error={isFieldTouched('cardiacCheckOtherOffice') && getFieldError('cardiacCheckOtherOffice')}
@@ -383,4 +448,4 @@ class WorkLoad2017 extends React.Component {
   }
 }
 
-export default withRouter(connect(state => state)(WorkLoad2017))
+export default withRouter(connect(state => state)(WorkLoad2018))
