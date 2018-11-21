@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { List, InputItem, WhiteSpace, Checkbox, Radio } from 'antd-mobile'
-import { createForm } from 'rc-form';
+// import { createForm } from 'rc-form';
 
 import {pipeFlowLevel, otherEquipNumber, flowLevel} from './SurveyData'
 
@@ -13,7 +13,7 @@ class HeartPipeHardwareCondition extends React.Component {
 
   render() {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
-    const { getFieldProps, getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
+    const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
 
     const DSANumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     return (
@@ -75,7 +75,9 @@ class HeartPipeHardwareCondition extends React.Component {
               {inputValue.otherEquipNumber && inputValue.otherEquipNumber.indexOf(i.value) > -1 ? (
                 <div key={i.value}>
                   <InputItem
-                    {...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler('otherEquipNumberValue', value, 'survey', `otherEquipNumber${i.value}`), rules: [{required: true, message: '请输入其他设备数量'}]})}
+                    {...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler('otherEquipNumberValue', value, 'survey', `otherEquipNumber${i.value}`),
+                      initialValue: inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`],
+                      rules: [{required: true, message: '请输入其他设备数量'}]})}
                     type="number"
                     value={inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`]}
                   />
@@ -156,4 +158,4 @@ class HeartPipeHardwareCondition extends React.Component {
   }
 }
 
-export default withRouter(connect(state => state)(createForm()(HeartPipeHardwareCondition)))
+export default withRouter(connect(state => state)(HeartPipeHardwareCondition))

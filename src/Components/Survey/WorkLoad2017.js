@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { List, InputItem, Radio, WhiteSpace, Checkbox } from 'antd-mobile'
-import { createForm } from 'rc-form';
+// import { createForm } from 'rc-form';
 
 import {
   pciOperation,
@@ -21,7 +21,7 @@ class WorkLoad2017 extends React.Component {
 
   render() {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
-    const { getFieldProps, getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
+    const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
     const workLoadList = [
       ['PCI手术', 'PCI', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
       ['起搏器手术', 'DDD', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
@@ -54,7 +54,9 @@ class WorkLoad2017 extends React.Component {
             <List>
               <p className='info_content'>手术量（单位：例）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[2], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[2]), rules: [{required: true, message: '请输入手术量'}]})}
+                {...getFieldProps(operation[2], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[2]),
+                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[2]],
+                  rules: [{required: true, message: '请输入手术量'}]})}
                 type="text"
                 value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[2]]}
               />
@@ -64,7 +66,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>其中，急诊手术量（单位：例）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[3], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[3]), rules: [{required: true, message: '请输入急诊手术量'}]})}
+                {...getFieldProps(operation[3], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[3]),
+                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[3]],
+                  rules: [{required: true, message: '请输入急诊手术量'}]})}
                 type="text"
                 value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[3]]}
               />
@@ -74,7 +78,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>病种比例（收治此类病人数/住院总人次数）（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[4], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[4]), rules: [{required: true, message: '请输入病种比例'}]})}
+                {...getFieldProps(operation[4], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[4]),
+                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[4]],
+                  rules: [{required: true, message: '请输入病种比例'}]})}
                 type="text"
                 value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[4]]}
               />
@@ -84,7 +90,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>平均住院日（单位：日）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[5], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[5]), rules: [{required: true, message: '请输入平均住院日'}]})}
+                {...getFieldProps(operation[5], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[5]),
+                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[5]],
+                  rules: [{required: true, message: '请输入平均住院日'}]})}
                 type="text"
                 value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[5]]}
               />
@@ -94,7 +102,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>平均手术费用（单位：元）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[6], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[6]), rules: [{required: true, message: '请输入平均手术费用'}]})}
+                {...getFieldProps(operation[6], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[6]),
+                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[6]],
+                  rules: [{required: true, message: '请输入平均手术费用'}]})}
                 type="text"
                 value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[6]]}
               />
@@ -104,7 +114,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>治愈率（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[7], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[7]), rules: [{required: true, message: '请输入治愈率'}]})}
+                {...getFieldProps(operation[7], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[7]),
+                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[7]],
+                  rules: [{required: true, message: '请输入治愈率'}]})}
                 type="text"
                 value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[7]]}
               />
@@ -114,7 +126,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>死亡率（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[8], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[8]), rules: [{required: true, message: '请输入死亡率'}]})}
+                {...getFieldProps(operation[8], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[8]),
+                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[8]],
+                  rules: [{required: true, message: '请输入死亡率'}]})}
                 type="text"
                 value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[8]]}
               />
@@ -229,7 +243,9 @@ class WorkLoad2017 extends React.Component {
             <List>
               <p className='info_content'>冠心病造影检查还有哪科室开展？<span>*</span></p>
               <InputItem
-                {...getFieldProps('CHDCheck_other', {onChange: (value) => onChangeHandler('CHDCheck_other', value), rules: [{required: true, message: '请输入冠心病造影检查还有哪科室开展'}]})}
+                {...getFieldProps('CHDCheck_other', {onChange: (value) => onChangeHandler('CHDCheck_other', value),
+                  initialValue: inputValue.CHDCheck_other || '',
+                  rules: [{required: true, message: '请输入冠心病造影检查还有哪科室开展'}]})}
                 type="text"
                 value={inputValue.CHDCheck_other || ''}
               />
@@ -239,7 +255,9 @@ class WorkLoad2017 extends React.Component {
 
               <p className='info_content'>其他科室每周造影检查数量？（例/周）<span>*</span></p>
               <InputItem
-                {...getFieldProps('CHDCheck_otherWeekNumber', {onChange: (value) => onChangeHandler('CHDCheck_otherWeekNumber', value), rules: [{required: true, message: '请输入其他科室每周造影检查数量'}]})}
+                {...getFieldProps('CHDCheck_otherWeekNumber', {onChange: (value) => onChangeHandler('CHDCheck_otherWeekNumber', value),
+                  initialValue: inputValue.CHDCheck_otherWeekNumber || '',
+                  rules: [{required: true, message: '请输入其他科室每周造影检查数量'}]})}
                 type="number"
                 value={inputValue.CHDCheck_otherWeekNumber || ''}
               />
@@ -273,7 +291,9 @@ class WorkLoad2017 extends React.Component {
             <List>
               <p className='info_content'>心脏介入治疗其他哪科室也开展？<span>*</span></p>
               <InputItem
-                {...getFieldProps('cardiacCheck_other', {onChange: (value) => onChangeHandler('cardiacCheck_other', value), rules: [{required: true, message: '请输入冠心病造影检查还有哪科室开展'}]})}
+                {...getFieldProps('cardiacCheck_other', {onChange: (value) => onChangeHandler('cardiacCheck_other', value),
+                  initialValue: inputValue.cardiacCheck_other || '',
+                  rules: [{required: true, message: '请输入冠心病造影检查还有哪科室开展'}]})}
                 type="text"
                 value={inputValue.cardiacCheck_other || ''}
               />
@@ -287,7 +307,9 @@ class WorkLoad2017 extends React.Component {
 
           <p className='info_content'>目前开展心导管室工作最困难的是：<span>*</span> </p>
           <InputItem
-            {...getFieldProps('currentPipeWorkHardest', {onChange: (value) => onChangeHandler('currentPipeWorkHardest', value), rules: [{required: true, message: '请输入目前开展心导管室工作最困难的是'}]})}
+            {...getFieldProps('currentPipeWorkHardest', {onChange: (value) => onChangeHandler('currentPipeWorkHardest', value),
+              initialValue: inputValue.currentPipeWorkHardest || '',
+              rules: [{required: true, message: '请输入目前开展心导管室工作最困难的是'}]})}
             type="text"
             value={inputValue.currentPipeWorkHardest || ''}
           />
@@ -297,7 +319,9 @@ class WorkLoad2017 extends React.Component {
 
           <p className='info_content'>建议的培训项目或内容：<span>*</span> </p>
           <InputItem
-            {...getFieldProps('adviceTrainingProgram', {onChange: (value) => onChangeHandler('adviceTrainingProgram', value), rules: [{required: true, message: '请输入建议的培训项目或内容'}]})}
+            {...getFieldProps('adviceTrainingProgram', {onChange: (value) => onChangeHandler('adviceTrainingProgram', value),
+              initialValue: inputValue.adviceTrainingProgram || '',
+              rules: [{required: true, message: '请输入建议的培训项目或内容'}]})}
             type="text"
             value={inputValue.adviceTrainingProgram || ''}
           />
@@ -307,7 +331,9 @@ class WorkLoad2017 extends React.Component {
 
           <p className='info_content'>给行政部门或质控中心的建议：<span>*</span> </p>
           <InputItem
-            {...getFieldProps('adviceAdministration', {onChange: (value) => onChangeHandler('adviceAdministration', value), rules: [{required: true, message: '请输入给行政部门或质控中心的建议'}]})}
+            {...getFieldProps('adviceAdministration', {onChange: (value) => onChangeHandler('adviceAdministration', value),
+              initialValue: inputValue.adviceAdministration || '',
+              rules: [{required: true, message: '请输入给行政部门或质控中心的建议'}]})}
             type="text"
             value={inputValue.adviceAdministration || ''}
           />
@@ -357,4 +383,4 @@ class WorkLoad2017 extends React.Component {
   }
 }
 
-export default withRouter(connect(state => state)(createForm()(WorkLoad2017)))
+export default withRouter(connect(state => state)(WorkLoad2017))

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { List, InputItem, Radio, WhiteSpace } from 'antd-mobile'
-import { createForm } from 'rc-form';
+// import { createForm } from 'rc-form';
 
 import {pipeBelongDepartment, pipeHospitalLocation} from './SurveyData'
 
@@ -12,7 +12,7 @@ class HeartPipeHardwareCondition extends React.Component {
 
   render() {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
-    const { getFieldProps, getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
+    const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
 
     return (
       <React.Fragment>
@@ -22,7 +22,7 @@ class HeartPipeHardwareCondition extends React.Component {
 
           <p className='info_content'>导管室数量（单位：间）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('pipeNumber', {onChange: (value) => onChangeHandler('pipeNumber', value), rules: [{required: true, message: '请输入导管室数量'}]})}
+            {...getFieldProps('pipeNumber', {onChange: (value) => onChangeHandler('pipeNumber', value), initialValue: inputValue.pipeNumber || '', rules: [{required: true, message: '请输入导管室数量'}]})}
             type="number"
             value={inputValue.pipeNumber || ''}
           />
@@ -32,7 +32,7 @@ class HeartPipeHardwareCondition extends React.Component {
 
           <p className='info_content'>手术区域平均使用面积（单位：平米）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('operativeAverageArea', {onChange: (value) => onChangeHandler('operativeAverageArea', value), rules: [{required: true, message: '请输入手术区域平均使用面积'}]})}
+            {...getFieldProps('operativeAverageArea', {onChange: (value) => onChangeHandler('operativeAverageArea', value), initialValue: inputValue.operativeAverageArea || '', rules: [{required: true, message: '请输入手术区域平均使用面积'}]})}
             type="number"
             value={inputValue.operativeAverageArea || ''}
           />
@@ -55,7 +55,7 @@ class HeartPipeHardwareCondition extends React.Component {
               {inputValue.pipeBelongDepartment && i.value === '其他科室' && inputValue['pipeBelongDepartment'].indexOf(i.value) > -1 ? (
                 <div>
                   <InputItem
-                    {...getFieldProps('pipeBelongDepartment_other', {onChange: (value) => onChangeHandler('pipeBelongDepartment_other', value), rules: [{required: true, message: '请输入其他科室'}]})}
+                    {...getFieldProps('pipeBelongDepartment_other', {onChange: (value) => onChangeHandler('pipeBelongDepartment_other', value), initialValue: inputValue.pipeBelongDepartment_other || '', rules: [{required: true, message: '请输入其他科室'}]})}
                     type="text"
                     value={inputValue.pipeBelongDepartment_other || ''}
                   />
@@ -93,4 +93,4 @@ class HeartPipeHardwareCondition extends React.Component {
   }
 }
 
-export default withRouter(connect(state => state)(createForm()(HeartPipeHardwareCondition)))
+export default withRouter(connect(state => state)(HeartPipeHardwareCondition))

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { List, InputItem, Radio, WhiteSpace } from 'antd-mobile'
-import { createForm } from 'rc-form';
+import {List, InputItem, Radio, WhiteSpace} from 'antd-mobile'
+// import { createForm } from 'rc-form';
 
 import {ifHeartSurgery, ifThoracotomy} from './SurveyData'
 
@@ -12,7 +12,7 @@ class HeartBasicCondition extends React.Component {
 
   render() {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
-    const { getFieldProps, getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
+    const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
 
     return (
       <React.Fragment>
@@ -20,7 +20,9 @@ class HeartBasicCondition extends React.Component {
         <List>
           <p className='info_content'>病房床位数（单位：张）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('wardBedsNumber', {onChange: (value) => onChangeHandler('wardBedsNumber', value), rules: [{required: true, message: '请输入病房床位数'}]})}
+            {...getFieldProps('wardBedsNumber', {onChange: (value) => onChangeHandler('wardBedsNumber', value),
+              initialValue: inputValue.wardBedsNumber || '',
+              rules: [{required: true, message: '请输入病房床位数'}]})}
             type="number"
             value={inputValue.wardBedsNumber || ''}
           />
@@ -30,7 +32,9 @@ class HeartBasicCondition extends React.Component {
 
           <p className='info_content'>CCU床位数（单位：张）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('CCUBedsNumber', {onChange: (value) => onChangeHandler('CCUBedsNumber', value), rules: [{required: true, message: '请输入CCU床位数'}]})}
+            {...getFieldProps('CCUBedsNumber', {onChange: (value) => onChangeHandler('CCUBedsNumber', value),
+              initialValue: inputValue.CCUBedsNumber || '',
+              rules: [{required: true, message: '请输入CCU床位数'}]})}
             type="number"
             value={inputValue.CCUBedsNumber || ''}
           />
@@ -40,7 +44,9 @@ class HeartBasicCondition extends React.Component {
 
           <p className='info_content'>医师人数（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('doctorNumber', {onChange: (value) => onChangeHandler('doctorNumber', value), rules: [{required: true, message: '请输入医师人数'}]})}
+            {...getFieldProps('doctorNumber', {onChange: (value) => onChangeHandler('doctorNumber', value),
+              initialValue: inputValue.doctorNumber || '',
+              rules: [{required: true, message: '请输入医师人数'}]})}
             type="number"
             value={inputValue.doctorNumber || ''}
           />
@@ -50,7 +56,9 @@ class HeartBasicCondition extends React.Component {
 
           <p className='info_content'>护士人数（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('nurseNumber', {onChange: (value) => onChangeHandler('nurseNumber', value), rules: [{required: true, message: '请输入护士人数'}]})}
+            {...getFieldProps('nurseNumber', {onChange: (value) => onChangeHandler('nurseNumber', value),
+              initialValue: inputValue.nurseNumber || '',
+              rules: [{required: true, message: '请输入护士人数'}]})}
             type="number"
             value={inputValue.nurseNumber || ''}
           />
@@ -99,11 +107,9 @@ class HeartBasicCondition extends React.Component {
           ) : ''}
         </List>
 
-
-
       </React.Fragment>
     )
   }
 }
 
-export default withRouter(connect(state => state)(createForm()(HeartBasicCondition)))
+export default withRouter(connect(state => state)(HeartBasicCondition))

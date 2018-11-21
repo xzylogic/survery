@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { List, InputItem, Checkbox, WhiteSpace } from 'antd-mobile'
-import { createForm } from 'rc-form';
+// import { createForm } from 'rc-form';
 
 import {groupSurgeryDoctorsOperationScope} from './SurveyData'
 
@@ -12,7 +12,7 @@ class HeartPipePersonConstruct extends React.Component {
 
   render() {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
-    const { getFieldProps, getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
+    const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
     const eachGroupNumberLsit = [
       ['PCI小组', 'PCI_TotalNumber', 'PCI_DoctorNumber', 'PCI_MasterNumber', 'PCI_seniorGradeNumber', 'PCI_mediumGradeNumber', 'PCI_SurgeryDoctorsOperationScope', 'PCI_otherSubject', 'PCI_currentInvolveEmergencySurgeryNumber', 'PCI'],
       ['电生理组人数', 'ELE_TotalNumber', 'ELE_DoctorNumber', 'ELE_MasterNumber', 'ELE_seniorGradeNumber', 'ELE_mediumGradeNumber', 'ELE_SurgeryDoctorsOperationScope', 'ELE_otherSubject', 'ELE_currentInvolveEmergencySurgeryNumber', 'ELE'],
@@ -33,7 +33,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>组内共多少人（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[1], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[1]), rules: [{required: true, message: '请输入组内共多少人'}]})}
+            {...getFieldProps(personValue[1], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[1]),
+              initialValue: inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[1]],
+              rules: [{required: true, message: '请输入组内共多少人'}]})}
             type="number"
             value={inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[1]]}
           />
@@ -43,7 +45,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>组内博士多少人（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[2], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[2]), rules: [{required: true, message: '请输入组内博士多少人'}]})}
+            {...getFieldProps(personValue[2], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[2]),
+              initialValue: inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[2]],
+              rules: [{required: true, message: '请输入组内博士多少人'}]})}
             type="number"
             value={inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[2]]}
           />
@@ -53,7 +57,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>组内硕士多少人（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[3], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[3]), rules: [{required: true, message: '请输入组内硕士多少人'}]})}
+            {...getFieldProps(personValue[3], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[3]),
+              initialValue: inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[3]],
+              rules: [{required: true, message: '请输入组内硕士多少人'}]})}
             type="number"
             value={inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[3]]}
           />
@@ -63,7 +69,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>高级职称多少人？（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[4], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[4]), rules: [{required: true, message: '请输入高级职称多少人'}]})}
+            {...getFieldProps(personValue[4], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[4]),
+              initialValue: inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[4]],
+              rules: [{required: true, message: '请输入高级职称多少人'}]})}
             type="number"
             value={inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[4]]}
           />
@@ -73,7 +81,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>中级职称多少人？（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[5], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[5]), rules: [{required: true, message: '请输入中级职称多少人'}]})}
+            {...getFieldProps(personValue[5], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[5]),
+              initialValue: inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[5]],
+              rules: [{required: true, message: '请输入中级职称多少人'}]})}
             type="number"
             value={inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[5]]}
           />
@@ -95,7 +105,7 @@ class HeartPipePersonConstruct extends React.Component {
               {/*{console.log(personValue[6], '++++++++++++++',inputValue[personValue[6]])}*/}
               {inputValue[personValue[6]] && i.value === '其他学科' && inputValue[personValue[6]].indexOf(i.value) > -1 ? (
                 <InputItem
-                  {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(personValue[7], value), rules: [{required: true, message: '请输入其他学科'}]})}
+                  {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(personValue[7], value), initialValue: inputValue[personValue[7]] || '', rules: [{required: true, message: '请输入其他学科'}]})}
                   type="text"
                   value={inputValue[personValue[7]] || ''}
                 />
@@ -107,7 +117,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>目前参与急诊手术的人数（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[8], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[8]), rules: [{required: true, message: '请输入中级职称多少人'}]})}
+            {...getFieldProps(personValue[8], {onChange: (value) => onChangeHandler(`${personValue[9]}_group`, value, 'survey', personValue[8]),
+              initialValue: inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[8]],
+              rules: [{required: true, message: '请输入中级职称多少人'}]})}
             type="number"
             value={inputValue[`${personValue[9]}_group`] && inputValue[`${personValue[9]}_group`][personValue[8]]}
           />
@@ -123,7 +135,9 @@ class HeartPipePersonConstruct extends React.Component {
         <div key={index}>
           <p className='info_content'>{personValue[0]}<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[1], {onChange: (value) => onChangeHandler(personValue[1], value), rules: [{required: true, message: '请输入总护士人数'}]})}
+            {...getFieldProps(personValue[1], {onChange: (value) => onChangeHandler(personValue[1], value),
+              initialValue: inputValue[personValue[1]] || '',
+              rules: [{required: true, message: '请输入总护士人数'}]})}
             type="number"
             value={inputValue[personValue[1]] || ''}
           />
@@ -134,7 +148,9 @@ class HeartPipePersonConstruct extends React.Component {
           <p className='info_content'>{personValue[2]}<span>*</span> </p>
           <p className='dsa_title'>专科</p>
           <InputItem
-            {...getFieldProps(personValue[3], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[3]), rules: [{required: true, message: '请输入专科人数'}]})}
+            {...getFieldProps(personValue[3], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[3]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[3]],
+              rules: [{required: true, message: '请输入专科人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[3]]}
           />
@@ -144,7 +160,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='dsa_title'>本科</p>
           <InputItem
-            {...getFieldProps(personValue[4], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[4]), rules: [{required: true, message: '请输入本科人数'}]})}
+            {...getFieldProps(personValue[4], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[4]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[4]],
+              rules: [{required: true, message: '请输入本科人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[4]]}
           />
@@ -154,7 +172,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='dsa_title'>硕士</p>
           <InputItem
-            {...getFieldProps(personValue[5], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[5]), rules: [{required: true, message: '请输入硕士人数'}]})}
+            {...getFieldProps(personValue[5], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[5]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[5]],
+              rules: [{required: true, message: '请输入硕士人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[5]]}
           />
@@ -164,7 +184,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='dsa_title'>博士</p>
           <InputItem
-            {...getFieldProps(personValue[6], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[6]), rules: [{required: true, message: '请输入博士人数'}]})}
+            {...getFieldProps(personValue[6], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[6]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[6]],
+              rules: [{required: true, message: '请输入博士人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[6]]}
           />
@@ -174,7 +196,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='dsa_title'>高级职称</p>
           <InputItem
-            {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[7]), rules: [{required: true, message: '请输入高级职称人数'}]})}
+            {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[7]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[7]],
+              rules: [{required: true, message: '请输入高级职称人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[7]]}
           />
@@ -184,7 +208,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='dsa_title'>中级职称</p>
           <InputItem
-            {...getFieldProps(personValue[8], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[8]), rules: [{required: true, message: '请输入中级职称人数'}]})}
+            {...getFieldProps(personValue[8], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[8]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[8]],
+              rules: [{required: true, message: '请输入中级职称人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[8]]}
           />
@@ -196,7 +222,9 @@ class HeartPipePersonConstruct extends React.Component {
           <p className='info_content'>{personValue[9]}</p>
           <p className='dsa_title'>心血管内科</p>
           <InputItem
-            {...getFieldProps(personValue[10], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[10]), rules: [{required: true, message: '请输入专科人数'}]})}
+            {...getFieldProps(personValue[10], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[10]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[10]],
+              rules: [{required: true, message: '请输入专科人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[10]]}
           />
@@ -206,7 +234,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='dsa_title'>心外科</p>
           <InputItem
-            {...getFieldProps(personValue[11], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[11]), rules: [{required: true, message: '请输入本科人数'}]})}
+            {...getFieldProps(personValue[11], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[11]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[11]],
+              rules: [{required: true, message: '请输入本科人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[11]]}
           />
@@ -216,7 +246,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='dsa_title'>放射科</p>
           <InputItem
-            {...getFieldProps(personValue[12], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[12]), rules: [{required: true, message: '请输入硕士人数'}]})}
+            {...getFieldProps(personValue[12], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[12]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[12]],
+              rules: [{required: true, message: '请输入硕士人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[12]]}
           />
@@ -226,17 +258,19 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='dsa_title'>其他学科：</p>
           <InputItem
-            {...getFieldProps(personValue[13], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[13]), rules: [{required: true, message: '请输入中级职称人数'}]})}
-            type="number"
+            {...getFieldProps(personValue[13], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[13]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[13]],
+              rules: [{required: true, message: '请输入其他学科'}]})}
+            type="text"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[13]]}
           />
           {isFieldTouched(personValue[13]) && getFieldError(personValue[13]) ? <p className='surveyError'>{getFieldError(personValue[13])}</p>:''}
 
-          <WhiteSpace size="lg" />
-
-          <p className='dsa_title'>选项1</p>
+          <p className='dsa_title'>（人数）</p>
           <InputItem
-            {...getFieldProps(personValue[14], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[14]), rules: [{required: true, message: '请输入中级职称人数'}]})}
+            {...getFieldProps(personValue[14], {onChange: (value) => onChangeHandler(`${personValue[15]}_constructor`, value, 'survey', personValue[14]),
+              initialValue: inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[14]],
+              rules: [{required: true, message: '请输入其他学科的人数'}]})}
             type="number"
             value={inputValue[`${personValue[15]}_constructor`] && inputValue[`${personValue[15]}_constructor`][personValue[14]]}
           />
@@ -254,7 +288,9 @@ class HeartPipePersonConstruct extends React.Component {
         <List>
           <p className='info_content'>科主任姓名 <span>*</span> </p>
           <InputItem
-            {...getFieldProps('directorName', {onChange: (value) => onChangeHandler('directorName', value), rules: [{required: true, message: '请输入科主任姓名'}]})}
+            {...getFieldProps('directorName', {onChange: (value) => onChangeHandler('directorName', value),
+              initialValue: inputValue.directorName || '',
+              rules: [{required: true, message: '请输入科主任姓名'}]})}
             type="text"
             value={inputValue.directorName || ''}
           />
@@ -264,7 +300,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>导管室主任 <span>*</span> </p>
           <InputItem
-            {...getFieldProps('pipeDirector', {onChange: (value) => onChangeHandler('pipeDirector', value), rules: [{required: true, message: '请输入导管室主任'}]})}
+            {...getFieldProps('pipeDirector', {onChange: (value) => onChangeHandler('pipeDirector', value),
+              initialValue: inputValue.pipeDirector || '',
+              rules: [{required: true, message: '请输入导管室主任'}]})}
             type="text"
             value={inputValue.pipeDirector || ''}
           />
@@ -274,7 +312,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>联系电话 <span>*</span> </p>
           <InputItem
-            {...getFieldProps('phone', {onChange: (value) => onChangeHandler('phone', value), rules: [{required: true, message: '请输入联系电话'}]})}
+            {...getFieldProps('phone', {onChange: (value) => onChangeHandler('phone', value),
+              initialValue: inputValue.phone || '',
+              rules: [{required: true, message: '请输入联系电话'}]})}
             type="phone"
             value={inputValue.phone || ''}
           />
@@ -287,7 +327,9 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>1.医师总人数(单位：人) <span>*</span> </p>
           <InputItem
-            {...getFieldProps('doctorTotalNumber', {onChange: (value) => onChangeHandler('doctorTotalNumber', value), rules: [{required: true, message: '请输入医师总人数'}]})}
+            {...getFieldProps('doctorTotalNumber', {onChange: (value) => onChangeHandler('doctorTotalNumber', value),
+              initialValue: inputValue.doctorTotalNumber || '',
+              rules: [{required: true, message: '请输入医师总人数'}]})}
             type="number"
             value={inputValue.doctorTotalNumber || ''}
           />
@@ -435,4 +477,4 @@ class HeartPipePersonConstruct extends React.Component {
   }
 }
 
-export default withRouter(connect(state => state)(createForm()(HeartPipePersonConstruct)))
+export default withRouter(connect(state => state)(HeartPipePersonConstruct))

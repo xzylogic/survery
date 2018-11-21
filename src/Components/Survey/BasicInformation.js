@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {List, InputItem, Picker, WhiteSpace, DatePicker, Button} from 'antd-mobile'
-import { createForm } from 'rc-form';
+// import { createForm } from 'rc-form';
+import  createDOMForm  from 'rc-form/lib/createDOMForm';
 import moment from 'moment'
 import {surveyStoreLocalAction} from "../../Store/actions/survey.action";
 
@@ -50,24 +51,36 @@ class BasicInformation extends React.Component {
 
   submit = () => {
     // const store = this.props;
-    const {validateFields} = this.props.form; //isFieldTouched, getFieldError
-    validateFields((error, value) => {
-      if (!error) {
-        console.info('success');
-        // store.dispatch()
-      } else {
-        console.log(value);
-        // console.log(getFieldError('hospitalGrade') );
-        // Object.keys(value).forEach((key, index)=>{
-        //   if(value[key] === undefined) {
-        //     console.log(key)
-        //     isFieldTouched(key) && getFieldError(key);
-        //   }
-        //   // console.log(key, value[key])
-        // })
-        // console.log(error);
-      }
-    });
+    const {validateFieldsAndScroll} = this.props.form; //isFieldTouched, getFieldError, validateFields
+
+    validateFieldsAndScroll({validateFirst: true}, (error, value) => {
+        if (!error) {
+          console.log(value);
+          console.info('success');
+          // store.dispatch()
+        } else {
+          console.log(value);
+        }
+      });
+
+    // validateFields({first: true}, (error, value) => {
+    //   if (!error) {
+    //     console.log(value);
+    //     console.info('success');
+    //     // store.dispatch()
+    //   } else {
+    //     console.log(value);
+    //     // console.log(getFieldError('hospitalGrade') );
+    //     // Object.keys(value).forEach((key, index)=>{
+    //     //   if(value[key] === undefined) {
+    //     //     console.log(key)
+    //     //     isFieldTouched(key) && getFieldError(key);
+    //     //   }
+    //     //   // console.log(key, value[key])
+    //     // })
+    //     // console.log(error);
+    //   }
+    // });
   }
 
   render() {
@@ -81,7 +94,9 @@ class BasicInformation extends React.Component {
         <List>
           <p className='info_content'>医院名称 <span>*</span> </p>
           <InputItem
-            {...getFieldProps('hospitalName', {onChange: (value) => this.onChangeHandler('hospitalName', value), rules: [{required: true, message: '请输入医院名称'}]})}
+            {...getFieldProps('hospitalName', {onChange: (value) => this.onChangeHandler('hospitalName', value),
+              initialValue: inputValue.hospitalName || '',
+              rules: [{required: true, message: '请输入医院名称'}]})}
             type="text"
             value={inputValue.hospitalName || ''}
           />
@@ -92,7 +107,9 @@ class BasicInformation extends React.Component {
 
           <p className='info_content'>医院的等级 <span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalGrade', {onChange: (value) => this.onChangeHandler('hospitalGrade', value), rules: [{required: true, message: '请选择医院的等级'}]})}
+            {...getFieldProps('hospitalGrade', {onChange: (value) => this.onChangeHandler('hospitalGrade', value),
+              initialValue: inputValue.hospitalGrade || '',
+              rules: [{required: true, message: '请选择医院的等级'}]})}
             value={inputValue.hospitalGrade || ''}
             data={hospitalGrade}
             // onDismiss={this.checkError.bind(this, 'hospitalGrade')}
@@ -105,7 +122,9 @@ class BasicInformation extends React.Component {
 
           <p className='info_content'>核定总床位数？（单位：张）<span>*</span></p>
           <InputItem
-            {...getFieldProps('approvedTotalBeds', {onChange: (value) => this.onChangeHandler('approvedTotalBeds', value), rules: [{required: true, message: '请输入核定总床位数'}]})}
+            {...getFieldProps('approvedTotalBeds', {onChange: (value) => this.onChangeHandler('approvedTotalBeds', value),
+              initialValue: inputValue.approvedTotalBeds || '',
+              rules: [{required: true, message: '请输入核定总床位数'}]})}
             type="number"
             value={inputValue.approvedTotalBeds || ''}
             // error={isFieldTouched('approvedTotalBeds') && getFieldError('approvedTotalBeds')}
@@ -117,7 +136,9 @@ class BasicInformation extends React.Component {
 
           <p className='info_content'>实际开放总床位数？（单位：张）<span>*</span></p>
           <InputItem
-            {...getFieldProps('realTotalBeds', {onChange: (value) => this.onChangeHandler('realTotalBeds', value), rules: [{required: true, message: '请输入实际开放总床位数'}]})}
+            {...getFieldProps('realTotalBeds', {onChange: (value) => this.onChangeHandler('realTotalBeds', value),
+              initialValue: inputValue.realTotalBeds || '',
+              rules: [{required: true, message: '请输入实际开放总床位数'}]})}
             type="number"
             value={inputValue.realTotalBeds || ''}
           />
@@ -127,7 +148,9 @@ class BasicInformation extends React.Component {
 
           <p className='info_content'>医院机构性质 <span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalOrganizationKind', {onChange: (value) => this.onChangeHandler('hospitalOrganizationKind', value), rules: [{required: true, message: '请选择医院机构性质'}]})}
+            {...getFieldProps('hospitalOrganizationKind', {onChange: (value) => this.onChangeHandler('hospitalOrganizationKind', value),
+              initialValue: inputValue.hospitalOrganizationKind || '',
+              rules: [{required: true, message: '请选择医院机构性质'}]})}
             value={inputValue.hospitalOrganizationKind || ''}
             data={hospitalOrganizationKind}
             cols={1}>
@@ -139,7 +162,9 @@ class BasicInformation extends React.Component {
 
           <p className='info_content'>医院性质 <span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalKind', {onChange: (value) => this.onChangeHandler('hospitalKind', value), rules: [{required: true, message: '请选择医院性质'}]})}
+            {...getFieldProps('hospitalKind', {onChange: (value) => this.onChangeHandler('hospitalKind', value),
+              initialValue: inputValue.hospitalKind || '',
+              rules: [{required: true, message: '请选择医院性质'}]})}
             value={inputValue.hospitalKind || ''}
             data={hospitalKind}
             cols={1}>
@@ -151,7 +176,9 @@ class BasicInformation extends React.Component {
 
           <p className='info_content'>其中属于 <span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalKindBelong', {onChange: (value) => this.onChangeHandler('hospitalKindBelong', value), rules: [{required: true, message: '请选择其中属于'}]})}
+            {...getFieldProps('hospitalKindBelong', {onChange: (value) => this.onChangeHandler('hospitalKindBelong', value),
+              initialValue: inputValue.hospitalKindBelong || '',
+              rules: [{required: true, message: '请选择其中属于'}]})}
             value={inputValue.hospitalKindBelong || ''}
             data={hospitalKindBelong}
             cols={1}>
@@ -163,7 +190,9 @@ class BasicInformation extends React.Component {
 
           <p className='info_content'>区域划分（旧区）<span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalOldArea', {onChange: (value) => this.onChangeHandler('hospitalOldArea', value), rules: [{required: true, message: '请选择区域划分'}]})}
+            {...getFieldProps('hospitalOldArea', {onChange: (value) => this.onChangeHandler('hospitalOldArea', value),
+              initialValue: inputValue.hospitalOldArea || '',
+              rules: [{required: true, message: '请选择区域划分'}]})}
             value={inputValue.hospitalOldArea || ''}
             data={hospitalOldArea}
             cols={1}>
@@ -172,17 +201,19 @@ class BasicInformation extends React.Component {
           {isFieldTouched('hospitalOldArea') && getFieldError('hospitalOldArea') ? <p className='surveyError'>{getFieldError('hospitalOldArea')}</p>:''}
         </List>
 
-        <HeartBasicCondition onChangeHandler={this.onChangeHandler} />
-        <HeartPipeHardwareCondition onChangeHandler={this.onChangeHandler} />
-        <DSA onChangeHandler={this.onChangeHandler} />
-        <HeartPipePersonConstruct onChangeHandler={this.onChangeHandler} />
-        <WorkLoad2017 onChangeHandler={this.onChangeHandler} />
+        <HeartBasicCondition onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError} />
+        <HeartPipeHardwareCondition onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError} />
+        <DSA onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>
+        <HeartPipePersonConstruct onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>
+        <WorkLoad2017 onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>
 
         <WhiteSpace size="lg" />
 
         <p className='info_content'>填表人 <span>*</span></p>
         <InputItem
-          {...getFieldProps('signatureName', {onChange: (value) => this.onChangeHandler('signatureName', value), rules: [{required: true, message: '请输入填表人'}]})}
+          {...getFieldProps('signatureName', {onChange: (value) => this.onChangeHandler('signatureName', value),
+            initialValue: inputValue.signatureName || '',
+            rules: [{required: true, message: '请输入填表人'}]})}
           type="text"
           value={inputValue.signatureName || ''}
         />
@@ -192,7 +223,9 @@ class BasicInformation extends React.Component {
 
         <p className='info_content'>填表日期 <span>*</span></p>
         <DatePicker
-          {...getFieldProps('signatureDate', {onChange: (value) => this.onChangeHandler('signatureDate', value), rules: [{required: true, message: '请输入填表日期'}]})}
+          {...getFieldProps('signatureDate', {onChange: (value) => this.onChangeHandler('signatureDate', value),
+            initialValue: inputValue.signatureDate && new Date(inputValue.signatureDate),
+            rules: [{required: true, message: '请输入填表日期'}]})}
           mode="date"
           title=""
           value={inputValue.signatureDate && new Date(inputValue.signatureDate)}
@@ -213,4 +246,4 @@ class BasicInformation extends React.Component {
   }
 }
 
-export default withRouter(connect(state => state)(createForm()(BasicInformation)))
+export default withRouter(connect(state => state)(createDOMForm()(BasicInformation)))
