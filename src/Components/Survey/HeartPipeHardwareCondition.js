@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { List, InputItem, Radio, WhiteSpace } from 'antd-mobile'
 // import { createForm } from 'rc-form';
 
-import {pipeBelongDepartment, pipeHospitalLocation} from './SurveyData'
+import {pipeDepartment, pipeLocation} from './SurveyData'
 
 const RadioItem = Radio.RadioItem;
 
@@ -22,42 +22,44 @@ class HeartPipeHardwareCondition extends React.Component {
 
           <p className='info_content'>导管室数量（单位：间）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('pipeNumber', {onChange: (value) => onChangeHandler('pipeNumber', value), initialValue: inputValue.pipeNumber || '', rules: [{required: true, message: '请输入导管室数量'}]})}
+            {...getFieldProps('pipeNum', {onChange: (value) => onChangeHandler('pipeNum', value), initialValue: inputValue.pipeNum || '', rules: [{required: true, message: '请输入导管室数量'}]})}
             type="number"
-            value={inputValue.pipeNumber || ''}
+            value={inputValue.pipeNum || ''}
           />
-          {isFieldTouched('pipeNumber') && getFieldError('pipeNumber') ? <p className='surveyError'>{getFieldError('pipeNumber')}</p>:''}
+          {isFieldTouched('pipeNum') && getFieldError('pipeNum') ? <p className='surveyError'>{getFieldError('pipeNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>手术区域平均使用面积（单位：平米）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('operativeAverageArea', {onChange: (value) => onChangeHandler('operativeAverageArea', value), initialValue: inputValue.operativeAverageArea || '', rules: [{required: true, message: '请输入手术区域平均使用面积'}]})}
+            {...getFieldProps('averageArea', {onChange: (value) => onChangeHandler('averageArea', value), initialValue: inputValue.averageArea || '', rules: [{required: true, message: '请输入手术区域平均使用面积'}]})}
             type="number"
-            value={inputValue.operativeAverageArea || ''}
+            value={inputValue.averageArea || ''}
           />
-          {isFieldTouched('operativeAverageArea') && getFieldError('operativeAverageArea') ? <p className='surveyError'>{getFieldError('operativeAverageArea')}</p>:''}
+          {isFieldTouched('averageArea') && getFieldError('averageArea') ? <p className='surveyError'>{getFieldError('averageArea')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>导管室隶属部门 <span>*</span> </p>
-          {pipeBelongDepartment.map(i => (
+          {pipeDepartment.map(i => (
             <div key={i.value}>
               <RadioItem
-                {...getFieldProps('pipeBelongDepartment', {
-                  initialValue: inputValue.pipeBelongDepartment || '',
+                {...getFieldProps('pipeDepartment', {
+                  initialValue: inputValue.pipeDepartment || '',
                   rules: [{required: true, message: '请选择导管室隶属部门'}]})}
                 key={i.value}
-                checked={i.value === inputValue.pipeBelongDepartment}
-                onChange={onChangeHandler.bind(this, 'pipeBelongDepartment', i.value)}
+                checked={i.value === inputValue.pipeDepartment}
+                onChange={onChangeHandler.bind(this, 'pipeDepartment', i.value)}
               >
                 {i.label}
               </RadioItem>
 
-              {inputValue.pipeBelongDepartment && i.value === '其他科室' && inputValue['pipeBelongDepartment'].indexOf(i.value) > -1 ? (
+              {inputValue.pipeDepartment && i.value === '其他科室' && inputValue['pipeDepartment'].indexOf(i.value) > -1 ? (
                 <div>
                   <InputItem
-                    {...getFieldProps('pipeBelongDepartment_other', {onChange: (value) => onChangeHandler('pipeBelongDepartment_other', value), initialValue: inputValue.pipeBelongDepartment_other || '', rules: [{required: true, message: '请输入其他科室'}]})}
+                    {...getFieldProps('pipeBelongDepartment_other', {onChange: (value) => onChangeHandler('pipeBelongDepartment_other', value),
+                      initialValue: inputValue.pipeBelongDepartment_other || '',
+                      rules: [{required: true, message: '请输入其他科室'}]})}
                     type="text"
                     value={inputValue.pipeBelongDepartment_other || ''}
                   />
@@ -68,26 +70,26 @@ class HeartPipeHardwareCondition extends React.Component {
               ) : ''}
             </div>
           ))}
-          {isFieldTouched('pipeBelongDepartment') && getFieldError('pipeBelongDepartment') ? <p className='surveyError'>{getFieldError('pipeBelongDepartment')}</p>:''}
+          {isFieldTouched('pipeDepartment') && getFieldError('pipeDepartment') ? <p className='surveyError'>{getFieldError('pipeDepartment')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>导管室在医院内的地理位置 <span>*</span> </p>
-          {pipeHospitalLocation.map(i => (
+          {pipeLocation.map(i => (
             <RadioItem
-              {...getFieldProps('pipeHospitalLocation', {
-                initialValue: inputValue.pipeHospitalLocation || '',
+              {...getFieldProps('pipeLocation', {
+                initialValue: inputValue.pipeLocation || '',
                 rules: [{required: true, message: '请选择导管室隶属部门'}]})}
               key={i.value}
-              checked={i.value === inputValue.pipeHospitalLocation}
-              // error={isFieldTouched('pipeHospitalLocation') && getFieldError('pipeHospitalLocation')}
-              // onErrorClick={() => Toast.info(getFieldError('pipeHospitalLocation'))}
-              onChange={onChangeHandler.bind(this, 'pipeHospitalLocation', i.value)}
+              checked={i.value === inputValue.pipeLocation}
+              // error={isFieldTouched('pipeLocation') && getFieldError('pipeLocation')}
+              // onErrorClick={() => Toast.info(getFieldError('pipeLocation'))}
+              onChange={onChangeHandler.bind(this, 'pipeLocation', i.value)}
             >
               {i.label}
             </RadioItem>
           ))}
-          {isFieldTouched('pipeHospitalLocation') && getFieldError('pipeHospitalLocation') ? <p className='surveyError'>{getFieldError('pipeHospitalLocation')}</p>:''}
+          {isFieldTouched('pipeLocation') && getFieldError('pipeLocation') ? <p className='surveyError'>{getFieldError('pipeLocation')}</p>:''}
 
           <WhiteSpace size="lg" />
         </List>

@@ -7,13 +7,14 @@ import { List, InputItem, Radio, WhiteSpace, Checkbox } from 'antd-mobile'
 import {
   pciOperation,
   operaCheckWay,
-  pipeNumberWork,
-  pipePersonShortage,
-  pipeOverTime,
-  CHDCheckOtherOffice,
-  cardiacCheckOtherOffice,
-  videoDataManageWay,
-  videoDataCarryMediumWay,
+  pcCheckWay,
+  imageManage,
+  medium,
+  satisfied,
+  lack,
+  overtime,
+  ca,
+  pci,
 } from './SurveyData'
 
 const RadioItem = Radio.RadioItem;
@@ -25,12 +26,12 @@ class WorkLoad2018 extends React.Component {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
     const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
     const workLoadList = [
-      ['PCI手术', 'PCI', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
-      ['起搏器手术', 'DDD', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
-      ['射频消融术', 'RF', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
-      ['先心病介入', 'ACHD', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
-      ['左心耳封堵术', 'LAA', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate'],
-      ['经皮主动脉瓣膜置换/成形术', 'PCN', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate']
+      ['PCI手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pciCommonDto'],
+      ['起搏器手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'poCommonDto'],
+      ['射频消融术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'rfCommonDto'],
+      ['先心病介入', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'chdCommonDto'],
+      ['左心耳封堵术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'laacCommonDto'],
+      ['经皮主动脉瓣膜置换/成形术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pavCommonDto']
     ];
     let workLoad = workLoadList.map((operation, index) => {
       return (
@@ -38,12 +39,14 @@ class WorkLoad2018 extends React.Component {
           <p className='info_content'>{operation[0]}<span>*</span> </p>
           {pciOperation.map(i => (
             <RadioItem
-              {...getFieldProps(operation[1], {rules: [{required: true, message: `请选择${operation[index]}`}]})}
+              {...getFieldProps(operation[1], {
+                initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[1]],
+                rules: [{required: true, message: `请选择${operation[index]}`}]})}
               key={i.value}
-              checked={i.value === inputValue[operation[1]]}
+              checked={inputValue[operation[9]] && inputValue[operation[9]][operation[1]] === i.value}
               // error={isFieldTouched('pciOperation') && getFieldError('pciOperation')}
               // onErrorClick={() => Toast.info(getFieldError('pciOperation'))}
-              onChange={onChangeHandler.bind(this, operation[1], i.value)}
+              onChange={onChangeHandler.bind(this, operation[9], i.value, 'survey', operation[1])}
             >
               {i.label}
             </RadioItem>
@@ -52,15 +55,15 @@ class WorkLoad2018 extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          {inputValue[operation[1]] === '已开展' ? (
+          {inputValue[operation[9]] && inputValue[operation[9]][operation[1]] === '已开展' ? (
             <List>
               <p className='info_content'>手术量（单位：例）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[2], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[2]),
-                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[2]],
+                {...getFieldProps(operation[2], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[2]),
+                  initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[2]],
                   rules: [{required: true, message: '请输入手术量'}]})}
                 type="text"
-                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[2]]}
+                value={inputValue[operation[9]] && inputValue[operation[9]][operation[2]]}
               />
               {isFieldTouched(operation[2]) && getFieldError(operation[2]) ? <p className='surveyError'>{getFieldError(operation[2])}</p>:''}
 
@@ -68,11 +71,11 @@ class WorkLoad2018 extends React.Component {
 
               <p className='info_content'>其中，急诊手术量（单位：例）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[3], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[3]),
-                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[3]],
+                {...getFieldProps(operation[3], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[3]),
+                  initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[3]],
                   rules: [{required: true, message: '请输入急诊手术量'}]})}
                 type="text"
-                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[3]]}
+                value={inputValue[operation[9]] && inputValue[operation[9]][operation[3]]}
               />
               {isFieldTouched(operation[3]) && getFieldError(operation[3]) ? <p className='surveyError'>{getFieldError(operation[3])}</p>:''}
 
@@ -80,11 +83,11 @@ class WorkLoad2018 extends React.Component {
 
               <p className='info_content'>病种比例（收治此类病人数/住院总人次数）（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[4], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[4]),
-                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[4]],
+                {...getFieldProps(operation[4], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[4]),
+                  initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[4]],
                   rules: [{required: true, message: '请输入病种比例'}]})}
                 type="text"
-                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[4]]}
+                value={inputValue[operation[9]] && inputValue[operation[9]][operation[4]]}
               />
               {isFieldTouched(operation[4]) && getFieldError(operation[4]) ? <p className='surveyError'>{getFieldError(operation[4])}</p>:''}
 
@@ -92,11 +95,11 @@ class WorkLoad2018 extends React.Component {
 
               <p className='info_content'>平均住院日（单位：日）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[5], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[5]),
-                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[5]],
+                {...getFieldProps(operation[5], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[5]),
+                  initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[5]],
                   rules: [{required: true, message: '请输入平均住院日'}]})}
                 type="text"
-                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[5]]}
+                value={inputValue[operation[9]] && inputValue[operation[9]][operation[5]]}
               />
               {isFieldTouched(operation[5]) && getFieldError(operation[5]) ? <p className='surveyError'>{getFieldError(operation[5])}</p>:''}
 
@@ -104,11 +107,11 @@ class WorkLoad2018 extends React.Component {
 
               <p className='info_content'>平均手术费用（单位：元）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[6], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[6]),
-                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[6]],
+                {...getFieldProps(operation[6], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[6]),
+                  initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[6]],
                   rules: [{required: true, message: '请输入平均手术费用'}]})}
                 type="text"
-                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[6]]}
+                value={inputValue[operation[9]] && inputValue[operation[9]][operation[6]]}
               />
               {isFieldTouched(operation[6]) && getFieldError(operation[6]) ? <p className='surveyError'>{getFieldError(operation[6])}</p>:''}
 
@@ -116,11 +119,11 @@ class WorkLoad2018 extends React.Component {
 
               <p className='info_content'>治愈率（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[7], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[7]),
-                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[7]],
+                {...getFieldProps(operation[7], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[7]),
+                  initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[7]],
                   rules: [{required: true, message: '请输入治愈率'}]})}
                 type="text"
-                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[7]]}
+                value={inputValue[operation[9]] && inputValue[operation[9]][operation[7]]}
               />
               {isFieldTouched(operation[7]) && getFieldError(operation[7]) ? <p className='surveyError'>{getFieldError(operation[7])}</p>:''}
 
@@ -128,11 +131,11 @@ class WorkLoad2018 extends React.Component {
 
               <p className='info_content'>死亡率（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[8], {onChange: (value) => onChangeHandler(`${operation[1]}_value`, value, 'survey', operation[8]),
-                  initialValue: inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[8]],
+                {...getFieldProps(operation[8], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[8]),
+                  initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[8]],
                   rules: [{required: true, message: '请输入死亡率'}]})}
                 type="text"
-                value={inputValue[`${operation[1]}_value`] && inputValue[`${operation[1]}_value`][operation[8]]}
+                value={inputValue[operation[9]] && inputValue[operation[9]][operation[8]]}
               />
               {isFieldTouched(operation[8]) && getFieldError(operation[8]) ? <p className='surveyError'>{getFieldError(operation[8])}</p>:''}
 
@@ -172,57 +175,78 @@ class WorkLoad2018 extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_title'>2.影像资料</p>
-          <p className='info_content'>影像资料管理方式 <span>*</span> </p>
-          {videoDataManageWay.map(i => (
-            <RadioItem
-              {...getFieldProps('videoDataManageWay', {
-                initialValue: inputValue.videoDataManageWay || '',
-                rules: [{required: true, message: '请选择影像资料管理方式'}]})}
-              key={i.value}
-              checked={i.value === inputValue.videoDataManageWay}
-              // error={isFieldTouched('videoDataManageWay') && getFieldError('videoDataManageWay')}
-              // onErrorClick={() => Toast.info(getFieldError('videoDataManageWay'))}
-              onChange={onChangeHandler.bind(this, 'videoDataManageWay', i.value)}
-            >
-              {i.label}
-            </RadioItem>
-          ))}
-          {isFieldTouched('videoDataManageWay') && getFieldError('videoDataManageWay') ? <p className='surveyError'>{getFieldError('videoDataManageWay')}</p>:''}
+          {inputValue.operaCheckWay === '电脑版' ? (
+            <List>
+              <p className='info_content'>电脑版的登记方式<i>（多选）</i> <span>*</span> </p>
+              {pcCheckWay.map(i => (
+                <CheckboxItem
+                  {...getFieldProps('pcCheckWay', {
+                    initialValue: inputValue.pcCheckWay || '',
+                    rules: [{required: true, message: '请选择电脑版的登记方式'}]})}
+                  key={i.value}
+                  checked={inputValue.pcCheckWay && Array.isArray(inputValue.pcCheckWay) && inputValue.pcCheckWay.indexOf(i.value) > -1}
+                  onChange={onChangeHandler.bind(this, 'pcCheckWay', i.value,  'checkbox')}
+                >
+                  {i.label}
+                </CheckboxItem>
+              ))}
+              {isFieldTouched('pcCheckWay') && getFieldError('pcCheckWay') ? <p className='surveyError'>{getFieldError('pcCheckWay')}</p>:''}
 
-          <WhiteSpace size="lg" />
+              <WhiteSpace size="lg" />
 
-          <p className='info_content'>影像资料承载媒介 <span>*</span> </p>
-          {videoDataCarryMediumWay.map(i => (
-            <div key={i.value}>
-              <RadioItem
-                {...getFieldProps('videoDataCarryMediumWay', {
-                  initialValue: inputValue.videoDataCarryMediumWay || '',
-                  rules: [{required: true, message: '请选择影像资料承载媒介'}]})}
-                key={i.value}
-                checked={i.value === inputValue.videoDataCarryMediumWay}
-                onChange={onChangeHandler.bind(this, 'videoDataCarryMediumWay', i.value)}
-              >
-                {i.label}
-              </RadioItem>
+              <p className='info_title'>2.影像资料</p>
+              <p className='info_content'>影像资料的管理 <span>*</span> </p>
+              {imageManage.map(i => (
+                <RadioItem
+                  {...getFieldProps('imageManage', {
+                    initialValue: inputValue.imageManage || '',
+                    rules: [{required: true, message: '请选择影像资料管理方式'}]})}
+                  key={i.value}
+                  checked={i.value === inputValue.imageManage}
+                  // error={isFieldTouched('imageManage') && getFieldError('imageManage')}
+                  // onErrorClick={() => Toast.info(getFieldError('imageManage'))}
+                  onChange={onChangeHandler.bind(this, 'imageManage', i.value)}
+                >
+                  {i.label}
+                </RadioItem>
+              ))}
+              {isFieldTouched('imageManage') && getFieldError('imageManage') ? <p className='surveyError'>{getFieldError('imageManage')}</p>:''}
 
-              {inputValue.videoDataCarryMediumWay && i.value === '其他' && inputValue['videoDataCarryMediumWay'].indexOf(i.value) > -1 ? (
-                <div>
-                  <InputItem
-                    {...getFieldProps('videoDataCarryMediumWay_other', {onChange: (value) => onChangeHandler('videoDataCarryMediumWay_other', value),
-                      initialValue: inputValue.videoDataCarryMediumWay_other || '',
-                      rules: [{required: true, message: '请输入其他影像资料承载媒介'}]})}
-                    type="text"
-                    value={inputValue.videoDataCarryMediumWay_other || ''}
-                  />
-                  {isFieldTouched('videoDataCarryMediumWay_other') && getFieldError('videoDataCarryMediumWay_other') ? <p className='surveyError'>{getFieldError('videoDataCarryMediumWay_other')}</p>:''}
+              <WhiteSpace size="lg" />
 
-                  <WhiteSpace size="lg" />
+              <p className='info_content'>承载媒介：<span>*</span> </p>
+              {medium.map(i => (
+                <div key={i.value}>
+                  <RadioItem
+                    {...getFieldProps('medium', {
+                      initialValue: inputValue.medium || '',
+                      rules: [{required: true, message: '请选择影像资料承载媒介'}]})}
+                    key={i.value}
+                    checked={i.value === inputValue.medium}
+                    onChange={onChangeHandler.bind(this, 'medium', i.value)}
+                  >
+                    {i.label}
+                  </RadioItem>
+
+                  {inputValue.medium && i.value === '其他' && inputValue['medium'].indexOf(i.value) > -1 ? (
+                    <div>
+                      <InputItem
+                        {...getFieldProps('medium_other', {onChange: (value) => onChangeHandler('medium_other', value),
+                          initialValue: inputValue.medium_other || '',
+                          rules: [{required: true, message: '请输入其他影像资料承载媒介'}]})}
+                        type="text"
+                        value={inputValue.medium_other || ''}
+                      />
+                      {isFieldTouched('medium_other') && getFieldError('medium_other') ? <p className='surveyError'>{getFieldError('medium_other')}</p>:''}
+
+                      <WhiteSpace size="lg" />
+                    </div>
+                  ) : ''}
                 </div>
-              ) : ''}
-            </div>
-          ))}
-          {isFieldTouched('videoDataCarryMediumWay') && getFieldError('videoDataCarryMediumWay') ? <p className='surveyError'>{getFieldError('videoDataCarryMediumWay')}</p>:''}
+              ))}
+              {isFieldTouched('medium') && getFieldError('medium') ? <p className='surveyError'>{getFieldError('medium')}</p>:''}
+            </List>
+          ) : ''}
 
           <WhiteSpace size="lg" />
 
@@ -230,101 +254,103 @@ class WorkLoad2018 extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>1、目前导管室的数量能够满足您科的工作量吗？<span>*</span> </p>
-          {pipeNumberWork.map(i => (
+          {satisfied.map(i => (
             <RadioItem
-              {...getFieldProps('pipeNumberWork', {
-                initialValue: inputValue.pipeNumberWork || '',
+              {...getFieldProps('satisfied', {
+                initialValue: inputValue.satisfied || '',
                 rules: [{required: true, message: '请选择目前导管室的数量能够满足您科的工作量吗？'}]})}
               key={i.value}
-              checked={i.value === inputValue.pipeNumberWork}
-              // error={isFieldTouched('pipeNumberWork') && getFieldError('pipeNumberWork')}
-              // onErrorClick={() => Toast.info(getFieldError('pipeNumberWork'))}
-              onChange={onChangeHandler.bind(this, 'pipeNumberWork', i.value)}
+              checked={i.value === inputValue.satisfied}
+              // error={isFieldTouched('satisfied') && getFieldError('satisfied')}
+              // onErrorClick={() => Toast.info(getFieldError('satisfied'))}
+              onChange={onChangeHandler.bind(this, 'satisfied', i.value)}
             >
               {i.label}
             </RadioItem>
           ))}
-          {isFieldTouched('pipeNumberWork') && getFieldError('pipeNumberWork') ? <p className='surveyError'>{getFieldError('pipeNumberWork')}</p>:''}
+          {isFieldTouched('satisfied') && getFieldError('satisfied') ? <p className='surveyError'>{getFieldError('satisfied')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>2、导管室人员中最紧缺的是？<i>（多选）</i> <span>*</span> </p>
-          {pipePersonShortage.map(i => (
+          {lack.map(i => (
             <CheckboxItem
               key={i.value}
-              // {...getFieldProps('groupSurgeryDoctorsOperationScope', {onChange: () => onChangeHandler('groupSurgeryDoctorsOperationScope', i.value,  'survey', i.value)})}
+              {...getFieldProps('lack', {
+                initialValue: inputValue.lack || '',
+                rules: [{required: true, message: '请选择导管室工作经常加班吗？'}]})}
               // checked={i.value === (inputValue.groupSurgeryDoctorsOperationScope && inputValue.groupSurgeryDoctorsOperationScope[i.value])}
-              checked={inputValue.pipePersonShortage && Array.isArray(inputValue.pipePersonShortage) && inputValue.pipePersonShortage.indexOf(i.value) > -1}
-              onChange={onChangeHandler.bind(this, 'pipePersonShortage', i.value,  'checkbox')}
+              checked={inputValue.lack && Array.isArray(inputValue.lack) && inputValue.lack.indexOf(i.value) > -1}
+              onChange={onChangeHandler.bind(this, 'lack', i.value,  'checkbox')}
             >
               {i.label}
             </CheckboxItem>
           ))}
-          {isFieldTouched('pipePersonShortage') && getFieldError('pipePersonShortage') ? <p className='surveyError'>{getFieldError('pipePersonShortage')}</p>:''}
+          {isFieldTouched('lack') && getFieldError('lack') ? <p className='surveyError'>{getFieldError('lack')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>3、导管室工作经常加班吗？<span>*</span> </p>
-          {pipeOverTime.map(i => (
+          {overtime.map(i => (
             <RadioItem
-              {...getFieldProps('pipeOverTime', {
-                initialValue: inputValue.pipeOverTime || '',
+              {...getFieldProps('overtime', {
+                initialValue: inputValue.overtime || '',
                 rules: [{required: true, message: '请选择导管室工作经常加班吗？'}]})}
               key={i.value}
-              checked={i.value === inputValue.pipeOverTime}
-              // error={isFieldTouched('pipeOverTime') && getFieldError('pipeOverTime')}
-              // onErrorClick={() => Toast.info(getFieldError('pipeOverTime'))}
-              onChange={onChangeHandler.bind(this, 'pipeOverTime', i.value)}
+              checked={i.value === inputValue.overtime}
+              // error={isFieldTouched('overtime') && getFieldError('overtime')}
+              // onErrorClick={() => Toast.info(getFieldError('overtime'))}
+              onChange={onChangeHandler.bind(this, 'overtime', i.value)}
             >
               {i.label}
             </RadioItem>
           ))}
-          {isFieldTouched('pipeOverTime') && getFieldError('pipeOverTime') ? <p className='surveyError'>{getFieldError('pipeOverTime')}</p>:''}
+          {isFieldTouched('overtime') && getFieldError('overtime') ? <p className='surveyError'>{getFieldError('overtime')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>4、冠心病造影检查除了心脏科是否其他科室也开展？<span>*</span> </p>
-          {CHDCheckOtherOffice.map(i => (
+          {ca.map(i => (
             <div key={i.value}>
               <RadioItem
-                {...getFieldProps('CHDCheckOtherOffice', {
-                  initialValue: inputValue.CHDCheckOtherOffice || '',
+                {...getFieldProps('ca', {
+                  initialValue: inputValue.ca || '',
                   rules: [{required: true, message: '请选择冠心病造影检查除了心脏科是否其他科室也开展？'}]})}
                 key={i.value}
-                checked={i.value === inputValue.CHDCheckOtherOffice}
-                // error={isFieldTouched('CHDCheckOtherOffice') && getFieldError('CHDCheckOtherOffice')}
-                // onErrorClick={() => Toast.info(getFieldError('CHDCheckOtherOffice'))}
-                onChange={onChangeHandler.bind(this, 'CHDCheckOtherOffice', i.value)}
+                checked={i.value === inputValue.ca}
+                // error={isFieldTouched('ca') && getFieldError('ca')}
+                // onErrorClick={() => Toast.info(getFieldError('ca'))}
+                onChange={onChangeHandler.bind(this, 'ca', i.value)}
               >
                 {i.label}
               </RadioItem>
             </div>
           ))}
-          {isFieldTouched('CHDCheckOtherOffice') && getFieldError('CHDCheckOtherOffice') ? <p className='surveyError'>{getFieldError('CHDCheckOtherOffice')}</p>:''}
+          {isFieldTouched('ca') && getFieldError('ca') ? <p className='surveyError'>{getFieldError('ca')}</p>:''}
 
-          {inputValue.CHDCheckOtherOffice === '是' ? (
+          {inputValue.ca === '是' ? (
             <List>
               <p className='info_content'>冠心病造影检查还有哪科室开展？<span>*</span></p>
               <InputItem
-                {...getFieldProps('CHDCheck_other', {onChange: (value) => onChangeHandler('CHDCheck_other', value),
-                  initialValue: inputValue.CHDCheck_other || '',
+                {...getFieldProps('caDepartment', {onChange: (value) => onChangeHandler('caDepartment', value),
+                  initialValue: inputValue.caDepartment || '',
                   rules: [{required: true, message: '请输入冠心病造影检查还有哪科室开展'}]})}
                 type="text"
-                value={inputValue.CHDCheck_other || ''}
+                value={inputValue.caDepartment || ''}
               />
-              {isFieldTouched('CHDCheck_other') && getFieldError('CHDCheck_other') ? <p className='surveyError'>{getFieldError('CHDCheck_other')}</p>:''}
+              {isFieldTouched('caDepartment') && getFieldError('caDepartment') ? <p className='surveyError'>{getFieldError('caDepartment')}</p>:''}
 
               <WhiteSpace size="lg" />
 
               <p className='info_content'>其他科室每周造影检查数量？（例/周）<span>*</span></p>
               <InputItem
-                {...getFieldProps('CHDCheck_otherWeekNumber', {onChange: (value) => onChangeHandler('CHDCheck_otherWeekNumber', value),
-                  initialValue: inputValue.CHDCheck_otherWeekNumber || '',
+                {...getFieldProps('caCount', {onChange: (value) => onChangeHandler('caCount', value),
+                  initialValue: inputValue.caCount || '',
                   rules: [{required: true, message: '请输入其他科室每周造影检查数量'}]})}
                 type="number"
-                value={inputValue.CHDCheck_otherWeekNumber || ''}
+                value={inputValue.caCount || ''}
               />
-              {isFieldTouched('CHDCheck_otherWeekNumber') && getFieldError('CHDCheck_otherWeekNumber') ? <p className='surveyError'>{getFieldError('CHDCheck_otherWeekNumber')}</p>:''}
+              {isFieldTouched('caCount') && getFieldError('caCount') ? <p className='surveyError'>{getFieldError('caCount')}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -334,35 +360,35 @@ class WorkLoad2018 extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>5、心脏介入治疗除了心脏科是否其他科室也开展？<span>*</span> </p>
-          {cardiacCheckOtherOffice.map(i => (
+          {pci.map(i => (
             <div key={i.value}>
               <RadioItem
-                {...getFieldProps('cardiacCheckOtherOffice', {
-                  initialValue: inputValue.cardiacCheckOtherOffice || '',
+                {...getFieldProps('pci', {
+                  initialValue: inputValue.pci || '',
                   rules: [{required: true, message: '请选择心脏介入治疗除了心脏科是否其他科室也开展？'}]})}
                 key={i.value}
-                checked={i.value === inputValue.cardiacCheckOtherOffice}
-                // error={isFieldTouched('cardiacCheckOtherOffice') && getFieldError('cardiacCheckOtherOffice')}
-                // onErrorClick={() => Toast.info(getFieldError('cardiacCheckOtherOffice'))}
-                onChange={onChangeHandler.bind(this, 'cardiacCheckOtherOffice', i.value)}
+                checked={i.value === inputValue.pci}
+                // error={isFieldTouched('pci') && getFieldError('pci')}
+                // onErrorClick={() => Toast.info(getFieldError('pci'))}
+                onChange={onChangeHandler.bind(this, 'pci', i.value)}
               >
                 {i.label}
               </RadioItem>
             </div>
           ))}
-          {isFieldTouched('cardiacCheckOtherOffice') && getFieldError('cardiacCheckOtherOffice') ? <p className='surveyError'>{getFieldError('cardiacCheckOtherOffice')}</p>:''}
+          {isFieldTouched('pci') && getFieldError('pci') ? <p className='surveyError'>{getFieldError('pci')}</p>:''}
 
-          {inputValue.cardiacCheckOtherOffice === '是' ? (
+          {inputValue.pci === '是' ? (
             <List>
               <p className='info_content'>心脏介入治疗其他哪科室也开展？<span>*</span></p>
               <InputItem
-                {...getFieldProps('cardiacCheck_other', {onChange: (value) => onChangeHandler('cardiacCheck_other', value),
-                  initialValue: inputValue.cardiacCheck_other || '',
+                {...getFieldProps('pciDepartment', {onChange: (value) => onChangeHandler('pciDepartment', value),
+                  initialValue: inputValue.pciDepartment || '',
                   rules: [{required: true, message: '请输入冠心病造影检查还有哪科室开展'}]})}
                 type="text"
-                value={inputValue.cardiacCheck_other || ''}
+                value={inputValue.pciDepartment || ''}
               />
-              {isFieldTouched('cardiacCheck_other') && getFieldError('cardiacCheck_other') ? <p className='surveyError'>{getFieldError('cardiacCheck_other')}</p>:''}
+              {isFieldTouched('pciDepartment') && getFieldError('pciDepartment') ? <p className='surveyError'>{getFieldError('pciDepartment')}</p>:''}
 
               <WhiteSpace size="lg" />
             </List>
@@ -372,37 +398,37 @@ class WorkLoad2018 extends React.Component {
 
           <p className='info_content'>目前开展心导管室工作最困难的是：<span>*</span> </p>
           <InputItem
-            {...getFieldProps('currentPipeWorkHardest', {onChange: (value) => onChangeHandler('currentPipeWorkHardest', value),
-              initialValue: inputValue.currentPipeWorkHardest || '',
+            {...getFieldProps('trouble', {onChange: (value) => onChangeHandler('trouble', value),
+              initialValue: inputValue.trouble || '',
               rules: [{required: true, message: '请输入目前开展心导管室工作最困难的是'}]})}
             type="text"
-            value={inputValue.currentPipeWorkHardest || ''}
+            value={inputValue.trouble || ''}
           />
-          {isFieldTouched('currentPipeWorkHardest') && getFieldError('currentPipeWorkHardest') ? <p className='surveyError'>{getFieldError('currentPipeWorkHardest')}</p>:''}
+          {isFieldTouched('trouble') && getFieldError('trouble') ? <p className='surveyError'>{getFieldError('trouble')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>建议的培训项目或内容：<span>*</span> </p>
           <InputItem
-            {...getFieldProps('adviceTrainingProgram', {onChange: (value) => onChangeHandler('adviceTrainingProgram', value),
-              initialValue: inputValue.adviceTrainingProgram || '',
+            {...getFieldProps('program', {onChange: (value) => onChangeHandler('program', value),
+              initialValue: inputValue.program || '',
               rules: [{required: true, message: '请输入建议的培训项目或内容'}]})}
             type="text"
-            value={inputValue.adviceTrainingProgram || ''}
+            value={inputValue.program || ''}
           />
-          {isFieldTouched('adviceTrainingProgram') && getFieldError('adviceTrainingProgram') ? <p className='surveyError'>{getFieldError('adviceTrainingProgram')}</p>:''}
+          {isFieldTouched('program') && getFieldError('program') ? <p className='surveyError'>{getFieldError('program')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>给行政部门或质控中心的建议：<span>*</span> </p>
           <InputItem
-            {...getFieldProps('adviceAdministration', {onChange: (value) => onChangeHandler('adviceAdministration', value),
-              initialValue: inputValue.adviceAdministration || '',
+            {...getFieldProps('suggest', {onChange: (value) => onChangeHandler('suggest', value),
+              initialValue: inputValue.suggest || '',
               rules: [{required: true, message: '请输入给行政部门或质控中心的建议'}]})}
             type="text"
-            value={inputValue.adviceAdministration || ''}
+            value={inputValue.suggest || ''}
           />
-          {isFieldTouched('adviceAdministration') && getFieldError('adviceAdministration') ? <p className='surveyError'>{getFieldError('adviceAdministration')}</p>:''}
+          {isFieldTouched('suggest') && getFieldError('suggest') ? <p className='surveyError'>{getFieldError('suggest')}</p>:''}
 
           <WhiteSpace size="lg" />
           {/*<p className='info_content'>PCI手术 <span>*</span> </p>

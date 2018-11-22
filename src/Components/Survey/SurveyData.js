@@ -3,7 +3,7 @@
  * BasicInformation数据（基本信息）
  */
 
-export const hospitalGrade = [
+export const hospitalLevel = [
   // {label: '请选择一个选项', value: '请选择一个选项'},
   {label: '二级甲等', value: '二级甲等'},
   {label: '二级乙等', value: '二级乙等'},
@@ -11,19 +11,19 @@ export const hospitalGrade = [
   {label: '三级乙等', value: '三级乙等'},
 ];
 
-export const hospitalOrganizationKind = [
+export const mechanNature = [
   // {label: '请选择一个选项', value: '请选择一个选项'},
   {label: '公立机构', value: '公立机构'},
   {label: '社会办公机构', value: '社会办公机构'},
 ];
 
-export const hospitalKind = [
+export const hospitalNature = [
   // {label: '请选择一个选项', value: '请选择一个选项'},
   {label: '综合性', value: '综合性'},
   {label: '专科', value: '专科'},
 ];
 
-export const hospitalKindBelong = [
+export const hospitalType = [
   // {label: '请选择一个选项', value: '请选择一个选项'},
   {label: '中医', value: '中医'},
   {label: '民营', value: '民营'},
@@ -31,7 +31,7 @@ export const hospitalKindBelong = [
   {label: '部队', value: '部队'},
 ];
 
-export const hospitalOldArea = [
+export const area = [
   // {label: '请选择一个选项', value: '请选择一个选项'},
   {label: '黄埔', value: '黄埔'},
   {label: '卢湾', value: '卢湾'},
@@ -69,14 +69,14 @@ export const ifThoracotomy = [
   {label: '从未开展过', value: '从未开展过'},
 ];
 
-export const pipeBelongDepartment = [
+export const pipeDepartment = [
   {label: '心脏科', value: '心脏科'},
   {label: '放射科', value: '放射科'},
   {label: '独立部门', value: '独立部门'},
   {label: '其他科室', value: '其他科室'},
 ];
 
-export const pipeHospitalLocation = [
+export const pipeLocation = [
   {label: '和普通病房同一层楼', value: '和普通病房同一层楼'},
   {label: '和CCU同一层楼', value: '和CCU同一层楼'},
   {label: '和病房同楼不同层', value: '和病房同楼不同层'},
@@ -121,12 +121,12 @@ export const otherEquipNumber = [
 // {label: '起搏器分析仪（单位：台）', value: '起搏器分析仪（单位：台）'},
 // {label: '麻醉机（单位：台）', value: '麻醉机（单位：台）'},
 
-export const pipeFlowLevel = [
+export const pipeLevel = [
   {label: '无', value: '无'},
   {label: '有', value: '有'},
 ];
 
-export const flowLevel = [
+export const level = [
   {label: '百级', value: '百级'},
   {label: '千级', value: '千级'},
   {label: '万级', value: '万级'},
@@ -152,48 +152,51 @@ export const pciOperation = [
 export const operaCheckWay = [
   {label: '纸质版', value: '纸质版'},
   {label: '电脑版', value: '电脑版'},
+];
+
+export const pcCheckWay = [
   {label: '医院构建下的系统', value: '医院构建下的系统'},
   {label: '专业开发的系统', value: '专业开发的系统'},
   {label: 'excel数据库', value: 'excel数据库'},
 ];
 
-export const videoDataManageWay = [
+export const imageManage = [
   {label: '放射科管理', value: '放射科管理'},
   {label: '导管室管理', value: '导管室管理'},
   {label: '医院统一管理', value: '医院统一管理'},
 ];
 
-export const videoDataCarryMediumWay = [
+export const medium = [
   {label: '光盘', value: '光盘'},
   {label: '独立服务器（云存储）', value: '独立服务器（云存储）'},
   {label: 'PACS', value: 'PACS'},
   {label: '其他', value: '其他'},
 ];
 
-export const pipeNumberWork = [
+export const satisfied = [
   {label: '可以满足', value: '可以满足'},
   {label: '不能满足', value: '不能满足'},
 ];
 
-export const pipePersonShortage = [
+export const lack = [
   {label: '手术医师', value: '手术医师'},
   {label: '专科护士', value: '专科护士'},
   {label: '放射技师', value: '放射技师'},
   {label: '工勤人员', value: '工勤人员'},
 ];
 
-export const pipeOverTime = [
+export const overtime = [
   {label: '经常（＞3次/周）', value: '经常（＞3次/周）'},
   {label: '偶尔（＜2次/周）', value: '偶尔（＜2次/周）'},
   {label: '几乎不加班', value: '几乎不加班'},
 ];
 
-export const CHDCheckOtherOffice = [
+export const ca = [
   {label: '无', value: '无'},
   {label: '是', value: '是'},
 ];
 
-export const cardiacCheckOtherOffice = [
+export const pci = [
   {label: '无', value: '无'},
   {label: '是', value: '是'},
 ];

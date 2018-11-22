@@ -20,59 +20,59 @@ class HeartBasicCondition extends React.Component {
         <List>
           <p className='info_content'>病房床位数（单位：张）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('wardBedsNumber', {onChange: (value) => onChangeHandler('wardBedsNumber', value),
-              initialValue: inputValue.wardBedsNumber || '',
+            {...getFieldProps('wardBedNum', {onChange: (value) => onChangeHandler('wardBedNum', value),
+              initialValue: inputValue.wardBedNum || '',
               rules: [{required: true, message: '请输入病房床位数'}]})}
             type="number"
-            value={inputValue.wardBedsNumber || ''}
+            value={inputValue.wardBedNum || ''}
           />
-          {isFieldTouched('wardBedsNumber') && getFieldError('wardBedsNumber') ? <p className='surveyError'>{getFieldError('wardBedsNumber')}</p>:''}
+          {isFieldTouched('wardBedNum') && getFieldError('wardBedNum') ? <p className='surveyError'>{getFieldError('wardBedNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>CCU床位数（单位：张）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('CCUBedsNumber', {onChange: (value) => onChangeHandler('CCUBedsNumber', value),
-              initialValue: inputValue.CCUBedsNumber || '',
+            {...getFieldProps('ccuBedNum', {onChange: (value) => onChangeHandler('ccuBedNum', value),
+              initialValue: inputValue.ccuBedNum || '',
               rules: [{required: true, message: '请输入CCU床位数'}]})}
             type="number"
-            value={inputValue.CCUBedsNumber || ''}
+            value={inputValue.ccuBedNum || ''}
           />
-          {isFieldTouched('CCUBedsNumber') && getFieldError('CCUBedsNumber') ? <p className='surveyError'>{getFieldError('CCUBedsNumber')}</p>:''}
+          {isFieldTouched('ccuBedNum') && getFieldError('ccuBedNum') ? <p className='surveyError'>{getFieldError('ccuBedNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>医师人数（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('doctorNumber', {onChange: (value) => onChangeHandler('doctorNumber', value),
-              initialValue: inputValue.doctorNumber || '',
+            {...getFieldProps('Basic_doctorNum', {onChange: (value) => onChangeHandler('doctorNum', value),
+              initialValue: inputValue.doctorNum || '',
               rules: [{required: true, message: '请输入医师人数'}]})}
             type="number"
-            value={inputValue.doctorNumber || ''}
+            value={inputValue.doctorNum || ''}
           />
-          {isFieldTouched('doctorNumber') && getFieldError('doctorNumber') ? <p className='surveyError'>{getFieldError('doctorNumber')}</p>:''}
+          {isFieldTouched('Basic_doctorNum') && getFieldError('Basic_doctorNum') ? <p className='surveyError'>{getFieldError('Basic_doctorNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>护士人数（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps('nurseNumber', {onChange: (value) => onChangeHandler('nurseNumber', value),
-              initialValue: inputValue.nurseNumber || '',
+            {...getFieldProps('nurseNum', {onChange: (value) => onChangeHandler('nurseNum', value),
+              initialValue: inputValue.nurseNum || '',
               rules: [{required: true, message: '请输入护士人数'}]})}
             type="number"
-            value={inputValue.nurseNumber || ''}
+            value={inputValue.nurseNum || ''}
           />
-          {isFieldTouched('nurseNumber') && getFieldError('nurseNumber') ? <p className='surveyError'>{getFieldError('nurseNumber')}</p>:''}
+          {isFieldTouched('nurseNum') && getFieldError('nurseNum') ? <p className='surveyError'>{getFieldError('nurseNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>是否有心胸外科 <span>*</span> </p>
           {ifHeartSurgery.map(i => (
             <RadioItem
+              key={i.value}
               {...getFieldProps('ifHeartSurgery', {
                 initialValue: inputValue.ifHeartSurgery || '',
                 rules: [{required: true, message: '请选择是否有心外科'}]})}
-              key={i.value}
               checked={i.value === inputValue.ifHeartSurgery}
               // error={isFieldTouched('ifHeartSurgery') && getFieldError('ifHeartSurgery')}
               // onErrorClick={() => Toast.info(getFieldError('ifHeartSurgery'))}

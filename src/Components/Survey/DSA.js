@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { List, InputItem, WhiteSpace, Checkbox, Radio } from 'antd-mobile'
 // import { createForm } from 'rc-form';
 
-import {pipeFlowLevel, otherEquipNumber, flowLevel} from './SurveyData'
+import { otherEquipNumber, pipeLevel,level} from './SurveyData'
 
 const CheckboxItem = Checkbox.CheckboxItem;
 const RadioItem = Radio.RadioItem;
@@ -43,17 +43,19 @@ class HeartPipeHardwareCondition extends React.Component {
                 <p className='dsa_id'>{index}</p>
                 <p className='dsa_title'>品牌、型号</p>
                 <InputItem
-                  {...getFieldProps(`DSABrandModel${index}`, {onChange: (value) => onChangeHandler('DSA', value, 'survey', `DSABrandModel${index}`)})}
+                  {...getFieldProps(`dsaName${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaName${index}`),
+                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaName${index}`]})}
                   type="text"
-                  value={inputValue['DSA'] && inputValue['DSA'][`DSABrandModel${index}`]}
-                  // onChange={onChangeHandler.bind(this, 'DSABrandModel')}
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaName${index}`]}
+                  // onChange={onChangeHandler.bind(this, 'dsaName')}
                 />
                 <p className='dsa_title'>安装年月（例：2018.4）</p>
                 <InputItem
-                  {...getFieldProps(`DSAInstallTime${index}`, {onChange: (value) => onChangeHandler('DSA', value, 'survey', `DSAInstallTime${index}`)})}
+                  {...getFieldProps(`dsaDate${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaDate${index}`),
+                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]})}
                   type="text"
-                  value={inputValue['DSA'] && inputValue['DSA'][`DSAInstallTime${index}`]}
-                  // onChange={onChangeHandler.bind(this, 'DSAInstallTime')}
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]}
+                  // onChange={onChangeHandler.bind(this, 'dsaDate')}
                 />
               </div>
             )
@@ -122,38 +124,38 @@ class HeartPipeHardwareCondition extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>导管室层流级别 <span>*</span> </p>
-          {pipeFlowLevel.map(i => (
+          {pipeLevel.map(i => (
             <RadioItem
-              {...getFieldProps('pipeFlowLevel', {
-                initialValue: inputValue.pipeFlowLevel || '',
+              {...getFieldProps('pipeLevel', {
+                initialValue: inputValue.pipeLevel || '',
                 rules: [{required: true, message: '请选择导管室层流级别'}]})}
               key={i.value}
-              checked={i.value === inputValue.pipeFlowLevel}
-              onChange={onChangeHandler.bind(this, 'pipeFlowLevel', i.value)}
+              checked={i.value === inputValue.pipeLevel}
+              onChange={onChangeHandler.bind(this, 'pipeLevel', i.value)}
             >
               {i.label}
             </RadioItem>
           ))}
-          {isFieldTouched('pipeFlowLevel') && getFieldError('pipeFlowLevel') ? <p className='surveyError'>{getFieldError('pipeFlowLevel')}</p>:''}
+          {isFieldTouched('pipeLevel') && getFieldError('pipeLevel') ? <p className='surveyError'>{getFieldError('pipeLevel')}</p>:''}
 
           <WhiteSpace size="lg" />
 
-          {inputValue.pipeFlowLevel === '有' ? (
+          {inputValue.pipeLevel === '有' ? (
             <List>
               <p className='info_content'>层流级别 <span>*</span></p>
-              {flowLevel.map(i => (
+              {level.map(i => (
                 <RadioItem
-                  {...getFieldProps('flowLevel', {
-                    initialValue: inputValue.flowLevel || '',
+                  {...getFieldProps('level', {
+                    initialValue: inputValue.level || '',
                     rules: [{required: true, message: '请选择层流级别'}]})}
                   key={i.value}
-                  checked={i.value === inputValue.flowLevel}
-                  onChange={onChangeHandler.bind(this, 'flowLevel', i.value)}
+                  checked={i.value === inputValue.level}
+                  onChange={onChangeHandler.bind(this, 'level', i.value)}
                 >
                   {i.label}
                 </RadioItem>
               ))}
-              {isFieldTouched('flowLevel') && getFieldError('flowLevel') ? <p className='surveyError'>{getFieldError('flowLevel')}</p>:''}
+              {isFieldTouched('level') && getFieldError('level') ? <p className='surveyError'>{getFieldError('level')}</p>:''}
 
               <WhiteSpace size="lg" />
             </List>

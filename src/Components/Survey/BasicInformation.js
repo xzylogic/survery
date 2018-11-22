@@ -7,7 +7,7 @@ import  createDOMForm  from 'rc-form/lib/createDOMForm';
 import moment from 'moment'
 import {surveyStoreLocalAction} from "../../Store/actions/survey.action";
 
-import { hospitalGrade, hospitalOrganizationKind, hospitalKind, hospitalKindBelong, hospitalOldArea} from './SurveyData';
+import { hospitalLevel, mechanNature, hospitalNature, hospitalType, area} from './SurveyData';
 import HeartBasicCondition from './HeartBasicCondition';
 import HeartPipeHardwareCondition from './HeartPipeHardwareCondition';
 import DSA from './DSA';
@@ -25,10 +25,11 @@ class BasicInformation extends React.Component {
 
   onChangeHandler = (key, value, type, id) => {
 
-    if(key === 'signatureDate') {
+    if(key === 'date') {
       value = moment(value).format('YYYY-MM-DD');
     }
     console.log(key, value);
+    console.log(typeof key, typeof value);
     const store = this.props;
     console.log(type)
 
@@ -51,36 +52,90 @@ class BasicInformation extends React.Component {
 
   submit = () => {
     // const store = this.props;
+
     const {validateFieldsAndScroll} = this.props.form; //isFieldTouched, getFieldError, validateFields
 
+    const { inputValue } = this.props.globalReducer;
+    let submitData = Object.assign({}, inputValue);
+
+    // console.log(submitData)
+    // console.log(submitData.dsaDtos)
+
+    Object.keys(submitData).forEach((key)=>{
+      let arr = [];
+      let dsaNameArr = [];
+      let dsaDateArr = [];
+      if(key === 'dsaDtos'){
+        Object.keys(submitData[key]).forEach((id) => {
+
+          if(id.indexOf('dsaName') > -1){
+            dsaNameArr.push(submitData[key][id]);
+          }else{
+            dsaDateArr.push(submitData[key][id]);
+          }
+          arr.push(submitData[key][id]);
+        })
+        submitData[key] = [];
+        submitData[key]['dsaName'] = dsaNameArr.toString();
+        submitData[key]['dsaDate'] = dsaDateArr.toString();
+      }
+
+      if(key === 'otherEquipNumberValue'){
+        submitData['iabp'] = submitData[key]['otherEquipNumber0'];
+        submitData['ivus'] = submitData[key]['otherEquipNumber1'];
+        submitData['oct'] = submitData[key]['otherEquipNumber2'];
+        submitData['ffr'] = submitData[key]['otherEquipNumber3'];
+        submitData['elr'] = submitData[key]['otherEquipNumber4'];
+        submitData['rgi'] = submitData[key]['otherEquipNumber5'];
+        submitData['bm'] = submitData[key]['otherEquipNumber6'];
+        submitData['kyky'] = submitData[key]['otherEquipNumber7'];
+        submitData['ci'] = submitData[key]['otherEquipNumber8'];
+        submitData['carto'] = submitData[key]['otherEquipNumber9'];
+        submitData['ensite'] = submitData[key]['otherEquipNumber10'];
+        submitData['els'] = submitData[key]['otherEquipNumber11'];
+        submitData['pa'] = submitData[key]['otherEquipNumber12'];
+        submitData['am'] = submitData[key]['otherEquipNumber13'];
+      }
+      if(key === 'pciDto'){
+        submitData[key]['canSelect'] = submitData['pci_canSelect'];
+      }
+      if(key === 'esDto'){
+        submitData[key]['canSelect'] = submitData['ele_canSelect'];
+      }
+      if(key === 'shdDto'){
+        submitData[key]['canSelect'] = submitData['con_canSelect'];
+      }
+
+    })
+    console.log(submitData)
+    // console.log(submitData)
+
+    // var arr = []
+    // for (let i in obj) {
+    //   arr.push(obj[i]); //属性
+    //   //arr.push(obj[i]); //值
+    // }
+    // console.log(arr);
+
+    // Object.keys(submitData).forEach((key, index)=>{
+    //   // if(key === 'dsaDtos'){
+    //   //   console.log(submitData[key])
+    //   //
+    //   // }
+    //   console.log(key, submitData[key])
+    // })
     validateFieldsAndScroll({validateFirst: true}, (error, value) => {
         if (!error) {
-          console.log(value);
+          // console.log(value);
           console.info('success');
           // store.dispatch()
         } else {
-          console.log(value);
+          // console.log(value);
+          console.log('false');
         }
       });
 
-    // validateFields({first: true}, (error, value) => {
-    //   if (!error) {
-    //     console.log(value);
-    //     console.info('success');
-    //     // store.dispatch()
-    //   } else {
-    //     console.log(value);
-    //     // console.log(getFieldError('hospitalGrade') );
-    //     // Object.keys(value).forEach((key, index)=>{
-    //     //   if(value[key] === undefined) {
-    //     //     console.log(key)
-    //     //     isFieldTouched(key) && getFieldError(key);
-    //     //   }
-    //     //   // console.log(key, value[key])
-    //     // })
-    //     // console.log(error);
-    //   }
-    // });
+
   }
 
   render() {
@@ -107,98 +162,98 @@ class BasicInformation extends React.Component {
 
           <p className='info_content'>医院的等级 <span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalGrade', {onChange: (value) => this.onChangeHandler('hospitalGrade', value),
-              initialValue: inputValue.hospitalGrade || '',
+            {...getFieldProps('hospitalLevel', {onChange: (value) => this.onChangeHandler('hospitalLevel', value),
+              initialValue: inputValue.hospitalLevel || '',
               rules: [{required: true, message: '请选择医院的等级'}]})}
-            value={inputValue.hospitalGrade || ''}
-            data={hospitalGrade}
-            // onDismiss={this.checkError.bind(this, 'hospitalGrade')}
+            value={inputValue.hospitalLevel || ''}
+            data={hospitalLevel}
+            // onDismiss={this.checkError.bind(this, 'hospitalLevel')}
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('hospitalGrade') && getFieldError('hospitalGrade') ? <p className='surveyError'>{getFieldError('hospitalGrade')}</p>:''}
+          {isFieldTouched('hospitalLevel') && getFieldError('hospitalLevel') ? <p className='surveyError'>{getFieldError('hospitalLevel')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>核定总床位数？（单位：张）<span>*</span></p>
           <InputItem
-            {...getFieldProps('approvedTotalBeds', {onChange: (value) => this.onChangeHandler('approvedTotalBeds', value),
-              initialValue: inputValue.approvedTotalBeds || '',
+            {...getFieldProps('totalBedNum', {onChange: (value) => this.onChangeHandler('totalBedNum', value),
+              initialValue: inputValue.totalBedNum || '',
               rules: [{required: true, message: '请输入核定总床位数'}]})}
             type="number"
-            value={inputValue.approvedTotalBeds || ''}
-            // error={isFieldTouched('approvedTotalBeds') && getFieldError('approvedTotalBeds')}
-            // onErrorClick={() => Toast.info(getFieldError('approvedTotalBeds'))}
+            value={inputValue.totalBedNum || ''}
+            // error={isFieldTouched('totalBedNum') && getFieldError('totalBedNum')}
+            // onErrorClick={() => Toast.info(getFieldError('totalBedNum'))}
           />
-          {isFieldTouched('approvedTotalBeds') && getFieldError('approvedTotalBeds') ? <p className='surveyError'>{getFieldError('approvedTotalBeds')}</p>:''}
+          {isFieldTouched('totalBedNum') && getFieldError('totalBedNum') ? <p className='surveyError'>{getFieldError('totalBedNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>实际开放总床位数？（单位：张）<span>*</span></p>
           <InputItem
-            {...getFieldProps('realTotalBeds', {onChange: (value) => this.onChangeHandler('realTotalBeds', value),
-              initialValue: inputValue.realTotalBeds || '',
+            {...getFieldProps('openBedNum', {onChange: (value) => this.onChangeHandler('openBedNum', value),
+              initialValue: inputValue.openBedNum || '',
               rules: [{required: true, message: '请输入实际开放总床位数'}]})}
             type="number"
-            value={inputValue.realTotalBeds || ''}
+            value={inputValue.openBedNum || ''}
           />
-          {isFieldTouched('realTotalBeds') && getFieldError('realTotalBeds') ? <p className='surveyError'>{getFieldError('realTotalBeds')}</p>:''}
+          {isFieldTouched('openBedNum') && getFieldError('openBedNum') ? <p className='surveyError'>{getFieldError('openBedNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>医院机构性质 <span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalOrganizationKind', {onChange: (value) => this.onChangeHandler('hospitalOrganizationKind', value),
-              initialValue: inputValue.hospitalOrganizationKind || '',
+            {...getFieldProps('mechanNature', {onChange: (value) => this.onChangeHandler('mechanNature', value),
+              initialValue: inputValue.mechanNature || '',
               rules: [{required: true, message: '请选择医院机构性质'}]})}
-            value={inputValue.hospitalOrganizationKind || ''}
-            data={hospitalOrganizationKind}
+            value={inputValue.mechanNature || ''}
+            data={mechanNature}
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('hospitalOrganizationKind') && getFieldError('hospitalOrganizationKind') ? <p className='surveyError'>{getFieldError('hospitalOrganizationKind')}</p>:''}
+          {isFieldTouched('mechanNature') && getFieldError('mechanNature') ? <p className='surveyError'>{getFieldError('mechanNature')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>医院性质 <span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalKind', {onChange: (value) => this.onChangeHandler('hospitalKind', value),
-              initialValue: inputValue.hospitalKind || '',
+            {...getFieldProps('hospitalNature', {onChange: (value) => this.onChangeHandler('hospitalNature', value),
+              initialValue: inputValue.hospitalNature || '',
               rules: [{required: true, message: '请选择医院性质'}]})}
-            value={inputValue.hospitalKind || ''}
-            data={hospitalKind}
+            value={inputValue.hospitalNature || ''}
+            data={hospitalNature}
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('hospitalKind') && getFieldError('hospitalKind') ? <p className='surveyError'>{getFieldError('hospitalKind')}</p>:''}
+          {isFieldTouched('hospitalNature') && getFieldError('hospitalNature') ? <p className='surveyError'>{getFieldError('hospitalNature')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>其中属于 <span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalKindBelong', {onChange: (value) => this.onChangeHandler('hospitalKindBelong', value),
-              initialValue: inputValue.hospitalKindBelong || '',
+            {...getFieldProps('hospitalType', {onChange: (value) => this.onChangeHandler('hospitalType', value),
+              initialValue: inputValue.hospitalType || '',
               rules: [{required: true, message: '请选择其中属于'}]})}
-            value={inputValue.hospitalKindBelong || ''}
-            data={hospitalKindBelong}
+            value={inputValue.hospitalType || ''}
+            data={hospitalType}
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('hospitalKindBelong') && getFieldError('hospitalKindBelong') ? <p className='surveyError'>{getFieldError('hospitalKindBelong')}</p>:''}
+          {isFieldTouched('hospitalType') && getFieldError('hospitalType') ? <p className='surveyError'>{getFieldError('hospitalType')}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>区域划分（旧区）<span>*</span></p>
           <Picker
-            {...getFieldProps('hospitalOldArea', {onChange: (value) => this.onChangeHandler('hospitalOldArea', value),
-              initialValue: inputValue.hospitalOldArea || '',
+            {...getFieldProps('area', {onChange: (value) => this.onChangeHandler('area', value),
+              initialValue: inputValue.area || '',
               rules: [{required: true, message: '请选择区域划分'}]})}
-            value={inputValue.hospitalOldArea || ''}
-            data={hospitalOldArea}
+            value={inputValue.area || ''}
+            data={area}
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('hospitalOldArea') && getFieldError('hospitalOldArea') ? <p className='surveyError'>{getFieldError('hospitalOldArea')}</p>:''}
+          {isFieldTouched('area') && getFieldError('area') ? <p className='surveyError'>{getFieldError('area')}</p>:''}
         </List>
 
         <HeartBasicCondition onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError} />
@@ -211,35 +266,35 @@ class BasicInformation extends React.Component {
 
         <p className='info_content'>填表人 <span>*</span></p>
         <InputItem
-          {...getFieldProps('signatureName', {onChange: (value) => this.onChangeHandler('signatureName', value),
-            initialValue: inputValue.signatureName || '',
+          {...getFieldProps('name', {onChange: (value) => this.onChangeHandler('name', value),
+            initialValue: inputValue.name || '',
             rules: [{required: true, message: '请输入填表人'}]})}
           type="text"
-          value={inputValue.signatureName || ''}
+          value={inputValue.name || ''}
         />
-        {isFieldTouched('signatureName') && getFieldError('signatureName') ? <p className='surveyError'>{getFieldError('signatureName')}</p>:''}
+        {isFieldTouched('name') && getFieldError('name') ? <p className='surveyError'>{getFieldError('name')}</p>:''}
 
         <WhiteSpace size="lg" />
 
         <p className='info_content'>填表日期 <span>*</span></p>
         <DatePicker
-          {...getFieldProps('signatureDate', {onChange: (value) => this.onChangeHandler('signatureDate', value),
-            initialValue: inputValue.signatureDate && new Date(inputValue.signatureDate),
+          {...getFieldProps('date', {onChange: (value) => this.onChangeHandler('date', value),
+            initialValue: inputValue.date && new Date(inputValue.date),
             rules: [{required: true, message: '请输入填表日期'}]})}
           mode="date"
           title=""
-          value={inputValue.signatureDate && new Date(inputValue.signatureDate)}
+          value={inputValue.date && new Date(inputValue.date)}
           minDate={new Date(`${new Date().getFullYear() - 120}-01-01`)}
           maxDate={new Date()}
         >
           <List.Item arrow="horizontal"> </List.Item>
         </DatePicker>
-        {isFieldTouched('signatureDate') && getFieldError('signatureDate') ? <p className='surveyError'>{getFieldError('signatureDate')}</p>:''}
+        {isFieldTouched('date') && getFieldError('date') ? <p className='surveyError'>{getFieldError('date')}</p>:''}
 
         <WhiteSpace size="lg" />
         <WhiteSpace size="lg" />
 
-        <Button type='primary' size='large' inline className='submit' onClick={this.submit}>提交</Button>
+        <Button type='primary' size='large' inline className='submit' onClick={this.submit} >提交</Button>
         {/*disabled={hasErrors(getFieldsError())}*/}
       </React.Fragment>
     )

@@ -15,7 +15,11 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
       };
     case actionTypes.UPDATE_INPUT_VALUE:
       let originDataA = state.inputValue;
+      // console.log( originDataA)
+      // console.log(typeof originDataA)
       originDataA[action.key] = action.value;
+      // console.log( originDataA)
+      // console.log(typeof originDataA)
       return {
         ...state,
         ...{inputValue: originDataA}
