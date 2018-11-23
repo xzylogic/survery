@@ -14,15 +14,15 @@ class HeartPipePersonConstruct extends React.Component {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
     const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
     const eachGroupNumberLsit = [
-      ['PCI小组', 'pci_totalNum', 'pci_doctorNum', 'pci_masterNum', 'pci_seniorNum', 'pci_mediumNum', 'PCI_canSelect', 'PCI_otherSubject', 'pci_surgeryNum', 'pciDto'],
-      ['电生理组人数', 'ele_totalNum', 'ele_doctorNum', 'ele_masterNum', 'ele_seniorNum', 'ele_mediumNum', 'ELE_canSelect', 'ELE_otherSubject', 'ele_surgeryNum', 'esDto'],
-      ['结构性心脏病介入组人数', 'con_totalNum', 'con_doctorNum', 'con_masterNum', 'con_seniorNum', 'con_mediumNum', 'CON_canSelect', 'CON_otherSubject', 'con_surgeryNum', 'shdDto']
+      ['PCI小组', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'pciDto'],
+      ['电生理组人数', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'esDto'],
+      ['结构性心脏病介入组人数', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'shdDto']
     ];
     const nurse_skill_personKindList = [
       ['总护士人数（单位：人）', 'totalNum', '护士人才架构（单位：人）', 'juniorNum', 'bachelorNum', 'masterNum', 'doctorNum', 'seniorNum', 'mediumNum',
         '隶属学科及人数（可多选）', 'cmNum', 'casNum', 'rdNum', 'otherName', 'otherNum', 'nurseDto'],
-      ['技术员人数', 'totalSkillNumber', '技术员人才架构（单位：人）', 'skill_juniorDegree', 'skill_bachelorDegree', 'skill_masterDegree', 'skill_doctorDegree', 'skill_seniorDegree', 'skill_mediumDegree',
-        '隶属学科及人数（可多选）', 'skill_cardiovascular', 'skill_cardiac', 'skill_radiology', 'skill_otherSubject', 'skill_option1', 'techDto'],
+      ['技术员人数', 'totalNum', '技术员人才架构（单位：人）', 'juniorNum', 'bachelorNum', 'masterNum', 'doctorNum', 'seniorNum', 'mediumNum',
+        '隶属学科及人数（可多选）', 'cmNum', 'casNum', 'rdNum', 'otherName', 'otherNum', 'techDto'],
     ];
 
     let eachGroupNumber = eachGroupNumberLsit.map((personValue, index) => {
@@ -33,61 +33,61 @@ class HeartPipePersonConstruct extends React.Component {
 
           <p className='info_content'>组内共多少人（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[1], {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[1]),
+            {...getFieldProps(`${personValue[1]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[1]),
               initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[1]],
               rules: [{required: true, message: '请输入组内共多少人'}]})}
             type="number"
             value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[1]]}
           />
-          {isFieldTouched(personValue[1]) && getFieldError(personValue[1]) ? <p className='surveyError'>{getFieldError(personValue[1])}</p>:''}
+          {isFieldTouched(`${personValue[1]}${index}`) && getFieldError(`${personValue[1]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[1]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>组内博士多少人（单位：人）<span>*</span> </p>
-          <InputItem
-            {...getFieldProps(personValue[2], {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[2]),
-              initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[2]],
-              rules: [{required: true, message: '请输入组内博士多少人'}]})}
-            type="number"
-            value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[2]]}
-          />
-          {isFieldTouched(personValue[2]) && getFieldError(personValue[2]) ? <p className='surveyError'>{getFieldError(personValue[2])}</p>:''}
+          {/*<p className='info_content'>组内博士多少人（单位：人）<span>*</span> </p>*/}
+          {/*<InputItem*/}
+            {/*{...getFieldProps(`${personValue[2]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[2]),*/}
+              {/*initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[2]],*/}
+              {/*rules: [{required: true, message: '请输入组内博士多少人'}]})}*/}
+            {/*type="number"*/}
+            {/*value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[2]]}*/}
+          {/*/>*/}
+          {/*{isFieldTouched(`${personValue[2]}${index}`) && getFieldError(`${personValue[2]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[2]}${index}`)}</p>:''}*/}
 
-          <WhiteSpace size="lg" />
+          {/*<WhiteSpace size="lg" />*/}
 
-          <p className='info_content'>组内硕士多少人（单位：人）<span>*</span> </p>
-          <InputItem
-            {...getFieldProps(personValue[3], {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[3]),
-              initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[3]],
-              rules: [{required: true, message: '请输入组内硕士多少人'}]})}
-            type="number"
-            value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[3]]}
-          />
-          {isFieldTouched(personValue[3]) && getFieldError(personValue[3]) ? <p className='surveyError'>{getFieldError(personValue[3])}</p>:''}
+          {/*<p className='info_content'>组内硕士多少人（单位：人）<span>*</span> </p>*/}
+          {/*<InputItem*/}
+            {/*{...getFieldProps(`${personValue[3]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[3]),*/}
+              {/*initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[3]],*/}
+              {/*rules: [{required: true, message: '请输入组内硕士多少人'}]})}*/}
+            {/*type="number"*/}
+            {/*value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[3]]}*/}
+          {/*/>*/}
+          {/*{isFieldTouched(`${personValue[3]}${index}`) && getFieldError(`${personValue[3]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[3]}${index}`)}</p>:''}*/}
 
-          <WhiteSpace size="lg" />
+          {/*<WhiteSpace size="lg" />*/}
 
-          <p className='info_content'>高级职称多少人？（单位：人）<span>*</span> </p>
-          <InputItem
-            {...getFieldProps(personValue[4], {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[4]),
-              initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[4]],
-              rules: [{required: true, message: '请输入高级职称多少人'}]})}
-            type="number"
-            value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[4]]}
-          />
-          {isFieldTouched(personValue[4]) && getFieldError(personValue[4]) ? <p className='surveyError'>{getFieldError(personValue[4])}</p>:''}
+          {/*<p className='info_content'>高级职称多少人？（单位：人）<span>*</span> </p>*/}
+          {/*<InputItem*/}
+            {/*{...getFieldProps(`${personValue[4]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[4]),*/}
+              {/*initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[4]],*/}
+              {/*rules: [{required: true, message: '请输入高级职称多少人'}]})}*/}
+            {/*type="number"*/}
+            {/*value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[4]]}*/}
+          {/*/>*/}
+          {/*{isFieldTouched(`${personValue[4]}${index}`) && getFieldError(`${personValue[4]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[4]}${index}`)}</p>:''}*/}
 
-          <WhiteSpace size="lg" />
+          {/*<WhiteSpace size="lg" />*/}
 
-          <p className='info_content'>中级职称多少人？（单位：人）<span>*</span> </p>
-          <InputItem
-            {...getFieldProps(personValue[5], {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[5]),
-              initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[5]],
-              rules: [{required: true, message: '请输入中级职称多少人'}]})}
-            type="number"
-            value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[5]]}
-          />
-          {isFieldTouched(personValue[5]) && getFieldError(personValue[5]) ? <p className='surveyError'>{getFieldError(personValue[5])}</p>:''}
+          {/*<p className='info_content'>中级职称多少人？（单位：人）<span>*</span> </p>*/}
+          {/*<InputItem*/}
+            {/*{...getFieldProps(`${personValue[5]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[5]),*/}
+              {/*initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[5]],*/}
+              {/*rules: [{required: true, message: '请输入中级职称多少人'}]})}*/}
+            {/*type="number"*/}
+            {/*value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[5]]}*/}
+          {/*/>*/}
+          {/*{isFieldTouched(`${personValue[5]}${index}`) && getFieldError(`${personValue[5]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[5]}${index}`)}</p>:''}*/}
 
           <WhiteSpace size="lg" />
 
@@ -95,41 +95,43 @@ class HeartPipePersonConstruct extends React.Component {
           {groupSurgeryDoctorsOperationScope.map(i => (
             <div key={i.value}>
               <CheckboxItem
-                // {...getFieldProps('groupSurgeryDoctorsOperationScope', {onChange: () => onChangeHandler('groupSurgeryDoctorsOperationScope', i.value,  'survey', i.value)})}
+                {...getFieldProps(`${personValue[6]}${index}`, {
+                  initialValue: inputValue[`${personValue[6]}${index}`] || '',
+                  rules: [{required: true, message: '请输入组内手术医师的执业范围'}]})}
                 // checked={i.value === (inputValue.groupSurgeryDoctorsOperationScope && inputValue.groupSurgeryDoctorsOperationScope[i.value])}
-                checked={inputValue[personValue[6]] && Array.isArray(inputValue[personValue[6]]) && inputValue[personValue[6]].indexOf(i.value) > -1}
-                onChange={onChangeHandler.bind(this, personValue[6], i.value,  'checkbox')}
+                checked={inputValue[`${personValue[6]}${index}`] && Array.isArray(inputValue[`${personValue[6]}${index}`]) && inputValue[`${personValue[6]}${index}`].indexOf(i.value) > -1}
+                onChange={onChangeHandler.bind(this, `${personValue[6]}${index}`, i.value,  'checkbox')}
               >
                 {i.label}
               </CheckboxItem>
               {/*{console.log(personValue[6], '++++++++++++++',inputValue[personValue[6]])}*/}
-              {inputValue[personValue[6]] && i.value === '其他学科' && inputValue[personValue[6]].indexOf(i.value) > -1 ? (
+              {inputValue[`${personValue[6]}${index}`] && i.value === '其他学科' && inputValue[`${personValue[6]}${index}`].indexOf(i.value) > -1 ? (
                 <div>
                   <InputItem
-                    {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(personValue[7], value),
-                      initialValue: inputValue[personValue[7]] || '',
+                    {...getFieldProps(`${personValue[7]}${index}`, {onChange: (value) => onChangeHandler(`${personValue[7]}${index}`, value),
+                      initialValue: inputValue[`${personValue[7]}${index}`] || '',
                       rules: [{required: true, message: '请输入其他学科'}]})}
                     type="text"
-                    value={inputValue[personValue[7]] || ''}
+                    value={inputValue[`${personValue[7]}${index}`] || ''}
                   />
-                  {isFieldTouched(personValue[7]) && getFieldError(personValue[7]) ? <p className='surveyError'>{getFieldError(personValue[7])}</p>:''}
+                  {isFieldTouched(`${personValue[7]}${index}`) && getFieldError(`${personValue[7]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[7]}${index}`)}</p>:''}
                 </div>
               ) : ''}
             </div>
           ))}
-          {isFieldTouched(personValue[6]) && getFieldError(personValue[6]) ? <p className='surveyError'>{getFieldError(personValue[6])}</p>:''}
+          {isFieldTouched(`${personValue[6]}${index}`) && getFieldError(`${personValue[6]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[6]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>目前参与急诊手术的人数（单位：人）<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[8], {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[8]),
+            {...getFieldProps(`${personValue[8]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[8]),
               initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[8]],
-              rules: [{required: true, message: '请输入中级职称多少人'}]})}
+              rules: [{required: true, message: '请输入目前参与急诊手术的人数'}]})}
             type="number"
             value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[8]]}
           />
-          {isFieldTouched(personValue[8]) && getFieldError(personValue[8]) ? <p className='surveyError'>{getFieldError(personValue[8])}</p>:''}
+          {isFieldTouched(`${personValue[8]}${index}`) && getFieldError(`${personValue[8]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[8]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
           <WhiteSpace size="lg" />
@@ -141,86 +143,86 @@ class HeartPipePersonConstruct extends React.Component {
         <div key={index}>
           <p className='info_content'>{personValue[0]}<span>*</span> </p>
           <InputItem
-            {...getFieldProps(personValue[1], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[1]),
+            {...getFieldProps(`ns_${personValue[1]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[1]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[1]],
               rules: [{required: true, message: '请输入总护士人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[1]]}
           />
-          {isFieldTouched(personValue[1]) && getFieldError(personValue[1]) ? <p className='surveyError'>{getFieldError(personValue[1])}</p>:''}
+          {isFieldTouched(`ns_${personValue[1]}${index}`) && getFieldError(`ns_${personValue[1]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[1]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='info_content'>{personValue[2]}<span>*</span> </p>
           <p className='dsa_title'>专科</p>
           <InputItem
-            {...getFieldProps(personValue[3], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[3]),
+            {...getFieldProps(`ns_${personValue[3]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[3]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[3]],
               rules: [{required: true, message: '请输入专科人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[3]]}
           />
-          {isFieldTouched(personValue[3]) && getFieldError(personValue[3]) ? <p className='surveyError'>{getFieldError(personValue[3])}</p>:''}
+          {isFieldTouched(`ns_${personValue[3]}${index}`) && getFieldError(`ns_${personValue[3]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[3]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='dsa_title'>本科</p>
           <InputItem
-            {...getFieldProps(personValue[4], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[4]),
+            {...getFieldProps(`ns_${personValue[4]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[4]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[4]],
               rules: [{required: true, message: '请输入本科人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[4]]}
           />
-          {isFieldTouched(personValue[4]) && getFieldError(personValue[4]) ? <p className='surveyError'>{getFieldError(personValue[4])}</p>:''}
+          {isFieldTouched(`ns_${personValue[4]}${index}`) && getFieldError(`ns_${personValue[4]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[4]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='dsa_title'>硕士</p>
           <InputItem
-            {...getFieldProps(personValue[5], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[5]),
+            {...getFieldProps(`ns_${personValue[5]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[5]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[5]],
               rules: [{required: true, message: '请输入硕士人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[5]]}
           />
-          {isFieldTouched(personValue[5]) && getFieldError(personValue[5]) ? <p className='surveyError'>{getFieldError(personValue[5])}</p>:''}
+          {isFieldTouched(`ns_${personValue[5]}${index}`) && getFieldError(`ns_${personValue[5]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[5]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='dsa_title'>博士</p>
           <InputItem
-            {...getFieldProps(personValue[6], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[6]),
+            {...getFieldProps(`ns_${personValue[6]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[6]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[6]],
               rules: [{required: true, message: '请输入博士人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[6]]}
           />
-          {isFieldTouched(personValue[6]) && getFieldError(personValue[6]) ? <p className='surveyError'>{getFieldError(personValue[6])}</p>:''}
+          {isFieldTouched(`ns_${personValue[6]}${index}`) && getFieldError(`ns_${personValue[6]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[6]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='dsa_title'>高级职称</p>
           <InputItem
-            {...getFieldProps(personValue[7], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[7]),
+            {...getFieldProps(`ns_${personValue[7]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[7]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[7]],
               rules: [{required: true, message: '请输入高级职称人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[7]]}
           />
-          {isFieldTouched(personValue[7]) && getFieldError(personValue[7]) ? <p className='surveyError'>{getFieldError(personValue[7])}</p>:''}
+          {isFieldTouched(`ns_${personValue[7]}${index}`) && getFieldError(`ns_${personValue[7]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[7]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='dsa_title'>中级职称</p>
           <InputItem
-            {...getFieldProps(personValue[8], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[8]),
+            {...getFieldProps(`ns_${personValue[8]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[8]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[8]],
               rules: [{required: true, message: '请输入中级职称人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[8]]}
           />
-          {isFieldTouched(personValue[8]) && getFieldError(personValue[8]) ? <p className='surveyError'>{getFieldError(personValue[8])}</p>:''}
+          {isFieldTouched(`ns_${personValue[8]}${index}`) && getFieldError(`ns_${personValue[8]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[8]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -228,59 +230,59 @@ class HeartPipePersonConstruct extends React.Component {
           <p className='info_content'>{personValue[9]}</p>
           <p className='dsa_title'>心血管内科</p>
           <InputItem
-            {...getFieldProps(personValue[10], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[10]),
+            {...getFieldProps(`ns_${personValue[10]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[10]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[10]],
               rules: [{required: true, message: '请输入专科人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[10]]}
           />
-          {isFieldTouched(personValue[10]) && getFieldError(personValue[10]) ? <p className='surveyError'>{getFieldError(personValue[10])}</p>:''}
+          {isFieldTouched(`ns_${personValue[10]}${index}`) && getFieldError(`ns_${personValue[10]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[10]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='dsa_title'>心外科</p>
           <InputItem
-            {...getFieldProps(personValue[11], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[11]),
+            {...getFieldProps(`ns_${personValue[11]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[11]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[11]],
               rules: [{required: true, message: '请输入本科人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[11]]}
           />
-          {isFieldTouched(personValue[11]) && getFieldError(personValue[11]) ? <p className='surveyError'>{getFieldError(personValue[11])}</p>:''}
+          {isFieldTouched(`ns_${personValue[11]}${index}`) && getFieldError(`ns_${personValue[11]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[11]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='dsa_title'>放射科</p>
           <InputItem
-            {...getFieldProps(personValue[12], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[12]),
+            {...getFieldProps(`ns_${personValue[12]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[12]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[12]],
               rules: [{required: true, message: '请输入硕士人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[12]]}
           />
-          {isFieldTouched(personValue[12]) && getFieldError(personValue[12]) ? <p className='surveyError'>{getFieldError(personValue[12])}</p>:''}
+          {isFieldTouched(`ns_${personValue[12]}${index}`) && getFieldError(`ns_${personValue[12]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[12]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
           <p className='dsa_title'>其他学科：</p>
           <InputItem
-            {...getFieldProps(personValue[13], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[13]),
+            {...getFieldProps(`ns_${personValue[13]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[13]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[13]],
               rules: [{required: true, message: '请输入其他学科'}]})}
             type="text"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[13]]}
           />
-          {isFieldTouched(personValue[13]) && getFieldError(personValue[13]) ? <p className='surveyError'>{getFieldError(personValue[13])}</p>:''}
+          {isFieldTouched(`ns_${personValue[13]}${index}`) && getFieldError(`ns_${personValue[13]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[13]}${index}`)}</p>:''}
 
           <p className='dsa_title'>（人数）</p>
           <InputItem
-            {...getFieldProps(personValue[14], {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[14]),
+            {...getFieldProps(`ns_${personValue[14]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[14]),
               initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[14]],
               rules: [{required: true, message: '请输入其他学科的人数'}]})}
             type="number"
             value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[14]]}
           />
-          {isFieldTouched(personValue[14]) && getFieldError(personValue[14]) ? <p className='surveyError'>{getFieldError(personValue[14])}</p>:''}
+          {isFieldTouched(`ns_${personValue[14]}${index}`) && getFieldError(`ns_${personValue[14]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[14]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
         </div>

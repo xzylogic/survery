@@ -5,12 +5,12 @@ import {
   appendInputValueAction, surveyUpdateLocalAction,
 } from '../actions/survey.action'
 
-// import { HttpCatchService, HttpOriginService, HttpHandlerService } from '../../Utilities/HttpService'
+import { HttpHandlerService } from '../../Utilities/HttpService'
 // import { GetRedirectUrl } from '../../Utilities'
 
-// const PATH = {
-//   saveSurvey: '/pci-micro/api/ruijin/save',
-// }
+const PATH = {
+  saveSurvey: 'http://pci.violetqqy.com/pci-operation/api/hospital/saveRecord',
+}
 
 function* surveyStoreLocal(actions) {
   if (actions.option === 'update') {
@@ -29,19 +29,19 @@ function* surveyGetLocal() {
   }
 }
 
-// const saveSurveyService = (data, errorHandler) => {
-//   return HttpHandlerService.post(`${PATH.saveSurvey}`, data, {}, errorHandler)
-// }
-//
-// function* saveSurvey(actions) {
-//   const res = yield call(saveSurveyService, actions.data, actions.errorHandler)
-//   if (res) {
-//     actions.callback()
-//   }
-// }
+const saveSurveyService = (data, errorHandler) => {
+  return HttpHandlerService.post(`${PATH.saveSurvey}`, data, {}, errorHandler)
+}
+
+function* saveSurvey(actions) {
+  const res = yield call(saveSurveyService, actions.data, actions.errorHandler)
+  if (res) {
+    actions.callback()
+  }
+}
 
 export const globalSaga = [
   takeLatest(actionTypes.SURVEY_STORE_LOCAL, surveyStoreLocal),
   takeLatest(actionTypes.SURVER_GET_LOCAL, surveyGetLocal),
-  // takeLatest(actionTypes.SAVE_SURVEY, saveSurvey),
+  takeLatest(actionTypes.SAVE_SURVEY, saveSurvey),
 ];

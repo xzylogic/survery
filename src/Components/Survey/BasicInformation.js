@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import {List, InputItem, Picker, WhiteSpace, DatePicker, Button} from 'antd-mobile'
+import {List, InputItem, Picker, WhiteSpace, DatePicker, Button, Toast} from 'antd-mobile'
 // import { createForm } from 'rc-form';
 import  createDOMForm  from 'rc-form/lib/createDOMForm';
 import moment from 'moment'
-import {surveyStoreLocalAction} from "../../Store/actions/survey.action";
+import {surveyStoreLocalAction, saveSurveyAction} from "../../Store/actions/survey.action";
 
 import { hospitalLevel, mechanNature, hospitalNature, hospitalType, area} from './SurveyData';
 import HeartBasicCondition from './HeartBasicCondition';
@@ -80,62 +80,102 @@ class BasicInformation extends React.Component {
         submitData[key]['dsaDate'] = dsaDateArr.toString();
       }
 
+      if(key === 'pipeDepartment' && submitData[key] === '其他科室'){
+        submitData[key] = submitData['pipeBelongDepartment_other'];
+      }
+      if(key === 'medium' && submitData[key] === '其他'){
+        submitData[key] = submitData['medium_other'];
+      }
+
       if(key === 'otherEquipNumberValue'){
-        submitData['iabp'] = submitData[key]['otherEquipNumber0'];
-        submitData['ivus'] = submitData[key]['otherEquipNumber1'];
-        submitData['oct'] = submitData[key]['otherEquipNumber2'];
-        submitData['ffr'] = submitData[key]['otherEquipNumber3'];
-        submitData['elr'] = submitData[key]['otherEquipNumber4'];
-        submitData['rgi'] = submitData[key]['otherEquipNumber5'];
-        submitData['bm'] = submitData[key]['otherEquipNumber6'];
-        submitData['kyky'] = submitData[key]['otherEquipNumber7'];
-        submitData['ci'] = submitData[key]['otherEquipNumber8'];
-        submitData['carto'] = submitData[key]['otherEquipNumber9'];
-        submitData['ensite'] = submitData[key]['otherEquipNumber10'];
-        submitData['els'] = submitData[key]['otherEquipNumber11'];
-        submitData['pa'] = submitData[key]['otherEquipNumber12'];
-        submitData['am'] = submitData[key]['otherEquipNumber13'];
+        submitData['iabp'] = submitData[key]['otherEquipNumber0'] || '0';
+        submitData['ivus'] = submitData[key]['otherEquipNumber1'] || '0';
+        submitData['oct'] = submitData[key]['otherEquipNumber2'] || '0';
+        submitData['ffr'] = submitData[key]['otherEquipNumber3'] || '0';
+        submitData['elr'] = submitData[key]['otherEquipNumber4'] || '0';
+        submitData['rgi'] = submitData[key]['otherEquipNumber5'] || '0';
+        submitData['bm'] = submitData[key]['otherEquipNumber6'] || '0';
+        submitData['kyky'] = submitData[key]['otherEquipNumber7'] || '0';
+        submitData['ci'] = submitData[key]['otherEquipNumber8'] || '0';
+        submitData['carto'] = submitData[key]['otherEquipNumber9'] || '0';
+        submitData['ensite'] = submitData[key]['otherEquipNumber10'] || '0';
+        submitData['els'] = submitData[key]['otherEquipNumber11'] || '0';
+        submitData['pa'] = submitData[key]['otherEquipNumber12'] || '0';
+        submitData['am'] = submitData[key]['otherEquipNumber13'] || '0';
       }
       if(key === 'pciDto'){
-        submitData[key]['canSelect'] = submitData['pci_canSelect'];
+        submitData[key]['canSelect'] = [...submitData['canSelect0']];
       }
       if(key === 'esDto'){
-        submitData[key]['canSelect'] = submitData['ele_canSelect'];
+        submitData[key]['canSelect'] = [...submitData['canSelect1']];
       }
       if(key === 'shdDto'){
-        submitData[key]['canSelect'] = submitData['con_canSelect'];
+        submitData[key]['canSelect'] = [...submitData['canSelect2']];
       }
 
-    })
-    console.log(submitData)
-    // console.log(submitData)
-
-    // var arr = []
-    // for (let i in obj) {
-    //   arr.push(obj[i]); //属性
-    //   //arr.push(obj[i]); //值
-    // }
-    // console.log(arr);
-
-    // Object.keys(submitData).forEach((key, index)=>{
-    //   // if(key === 'dsaDtos'){
-    //   //   console.log(submitData[key])
-    //   //
-    //   // }
-    //   console.log(key, submitData[key])
-    // })
-    validateFieldsAndScroll({validateFirst: true}, (error, value) => {
-        if (!error) {
-          // console.log(value);
-          console.info('success');
-          // store.dispatch()
-        } else {
-          // console.log(value);
-          console.log('false');
+      if(key === 'otherSubject0'){
+        if(submitData['pciDto']['canSelect'].indexOf('其他学科') > -1){
+          submitData['pciDto']['canSelect'].splice(submitData['pciDto']['canSelect'].indexOf('其他学科'), 1);
+          submitData['pciDto']['canSelect'].push(submitData['otherSubject0']);
         }
-      });
+        submitData['pciDto'].canSelect = submitData['pciDto']['canSelect'].toString();
+      }
 
+      if(key === 'otherSubject1'){
+        if(submitData['esDto']['canSelect'].indexOf('其他学科') > -1){
+          submitData['esDto']['canSelect'].splice(submitData['esDto']['canSelect'].indexOf('其他学科'), 1);
+          submitData['esDto']['canSelect'].push(submitData['otherSubject1']);
+        }
+        submitData['esDto'].canSelect = submitData['esDto']['canSelect'].toString();
+      }
 
+      if(key === 'otherSubject2'){
+        if(submitData['shdDto']['canSelect'].indexOf('其他学科') > -1){
+          submitData['shdDto']['canSelect'].splice(submitData['shdDto']['canSelect'].indexOf('其他学科'), 1);
+          submitData['shdDto']['canSelect'].push(submitData['otherSubject2']);
+        }
+        submitData['shdDto'].canSelect = submitData['shdDto']['canSelect'].toString();
+      }
+
+      if(key === 'area' || key === 'hospitalLevel' || key === 'hospitalNature' || key === 'hospitalType' || key === 'mechanNature' || key === 'pcCheckWay' || key === 'lack'){
+        submitData[key] = submitData[key].toString();
+      }
+    })
+    // submitData = JSON.stringify(submitData);
+    delete submitData['canSelect0'];
+    delete submitData['canSelect1'];
+    delete submitData['canSelect2'];
+    delete submitData['otherSubject0'];
+    delete submitData['otherSubject1'];
+    delete submitData['otherSubject2'];
+    delete submitData['otherSubject'];
+    delete submitData['medium_other'];
+    delete submitData['otherEquipNumber'];
+    delete submitData['otherEquipNumberValue'];
+    delete submitData['pipeBelongDepartment_other'];
+    console.log(submitData);
+
+    validateFieldsAndScroll({first: true}, (error) => {
+      const store = this.props;
+      const {getFieldError} = this.props.form;
+      const router = this.props.history;
+      if (!error) {
+        store.dispatch(saveSurveyAction(submitData, () => {
+          console.log('提交成功');
+          // router.push('/success');
+        }, err => {
+          Toast.info(err);
+        }))
+        // console.log(value);
+        console.info('success');
+      } else {
+        // console.log(error);
+        // console.log(error.surgeryNum1.errors[0].message);
+        // console.log(value);
+        Toast.info('请输入完后提交~');
+        console.log('false');
+      }
+    });
   }
 
   render() {
@@ -291,6 +331,7 @@ class BasicInformation extends React.Component {
         </DatePicker>
         {isFieldTouched('date') && getFieldError('date') ? <p className='surveyError'>{getFieldError('date')}</p>:''}
 
+        <WhiteSpace size="lg" />
         <WhiteSpace size="lg" />
         <WhiteSpace size="lg" />
 

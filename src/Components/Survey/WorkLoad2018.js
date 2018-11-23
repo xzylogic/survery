@@ -39,7 +39,7 @@ class WorkLoad2018 extends React.Component {
           <p className='info_content'>{operation[0]}<span>*</span> </p>
           {pciOperation.map(i => (
             <RadioItem
-              {...getFieldProps(operation[1], {
+              {...getFieldProps(`op_${operation[1]}${index}`, {
                 initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[1]],
                 rules: [{required: true, message: `请选择${operation[index]}`}]})}
               key={i.value}
@@ -51,7 +51,7 @@ class WorkLoad2018 extends React.Component {
               {i.label}
             </RadioItem>
           ))}
-          {isFieldTouched(operation[1]) && getFieldError(operation[1]) ? <p className='surveyError'>{getFieldError(operation[1])}</p>:''}
+          {isFieldTouched(`op_${operation[1]}${index}`) && getFieldError(`op_${operation[1]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[1]}${index}`)}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -59,85 +59,85 @@ class WorkLoad2018 extends React.Component {
             <List>
               <p className='info_content'>手术量（单位：例）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[2], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[2]),
+                {...getFieldProps(`op_${operation[2]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[2]),
                   initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[2]],
                   rules: [{required: true, message: '请输入手术量'}]})}
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[2]]}
               />
-              {isFieldTouched(operation[2]) && getFieldError(operation[2]) ? <p className='surveyError'>{getFieldError(operation[2])}</p>:''}
+              {isFieldTouched(`op_${operation[2]}${index}`) && getFieldError(`op_${operation[2]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[2]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
               <p className='info_content'>其中，急诊手术量（单位：例）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[3], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[3]),
+                {...getFieldProps(`op_${operation[3]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[3]),
                   initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[3]],
                   rules: [{required: true, message: '请输入急诊手术量'}]})}
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[3]]}
               />
-              {isFieldTouched(operation[3]) && getFieldError(operation[3]) ? <p className='surveyError'>{getFieldError(operation[3])}</p>:''}
+              {isFieldTouched(`op_${operation[3]}${index}`) && getFieldError(`op_${operation[3]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[3]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
               <p className='info_content'>病种比例（收治此类病人数/住院总人次数）（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[4], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[4]),
+                {...getFieldProps(`op_${operation[4]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[4]),
                   initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[4]],
                   rules: [{required: true, message: '请输入病种比例'}]})}
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[4]]}
               />
-              {isFieldTouched(operation[4]) && getFieldError(operation[4]) ? <p className='surveyError'>{getFieldError(operation[4])}</p>:''}
+              {isFieldTouched(`op_${operation[4]}${index}`) && getFieldError(`op_${operation[4]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[4]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
               <p className='info_content'>平均住院日（单位：日）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[5], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[5]),
+                {...getFieldProps(`op_${operation[5]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[5]),
                   initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[5]],
                   rules: [{required: true, message: '请输入平均住院日'}]})}
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[5]]}
               />
-              {isFieldTouched(operation[5]) && getFieldError(operation[5]) ? <p className='surveyError'>{getFieldError(operation[5])}</p>:''}
+              {isFieldTouched(`op_${operation[5]}${index}`) && getFieldError(`op_${operation[5]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[5]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
               <p className='info_content'>平均手术费用（单位：元）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[6], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[6]),
+                {...getFieldProps(`op_${operation[6]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[6]),
                   initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[6]],
                   rules: [{required: true, message: '请输入平均手术费用'}]})}
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[6]]}
               />
-              {isFieldTouched(operation[6]) && getFieldError(operation[6]) ? <p className='surveyError'>{getFieldError(operation[6])}</p>:''}
+              {isFieldTouched(`op_${operation[6]}${index}`) && getFieldError(`op_${operation[6]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[6]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
               <p className='info_content'>治愈率（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[7], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[7]),
+                {...getFieldProps(`op_${operation[7]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[7]),
                   initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[7]],
                   rules: [{required: true, message: '请输入治愈率'}]})}
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[7]]}
               />
-              {isFieldTouched(operation[7]) && getFieldError(operation[7]) ? <p className='surveyError'>{getFieldError(operation[7])}</p>:''}
+              {isFieldTouched(`op_${operation[7]}${index}`) && getFieldError(`op_${operation[7]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[7]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
               <p className='info_content'>死亡率（单位：%）<span>*</span></p>
               <InputItem
-                {...getFieldProps(operation[8], {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[8]),
+                {...getFieldProps(`op_${operation[8]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[8]),
                   initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[8]],
                   rules: [{required: true, message: '请输入死亡率'}]})}
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[8]]}
               />
-              {isFieldTouched(operation[8]) && getFieldError(operation[8]) ? <p className='surveyError'>{getFieldError(operation[8])}</p>:''}
+              {isFieldTouched(`op_${operation[8]}${index}`) && getFieldError(`op_${operation[8]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[8]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
             </List>
