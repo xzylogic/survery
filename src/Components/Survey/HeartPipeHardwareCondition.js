@@ -26,7 +26,7 @@ class HeartPipeHardwareCondition extends React.Component {
             type="number"
             value={inputValue.pipeNum || ''}
           />
-          {isFieldTouched('pipeNum') && getFieldError('pipeNum') ? <p className='surveyError'>{getFieldError('pipeNum')}</p>:''}
+          {getFieldError('pipeNum') ? <p className='surveyError'>{getFieldError('pipeNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -36,7 +36,7 @@ class HeartPipeHardwareCondition extends React.Component {
             type="number"
             value={inputValue.averageArea || ''}
           />
-          {isFieldTouched('averageArea') && getFieldError('averageArea') ? <p className='surveyError'>{getFieldError('averageArea')}</p>:''}
+          {getFieldError('averageArea') ? <p className='surveyError'>{getFieldError('averageArea')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -63,7 +63,7 @@ class HeartPipeHardwareCondition extends React.Component {
                     type="text"
                     value={inputValue.pipeBelongDepartment_other || ''}
                   />
-                  {isFieldTouched('pipeBelongDepartment_other') && getFieldError('pipeBelongDepartment_other') ? <p className='surveyError'>{getFieldError('pipeBelongDepartment_other')}</p>:''}
+                  {getFieldError('pipeBelongDepartment_other') ? <p className='surveyError'>{getFieldError('pipeBelongDepartment_other')}</p>:''}
 
                   <WhiteSpace size="lg" />
                 </div>

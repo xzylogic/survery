@@ -61,118 +61,122 @@ class BasicInformation extends React.Component {
     // console.log(submitData)
     // console.log(submitData.dsaDtos)
 
-    Object.keys(submitData).forEach((key)=>{
-      let arr = [];
-      let dsaNameArr = [];
-      let dsaDateArr = [];
-      if(key === 'dsaDtos'){
-        Object.keys(submitData[key]).forEach((id) => {
 
-          if(id.indexOf('dsaName') > -1){
-            dsaNameArr.push(submitData[key][id]);
-          }else{
-            dsaDateArr.push(submitData[key][id]);
-          }
-          arr.push(submitData[key][id]);
-        })
-        submitData[key] = [];
-        submitData[key]['dsaName'] = dsaNameArr.toString();
-        submitData[key]['dsaDate'] = dsaDateArr.toString();
-      }
-
-      if(key === 'pipeDepartment' && submitData[key] === '其他科室'){
-        submitData[key] = submitData['pipeBelongDepartment_other'];
-      }
-      if(key === 'medium' && submitData[key] === '其他'){
-        submitData[key] = submitData['medium_other'];
-      }
-
-      if(key === 'otherEquipNumberValue'){
-        submitData['iabp'] = submitData[key]['otherEquipNumber0'] || '0';
-        submitData['ivus'] = submitData[key]['otherEquipNumber1'] || '0';
-        submitData['oct'] = submitData[key]['otherEquipNumber2'] || '0';
-        submitData['ffr'] = submitData[key]['otherEquipNumber3'] || '0';
-        submitData['elr'] = submitData[key]['otherEquipNumber4'] || '0';
-        submitData['rgi'] = submitData[key]['otherEquipNumber5'] || '0';
-        submitData['bm'] = submitData[key]['otherEquipNumber6'] || '0';
-        submitData['kyky'] = submitData[key]['otherEquipNumber7'] || '0';
-        submitData['ci'] = submitData[key]['otherEquipNumber8'] || '0';
-        submitData['carto'] = submitData[key]['otherEquipNumber9'] || '0';
-        submitData['ensite'] = submitData[key]['otherEquipNumber10'] || '0';
-        submitData['els'] = submitData[key]['otherEquipNumber11'] || '0';
-        submitData['pa'] = submitData[key]['otherEquipNumber12'] || '0';
-        submitData['am'] = submitData[key]['otherEquipNumber13'] || '0';
-      }
-      if(key === 'pciDto'){
-        submitData[key]['canSelect'] = [...submitData['canSelect0']];
-      }
-      if(key === 'esDto'){
-        submitData[key]['canSelect'] = [...submitData['canSelect1']];
-      }
-      if(key === 'shdDto'){
-        submitData[key]['canSelect'] = [...submitData['canSelect2']];
-      }
-
-      if(key === 'otherSubject0'){
-        if(submitData['pciDto']['canSelect'].indexOf('其他学科') > -1){
-          submitData['pciDto']['canSelect'].splice(submitData['pciDto']['canSelect'].indexOf('其他学科'), 1);
-          submitData['pciDto']['canSelect'].push(submitData['otherSubject0']);
-        }
-        submitData['pciDto'].canSelect = submitData['pciDto']['canSelect'].toString();
-      }
-
-      if(key === 'otherSubject1'){
-        if(submitData['esDto']['canSelect'].indexOf('其他学科') > -1){
-          submitData['esDto']['canSelect'].splice(submitData['esDto']['canSelect'].indexOf('其他学科'), 1);
-          submitData['esDto']['canSelect'].push(submitData['otherSubject1']);
-        }
-        submitData['esDto'].canSelect = submitData['esDto']['canSelect'].toString();
-      }
-
-      if(key === 'otherSubject2'){
-        if(submitData['shdDto']['canSelect'].indexOf('其他学科') > -1){
-          submitData['shdDto']['canSelect'].splice(submitData['shdDto']['canSelect'].indexOf('其他学科'), 1);
-          submitData['shdDto']['canSelect'].push(submitData['otherSubject2']);
-        }
-        submitData['shdDto'].canSelect = submitData['shdDto']['canSelect'].toString();
-      }
-
-      if(key === 'area' || key === 'hospitalLevel' || key === 'hospitalNature' || key === 'hospitalType' || key === 'mechanNature' || key === 'pcCheckWay' || key === 'lack'){
-        submitData[key] = submitData[key].toString();
-      }
-    })
-    // submitData = JSON.stringify(submitData);
-    delete submitData['canSelect0'];
-    delete submitData['canSelect1'];
-    delete submitData['canSelect2'];
-    delete submitData['otherSubject0'];
-    delete submitData['otherSubject1'];
-    delete submitData['otherSubject2'];
-    delete submitData['otherSubject'];
-    delete submitData['medium_other'];
-    delete submitData['otherEquipNumber'];
-    delete submitData['otherEquipNumberValue'];
-    delete submitData['pipeBelongDepartment_other'];
-    console.log(submitData);
-
-    validateFieldsAndScroll({first: true}, (error) => {
+    validateFieldsAndScroll({scroll:{offsetTop: 200}}, (error) => {
       const store = this.props;
-      const {getFieldError} = this.props.form;
+      const {isFieldTouched, getFieldError} = this.props.form;
       const router = this.props.history;
       if (!error) {
-        store.dispatch(saveSurveyAction(submitData, () => {
-          console.log('提交成功');
-          // router.push('/success');
-        }, err => {
-          Toast.info(err);
-        }))
+
+        Object.keys(submitData).forEach((key)=>{
+          let arr = [];
+          let dsaNameArr = [];
+          let dsaDateArr = [];
+          if(key === 'dsaDtos'){
+            Object.keys(submitData[key]).forEach((id) => {
+
+              if(id.indexOf('dsaName') > -1){
+                dsaNameArr.push(submitData[key][id]);
+              }else{
+                dsaDateArr.push(submitData[key][id]);
+              }
+              arr.push(submitData[key][id]);
+            })
+            submitData[key] = [];
+            submitData[key]['dsaName'] = dsaNameArr.toString();
+            submitData[key]['dsaDate'] = dsaDateArr.toString();
+          }
+
+          if(key === 'pipeDepartment' && submitData[key] === '其他科室'){
+            submitData[key] = submitData['pipeBelongDepartment_other'];
+          }
+          if(key === 'medium' && submitData[key] === '其他'){
+            submitData[key] = submitData['medium_other'];
+          }
+
+          if(key === 'otherEquipNumberValue'){
+            submitData['iabp'] = submitData[key]['otherEquipNumber0'] || '0';
+            submitData['ivus'] = submitData[key]['otherEquipNumber1'] || '0';
+            submitData['oct'] = submitData[key]['otherEquipNumber2'] || '0';
+            submitData['ffr'] = submitData[key]['otherEquipNumber3'] || '0';
+            submitData['elr'] = submitData[key]['otherEquipNumber4'] || '0';
+            submitData['rgi'] = submitData[key]['otherEquipNumber5'] || '0';
+            submitData['bm'] = submitData[key]['otherEquipNumber6'] || '0';
+            submitData['kyky'] = submitData[key]['otherEquipNumber7'] || '0';
+            submitData['ci'] = submitData[key]['otherEquipNumber8'] || '0';
+            submitData['carto'] = submitData[key]['otherEquipNumber9'] || '0';
+            submitData['ensite'] = submitData[key]['otherEquipNumber10'] || '0';
+            submitData['els'] = submitData[key]['otherEquipNumber11'] || '0';
+            submitData['pa'] = submitData[key]['otherEquipNumber12'] || '0';
+            submitData['am'] = submitData[key]['otherEquipNumber13'] || '0';
+          }
+          if(key === 'pciDto'){
+            submitData[key]['canSelect'] = [...submitData['canSelect0']];
+          }
+          if(key === 'esDto'){
+            submitData[key]['canSelect'] = [...submitData['canSelect1']];
+          }
+          if(key === 'shdDto'){
+            submitData[key]['canSelect'] = [...submitData['canSelect2']];
+          }
+
+          if(key === 'otherSubject0'){
+            if(submitData['pciDto']['canSelect'].indexOf('其他学科') > -1){
+              submitData['pciDto']['canSelect'].splice(submitData['pciDto']['canSelect'].indexOf('其他学科'), 1);
+              submitData['pciDto']['canSelect'].push(submitData['otherSubject0']);
+            }
+            submitData['pciDto'].canSelect = submitData['pciDto']['canSelect'].toString();
+          }
+
+          if(key === 'otherSubject1'){
+            if(submitData['esDto']['canSelect'].indexOf('其他学科') > -1){
+              submitData['esDto']['canSelect'].splice(submitData['esDto']['canSelect'].indexOf('其他学科'), 1);
+              submitData['esDto']['canSelect'].push(submitData['otherSubject1']);
+            }
+            submitData['esDto'].canSelect = submitData['esDto']['canSelect'].toString();
+          }
+
+          if(key === 'otherSubject2'){
+            if(submitData['shdDto']['canSelect'].indexOf('其他学科') > -1){
+              submitData['shdDto']['canSelect'].splice(submitData['shdDto']['canSelect'].indexOf('其他学科'), 1);
+              submitData['shdDto']['canSelect'].push(submitData['otherSubject2']);
+            }
+            submitData['shdDto'].canSelect = submitData['shdDto']['canSelect'].toString();
+          }
+
+          if(key === 'area' || key === 'hospitalLevel' || key === 'hospitalNature' || key === 'hospitalType' || key === 'mechanNature' || key === 'pcCheckWay' || key === 'lack'){
+            submitData[key] = submitData[key].toString();
+          }
+        })
+        delete submitData['canSelect0'];
+        delete submitData['canSelect1'];
+        delete submitData['canSelect2'];
+        delete submitData['otherSubject0'];
+        delete submitData['otherSubject1'];
+        delete submitData['otherSubject2'];
+        delete submitData['otherSubject'];
+        delete submitData['medium_other'];
+        delete submitData['otherEquipNumber'];
+        delete submitData['otherEquipNumberValue'];
+        delete submitData['pipeBelongDepartment_other'];
+        console.log(submitData);
+
+        // store.dispatch(saveSurveyAction(submitData, () => {
+        //   console.log('提交成功');
+        //   // router.push('/success');
+        // }, err => {
+        //   Toast.info(err);
+        // }))
         // console.log(value);
         console.info('success');
       } else {
+        Object.keys(submitData).forEach((key)=>{
+          getFieldError(key)
+        })
         // console.log(error);
         // console.log(error.surgeryNum1.errors[0].message);
         // console.log(value);
-        Toast.info('请输入完后提交~');
+        // Toast.info('请输入完后提交~');
         console.log('false');
       }
     });
@@ -196,7 +200,7 @@ class BasicInformation extends React.Component {
             value={inputValue.hospitalName || ''}
           />
           {/*{this.checkError('hospitalName')}*/}
-          {isFieldTouched('hospitalName') && getFieldError('hospitalName') ? <p className='surveyError'>{getFieldError('hospitalName')}</p>:''}
+          {getFieldError('hospitalName') ? <p className='surveyError'>{getFieldError('hospitalName')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -211,7 +215,7 @@ class BasicInformation extends React.Component {
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('hospitalLevel') && getFieldError('hospitalLevel') ? <p className='surveyError'>{getFieldError('hospitalLevel')}</p>:''}
+          {getFieldError('hospitalLevel') ? <p className='surveyError'>{getFieldError('hospitalLevel')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -225,7 +229,7 @@ class BasicInformation extends React.Component {
             // error={isFieldTouched('totalBedNum') && getFieldError('totalBedNum')}
             // onErrorClick={() => Toast.info(getFieldError('totalBedNum'))}
           />
-          {isFieldTouched('totalBedNum') && getFieldError('totalBedNum') ? <p className='surveyError'>{getFieldError('totalBedNum')}</p>:''}
+          {getFieldError('totalBedNum') ? <p className='surveyError'>{getFieldError('totalBedNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -237,7 +241,7 @@ class BasicInformation extends React.Component {
             type="number"
             value={inputValue.openBedNum || ''}
           />
-          {isFieldTouched('openBedNum') && getFieldError('openBedNum') ? <p className='surveyError'>{getFieldError('openBedNum')}</p>:''}
+          {getFieldError('openBedNum') ? <p className='surveyError'>{getFieldError('openBedNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -251,7 +255,7 @@ class BasicInformation extends React.Component {
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('mechanNature') && getFieldError('mechanNature') ? <p className='surveyError'>{getFieldError('mechanNature')}</p>:''}
+          {getFieldError('mechanNature') ? <p className='surveyError'>{getFieldError('mechanNature')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -265,7 +269,7 @@ class BasicInformation extends React.Component {
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('hospitalNature') && getFieldError('hospitalNature') ? <p className='surveyError'>{getFieldError('hospitalNature')}</p>:''}
+          {getFieldError('hospitalNature') ? <p className='surveyError'>{getFieldError('hospitalNature')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -279,7 +283,7 @@ class BasicInformation extends React.Component {
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('hospitalType') && getFieldError('hospitalType') ? <p className='surveyError'>{getFieldError('hospitalType')}</p>:''}
+          {getFieldError('hospitalType') ? <p className='surveyError'>{getFieldError('hospitalType')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -293,7 +297,7 @@ class BasicInformation extends React.Component {
             cols={1}>
             <List.Item arrow="horizontal"> </List.Item>
           </Picker>
-          {isFieldTouched('area') && getFieldError('area') ? <p className='surveyError'>{getFieldError('area')}</p>:''}
+          {getFieldError('area') ? <p className='surveyError'>{getFieldError('area')}</p>:''}
         </List>
 
         <HeartBasicCondition onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError} />
@@ -312,7 +316,7 @@ class BasicInformation extends React.Component {
           type="text"
           value={inputValue.name || ''}
         />
-        {isFieldTouched('name') && getFieldError('name') ? <p className='surveyError'>{getFieldError('name')}</p>:''}
+        {getFieldError('name') ? <p className='surveyError'>{getFieldError('name')}</p>:''}
 
         <WhiteSpace size="lg" />
 
@@ -329,7 +333,7 @@ class BasicInformation extends React.Component {
         >
           <List.Item arrow="horizontal"> </List.Item>
         </DatePicker>
-        {isFieldTouched('date') && getFieldError('date') ? <p className='surveyError'>{getFieldError('date')}</p>:''}
+        {getFieldError('date') ? <p className='surveyError'>{getFieldError('date')}</p>:''}
 
         <WhiteSpace size="lg" />
         <WhiteSpace size="lg" />

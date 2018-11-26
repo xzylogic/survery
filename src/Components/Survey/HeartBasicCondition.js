@@ -26,7 +26,7 @@ class HeartBasicCondition extends React.Component {
             type="number"
             value={inputValue.wardBedNum || ''}
           />
-          {isFieldTouched('wardBedNum') && getFieldError('wardBedNum') ? <p className='surveyError'>{getFieldError('wardBedNum')}</p>:''}
+          {getFieldError('wardBedNum') ? <p className='surveyError'>{getFieldError('wardBedNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -38,7 +38,7 @@ class HeartBasicCondition extends React.Component {
             type="number"
             value={inputValue.ccuBedNum || ''}
           />
-          {isFieldTouched('ccuBedNum') && getFieldError('ccuBedNum') ? <p className='surveyError'>{getFieldError('ccuBedNum')}</p>:''}
+          {getFieldError('ccuBedNum') ? <p className='surveyError'>{getFieldError('ccuBedNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -50,7 +50,7 @@ class HeartBasicCondition extends React.Component {
             type="number"
             value={inputValue.doctorNum || ''}
           />
-          {isFieldTouched('Basic_doctorNum') && getFieldError('Basic_doctorNum') ? <p className='surveyError'>{getFieldError('Basic_doctorNum')}</p>:''}
+          {getFieldError('Basic_doctorNum') ? <p className='surveyError'>{getFieldError('Basic_doctorNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -62,7 +62,7 @@ class HeartBasicCondition extends React.Component {
             type="number"
             value={inputValue.nurseNum || ''}
           />
-          {isFieldTouched('nurseNum') && getFieldError('nurseNum') ? <p className='surveyError'>{getFieldError('nurseNum')}</p>:''}
+          {getFieldError('nurseNum') ? <p className='surveyError'>{getFieldError('nurseNum')}</p>:''}
 
           <WhiteSpace size="lg" />
 

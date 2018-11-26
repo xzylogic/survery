@@ -85,7 +85,7 @@ class HeartPipeHardwareCondition extends React.Component {
                     type="number"
                     value={inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`]}
                   />
-                  {isFieldTouched(`otherEquipNumber${i.value}`) && getFieldError(`otherEquipNumber${i.value}`) ? <p className='surveyError'>{getFieldError(`otherEquipNumber${i.value}`)}</p>:''}
+                  {getFieldError(`otherEquipNumber${i.value}`) ? <p className='surveyError'>{getFieldError(`otherEquipNumber${i.value}`)}</p>:''}
                 </div>
               ) : ''}
             </div>

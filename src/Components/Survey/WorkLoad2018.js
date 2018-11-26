@@ -65,7 +65,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[2]]}
               />
-              {isFieldTouched(`op_${operation[2]}${index}`) && getFieldError(`op_${operation[2]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[2]}${index}`)}</p>:''}
+              {getFieldError(`op_${operation[2]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[2]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -77,7 +77,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[3]]}
               />
-              {isFieldTouched(`op_${operation[3]}${index}`) && getFieldError(`op_${operation[3]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[3]}${index}`)}</p>:''}
+              {getFieldError(`op_${operation[3]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[3]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -89,7 +89,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[4]]}
               />
-              {isFieldTouched(`op_${operation[4]}${index}`) && getFieldError(`op_${operation[4]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[4]}${index}`)}</p>:''}
+              {getFieldError(`op_${operation[4]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[4]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -101,7 +101,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[5]]}
               />
-              {isFieldTouched(`op_${operation[5]}${index}`) && getFieldError(`op_${operation[5]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[5]}${index}`)}</p>:''}
+              {getFieldError(`op_${operation[5]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[5]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -113,7 +113,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[6]]}
               />
-              {isFieldTouched(`op_${operation[6]}${index}`) && getFieldError(`op_${operation[6]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[6]}${index}`)}</p>:''}
+              {getFieldError(`op_${operation[6]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[6]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -125,7 +125,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[7]]}
               />
-              {isFieldTouched(`op_${operation[7]}${index}`) && getFieldError(`op_${operation[7]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[7]}${index}`)}</p>:''}
+              {getFieldError(`op_${operation[7]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[7]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -137,7 +137,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue[operation[9]] && inputValue[operation[9]][operation[8]]}
               />
-              {isFieldTouched(`op_${operation[8]}${index}`) && getFieldError(`op_${operation[8]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[8]}${index}`)}</p>:''}
+              {getFieldError(`op_${operation[8]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[8]}${index}`)}</p>:''}
 
               <WhiteSpace size="lg" />
             </List>
@@ -237,7 +237,7 @@ class WorkLoad2018 extends React.Component {
                         type="text"
                         value={inputValue.medium_other || ''}
                       />
-                      {isFieldTouched('medium_other') && getFieldError('medium_other') ? <p className='surveyError'>{getFieldError('medium_other')}</p>:''}
+                      {getFieldError('medium_other') ? <p className='surveyError'>{getFieldError('medium_other')}</p>:''}
 
                       <WhiteSpace size="lg" />
                     </div>
@@ -338,7 +338,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue.caDepartment || ''}
               />
-              {isFieldTouched('caDepartment') && getFieldError('caDepartment') ? <p className='surveyError'>{getFieldError('caDepartment')}</p>:''}
+              {getFieldError('caDepartment') ? <p className='surveyError'>{getFieldError('caDepartment')}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -350,7 +350,7 @@ class WorkLoad2018 extends React.Component {
                 type="number"
                 value={inputValue.caCount || ''}
               />
-              {isFieldTouched('caCount') && getFieldError('caCount') ? <p className='surveyError'>{getFieldError('caCount')}</p>:''}
+              {getFieldError('caCount') ? <p className='surveyError'>{getFieldError('caCount')}</p>:''}
 
               <WhiteSpace size="lg" />
 
@@ -388,7 +388,7 @@ class WorkLoad2018 extends React.Component {
                 type="text"
                 value={inputValue.pciDepartment || ''}
               />
-              {isFieldTouched('pciDepartment') && getFieldError('pciDepartment') ? <p className='surveyError'>{getFieldError('pciDepartment')}</p>:''}
+              {getFieldError('pciDepartment') ? <p className='surveyError'>{getFieldError('pciDepartment')}</p>:''}
 
               <WhiteSpace size="lg" />
             </List>
@@ -404,7 +404,7 @@ class WorkLoad2018 extends React.Component {
             type="text"
             value={inputValue.trouble || ''}
           />
-          {isFieldTouched('trouble') && getFieldError('trouble') ? <p className='surveyError'>{getFieldError('trouble')}</p>:''}
+          {getFieldError('trouble') ? <p className='surveyError'>{getFieldError('trouble')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -416,7 +416,7 @@ class WorkLoad2018 extends React.Component {
             type="text"
             value={inputValue.program || ''}
           />
-          {isFieldTouched('program') && getFieldError('program') ? <p className='surveyError'>{getFieldError('program')}</p>:''}
+          {getFieldError('program') ? <p className='surveyError'>{getFieldError('program')}</p>:''}
 
           <WhiteSpace size="lg" />
 
@@ -428,7 +428,7 @@ class WorkLoad2018 extends React.Component {
             type="text"
             value={inputValue.suggest || ''}
           />
-          {isFieldTouched('suggest') && getFieldError('suggest') ? <p className='surveyError'>{getFieldError('suggest')}</p>:''}
+          {getFieldError('suggest') ? <p className='surveyError'>{getFieldError('suggest')}</p>:''}
 
           <WhiteSpace size="lg" />
           {/*<p className='info_content'>PCI手术 <span>*</span> </p>
