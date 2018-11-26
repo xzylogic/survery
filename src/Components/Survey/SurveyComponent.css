@@ -62,7 +62,7 @@ html:not([data-scale]) .am-list-body::after{
 }
 
 .info_title {
-  font-size: 0.36rem;
+  font-size: 0.45rem;
   /*color: rgb(82, 84, 105);*/
   letter-spacing: 1px;
   line-height: 1.4;
@@ -70,7 +70,7 @@ html:not([data-scale]) .am-list-body::after{
 }
 
 .info_content {
-  font-size: 0.45rem;
+  font-size: 0.37rem;
   line-height: 2.4;
   /*color: rgb(82, 84, 105);*/
   letter-spacing: 1px;

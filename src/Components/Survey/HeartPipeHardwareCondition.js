@@ -61,6 +61,7 @@ class HeartPipeHardwareCondition extends React.Component {
                       initialValue: inputValue.pipeBelongDepartment_other || '',
                       rules: [{required: true, message: '请输入其他科室'}]})}
                     type="text"
+                    placeholder='请输入...'
                     value={inputValue.pipeBelongDepartment_other || ''}
                   />
                   {getFieldError('pipeBelongDepartment_other') ? <p className='surveyError'>{getFieldError('pipeBelongDepartment_other')}</p>:''}

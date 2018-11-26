@@ -64,7 +64,7 @@ class BasicInformation extends React.Component {
 
     validateFieldsAndScroll({scroll:{offsetTop: 200}}, (error) => {
       const store = this.props;
-      const {isFieldTouched, getFieldError} = this.props.form;
+      const {getFieldError} = this.props.form;  //isFieldTouched
       const router = this.props.history;
       if (!error) {
 
@@ -163,7 +163,7 @@ class BasicInformation extends React.Component {
 
         store.dispatch(saveSurveyAction(submitData, () => {
           console.log('提交成功');
-          // router.push('/success');
+          router.push('/surveySuccess');
         }, err => {
           Toast.info(err);
         }))

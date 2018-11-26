@@ -83,6 +83,7 @@ class HeartPipeHardwareCondition extends React.Component {
                       initialValue: inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`],
                       rules: [{required: true, message: '请输入其他设备数量'}]})}
                     type="number"
+                    placeholder="请输入..."
                     value={inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`]}
                   />
                   {getFieldError(`otherEquipNumber${i.value}`) ? <p className='surveyError'>{getFieldError(`otherEquipNumber${i.value}`)}</p>:''}

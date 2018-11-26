@@ -154,7 +154,6 @@ class WorkLoad2018 extends React.Component {
           {workLoad}
 
           <p className='info_title'>五、数据管理</p>
-          <WhiteSpace size="lg" />
           <p className='info_title'>1.手术登记</p>
           <p className='info_content'>手术登记方式 <span>*</span> </p>
           {operaCheckWay.map(i => (
@@ -235,6 +234,7 @@ class WorkLoad2018 extends React.Component {
                           initialValue: inputValue.medium_other || '',
                           rules: [{required: true, message: '请输入其他影像资料承载媒介'}]})}
                         type="text"
+                        placeholder='请输入...'
                         value={inputValue.medium_other || ''}
                       />
                       {getFieldError('medium_other') ? <p className='surveyError'>{getFieldError('medium_other')}</p>:''}
