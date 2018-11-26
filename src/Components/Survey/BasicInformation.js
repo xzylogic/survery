@@ -28,10 +28,10 @@ class BasicInformation extends React.Component {
     if(key === 'date') {
       value = moment(value).format('YYYY-MM-DD');
     }
-    console.log(key, value);
-    console.log(typeof key, typeof value);
+    // console.log(key, value);
+    // console.log(typeof key, typeof value);
     const store = this.props;
-    console.log(type)
+    // console.log(type)
 
     if(type === 'survey') {
       store.dispatch(surveyStoreLocalAction('append', key, value, id));
@@ -159,16 +159,16 @@ class BasicInformation extends React.Component {
         delete submitData['otherEquipNumber'];
         delete submitData['otherEquipNumberValue'];
         delete submitData['pipeBelongDepartment_other'];
-        console.log(submitData);
+        // console.log(submitData);
 
-        // store.dispatch(saveSurveyAction(submitData, () => {
-        //   console.log('提交成功');
-        //   // router.push('/success');
-        // }, err => {
-        //   Toast.info(err);
-        // }))
+        store.dispatch(saveSurveyAction(submitData, () => {
+          console.log('提交成功');
+          // router.push('/success');
+        }, err => {
+          Toast.info(err);
+        }))
         // console.log(value);
-        console.info('success');
+        // console.info('success');
       } else {
         Object.keys(submitData).forEach((key)=>{
           getFieldError(key)
@@ -177,7 +177,7 @@ class BasicInformation extends React.Component {
         // console.log(error.surgeryNum1.errors[0].message);
         // console.log(value);
         // Toast.info('请输入完后提交~');
-        console.log('false');
+        // console.log('false');
       }
     });
   }
