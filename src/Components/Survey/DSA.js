@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { List, InputItem, WhiteSpace, Checkbox, Radio } from 'antd-mobile'
+import { List, InputItem, WhiteSpace, Checkbox, Radio, Button } from 'antd-mobile'
 // import { createForm } from 'rc-form';
 
 import { otherEquipNumber, pipeLevel,level} from './SurveyData'
@@ -10,44 +10,46 @@ const CheckboxItem = Checkbox.CheckboxItem;
 const RadioItem = Radio.RadioItem;
 
 class HeartPipeHardwareCondition extends React.Component {
+  state = {
+    dsa_id : [1]
+  }
+
+  addDsa = () => {
+    let id = this.state.dsa_id;
+    id.push(id.length + 1);
+    this.setState({
+      dsa_id: id
+    });
+    localStorage.setItem('dsa_id', id);
+  }
 
   render() {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
     const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
 
-    const DSANumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    let dsa_id = localStorage.getItem('dsa_id') && localStorage.getItem('dsa_id').split(',');
     return (
       <React.Fragment>
         <List>
           <p className='info_content'>数字减影血管造影机</p>
-          {/*<div>*/}
-            {/*<p className='dsa_id'>1</p>*/}
-            {/*<p className='dsa_title'>品牌、型号</p>*/}
-            {/*<InputItem*/}
-              {/*{...getFieldProps(`DSABrandModel1`)}*/}
-              {/*type="text"*/}
-              {/*value={inputValue.DSABrandModel1 || ''}*/}
-              {/*onChange={onChangeHandler.bind(this, `DSABrandModel1`)}*/}
-            {/*/>*/}
-            {/*<p className='dsa_title'>安装年月（例：2018.4）</p>*/}
-            {/*<InputItem*/}
-              {/*{...getFieldProps(`DSAInstallTime1`)}*/}
-              {/*type="text"*/}
-              {/*value={inputValue.DSAInstallTime1 || ''}*/}
-              {/*onChange={onChangeHandler.bind(this, `DSAInstallTime1`)}*/}
-            {/*/>*/}
-          {/*</div>*/}
-          {DSANumber.map((index) => {
+          {(dsa_id || this.state.dsa_id).map((index) => {
             return (
               <div key={index}>
                 <p className='dsa_id'>{index}</p>
-                <p className='dsa_title'>品牌、型号</p>
+                <p className='dsa_title'>品牌</p>
                 <InputItem
-                  {...getFieldProps(`dsaName${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaName${index}`),
-                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaName${index}`]})}
+                  {...getFieldProps(`dsaBrand${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaBrand${index}`),
+                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaBrand${index}`]})}
                   type="text"
-                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaName${index}`]}
-                  // onChange={onChangeHandler.bind(this, 'dsaName')}
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaBrand${index}`]}
+                  // onChange={onChangeHandler.bind(this, 'dsaBrand')}
+                />
+                <p className='dsa_title'>型号</p>
+                <InputItem
+                  {...getFieldProps(`dsaModel${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaModel${index}`),
+                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaModel${index}`]})}
+                  type="text"
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaModel${index}`]}
                 />
                 <p className='dsa_title'>安装年月（例：2018.4）</p>
                 <InputItem
@@ -55,11 +57,12 @@ class HeartPipeHardwareCondition extends React.Component {
                     initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]})}
                   type="text"
                   value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]}
-                  // onChange={onChangeHandler.bind(this, 'dsaDate')}
                 />
               </div>
             )
           })}
+          <WhiteSpace size="lg" />
+          <Button type='primary' onClick={this.addDsa}>+</Button>
 
           <WhiteSpace size="lg" />
 
@@ -69,7 +72,7 @@ class HeartPipeHardwareCondition extends React.Component {
               <CheckboxItem
                 {...getFieldProps('otherEquipNumber', {
                   initialValue: inputValue.otherEquipNumber || '',
-                  rules: [{required: true, message: '请选择其他设备数量'}]})}
+                  rules: [{message: '请选择其他设备数量'}]})}
                 // checked={i.value === (inputValue.otherEquipNumber && inputValue.otherEquipNumber[i.value])}
                 checked={inputValue.otherEquipNumber && Array.isArray(inputValue.otherEquipNumber) && inputValue.otherEquipNumber.indexOf(i.value) > -1}
                 onClick={onChangeHandler.bind(this, 'otherEquipNumber', i.value,  'checkbox')}
@@ -79,12 +82,13 @@ class HeartPipeHardwareCondition extends React.Component {
               {inputValue.otherEquipNumber && inputValue.otherEquipNumber.indexOf(i.value) > -1 ? (
                 <div key={i.value}>
                   <InputItem
-                    {...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler('otherEquipNumberValue', value, 'survey', `otherEquipNumber${i.value}`),
-                      initialValue: inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`],
+                    {...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler(i.value, value),
+                      initialValue: inputValue[i.value] || '',
+                      // initialValue: inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`],
                       rules: [{required: true, message: '请输入其他设备数量'}]})}
                     type="number"
                     placeholder="请输入..."
-                    value={inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`]}
+                    value={inputValue[i.value]}
                   />
                   {getFieldError(`otherEquipNumber${i.value}`) ? <p className='surveyError'>{getFieldError(`otherEquipNumber${i.value}`)}</p>:''}
                 </div>
@@ -129,7 +133,7 @@ class HeartPipeHardwareCondition extends React.Component {
             <RadioItem
               {...getFieldProps('pipeLevel', {
                 initialValue: inputValue.pipeLevel || '',
-                rules: [{required: true, message: '请选择导管室层流级别'}]})}
+                rules: [{message: '请选择导管室层流级别'}]})}
               key={i.value}
               checked={i.value === inputValue.pipeLevel}
               onChange={onChangeHandler.bind(this, 'pipeLevel', i.value)}
@@ -148,7 +152,7 @@ class HeartPipeHardwareCondition extends React.Component {
                 <RadioItem
                   {...getFieldProps('level', {
                     initialValue: inputValue.level || '',
-                    rules: [{required: true, message: '请选择层流级别'}]})}
+                    rules: [{message: '请选择层流级别'}]})}
                   key={i.value}
                   checked={i.value === inputValue.level}
                   onChange={onChangeHandler.bind(this, 'level', i.value)}

@@ -70,20 +70,24 @@ class BasicInformation extends React.Component {
 
         Object.keys(submitData).forEach((key)=>{
           let arr = [];
-          let dsaNameArr = [];
+          let dsaBrandArr = [];
+          let dsaModelArr = [];
           let dsaDateArr = [];
           if(key === 'dsaDtos'){
             Object.keys(submitData[key]).forEach((id) => {
 
-              if(id.indexOf('dsaName') > -1){
-                dsaNameArr.push(submitData[key][id]);
+              if(id.indexOf('dsaBrand') > -1){
+                dsaBrandArr.push(submitData[key][id]);
+              }else if(id.indexOf('dsaModel') > -1){
+                dsaModelArr.push(submitData[key][id]);
               }else{
                 dsaDateArr.push(submitData[key][id]);
               }
               arr.push(submitData[key][id]);
             })
             submitData[key] = [];
-            submitData[key]['dsaName'] = dsaNameArr.toString();
+            submitData[key]['dsaBrand'] = dsaBrandArr.toString();
+            submitData[key]['dsaModel'] = dsaModelArr.toString();
             submitData[key]['dsaDate'] = dsaDateArr.toString();
           }
 
@@ -94,22 +98,6 @@ class BasicInformation extends React.Component {
             submitData[key] = submitData['medium_other'];
           }
 
-          if(key === 'otherEquipNumberValue'){
-            submitData['iabp'] = submitData[key]['otherEquipNumber0'] || '0';
-            submitData['ivus'] = submitData[key]['otherEquipNumber1'] || '0';
-            submitData['oct'] = submitData[key]['otherEquipNumber2'] || '0';
-            submitData['ffr'] = submitData[key]['otherEquipNumber3'] || '0';
-            submitData['elr'] = submitData[key]['otherEquipNumber4'] || '0';
-            submitData['rgi'] = submitData[key]['otherEquipNumber5'] || '0';
-            submitData['bm'] = submitData[key]['otherEquipNumber6'] || '0';
-            submitData['kyky'] = submitData[key]['otherEquipNumber7'] || '0';
-            submitData['ci'] = submitData[key]['otherEquipNumber8'] || '0';
-            submitData['carto'] = submitData[key]['otherEquipNumber9'] || '0';
-            submitData['ensite'] = submitData[key]['otherEquipNumber10'] || '0';
-            submitData['els'] = submitData[key]['otherEquipNumber11'] || '0';
-            submitData['pa'] = submitData[key]['otherEquipNumber12'] || '0';
-            submitData['am'] = submitData[key]['otherEquipNumber13'] || '0';
-          }
           if(key === 'pciDto'){
             submitData[key]['canSelect'] = [...submitData['canSelect0']];
           }
@@ -157,7 +145,6 @@ class BasicInformation extends React.Component {
         delete submitData['otherSubject'];
         delete submitData['medium_other'];
         delete submitData['otherEquipNumber'];
-        delete submitData['otherEquipNumberValue'];
         delete submitData['pipeBelongDepartment_other'];
         // console.log(submitData);
 

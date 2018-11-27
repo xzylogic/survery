@@ -41,7 +41,7 @@ class WorkLoad2018 extends React.Component {
             <RadioItem
               {...getFieldProps(`op_${operation[1]}${index}`, {
                 initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[1]],
-                rules: [{required: true, message: `请选择${operation[index]}`}]})}
+                rules: [{message: `请选择${operation[index]}`}]})}
               key={i.value}
               checked={inputValue[operation[9]] && inputValue[operation[9]][operation[1]] === i.value}
               // error={isFieldTouched('pciOperation') && getFieldError('pciOperation')}
@@ -160,7 +160,7 @@ class WorkLoad2018 extends React.Component {
             <RadioItem
               {...getFieldProps('operaCheckWay', {
                 initialValue: inputValue.operaCheckWay || '',
-                rules: [{required: true, message: '请选择手术登记方式'}]})}
+                rules: [{message: '请选择手术登记方式'}]})}
               key={i.value}
               checked={i.value === inputValue.operaCheckWay}
               // error={isFieldTouched('operaCheckWay') && getFieldError('operaCheckWay')}
@@ -199,7 +199,7 @@ class WorkLoad2018 extends React.Component {
                 <RadioItem
                   {...getFieldProps('imageManage', {
                     initialValue: inputValue.imageManage || '',
-                    rules: [{required: true, message: '请选择影像资料管理方式'}]})}
+                    rules: [{message: '请选择影像资料管理方式'}]})}
                   key={i.value}
                   checked={i.value === inputValue.imageManage}
                   // error={isFieldTouched('imageManage') && getFieldError('imageManage')}
@@ -219,7 +219,7 @@ class WorkLoad2018 extends React.Component {
                   <RadioItem
                     {...getFieldProps('medium', {
                       initialValue: inputValue.medium || '',
-                      rules: [{required: true, message: '请选择影像资料承载媒介'}]})}
+                      rules: [{message: '请选择影像资料承载媒介'}]})}
                     key={i.value}
                     checked={i.value === inputValue.medium}
                     onChange={onChangeHandler.bind(this, 'medium', i.value)}
@@ -258,7 +258,7 @@ class WorkLoad2018 extends React.Component {
             <RadioItem
               {...getFieldProps('satisfied', {
                 initialValue: inputValue.satisfied || '',
-                rules: [{required: true, message: '请选择目前导管室的数量能够满足您科的工作量吗？'}]})}
+                rules: [{message: '请选择目前导管室的数量能够满足您科的工作量吗？'}]})}
               key={i.value}
               checked={i.value === inputValue.satisfied}
               // error={isFieldTouched('satisfied') && getFieldError('satisfied')}
@@ -295,7 +295,7 @@ class WorkLoad2018 extends React.Component {
             <RadioItem
               {...getFieldProps('overtime', {
                 initialValue: inputValue.overtime || '',
-                rules: [{required: true, message: '请选择导管室工作经常加班吗？'}]})}
+                rules: [{message: '请选择导管室工作经常加班吗？'}]})}
               key={i.value}
               checked={i.value === inputValue.overtime}
               // error={isFieldTouched('overtime') && getFieldError('overtime')}
@@ -315,7 +315,7 @@ class WorkLoad2018 extends React.Component {
               <RadioItem
                 {...getFieldProps('ca', {
                   initialValue: inputValue.ca || '',
-                  rules: [{required: true, message: '请选择冠心病造影检查除了心脏科是否其他科室也开展？'}]})}
+                  rules: [{message: '请选择冠心病造影检查除了心脏科是否其他科室也开展？'}]})}
                 key={i.value}
                 checked={i.value === inputValue.ca}
                 // error={isFieldTouched('ca') && getFieldError('ca')}
@@ -365,7 +365,7 @@ class WorkLoad2018 extends React.Component {
               <RadioItem
                 {...getFieldProps('pci', {
                   initialValue: inputValue.pci || '',
-                  rules: [{required: true, message: '请选择心脏介入治疗除了心脏科是否其他科室也开展？'}]})}
+                  rules: [{message: '请选择心脏介入治疗除了心脏科是否其他科室也开展？'}]})}
                 key={i.value}
                 checked={i.value === inputValue.pci}
                 // error={isFieldTouched('pci') && getFieldError('pci')}

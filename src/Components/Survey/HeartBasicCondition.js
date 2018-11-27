@@ -72,7 +72,7 @@ class HeartBasicCondition extends React.Component {
               key={i.value}
               {...getFieldProps('ifHeartSurgery', {
                 initialValue: inputValue.ifHeartSurgery || '',
-                rules: [{required: true, message: '请选择是否有心外科'}]})}
+                rules: [{message: '请选择是否有心外科'}]})}
               checked={i.value === inputValue.ifHeartSurgery}
               // error={isFieldTouched('ifHeartSurgery') && getFieldError('ifHeartSurgery')}
               // onErrorClick={() => Toast.info(getFieldError('ifHeartSurgery'))}
@@ -92,7 +92,7 @@ class HeartBasicCondition extends React.Component {
                 <RadioItem
                   {...getFieldProps('ifThoracotomy', {
                     initialValue: inputValue.ifThoracotomy || '',
-                    rules: [{required: true, message: '请选择是否有心外科'}]})}
+                    rules: [{message: '请选择是否有心外科'}]})}
                   key={i.value}
                   checked={i.value === inputValue.ifThoracotomy}
                   // error={isFieldTouched('ifThoracotomy') && getFieldError('ifThoracotomy')}

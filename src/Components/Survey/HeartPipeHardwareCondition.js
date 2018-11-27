@@ -46,7 +46,7 @@ class HeartPipeHardwareCondition extends React.Component {
               <RadioItem
                 {...getFieldProps('pipeDepartment', {
                   initialValue: inputValue.pipeDepartment || '',
-                  rules: [{required: true, message: '请选择导管室隶属部门'}]})}
+                  rules: [{message: '请选择导管室隶属部门'}]})}
                 key={i.value}
                 checked={i.value === inputValue.pipeDepartment}
                 onChange={onChangeHandler.bind(this, 'pipeDepartment', i.value)}
@@ -80,7 +80,7 @@ class HeartPipeHardwareCondition extends React.Component {
             <RadioItem
               {...getFieldProps('pipeLocation', {
                 initialValue: inputValue.pipeLocation || '',
-                rules: [{required: true, message: '请选择导管室隶属部门'}]})}
+                rules: [{message: '请选择导管室隶属部门'}]})}
               key={i.value}
               checked={i.value === inputValue.pipeLocation}
               // error={isFieldTouched('pipeLocation') && getFieldError('pipeLocation')}
