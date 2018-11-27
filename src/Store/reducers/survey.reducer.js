@@ -26,12 +26,19 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
       };
     case actionTypes.APPEND_INPUT_VALUE:
       let originDataB = state.inputValue;
-      // if(originDataB['otherEquipNumber'][action.id]) {
-      //   delete originDataB['otherEquipNumber'][action.id]
-      // }else {
-      //   originDataB[action.key][action.id] = action.value;
-      // }
-      if (!action.id && originDataB[action.key] && Array.isArray(originDataB[action.key]) && originDataB[action.key].indexOf(action.value) === -1) {
+
+      if (action.i === 0 && !originDataB[action.key]){
+        originDataB[action.key] = [{}];
+        originDataB[action.key][action.i][action.id] = action.value;
+      }else if(action.i === 0 && originDataB[action.key]){
+        originDataB[action.key] = originDataB[action.key];
+        originDataB[action.key][action.i] = originDataB[action.key][action.i] || {};
+        originDataB[action.key][action.i][action.id] = action.value;
+      }else if(action.i && originDataB[action.key]){
+        originDataB[action.key] = originDataB[action.key];
+        originDataB[action.key][action.i] = originDataB[action.key][action.i] || {};
+        originDataB[action.key][action.i][action.id] = action.value;
+      }else if (!action.id && originDataB[action.key] && Array.isArray(originDataB[action.key]) && originDataB[action.key].indexOf(action.value) === -1) {
         originDataB[action.key].push(action.value);
       } else if (!action.id && originDataB[action.key] && Array.isArray(originDataB[action.key]) && originDataB[action.key].indexOf(action.value) > -1)  {
         originDataB[action.key].splice(originDataB[action.key].indexOf(action.value), 1);

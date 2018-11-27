@@ -96,8 +96,7 @@ class HeartPipePersonConstruct extends React.Component {
             <div key={i.value}>
               <CheckboxItem
                 {...getFieldProps(`${personValue[6]}${index}`, {
-                  initialValue: inputValue[`${personValue[6]}${index}`] || '',
-                  rules: [{message: '请输入组内手术医师的执业范围'}]})}
+                  initialValue: inputValue[`${personValue[6]}${index}`] || ''})}
                 // checked={i.value === (inputValue.groupSurgeryDoctorsOperationScope && inputValue.groupSurgeryDoctorsOperationScope[i.value])}
                 checked={inputValue[`${personValue[6]}${index}`] && Array.isArray(inputValue[`${personValue[6]}${index}`]) && inputValue[`${personValue[6]}${index}`].indexOf(i.value) > -1}
                 onChange={onChangeHandler.bind(this, `${personValue[6]}${index}`, i.value,  'checkbox')}

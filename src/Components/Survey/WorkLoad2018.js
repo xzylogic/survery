@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { List, InputItem, Radio, WhiteSpace, Checkbox } from 'antd-mobile'
+import { List, InputItem, Radio, WhiteSpace, Checkbox, TextareaItem } from 'antd-mobile'
 // import { createForm } from 'rc-form';
 
 import {
@@ -180,8 +180,7 @@ class WorkLoad2018 extends React.Component {
               {pcCheckWay.map(i => (
                 <CheckboxItem
                   {...getFieldProps('pcCheckWay', {
-                    initialValue: inputValue.pcCheckWay || '',
-                    rules: [{required: true, message: '请选择电脑版的登记方式'}]})}
+                    initialValue: inputValue.pcCheckWay || ''})}
                   key={i.value}
                   checked={inputValue.pcCheckWay && Array.isArray(inputValue.pcCheckWay) && inputValue.pcCheckWay.indexOf(i.value) > -1}
                   onChange={onChangeHandler.bind(this, 'pcCheckWay', i.value,  'checkbox')}
@@ -189,7 +188,7 @@ class WorkLoad2018 extends React.Component {
                   {i.label}
                 </CheckboxItem>
               ))}
-              {isFieldTouched('pcCheckWay') && getFieldError('pcCheckWay') ? <p className='surveyError'>{getFieldError('pcCheckWay')}</p>:''}
+              {/*{isFieldTouched('pcCheckWay') && getFieldError('pcCheckWay') ? <p className='surveyError'>{getFieldError('pcCheckWay')}</p>:''}*/}
 
               <WhiteSpace size="lg" />
 
@@ -277,8 +276,7 @@ class WorkLoad2018 extends React.Component {
             <CheckboxItem
               key={i.value}
               {...getFieldProps('lack', {
-                initialValue: inputValue.lack || '',
-                rules: [{required: true, message: '请选择导管室工作经常加班吗？'}]})}
+                initialValue: inputValue.lack || ''})}
               // checked={i.value === (inputValue.groupSurgeryDoctorsOperationScope && inputValue.groupSurgeryDoctorsOperationScope[i.value])}
               checked={inputValue.lack && Array.isArray(inputValue.lack) && inputValue.lack.indexOf(i.value) > -1}
               onChange={onChangeHandler.bind(this, 'lack', i.value,  'checkbox')}
@@ -397,11 +395,12 @@ class WorkLoad2018 extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>目前开展心导管室工作最困难的是：<span>*</span> </p>
-          <InputItem
+          <TextareaItem
             {...getFieldProps('trouble', {onChange: (value) => onChangeHandler('trouble', value),
               initialValue: inputValue.trouble || '',
               rules: [{required: true, message: '请输入目前开展心导管室工作最困难的是'}]})}
             type="text"
+            rows={3}
             value={inputValue.trouble || ''}
           />
           {getFieldError('trouble') ? <p className='surveyError'>{getFieldError('trouble')}</p>:''}
@@ -409,11 +408,12 @@ class WorkLoad2018 extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>建议的培训项目或内容：<span>*</span> </p>
-          <InputItem
+          <TextareaItem
             {...getFieldProps('program', {onChange: (value) => onChangeHandler('program', value),
               initialValue: inputValue.program || '',
               rules: [{required: true, message: '请输入建议的培训项目或内容'}]})}
             type="text"
+            rows={5}
             value={inputValue.program || ''}
           />
           {getFieldError('program') ? <p className='surveyError'>{getFieldError('program')}</p>:''}
@@ -421,11 +421,12 @@ class WorkLoad2018 extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>给行政部门或质控中心的建议：<span>*</span> </p>
-          <InputItem
+          <TextareaItem
             {...getFieldProps('suggest', {onChange: (value) => onChangeHandler('suggest', value),
               initialValue: inputValue.suggest || '',
               rules: [{required: true, message: '请输入给行政部门或质控中心的建议'}]})}
             type="text"
+            rows={5}
             value={inputValue.suggest || ''}
           />
           {getFieldError('suggest') ? <p className='surveyError'>{getFieldError('suggest')}</p>:''}

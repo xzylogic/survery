@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { List, InputItem, WhiteSpace, Checkbox, Radio, Button } from 'antd-mobile'
+import {List, InputItem, WhiteSpace, Checkbox, Radio, Button, DatePicker} from 'antd-mobile'
 // import { createForm } from 'rc-form';
 
 import { otherEquipNumber, pipeLevel,level} from './SurveyData'
@@ -15,7 +15,8 @@ class HeartPipeHardwareCondition extends React.Component {
   }
 
   addDsa = () => {
-    let id = this.state.dsa_id;
+    let dsa_id = localStorage.getItem('dsa_id') && localStorage.getItem('dsa_id').split(',');
+    let id = dsa_id || this.state.dsa_id;
     id.push(id.length + 1);
     this.setState({
       dsa_id: id
@@ -26,23 +27,64 @@ class HeartPipeHardwareCondition extends React.Component {
   render() {
     const { globalReducer:{ inputValue }, onChangeHandler } = this.props;
     const { getFieldProps, getFieldError, isFieldTouched } = this.props;  //getFieldsError
-
     let dsa_id = localStorage.getItem('dsa_id') && localStorage.getItem('dsa_id').split(',');
+
     return (
       <React.Fragment>
         <List>
           <p className='info_content'>数字减影血管造影机</p>
-          {(dsa_id || this.state.dsa_id).map((index) => {
+          {(dsa_id || this.state.dsa_id).map((index, i) => {
             return (
               <div key={index}>
                 <p className='dsa_id'>{index}</p>
                 <p className='dsa_title'>品牌</p>
                 <InputItem
-                  {...getFieldProps(`dsaBrand${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaBrand${index}`),
-                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaBrand${index}`]})}
+                  {...getFieldProps(`dsaName${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'arrObj', 'dsaName', i),
+                    })}
                   type="text"
-                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaBrand${index}`]}
-                  // onChange={onChangeHandler.bind(this, 'dsaBrand')}
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][i] && inputValue['dsaDtos'][i]['dsaName']}
+                  // onChange={onChangeHandler.bind(this, 'dsaName')}
+                />
+                <p className='dsa_title'>型号</p>
+                <InputItem
+                  {...getFieldProps(`dsaModel${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'arrObj', 'dsaModel', i),
+                    })}
+                  type="text"
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][i] && inputValue['dsaDtos'][i]['dsaModel']}
+                />
+                <p className='dsa_title'>安装年月</p>
+                <DatePicker
+                  {...getFieldProps(`dsaDate${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'arrObj', 'dsaDate', i),
+                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][i] && inputValue['dsaDtos'][i]['dsaDate'] && new Date(inputValue['dsaDtos'][i]['dsaDate'])})}
+                    // })}
+                  mode="month"
+                  title=""
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][i] && inputValue['dsaDtos'][i]['dsaDate'] && new Date(inputValue['dsaDtos'][i]['dsaDate'])}
+                  minDate={new Date(`${new Date().getFullYear() - 120}-01-01`)}
+                  maxDate={new Date()}
+                >
+                  <List.Item arrow="horizontal"> </List.Item>
+                </DatePicker>
+                {/*<InputItem*/}
+                {/*{...getFieldProps(`dsaDate${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaDate${index}`),*/}
+                {/*initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]})}*/}
+                {/*type="text"*/}
+                {/*value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]}*/}
+                {/*/>*/}
+              </div>
+            )
+          })}
+          {/*{(dsa_id || this.state.dsa_id).map((index) => {
+            return (
+              <div key={index}>
+                <p className='dsa_id'>{index}</p>
+                <p className='dsa_title'>品牌</p>
+                <InputItem
+                  {...getFieldProps(`dsaName${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaName${index}`),
+                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaName${index}`]})}
+                  type="text"
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaName${index}`]}
+                  // onChange={onChangeHandler.bind(this, 'dsaName')}
                 />
                 <p className='dsa_title'>型号</p>
                 <InputItem
@@ -51,7 +93,18 @@ class HeartPipeHardwareCondition extends React.Component {
                   type="text"
                   value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaModel${index}`]}
                 />
-                <p className='dsa_title'>安装年月（例：2018.4）</p>
+                <p className='dsa_title'>安装年月</p>
+                <DatePicker
+                  {...getFieldProps(`dsaDate${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaDate${index}`),
+                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`] && new Date(inputValue['dsaDtos'][`dsaDate${index}`])})}
+                  mode="month"
+                  title=""
+                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`] && new Date(inputValue['dsaDtos'][`dsaDate${index}`])}
+                  minDate={new Date(`${new Date().getFullYear() - 120}-01-01`)}
+                  maxDate={new Date()}
+                >
+                  <List.Item arrow="horizontal"> </List.Item>
+                </DatePicker>
                 <InputItem
                   {...getFieldProps(`dsaDate${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaDate${index}`),
                     initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]})}
@@ -60,7 +113,7 @@ class HeartPipeHardwareCondition extends React.Component {
                 />
               </div>
             )
-          })}
+          })}*/}
           <WhiteSpace size="lg" />
           <Button type='primary' onClick={this.addDsa}>+</Button>
 
@@ -71,8 +124,7 @@ class HeartPipeHardwareCondition extends React.Component {
             <div key={i.value}>
               <CheckboxItem
                 {...getFieldProps('otherEquipNumber', {
-                  initialValue: inputValue.otherEquipNumber || '',
-                  rules: [{message: '请选择其他设备数量'}]})}
+                  initialValue: inputValue.otherEquipNumber || '',})}
                 // checked={i.value === (inputValue.otherEquipNumber && inputValue.otherEquipNumber[i.value])}
                 checked={inputValue.otherEquipNumber && Array.isArray(inputValue.otherEquipNumber) && inputValue.otherEquipNumber.indexOf(i.value) > -1}
                 onClick={onChangeHandler.bind(this, 'otherEquipNumber', i.value,  'checkbox')}
@@ -95,7 +147,7 @@ class HeartPipeHardwareCondition extends React.Component {
               ) : ''}
             </div>
           ))}
-          {isFieldTouched('otherEquipNumber') && getFieldError('otherEquipNumber') ? <p className='surveyError'>{getFieldError('otherEquipNumber')}</p>:''}
+          {/*{isFieldTouched('otherEquipNumber') && getFieldError('otherEquipNumber') ? <p className='surveyError'>{getFieldError('otherEquipNumber')}</p>:''}*/}
 
           {/*<p className='info_content'>其他设备数量<i>（多选）</i> <span>*</span> </p>*/}
           {/*{otherEquipNumber.map(i => (*/}

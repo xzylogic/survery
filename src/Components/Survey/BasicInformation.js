@@ -23,17 +23,24 @@ class BasicInformation extends React.Component {
     };
   }
 
-  onChangeHandler = (key, value, type, id) => {
+  onChangeHandler = (key, value, type, id, i) => {
 
     if(key === 'date') {
       value = moment(value).format('YYYY-MM-DD');
     }
+    if(id && typeof id === 'string' && id.indexOf('dsaDate') > -1) {
+      value = moment(value).format('YYYY-MM');
+    }
+
     // console.log(key, value);
     // console.log(typeof key, typeof value);
     const store = this.props;
     // console.log(type)
 
-    if(type === 'survey') {
+    if(type === 'arrObj') {
+      console.log(i)
+      store.dispatch(surveyStoreLocalAction('append', key, value, id, i));
+    }else if(type === 'survey') {
       store.dispatch(surveyStoreLocalAction('append', key, value, id));
     }else if(type === 'checkbox') {
       store.dispatch(surveyStoreLocalAction('append', key, value));
@@ -61,35 +68,33 @@ class BasicInformation extends React.Component {
     // console.log(submitData)
     // console.log(submitData.dsaDtos)
 
-
     validateFieldsAndScroll({scroll:{offsetTop: 200}}, (error) => {
       const store = this.props;
       const {getFieldError} = this.props.form;  //isFieldTouched
       const router = this.props.history;
       if (!error) {
-
         Object.keys(submitData).forEach((key)=>{
-          let arr = [];
-          let dsaBrandArr = [];
-          let dsaModelArr = [];
-          let dsaDateArr = [];
-          if(key === 'dsaDtos'){
-            Object.keys(submitData[key]).forEach((id) => {
-
-              if(id.indexOf('dsaBrand') > -1){
-                dsaBrandArr.push(submitData[key][id]);
-              }else if(id.indexOf('dsaModel') > -1){
-                dsaModelArr.push(submitData[key][id]);
-              }else{
-                dsaDateArr.push(submitData[key][id]);
-              }
-              arr.push(submitData[key][id]);
-            })
-            submitData[key] = [];
-            submitData[key]['dsaBrand'] = dsaBrandArr.toString();
-            submitData[key]['dsaModel'] = dsaModelArr.toString();
-            submitData[key]['dsaDate'] = dsaDateArr.toString();
-          }
+          // let arr = [];
+          // let dsaNameArr = [];
+          // let dsaModelArr = [];
+          // let dsaDateArr = [];
+          // if(key === 'dsaDtos'){
+          //   Object.keys(submitData[key]).forEach((id) => {
+          //
+          //     if(id.indexOf('dsaName') > -1){
+          //       dsaNameArr.push(submitData[key][id]);
+          //     }else if(id.indexOf('dsaModel') > -1){
+          //       dsaModelArr.push(submitData[key][id]);
+          //     }else{
+          //       dsaDateArr.push(submitData[key][id]);
+          //     }
+          //     arr.push(submitData[key][id]);
+          //   })
+          //   submitData[key] = [{}];
+          //   submitData[key][0]['dsaName'] = dsaNameArr.toString();
+          //   submitData[key][0]['dsaModel'] = dsaModelArr.toString();
+          //   submitData[key][0]['dsaDate'] = dsaDateArr.toString();
+          // }
 
           if(key === 'pipeDepartment' && submitData[key] === '其他科室'){
             submitData[key] = submitData['pipeBelongDepartment_other'];
@@ -99,35 +104,41 @@ class BasicInformation extends React.Component {
           }
 
           if(key === 'pciDto'){
-            submitData[key]['canSelect'] = [...submitData['canSelect0']];
+            submitData[key]['canSelect'] = [...submitData['canSelect0']].toString();
+            console.log(submitData['pciDto'].canSelect)
           }
           if(key === 'esDto'){
-            submitData[key]['canSelect'] = [...submitData['canSelect1']];
+            submitData[key]['canSelect'] = [...submitData['canSelect1']].toString();
+            console.log(submitData['esDto'].canSelect)
           }
           if(key === 'shdDto'){
-            submitData[key]['canSelect'] = [...submitData['canSelect2']];
+            submitData[key]['canSelect'] = [...submitData['canSelect2']].toString();
+            console.log(submitData['shdDto'].canSelect)
           }
 
           if(key === 'otherSubject0'){
-            if(submitData['pciDto']['canSelect'].indexOf('其他学科') > -1){
-              submitData['pciDto']['canSelect'].splice(submitData['pciDto']['canSelect'].indexOf('其他学科'), 1);
-              submitData['pciDto']['canSelect'].push(submitData['otherSubject0']);
+            let os0 = submitData['pciDto']['canSelect'];
+            if(os0.split(',').indexOf('其他学科') > -1){
+              os0.split(',').splice(submitData['pciDto']['canSelect'].indexOf('其他学科'), 1);
+              os0.split(',').push(submitData['otherSubject0']);
             }
             submitData['pciDto'].canSelect = submitData['pciDto']['canSelect'].toString();
           }
 
           if(key === 'otherSubject1'){
-            if(submitData['esDto']['canSelect'].indexOf('其他学科') > -1){
-              submitData['esDto']['canSelect'].splice(submitData['esDto']['canSelect'].indexOf('其他学科'), 1);
-              submitData['esDto']['canSelect'].push(submitData['otherSubject1']);
+            let os1 = submitData['esDto']['canSelect'];
+            if(os1.split(',').indexOf('其他学科') > -1){
+              os1.split(',').splice(submitData['esDto']['canSelect'].indexOf('其他学科'), 1);
+              os1.split(',').push(submitData['otherSubject1']);
             }
             submitData['esDto'].canSelect = submitData['esDto']['canSelect'].toString();
           }
 
           if(key === 'otherSubject2'){
-            if(submitData['shdDto']['canSelect'].indexOf('其他学科') > -1){
-              submitData['shdDto']['canSelect'].splice(submitData['shdDto']['canSelect'].indexOf('其他学科'), 1);
-              submitData['shdDto']['canSelect'].push(submitData['otherSubject2']);
+            let os2 = submitData['shdDto']['canSelect'];
+            if(os2.split(',').indexOf('其他学科') > -1){
+              os2.split(',').splice(submitData['shdDto']['canSelect'].indexOf('其他学科'), 1);
+              os2.split(',').push(submitData['otherSubject2']);
             }
             submitData['shdDto'].canSelect = submitData['shdDto']['canSelect'].toString();
           }
@@ -146,8 +157,7 @@ class BasicInformation extends React.Component {
         delete submitData['medium_other'];
         delete submitData['otherEquipNumber'];
         delete submitData['pipeBelongDepartment_other'];
-        // console.log(submitData);
-
+        console.log(submitData);
         store.dispatch(saveSurveyAction(submitData, () => {
           console.log('提交成功');
           router.push('/surveySuccess');
@@ -155,7 +165,7 @@ class BasicInformation extends React.Component {
           Toast.info(err);
         }))
         // console.log(value);
-        // console.info('success');
+        console.info('success');
       } else {
         Object.keys(submitData).forEach((key)=>{
           getFieldError(key)

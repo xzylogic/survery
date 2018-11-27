@@ -16,7 +16,8 @@ function* surveyStoreLocal(actions) {
   if (actions.option === 'update') {
     yield put(updateInputValueAction(actions.key, actions.value))
   } else if (actions.option === 'append') {
-    yield put(appendInputValueAction(actions.key, actions.value, actions.id))
+    console.log(actions.i)
+    yield put(appendInputValueAction(actions.key, actions.value, actions.id, actions.i))
   }
   const { inputValue } = yield select(state => state.globalReducer)
   yield call([localStorage, 'setItem'], 'inputValue', JSON.stringify(inputValue))

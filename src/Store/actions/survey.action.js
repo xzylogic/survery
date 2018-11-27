@@ -20,12 +20,13 @@ export const surveyGetLocalAction = () => {
   }
 }
 
-export const surveyStoreLocalAction = (option, key, value, id) => {
+export const surveyStoreLocalAction = (option, key, value, id, i) => {
   return {
     type: actionTypes.SURVEY_STORE_LOCAL,
     key: key,
     value: value,
     id: id,
+    i: i,
     option: option
   }
 }
@@ -45,12 +46,13 @@ export const updateInputValueAction = (key, value) => {
   }
 }
 
-export const appendInputValueAction = (key, value, id) => {
+export const appendInputValueAction = (key, value, id, i) => {
   return {
     type: actionTypes.APPEND_INPUT_VALUE,
     key: key,
     value: value,
-    id: id
+    id: id,
+    i: i,
   }
 }
 
