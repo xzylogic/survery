@@ -50,9 +50,10 @@ html:not([data-scale]) .am-list-body::after{
 }
 
 .survey_noUnit {
-  font-size: 0.36rem;
+  font-size: 0.35rem;
   /*color: rgb(82, 84, 105);*/
-  line-height: 5;
+  height: 2.5rem;
+  padding-top: 1rem;
 }
 
 .survey_noUnit span{
