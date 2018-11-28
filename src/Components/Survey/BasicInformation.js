@@ -34,11 +34,9 @@ class BasicInformation extends React.Component {
 
     // console.log(key, value);
     // console.log(typeof key, typeof value);
-    const store = this.props;
     // console.log(type)
-
+    const store = this.props;
     if(type === 'arrObj') {
-      console.log(i)
       store.dispatch(surveyStoreLocalAction('append', key, value, id, i));
     }else if(type === 'survey') {
       store.dispatch(surveyStoreLocalAction('append', key, value, id));
@@ -66,36 +64,12 @@ class BasicInformation extends React.Component {
     let submitData = Object.assign({}, inputValue);
 
     // console.log(submitData)
-    // console.log(submitData.dsaDtos)
-
     validateFieldsAndScroll({scroll:{offsetTop: 200}}, (error) => {
       const store = this.props;
       const {getFieldError} = this.props.form;  //isFieldTouched
       const router = this.props.history;
       if (!error) {
         Object.keys(submitData).forEach((key)=>{
-          // let arr = [];
-          // let dsaNameArr = [];
-          // let dsaModelArr = [];
-          // let dsaDateArr = [];
-          // if(key === 'dsaDtos'){
-          //   Object.keys(submitData[key]).forEach((id) => {
-          //
-          //     if(id.indexOf('dsaName') > -1){
-          //       dsaNameArr.push(submitData[key][id]);
-          //     }else if(id.indexOf('dsaModel') > -1){
-          //       dsaModelArr.push(submitData[key][id]);
-          //     }else{
-          //       dsaDateArr.push(submitData[key][id]);
-          //     }
-          //     arr.push(submitData[key][id]);
-          //   })
-          //   submitData[key] = [{}];
-          //   submitData[key][0]['dsaName'] = dsaNameArr.toString();
-          //   submitData[key][0]['dsaModel'] = dsaModelArr.toString();
-          //   submitData[key][0]['dsaDate'] = dsaDateArr.toString();
-          // }
-
           if(key === 'pipeDepartment' && submitData[key] === '其他科室'){
             submitData[key] = submitData['pipeBelongDepartment_other'];
           }
@@ -105,15 +79,12 @@ class BasicInformation extends React.Component {
 
           if(key === 'pciDto'){
             submitData[key]['canSelect'] = [...submitData['canSelect0']].toString();
-            console.log(submitData['pciDto'].canSelect)
           }
           if(key === 'esDto'){
             submitData[key]['canSelect'] = [...submitData['canSelect1']].toString();
-            console.log(submitData['esDto'].canSelect)
           }
           if(key === 'shdDto'){
             submitData[key]['canSelect'] = [...submitData['canSelect2']].toString();
-            console.log(submitData['shdDto'].canSelect)
           }
 
           if(key === 'otherSubject0'){
@@ -157,7 +128,7 @@ class BasicInformation extends React.Component {
         delete submitData['medium_other'];
         delete submitData['otherEquipNumber'];
         delete submitData['pipeBelongDepartment_other'];
-        console.log(submitData);
+        // console.log(submitData);
         store.dispatch(saveSurveyAction(submitData, () => {
           console.log('提交成功');
           router.push('/surveySuccess');
@@ -165,16 +136,14 @@ class BasicInformation extends React.Component {
           Toast.info(err);
         }))
         // console.log(value);
-        console.info('success');
+        // console.info('success');
       } else {
         Object.keys(submitData).forEach((key)=>{
           getFieldError(key)
         })
         // console.log(error);
-        // console.log(error.surgeryNum1.errors[0].message);
         // console.log(value);
         // Toast.info('请输入完后提交~');
-        // console.log('false');
       }
     });
   }
@@ -182,7 +151,6 @@ class BasicInformation extends React.Component {
   render() {
     const { globalReducer:{ inputValue } } = this.props;
     const { getFieldProps, getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
-    // console.log(inputValue);
     return (
       <React.Fragment>
         <p className='info_title'>基本信息</p>
