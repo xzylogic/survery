@@ -14,7 +14,7 @@ export const hospitalLevel = [
 export const mechanNature = [
   // {label: '请选择一个选项', value: '请选择一个选项'},
   {label: '公立机构', value: '公立机构'},
-  {label: '社会办公机构', value: '社会办公机构'},
+  {label: '社会办机构', value: '社会办机构'},
 ];
 
 export const hospitalNature = [
