@@ -59,7 +59,131 @@ class BasicInformation extends React.Component {
   }
 
   onChangeHandler = (key, value, type, id, i) => {
-
+    const {setFieldsValue} = this.props.form;
+    switch (key) {
+      case 'ifHeartSurgery':
+        setFieldsValue({
+          ifHeartSurgery: value,
+        });
+        break;
+      case 'ifThoracotomy':
+        setFieldsValue({
+          ifThoracotomy: value,
+        });
+        break;
+      case 'pipeDepartment':
+        setFieldsValue({
+          pipeDepartment: value,
+        });
+        break;
+      case 'pipeLocation':
+        setFieldsValue({
+          pipeLocation: value,
+        });
+        break;
+      case 'pipeLevel':
+        setFieldsValue({
+          pipeLevel: value,
+        });
+        break;
+      case 'level':
+        setFieldsValue({
+          level: value,
+        });
+        break;
+      case 'canSelect0':
+        setFieldsValue({
+          canSelect0: value,
+        });
+        break;
+      case 'canSelect1':
+        setFieldsValue({
+          canSelect1: value,
+        });
+        break;
+      case 'canSelect2':
+        setFieldsValue({
+          canSelect2: value,
+        });
+        break;
+      case 'pciCommonDto':
+        setFieldsValue({
+          op_ifHave0: value,
+        });
+        break;
+      case 'poCommonDto':
+        setFieldsValue({
+          op_ifHave1: value,
+        });
+        break;
+      case 'rfCommonDto':
+        setFieldsValue({
+          op_ifHave2: value,
+        });
+        break;
+      case 'chdCommonDto':
+        setFieldsValue({
+          op_ifHave3: value,
+        });
+        break;
+      case 'laacCommonDto':
+        setFieldsValue({
+          op_ifHave4: value,
+        });
+        break;
+      case 'pavCommonDto':
+        setFieldsValue({
+          op_ifHave5: value,
+        });
+        break;
+      case 'operaCheckWay':
+        setFieldsValue({
+          operaCheckWay: value,
+        });
+        break;
+      case 'pcCheckWay':
+        setFieldsValue({
+          pcCheckWay: value,
+        });
+        break;
+      case 'imageManage':
+        setFieldsValue({
+          imageManage: value,
+        });
+        break;
+      case 'medium':
+        setFieldsValue({
+          medium: value,
+        });
+        break;
+      case 'satisfied':
+        setFieldsValue({
+          satisfied: value,
+        });
+        break;
+      case 'lack':
+        setFieldsValue({
+          lack: value,
+        });
+        break;
+      case 'overtime':
+        setFieldsValue({
+          overtime: value,
+        });
+        break;
+      case 'ca':
+        setFieldsValue({
+          ca: value,
+        });
+        break;
+      case 'pci':
+        setFieldsValue({
+          pci: value,
+        });
+        break;
+      default:
+        break;
+    }
     if(key === 'date') {
       value = moment(value).format('YYYY-MM-DD');
     }
@@ -93,7 +217,7 @@ class BasicInformation extends React.Component {
     // console.log(submitData)
     validateFieldsAndScroll({first: true, force: true, scroll:{offsetTop: 200}}, (error) => {
       const store = this.props;
-      const {getFieldError} = this.props.form;  //isFieldTouched
+      const {getFieldError} = this.props.form;
       const router = this.props.history;
       if (!error) {
         Object.keys(submitData).forEach((key)=>{
@@ -177,7 +301,7 @@ class BasicInformation extends React.Component {
 
   render() {
     const { globalReducer:{ inputValue } } = this.props;
-    const { getFieldProps, getFieldError, isFieldTouched } = this.props.form;  //getFieldsError
+    const { getFieldProps, getFieldError } = this.props.form;  //getFieldsError, isFieldTouched
     let dsa_id = localStorage.getItem('dsa_id') && localStorage.getItem('dsa_id').split(',');
     let onChangeHandler = this.onChangeHandler;
 
@@ -368,15 +492,14 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>是否有心胸外科 <span>*</span> </p>
-          {isFieldTouched('ifHeartSurgery') && getFieldError('ifHeartSurgery') ? <p className='surveyError'>{getFieldError('ifHeartSurgery')}</p>:''}
+          {getFieldError('ifHeartSurgery') ? <p className='surveyError'>{getFieldError('ifHeartSurgery')}</p>:''}
           {ifHeartSurgery.map(i => (
             <RadioItem
               key={i.value}
               {...getFieldProps('ifHeartSurgery', {
-                initialValue: inputValue.ifHeartSurgery || ''})}
+                initialValue: inputValue.ifHeartSurgery || '',
+                rules: [{required: true, message: '请选择是否有心胸外科'}]})}
               checked={i.value === inputValue.ifHeartSurgery}
-              // error={isFieldTouched('ifHeartSurgery') && getFieldError('ifHeartSurgery')}
-              // onErrorClick={() => Toast.info(getFieldError('ifHeartSurgery'))}
               onChange={onChangeHandler.bind(this, 'ifHeartSurgery', i.value)}
             >
               {i.label}
@@ -388,15 +511,14 @@ class BasicInformation extends React.Component {
           {inputValue.ifHeartSurgery === '有' ? (
             <List>
               <p className='info_content'>是否开展过开胸手术？<span>*</span></p>
-              {isFieldTouched('ifThoracotomy') && getFieldError('ifThoracotomy') ? <p className='surveyError'>{getFieldError('ifThoracotomy')}</p>:''}
+              {getFieldError('ifThoracotomy') ? <p className='surveyError'>{getFieldError('ifThoracotomy')}</p>:''}
               {ifThoracotomy.map(i => (
                 <RadioItem
                   {...getFieldProps('ifThoracotomy', {
-                    initialValue: inputValue.ifThoracotomy || ''})}
+                    initialValue: inputValue.ifThoracotomy || '',
+                    rules: [{required: true, message: '请选择是否开展过开胸手术'}]})}
                   key={i.value}
                   checked={i.value === inputValue.ifThoracotomy}
-                  // error={isFieldTouched('ifThoracotomy') && getFieldError('ifThoracotomy')}
-                  // onErrorClick={() => Toast.info(getFieldError('ifThoracotomy'))}
                   onChange={onChangeHandler.bind(this, 'ifThoracotomy', i.value)}
                 >
                   {i.label}
@@ -437,13 +559,13 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>导管室隶属部门 <span>*</span> </p>
-          {isFieldTouched('pipeDepartment') && getFieldError('pipeDepartment') ? <p className='surveyError'>{getFieldError('pipeDepartment')}</p>:''}
+          {getFieldError('pipeDepartment') ? <p className='surveyError'>{getFieldError('pipeDepartment')}</p>:''}
           {pipeDepartment.map(i => (
             <div key={i.value}>
               <RadioItem
                 {...getFieldProps('pipeDepartment', {
                   initialValue: inputValue.pipeDepartment || '',
-                  rules: [{message: '请选择导管室隶属部门'}]})}
+                  rules: [{required: true, message: '请选择导管室隶属部门'}]})}
                 key={i.value}
                 checked={i.value === inputValue.pipeDepartment}
                 onChange={onChangeHandler.bind(this, 'pipeDepartment', i.value)}
@@ -472,16 +594,14 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>导管室在医院内的地理位置 <span>*</span> </p>
-          {isFieldTouched('pipeLocation') && getFieldError('pipeLocation') ? <p className='surveyError'>{getFieldError('pipeLocation')}</p>:''}
+          {getFieldError('pipeLocation') ? <p className='surveyError'>{getFieldError('pipeLocation')}</p>:''}
           {pipeLocation.map(i => (
             <RadioItem
               {...getFieldProps('pipeLocation', {
                 initialValue: inputValue.pipeLocation || '',
-                rules: [{message: '请选择导管室隶属部门'}]})}
+                rules: [{required: true, message: '请选择导管室在医院内的地理位置'}]})}
               key={i.value}
               checked={i.value === inputValue.pipeLocation}
-              // error={isFieldTouched('pipeLocation') && getFieldError('pipeLocation')}
-              // onErrorClick={() => Toast.info(getFieldError('pipeLocation'))}
               onChange={onChangeHandler.bind(this, 'pipeLocation', i.value)}
             >
               {i.label}
@@ -582,7 +702,7 @@ class BasicInformation extends React.Component {
             <div key={i.value}>
               <CheckboxItem
                 {...getFieldProps('otherEquipNumber', {
-                  initialValue: inputValue.otherEquipNumber || '',})}
+                  initialValue: inputValue.otherEquipNumber || ''})}
                 // checked={i.value === (inputValue.otherEquipNumber && inputValue.otherEquipNumber[i.value])}
                 checked={inputValue.otherEquipNumber && Array.isArray(inputValue.otherEquipNumber) && inputValue.otherEquipNumber.indexOf(i.value) > -1}
                 onClick={onChangeHandler.bind(this, 'otherEquipNumber', i.value,  'checkbox')}
@@ -639,12 +759,12 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>导管室层流级别 <span>*</span> </p>
-          {isFieldTouched('pipeLevel') && getFieldError('pipeLevel') ? <p className='surveyError'>{getFieldError('pipeLevel')}</p>:''}
+          {getFieldError('pipeLevel') ? <p className='surveyError'>{getFieldError('pipeLevel')}</p>:''}
           {pipeLevel.map(i => (
             <RadioItem
               {...getFieldProps('pipeLevel', {
                 initialValue: inputValue.pipeLevel || '',
-                rules: [{message: '请选择导管室层流级别'}]})}
+                rules: [{required: true, message: '请选择导管室层流级别'}]})}
               key={i.value}
               checked={i.value === inputValue.pipeLevel}
               onChange={onChangeHandler.bind(this, 'pipeLevel', i.value)}
@@ -658,12 +778,12 @@ class BasicInformation extends React.Component {
           {inputValue.pipeLevel === '有' ? (
             <List>
               <p className='info_content'>层流级别 <span>*</span></p>
-              {isFieldTouched('level') && getFieldError('level') ? <p className='surveyError'>{getFieldError('level')}</p>:''}
+              {getFieldError('level') ? <p className='surveyError'>{getFieldError('level')}</p>:''}
               {level.map(i => (
                 <RadioItem
                   {...getFieldProps('level', {
                     initialValue: inputValue.level || '',
-                    rules: [{message: '请选择层流级别'}]})}
+                    rules: [{required: true, message: '请选择层流级别'}]})}
                   key={i.value}
                   checked={i.value === inputValue.level}
                   onChange={onChangeHandler.bind(this, 'level', i.value)}
@@ -811,7 +931,8 @@ class BasicInformation extends React.Component {
                   <div key={i.value}>
                     <CheckboxItem
                       {...getFieldProps(`${personValue[6]}${index}`, {
-                        initialValue: inputValue[`${personValue[6]}${index}`] || ''})}
+                        initialValue: inputValue[`${personValue[6]}${index}`] || '',
+                        rules: [{required: true, message: '请选择组内手术医师的执业范围'}]})}
                       // checked={i.value === (inputValue.groupSurgeryDoctorsOperationScope && inputValue.groupSurgeryDoctorsOperationScope[i.value])}
                       checked={inputValue[`${personValue[6]}${index}`] && Array.isArray(inputValue[`${personValue[6]}${index}`]) && inputValue[`${personValue[6]}${index}`].indexOf(i.value) > -1}
                       onChange={onChangeHandler.bind(this, `${personValue[6]}${index}`, i.value,  'checkbox')}
@@ -1021,16 +1142,14 @@ class BasicInformation extends React.Component {
             return (
               <div key={index}>
                 <p className='info_content'>{operation[0]}<span>*</span> </p>
-                {isFieldTouched(`op_${operation[1]}${index}`) && getFieldError(`op_${operation[1]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[1]}${index}`)}</p>:''}
+                {getFieldError(`op_${operation[1]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[1]}${index}`)}</p>:''}
                 {pciOperation.map(i => (
                   <RadioItem
                     {...getFieldProps(`op_${operation[1]}${index}`, {
                       initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[1]],
-                      rules: [{message: `请选择${operation[index]}`}]})}
+                      rules: [{required: true, message: `请选择${operation[0]}`}]})}
                     key={i.value}
                     checked={inputValue[operation[9]] && inputValue[operation[9]][operation[1]] === i.value}
-                    // error={isFieldTouched('pciOperation') && getFieldError('pciOperation')}
-                    // onErrorClick={() => Toast.info(getFieldError('pciOperation'))}
                     onChange={onChangeHandler.bind(this, operation[9], i.value, 'survey', operation[1])}
                   >
                     {i.label}
@@ -1133,15 +1252,14 @@ class BasicInformation extends React.Component {
           <p className='info_title'>五、数据管理</p>
           <p className='info_title'>1.手术登记</p>
           <p className='info_content'>手术登记方式 <span>*</span> </p>
-          {isFieldTouched('operaCheckWay') && getFieldError('operaCheckWay') ? <p className='surveyError'>{getFieldError('operaCheckWay')}</p>:''}
+          {getFieldError('operaCheckWay') ? <p className='surveyError'>{getFieldError('operaCheckWay')}</p>:''}
           {operaCheckWay.map(i => (
             <RadioItem
               {...getFieldProps('operaCheckWay', {
-                initialValue: inputValue.operaCheckWay || ''})}
+                initialValue: inputValue.operaCheckWay || '',
+                rules: [{required: true, message: '请选择手术登记方式'}]})}
               key={i.value}
               checked={i.value === inputValue.operaCheckWay}
-              // error={isFieldTouched('operaCheckWay') && getFieldError('operaCheckWay')}
-              // onErrorClick={() => Toast.info(getFieldError('operaCheckWay'))}
               onChange={onChangeHandler.bind(this, 'operaCheckWay', i.value)}
             >
               {i.label}
@@ -1153,11 +1271,12 @@ class BasicInformation extends React.Component {
           {inputValue.operaCheckWay === '电脑版' ? (
             <List>
               <p className='info_content'>电脑版的登记方式<i>（多选）</i> <span>*</span> </p>
-              {/*{isFieldTouched('pcCheckWay') && getFieldError('pcCheckWay') ? <p className='surveyError'>{getFieldError('pcCheckWay')}</p>:''}*/}
+              {getFieldError('pcCheckWay') ? <p className='surveyError'>{getFieldError('pcCheckWay')}</p>:''}
               {pcCheckWay.map(i => (
                 <CheckboxItem
                   {...getFieldProps('pcCheckWay', {
-                    initialValue: inputValue.pcCheckWay || ''})}
+                    initialValue: inputValue.pcCheckWay || '',
+                    rules: [{required: true, message: '请选择电脑版的登记方式'}]})}
                   key={i.value}
                   checked={inputValue.pcCheckWay && Array.isArray(inputValue.pcCheckWay) && inputValue.pcCheckWay.indexOf(i.value) > -1}
                   onChange={onChangeHandler.bind(this, 'pcCheckWay', i.value,  'checkbox')}
@@ -1170,15 +1289,14 @@ class BasicInformation extends React.Component {
 
               <p className='info_title'>2.影像资料</p>
               <p className='info_content'>影像资料的管理 <span>*</span> </p>
-              {isFieldTouched('imageManage') && getFieldError('imageManage') ? <p className='surveyError'>{getFieldError('imageManage')}</p>:''}
+              {getFieldError('imageManage') ? <p className='surveyError'>{getFieldError('imageManage')}</p>:''}
               {imageManage.map(i => (
                 <RadioItem
                   {...getFieldProps('imageManage', {
-                    initialValue: inputValue.imageManage || ''})}
+                    initialValue: inputValue.imageManage || '',
+                    rules: [{required: true, message: '请选择影像资料的管理'}]})}
                   key={i.value}
                   checked={i.value === inputValue.imageManage}
-                  // error={isFieldTouched('imageManage') && getFieldError('imageManage')}
-                  // onErrorClick={() => Toast.info(getFieldError('imageManage'))}
                   onChange={onChangeHandler.bind(this, 'imageManage', i.value)}
                 >
                   {i.label}
@@ -1188,12 +1306,13 @@ class BasicInformation extends React.Component {
               <WhiteSpace size="lg" />
 
               <p className='info_content'>承载媒介：<span>*</span> </p>
-              {isFieldTouched('medium') && getFieldError('medium') ? <p className='surveyError'>{getFieldError('medium')}</p>:''}
+              {getFieldError('medium') ? <p className='surveyError'>{getFieldError('medium')}</p>:''}
               {medium.map(i => (
                 <div key={i.value}>
                   <RadioItem
                     {...getFieldProps('medium', {
-                      initialValue: inputValue.medium || ''})}
+                      initialValue: inputValue.medium || '',
+                      rules: [{required: true, message: '请选择承载媒介'}]})}
                     key={i.value}
                     checked={i.value === inputValue.medium}
                     onChange={onChangeHandler.bind(this, 'medium', i.value)}
@@ -1227,15 +1346,14 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>1、目前导管室的数量能够满足您科的工作量吗？<span>*</span> </p>
-          {isFieldTouched('satisfied') && getFieldError('satisfied') ? <p className='surveyError'>{getFieldError('satisfied')}</p>:''}
+          {getFieldError('satisfied') ? <p className='surveyError'>{getFieldError('satisfied')}</p>:''}
           {satisfied.map(i => (
             <RadioItem
               {...getFieldProps('satisfied', {
-                initialValue: inputValue.satisfied || ''})}
+                initialValue: inputValue.satisfied || '',
+                rules: [{required: true, message: '请选择目前导管室的数量能够满足您科的工作量吗？'}]})}
               key={i.value}
               checked={i.value === inputValue.satisfied}
-              // error={isFieldTouched('satisfied') && getFieldError('satisfied')}
-              // onErrorClick={() => Toast.info(getFieldError('satisfied'))}
               onChange={onChangeHandler.bind(this, 'satisfied', i.value)}
             >
               {i.label}
@@ -1245,12 +1363,13 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>2、导管室人员中最紧缺的是？<i>（多选）</i> <span>*</span> </p>
-          {isFieldTouched('lack') && getFieldError('lack') ? <p className='surveyError'>{getFieldError('lack')}</p>:''}
+          {getFieldError('lack') ? <p className='surveyError'>{getFieldError('lack')}</p>:''}
           {lack.map(i => (
             <CheckboxItem
               key={i.value}
               {...getFieldProps('lack', {
-                initialValue: inputValue.lack || ''})}
+                initialValue: inputValue.lack || '',
+                rules: [{required: true, message: '请选择导管室人员中最紧缺的是？'}]})}
               // checked={i.value === (inputValue.groupSurgeryDoctorsOperationScope && inputValue.groupSurgeryDoctorsOperationScope[i.value])}
               checked={inputValue.lack && Array.isArray(inputValue.lack) && inputValue.lack.indexOf(i.value) > -1}
               onChange={onChangeHandler.bind(this, 'lack', i.value,  'checkbox')}
@@ -1262,15 +1381,14 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>3、导管室工作经常加班吗？<span>*</span> </p>
-          {isFieldTouched('overtime') && getFieldError('overtime') ? <p className='surveyError'>{getFieldError('overtime')}</p>:''}
+          {getFieldError('overtime') ? <p className='surveyError'>{getFieldError('overtime')}</p>:''}
           {overtime.map(i => (
             <RadioItem
               {...getFieldProps('overtime', {
-                initialValue: inputValue.overtime || ''})}
+                initialValue: inputValue.overtime || '',
+                rules: [{required: true, message: '请选择导管室工作经常加班吗？'}]})}
               key={i.value}
               checked={i.value === inputValue.overtime}
-              // error={isFieldTouched('overtime') && getFieldError('overtime')}
-              // onErrorClick={() => Toast.info(getFieldError('overtime'))}
               onChange={onChangeHandler.bind(this, 'overtime', i.value)}
             >
               {i.label}
@@ -1280,16 +1398,15 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>4、冠心病造影检查除了心脏科是否其他科室也开展？<span>*</span> </p>
-          {isFieldTouched('ca') && getFieldError('ca') ? <p className='surveyError'>{getFieldError('ca')}</p>:''}
+          {getFieldError('ca') ? <p className='surveyError'>{getFieldError('ca')}</p>:''}
           {ca.map(i => (
             <div key={i.value}>
               <RadioItem
                 {...getFieldProps('ca', {
-                  initialValue: inputValue.ca || ''})}
+                  initialValue: inputValue.ca || '',
+                  rules: [{required: true, message: '请选择冠心病造影检查除了心脏科是否其他科室也开展？'}]})}
                 key={i.value}
                 checked={i.value === inputValue.ca}
-                // error={isFieldTouched('ca') && getFieldError('ca')}
-                // onErrorClick={() => Toast.info(getFieldError('ca'))}
                 onChange={onChangeHandler.bind(this, 'ca', i.value)}
               >
                 {i.label}
@@ -1329,16 +1446,15 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
 
           <p className='info_content'>5、心脏介入治疗除了心脏科是否其他科室也开展？<span>*</span> </p>
-          {isFieldTouched('pci') && getFieldError('pci') ? <p className='surveyError'>{getFieldError('pci')}</p>:''}
+          {getFieldError('pci') ? <p className='surveyError'>{getFieldError('pci')}</p>:''}
           {pci.map(i => (
             <div key={i.value}>
               <RadioItem
                 {...getFieldProps('pci', {
-                  initialValue: inputValue.pci || ''})}
+                  initialValue: inputValue.pci || '',
+                  rules: [{required: true, message: '请选择心脏介入治疗除了心脏科是否其他科室也开展？'}]})}
                 key={i.value}
                 checked={i.value === inputValue.pci}
-                // error={isFieldTouched('pci') && getFieldError('pci')}
-                // onErrorClick={() => Toast.info(getFieldError('pci'))}
                 onChange={onChangeHandler.bind(this, 'pci', i.value)}
               >
                 {i.label}
