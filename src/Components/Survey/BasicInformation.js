@@ -577,7 +577,7 @@ class BasicInformation extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>其他设备数量<i>（多选）</i> <span>*</span> </p>
+          <p className='info_content'>其他设备数量<i>（多选）</i></p>
           {otherEquipNumber.map((i) => (
             <div key={i.value}>
               <CheckboxItem
@@ -595,7 +595,7 @@ class BasicInformation extends React.Component {
                     {...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler(i.value, value),
                       initialValue: inputValue[i.value] || '',
                       // initialValue: inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`],
-                      rules: [{required: true, message: '请输入其他设备数量'}]})}
+                      rules: [{required: true, message: '请输入填空项的内容'}]})}
                     type="number"
                     placeholder="请输入..."
                     value={inputValue[i.value]}

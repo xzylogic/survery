@@ -3,8 +3,7 @@ html:not([data-scale]) .am-list-body::after{
   height: 0;
 }
 
-.am-list-item,
-.am-list-item.am-input-item{
+:global(.am-list-item){
   border: 1px solid lightskyblue;
 }
 
