@@ -206,6 +206,13 @@ class BasicInformation extends React.Component {
     }
   }
 
+  formatDate = (date) => {
+    const pad = n => n < 10 ? `0${n}` : n;
+    const dateStr = `${date.getFullYear()}-${pad(date.getMonth() + 1)}`;
+    // const timeStr = `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    return `${dateStr}`;
+  }
+
   submit = () => {
     // const store = this.props;
 
@@ -642,6 +649,7 @@ class BasicInformation extends React.Component {
                     initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][i] && inputValue['dsaDtos'][i]['dsaDate'] && new Date(inputValue['dsaDtos'][i]['dsaDate'])})}
                   // })}
                   mode="month"
+                  format={val => `${this.formatDate(val)}`}
                   title=""
                   value={inputValue['dsaDtos'] && inputValue['dsaDtos'][i] && inputValue['dsaDtos'][i]['dsaDate'] && new Date(inputValue['dsaDtos'][i]['dsaDate'])}
                   minDate={new Date(`${new Date().getFullYear() - 120}-01-01`)}
@@ -652,52 +660,12 @@ class BasicInformation extends React.Component {
               </div>
             )
           })}
-          {/*{(dsa_id || this.state.dsa_id).map((index) => {
-            return (
-              <div key={index}>
-                <p className='dsa_id'>{index}</p>
-                <p className='dsa_title'>品牌</p>
-                <InputItem
-                  {...getFieldProps(`dsaName${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaName${index}`),
-                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaName${index}`]})}
-                  type="text"
-                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaName${index}`]}
-                  // onChange={onChangeHandler.bind(this, 'dsaName')}
-                />
-                <p className='dsa_title'>型号</p>
-                <InputItem
-                  {...getFieldProps(`dsaModel${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaModel${index}`),
-                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaModel${index}`]})}
-                  type="text"
-                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaModel${index}`]}
-                />
-                <p className='dsa_title'>安装年月</p>
-                <DatePicker
-                  {...getFieldProps(`dsaDate${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaDate${index}`),
-                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`] && new Date(inputValue['dsaDtos'][`dsaDate${index}`])})}
-                  mode="month"
-                  title=""
-                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`] && new Date(inputValue['dsaDtos'][`dsaDate${index}`])}
-                  minDate={new Date(`${new Date().getFullYear() - 120}-01-01`)}
-                  maxDate={new Date()}
-                >
-                  <List.Item arrow="horizontal"> </List.Item>
-                </DatePicker>
-                <InputItem
-                  {...getFieldProps(`dsaDate${index}`, {onChange: (value) => onChangeHandler('dsaDtos', value, 'survey', `dsaDate${index}`),
-                    initialValue: inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]})}
-                  type="text"
-                  value={inputValue['dsaDtos'] && inputValue['dsaDtos'][`dsaDate${index}`]}
-                />
-              </div>
-            )
-          })}*/}
           <WhiteSpace size="lg" />
           <Button type='primary' onClick={this.addDsa}>+</Button>
-
           <WhiteSpace size="lg" />
 
           <p className='info_content'>其他设备数量<i>（多选）</i></p>
+          {/*{getFieldError('otherEquipNumber') ? <p className='surveyError'>{getFieldError('otherEquipNumber')}</p>:''}*/}
           {otherEquipNumber.map((i) => (
             <div key={i.value}>
               <CheckboxItem
@@ -725,36 +693,6 @@ class BasicInformation extends React.Component {
               ) : ''}
             </div>
           ))}
-          {/*{isFieldTouched('otherEquipNumber') && getFieldError('otherEquipNumber') ? <p className='surveyError'>{getFieldError('otherEquipNumber')}</p>:''}*/}
-
-          {/*<p className='info_content'>其他设备数量<i>（多选）</i> <span>*</span> </p>*/}
-          {/*{otherEquipNumber.map(i => (*/}
-          {/*<div key={i.value}>*/}
-          {/*<CheckboxItem*/}
-          {/*// {...getFieldProps('otherEquipNumber', {onChange: () => onChangeHandler('otherEquipNumber', i.value,  'survey', i.value)})}*/}
-          {/*// checked={i.value === (inputValue.otherEquipNumber && inputValue.otherEquipNumber[i.value])}  //  (typeof inputValue['otherEquipNumber'] === "object")*/}
-          {/*checked={inputValue.otherEquipNumber && inputValue['otherEquipNumber'][i.value]}*/}
-          {/*onClick={onChangeHandler.bind(this, 'otherEquipNumber', i.value, 'survey', i.value)}*/}
-          {/*>*/}
-          {/*{i.label}*/}
-          {/*</CheckboxItem>*/}
-          {/*{*/}
-          {/*Object.keys(inputValue['otherEquipNumber']).forEach(key => {*/}
-          {/*return key === i.value ? (*/}
-          {/*<div>*/}
-          {/*{console.log('true')}*/}
-          {/*<InputItem*/}
-          {/*{...getFieldProps(`otherEquipNumber${i.value}`, {onChange: (value) => onChangeHandler('otherEquipNumber', value, 'survey', i.value), rules: [{required: true, message: '请输入其他设备数量'}]})}*/}
-          {/*type="number"*/}
-          {/*value={inputValue['otherEquipNumber'] && inputValue['otherEquipNumber'][i.value]}*/}
-          {/*/>*/}
-          {/*{isFieldTouched(`otherEquipNumber${i.value}`) && getFieldError(`otherEquipNumber${i.value}`) ? <p className='surveyError'>{getFieldError(`otherEquipNumber${i.value}`)}</p>:''}*/}
-          {/*</div>*/}
-          {/*) : ''*/}
-          {/*})*/}
-          {/*}*/}
-          {/*</div>*/}
-          {/*))}*/}
 
           <WhiteSpace size="lg" />
 
