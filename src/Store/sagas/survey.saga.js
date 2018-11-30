@@ -1,11 +1,12 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
-
+import {Toast} from "antd-mobile";
 import {
   actionTypes, updateInputValueAction,
   appendInputValueAction, surveyUpdateLocalAction,
 } from '../actions/survey.action'
 
 import { HttpHandlerService } from '../../Utilities/HttpService'
+
 // import { GetRedirectUrl } from '../../Utilities'
 
 const PATH = {
@@ -34,9 +35,11 @@ const saveSurveyService = (data, errorHandler) => {
 }
 
 function* saveSurvey(actions) {
-  const res = yield call(saveSurveyService, actions.data, actions.errorHandler)
+  Toast.loading('处理中，请稍后...');
+  const res = yield call(saveSurveyService, actions.data, actions.errorHandler);
   if (res) {
-    actions.callback()
+    Toast.hide();
+    actions.callback();
   }
 }
 
