@@ -33,6 +33,11 @@ html:not([data-scale]) .am-list-body::after{
   padding: 0.8rem 0.3rem;
 }
 
+.survey_logo {
+  text-align: center;
+  padding: .3rem 0;
+}
+
 .survey_title {
   font-size: 0.5rem;
   line-height: 2;

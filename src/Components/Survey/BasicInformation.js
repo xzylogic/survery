@@ -447,7 +447,7 @@ class BasicInformation extends React.Component {
         </List>
 
 
-
+        <WhiteSpace size="lg" />
         <List>
           <p className='info_title'>一、心脏科基本情况</p>
           <p className='info_content'>病房床位数（单位：张）<span>*</span> </p>
@@ -540,7 +540,7 @@ class BasicInformation extends React.Component {
 
         {/*<HeartBasicCondition onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError} />*/}
 
-
+        <WhiteSpace size="lg" />
         <List>
           <p className='info_title'>二.心导管室硬件情况</p>
           <WhiteSpace size="lg" />
@@ -621,7 +621,7 @@ class BasicInformation extends React.Component {
 
         {/*<HeartPipeHardwareCondition onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError} />*/}
 
-
+        <WhiteSpace size="lg" />
         <List>
           <p className='info_content'>数字减影血管造影机</p>
           {(dsa_id || this.state.dsa_id).map((index, i) => {
@@ -738,7 +738,7 @@ class BasicInformation extends React.Component {
 
         {/*<DSA onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>*/}
 
-
+        <WhiteSpace size="lg" />
         <List>
           <p className='info_title'>三、心导管人员结构</p>
           <p className='info_content'>科主任姓名 <span>*</span> </p>
@@ -1071,7 +1071,7 @@ class BasicInformation extends React.Component {
 
         {/*<HeartPipePersonConstruct onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>*/}
 
-
+        <WhiteSpace size="lg" />
         <List>
           <p className='info_title'>四、2018年工作量（2018年1月~2018年11月）</p>
 
@@ -1104,7 +1104,7 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[2]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[2]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[2]],
                         rules: [{required: true, message: '请输入手术量'}]})}
-                      type="text"
+                      type="number"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[2]]}
                     />
 
@@ -1116,7 +1116,7 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[3]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[3]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[3]],
                         rules: [{required: true, message: '请输入急诊手术量'}]})}
-                      type="text"
+                      type="number"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[3]]}
                     />
 
@@ -1128,7 +1128,7 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[4]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[4]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[4]],
                         rules: [{required: true, message: '请输入病种比例'}]})}
-                      type="text"
+                      type="number"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[4]]}
                     />
 
@@ -1140,7 +1140,7 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[5]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[5]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[5]],
                         rules: [{required: true, message: '请输入平均住院日'}]})}
-                      type="text"
+                      type="number"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[5]]}
                     />
 
@@ -1152,7 +1152,7 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[6]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[6]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[6]],
                         rules: [{required: true, message: '请输入平均手术费用'}]})}
-                      type="text"
+                      type="number"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[6]]}
                     />
 
@@ -1164,7 +1164,7 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[7]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[7]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[7]],
                         rules: [{required: true, message: '请输入治愈率'}]})}
-                      type="text"
+                      type="number"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[7]]}
                     />
 
@@ -1176,7 +1176,7 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[8]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[8]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[8]],
                         rules: [{required: true, message: '请输入死亡率'}]})}
-                      type="text"
+                      type="number"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[8]]}
                     />
 
