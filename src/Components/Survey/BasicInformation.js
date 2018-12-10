@@ -324,12 +324,12 @@ class BasicInformation extends React.Component {
         '隶属学科及人数（可多选）', 'cmNum', 'casNum', 'rdNum', 'otherName', 'otherNum', 'techDto'],
     ];
     const workLoadList = [
-      ['1.PCI手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pciCommonDto'],
-      ['2.起搏器手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'poCommonDto'],
-      ['3.射频消融术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'rfCommonDto'],
-      ['4.先心病介入', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'chdCommonDto'],
-      ['5.左心耳封堵术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'laacCommonDto'],
-      ['6.经皮主动脉瓣膜置换/成形术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pavCommonDto']
+      ['PCI手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pciCommonDto'],
+      ['起搏器手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'poCommonDto'],
+      ['射频消融术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'rfCommonDto'],
+      ['先心病介入', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'chdCommonDto'],
+      ['左心耳封堵术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'laacCommonDto'],
+      ['经皮主动脉瓣膜置换/成形术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pavCommonDto']
     ];
 
     return (
@@ -1006,11 +1006,11 @@ class BasicInformation extends React.Component {
 
                 <p className='info_content'>{personValue[9]}</p>
                 <p className='dsa_title'>心血管内科</p>
-                {getFieldError(`ns_${personValue[10]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[10]}${index}`)}</p>:''}
+                {/*{getFieldError(`ns_${personValue[10]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[10]}${index}`)}</p>:''}*/}
                 <InputItem
-                  {...getFieldProps(`ns_${personValue[10]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[10]),
-                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[10]],
-                    rules: [{required: true, message: '请输入专科人数'}]})}
+                  {...getFieldProps(`ns_${personValue[10]}${index}`, {
+                    onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[10]),
+                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[10]]})}
                   type="number"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[10]]}
                 />
@@ -1018,11 +1018,10 @@ class BasicInformation extends React.Component {
                 <WhiteSpace size="lg" />
 
                 <p className='dsa_title'>心外科</p>
-                {getFieldError(`ns_${personValue[11]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[11]}${index}`)}</p>:''}
+                {/*{getFieldError(`ns_${personValue[11]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[11]}${index}`)}</p>:''}*/}
                 <InputItem
                   {...getFieldProps(`ns_${personValue[11]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[11]),
-                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[11]],
-                    rules: [{required: true, message: '请输入本科人数'}]})}
+                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[11]]})}
                   type="number"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[11]]}
                 />
@@ -1030,11 +1029,10 @@ class BasicInformation extends React.Component {
                 <WhiteSpace size="lg" />
 
                 <p className='dsa_title'>放射科</p>
-                {getFieldError(`ns_${personValue[12]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[12]}${index}`)}</p>:''}
+                {/*{getFieldError(`ns_${personValue[12]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[12]}${index}`)}</p>:''}*/}
                 <InputItem
                   {...getFieldProps(`ns_${personValue[12]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[12]),
-                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[12]],
-                    rules: [{required: true, message: '请输入硕士人数'}]})}
+                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[12]]})}
                   type="number"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[12]]}
                 />
@@ -1042,21 +1040,19 @@ class BasicInformation extends React.Component {
                 <WhiteSpace size="lg" />
 
                 <p className='dsa_title'>其他学科：</p>
-                {getFieldError(`ns_${personValue[13]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[13]}${index}`)}</p>:''}
+                {/*{getFieldError(`ns_${personValue[13]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[13]}${index}`)}</p>:''}*/}
                 <InputItem
                   {...getFieldProps(`ns_${personValue[13]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[13]),
-                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[13]],
-                    rules: [{required: true, message: '请输入其他学科'}]})}
+                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[13]]})}
                   type="text"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[13]]}
                 />
 
                 <p className='dsa_title'>（人数）</p>
-                {getFieldError(`ns_${personValue[14]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[14]}${index}`)}</p>:''}
+                {/*{getFieldError(`ns_${personValue[14]}${index}`) ? <p className='surveyError'>{getFieldError(`ns_${personValue[14]}${index}`)}</p>:''}*/}
                 <InputItem
                   {...getFieldProps(`ns_${personValue[14]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[14]),
-                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[14]],
-                    rules: [{required: true, message: '请输入其他学科的人数'}]})}
+                    initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[14]]})}
                   type="number"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[14]]}
                 />

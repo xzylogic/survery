@@ -22,3 +22,8 @@ html, body {
 html:not([data-scale]) .am-list .am-list-item.am-textarea-item{
   border: 1px solid lightskyblue;
 }
+
+html:not([data-scale]) .am-list-body div:not(:last-child) .am-list-line::after,
+html:not([data-scale]) .am-list-item:not(:last-child) .am-list-line::after{
+  height: 0;
+}
