@@ -48,7 +48,6 @@ html:not([data-scale]) .am-list-body::after{
   font-size: 0.5rem;
   line-height: 2;
   color: rgb(59, 59, 59);
-  text-align: center;
 }
 
 .survey_container {
