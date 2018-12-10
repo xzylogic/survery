@@ -14,3 +14,11 @@ table { border-collapse:collapse; border-spacing:0; }
 html, body {
   font-size: 50px;
 }
+
+.am-list-body .am-list-item:last-child{
+  border: 1px solid lightskyblue;
+}
+
+html:not([data-scale]) .am-list .am-list-item.am-textarea-item{
+  border: 1px solid lightskyblue;
+}

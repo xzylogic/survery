@@ -25,23 +25,30 @@ html:not([data-scale]) .am-list-body::after{
   border-top: 1px dashed darkgray;
 }
 
-/*.am-list {*/
-  /*padding: 0.5rem 0;*/
-/*}*/
-
 .survey {
-  padding: 0.8rem 0.3rem;
+  padding: 0.8rem 0.3rem 0.3rem 0.3rem;
 }
 
-.survey_logo {
+.survey_logo{
   text-align: center;
-  padding: .3rem 0;
+}
+
+.survey_logo img{
+  width: 0.5rem;
+}
+
+.survey_support{
+  font-size: 0.35rem;
+  display: inline-block;
+  vertical-align: middle;
+  text-indent: 0.5em;
 }
 
 .survey_title {
   font-size: 0.5rem;
   line-height: 2;
   color: rgb(59, 59, 59);
+  text-align: center;
 }
 
 .survey_container {
@@ -56,8 +63,8 @@ html:not([data-scale]) .am-list-body::after{
 .survey_noUnit {
   font-size: 0.35rem;
   /*color: rgb(82, 84, 105);*/
-  height: 2.5rem;
-  padding-top: 1rem;
+  height: 1.5rem;
+  padding-top: 0.8rem;
 }
 
 .survey_noUnit span{

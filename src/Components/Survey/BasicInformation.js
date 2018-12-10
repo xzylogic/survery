@@ -313,23 +313,23 @@ class BasicInformation extends React.Component {
     let onChangeHandler = this.onChangeHandler;
 
     const eachGroupNumberLsit = [
-      ['PCI小组', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'pciDto'],
-      ['电生理组人数', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'esDto'],
-      ['结构性心脏病介入组人数', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'shdDto']
+      ['（1）PCI小组', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'pciDto'],
+      ['（2）电生理组人数', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'esDto'],
+      ['（3）结构性心脏病介入组人数', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'shdDto']
     ];
     const nurse_skill_personKindList = [
-      ['总护士人数（单位：人）', 'totalNum', '护士人才架构（单位：人）', 'juniorNum', 'bachelorNum', 'masterNum', 'doctorNum', 'seniorNum', 'mediumNum',
+      ['2.护士人数（单位：人）', 'totalNum', '护士人才架构（单位：人）', 'juniorNum', 'bachelorNum', 'masterNum', 'doctorNum', 'seniorNum', 'mediumNum',
         '隶属学科及人数（可多选）', 'cmNum', 'casNum', 'rdNum', 'otherName', 'otherNum', 'nurseDto'],
-      ['技术员人数', 'totalNum', '技术员人才架构（单位：人）', 'juniorNum', 'bachelorNum', 'masterNum', 'doctorNum', 'seniorNum', 'mediumNum',
+      ['3.技术员人数（单位：人）', 'totalNum', '技术员人才架构（单位：人）', 'juniorNum', 'bachelorNum', 'masterNum', 'doctorNum', 'seniorNum', 'mediumNum',
         '隶属学科及人数（可多选）', 'cmNum', 'casNum', 'rdNum', 'otherName', 'otherNum', 'techDto'],
     ];
     const workLoadList = [
-      ['PCI手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pciCommonDto'],
-      ['起搏器手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'poCommonDto'],
-      ['射频消融术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'rfCommonDto'],
-      ['先心病介入', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'chdCommonDto'],
-      ['左心耳封堵术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'laacCommonDto'],
-      ['经皮主动脉瓣膜置换/成形术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pavCommonDto']
+      ['1.PCI手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pciCommonDto'],
+      ['2.起搏器手术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'poCommonDto'],
+      ['3.射频消融术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'rfCommonDto'],
+      ['4.先心病介入', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'chdCommonDto'],
+      ['5.左心耳封堵术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'laacCommonDto'],
+      ['6.经皮主动脉瓣膜置换/成形术', 'ifHave', 'operaCount', 'emergencyCount', 'sickKindRate', 'averageInHospital', 'averageOperaCost', 'cureRate', 'diedRate', 'pavCommonDto']
     ];
 
     return (
@@ -542,7 +542,7 @@ class BasicInformation extends React.Component {
 
         <WhiteSpace size="lg" />
         <List>
-          <p className='info_title'>二.心导管室硬件情况</p>
+          <p className='info_title'>二、心导管室硬件情况</p>
           <WhiteSpace size="lg" />
 
           <p className='info_content'>导管室数量（单位：间）<span>*</span> </p>
@@ -780,7 +780,7 @@ class BasicInformation extends React.Component {
           <WhiteSpace size="lg" />
           <p className='dashed' />
 
-          <p className='info_content'>1.医师总人数(单位：人) <span>*</span> </p>
+          <p className='info_content'>1.医师人数(单位：人) <span>*</span> </p>
           {getFieldError('surgeonNum') ? <p className='surveyError'>{getFieldError('surgeonNum')}</p>:''}
           <InputItem
             {...getFieldProps('surgeonNum', {onChange: (value) => onChangeHandler('surgeonNum', value),
@@ -923,7 +923,7 @@ class BasicInformation extends React.Component {
                 <InputItem
                   {...getFieldProps(`ns_${personValue[1]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[1]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[1]],
-                    rules: [{required: true, message: '请输入总护士人数'}]})}
+                    rules: [{required: true, message: '请输入人数'}]})}
                   type="number"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[1]]}
                 />
@@ -1060,7 +1060,7 @@ class BasicInformation extends React.Component {
                   type="number"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[14]]}
                 />
-
+                <WhiteSpace size="lg" />
                 <WhiteSpace size="lg" />
               </div>
             )
@@ -1071,7 +1071,6 @@ class BasicInformation extends React.Component {
 
         {/*<HeartPipePersonConstruct onChangeHandler={this.onChangeHandler} getFieldProps={getFieldProps} isFieldTouched={isFieldTouched} getFieldError={getFieldError}/>*/}
 
-        <WhiteSpace size="lg" />
         <List>
           <p className='info_title'>四、2018年工作量（2018年1月~2018年11月）</p>
 
@@ -1283,7 +1282,7 @@ class BasicInformation extends React.Component {
           <p className='info_title'>六、建议意见</p>
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>1、目前导管室的数量能够满足您科的工作量吗？<span>*</span> </p>
+          <p className='info_content'>1.目前导管室的数量能够满足您科的工作量吗？<span>*</span> </p>
           {getFieldError('satisfied') ? <p className='surveyError'>{getFieldError('satisfied')}</p>:''}
           {satisfied.map(i => (
             <RadioItem
@@ -1300,7 +1299,7 @@ class BasicInformation extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>2、导管室人员中最紧缺的是？<i>（多选）</i> <span>*</span> </p>
+          <p className='info_content'>2.导管室人员中最紧缺的是？<i>（多选）</i> <span>*</span> </p>
           {getFieldError('lack') ? <p className='surveyError'>{getFieldError('lack')}</p>:''}
           {lack.map(i => (
             <CheckboxItem
@@ -1318,7 +1317,7 @@ class BasicInformation extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>3、导管室工作经常加班吗？<span>*</span> </p>
+          <p className='info_content'>3.导管室工作经常加班吗？<span>*</span> </p>
           {getFieldError('overtime') ? <p className='surveyError'>{getFieldError('overtime')}</p>:''}
           {overtime.map(i => (
             <RadioItem
@@ -1335,7 +1334,7 @@ class BasicInformation extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>4、冠心病造影检查除了心脏科是否其他科室也开展？<span>*</span> </p>
+          <p className='info_content'>4.冠心病造影检查除了心脏科是否其他科室也开展？<span>*</span> </p>
           {getFieldError('ca') ? <p className='surveyError'>{getFieldError('ca')}</p>:''}
           {ca.map(i => (
             <div key={i.value}>
@@ -1383,7 +1382,7 @@ class BasicInformation extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>5、心脏介入治疗除了心脏科是否其他科室也开展？<span>*</span> </p>
+          <p className='info_content'>5.心脏介入治疗除了心脏科是否其他科室也开展？<span>*</span> </p>
           {getFieldError('pci') ? <p className='surveyError'>{getFieldError('pci')}</p>:''}
           {pci.map(i => (
             <div key={i.value}>
@@ -1418,7 +1417,7 @@ class BasicInformation extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>目前开展心导管室工作最困难的是：<span>*</span> </p>
+          <p className='info_content'>6.目前开展心导管室工作最困难的是：<span>*</span> </p>
           {getFieldError('trouble') ? <p className='surveyError'>{getFieldError('trouble')}</p>:''}
           <TextareaItem
             {...getFieldProps('trouble', {onChange: (value) => onChangeHandler('trouble', value),
@@ -1431,7 +1430,7 @@ class BasicInformation extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>建议的培训项目或内容：<span>*</span> </p>
+          <p className='info_content'>7.建议的培训项目或内容：<span>*</span> </p>
           {getFieldError('program') ? <p className='surveyError'>{getFieldError('program')}</p>:''}
           <TextareaItem
             {...getFieldProps('program', {onChange: (value) => onChangeHandler('program', value),
@@ -1444,7 +1443,7 @@ class BasicInformation extends React.Component {
 
           <WhiteSpace size="lg" />
 
-          <p className='info_content'>给行政部门或质控中心的建议：<span>*</span> </p>
+          <p className='info_content'>8.给行政部门或质控中心的建议：<span>*</span> </p>
           {getFieldError('suggest') ? <p className='surveyError'>{getFieldError('suggest')}</p>:''}
           <TextareaItem
             {...getFieldProps('suggest', {onChange: (value) => onChangeHandler('suggest', value),
