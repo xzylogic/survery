@@ -803,7 +803,7 @@ class BasicInformation extends React.Component {
                 <p className='dsa_id'>{personValue[0]}</p>
                 <WhiteSpace size="lg" />
 
-                <p className='info_content'>组内共多少人（单位：人）<span>*</span> </p>
+                <p className='info_content'>组内共多少人？（单位：人）<span>*</span> </p>
                 {getFieldError(`${personValue[1]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[1]}${index}`)}</p>:''}
                 <InputItem
                   {...getFieldProps(`${personValue[1]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[1]),
@@ -815,7 +815,7 @@ class BasicInformation extends React.Component {
 
                 <WhiteSpace size="lg" />
 
-                <p className='info_content'>组内博士多少人（单位：人）<span>*</span> </p>
+                <p className='info_content'>组内博士多少人？（单位：人）<span>*</span> </p>
                 {getFieldError(`${personValue[2]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[2]}${index}`)}</p>:''}
                 <InputItem
                   {...getFieldProps(`${personValue[2]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[2]),
@@ -827,7 +827,7 @@ class BasicInformation extends React.Component {
 
                 <WhiteSpace size="lg" />
 
-                <p className='info_content'>组内硕士多少人（单位：人）<span>*</span> </p>
+                <p className='info_content'>组内硕士多少人？（单位：人）<span>*</span> </p>
                 {getFieldError(`${personValue[3]}${index}`) ? <p className='surveyError'>{getFieldError(`${personValue[3]}${index}`)}</p>:''}
                 <InputItem
                   {...getFieldProps(`${personValue[3]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[3]),

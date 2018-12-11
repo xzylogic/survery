@@ -59,6 +59,14 @@ html:not([data-scale]) .am-list-body::after{
   border-bottom: 3px solid rgb(68, 144, 240);
 }
 
+.survey img{
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  right: 0;
+  bottom: 1.1rem;
+}
+
 .survey_noUnit {
   font-size: 0.35rem;
   /*color: rgb(82, 84, 105);*/
