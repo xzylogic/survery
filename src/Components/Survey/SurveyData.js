@@ -29,6 +29,7 @@ export const hospitalType = [
   {label: '民营', value: '民营'},
   {label: '儿童', value: '儿童'},
   {label: '部队', value: '部队'},
+  {label: '其他', value: '其他'},
 ];
 
 export const area = [
