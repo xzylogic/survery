@@ -2,6 +2,7 @@
 import Question from './Pages/Question'
 import Success from './Pages/Success'
 import surveySuccess from './Pages/surveySuccess'
+import ExportExcel from './Pages/ExportExcel'
 import Survey from './Pages/Survey'
 import Error from './Pages/Error'
 
@@ -22,6 +23,9 @@ export const routeConfig = [{
 }, {
   path: '/surveySuccess',
   component: surveySuccess,
+}, {
+  path: '/exportExcel',
+  component: ExportExcel,
 }]
 
 export const staticRouteConfig = [{
