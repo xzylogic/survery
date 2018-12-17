@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import SurveyComponent from '../Components/Survey/SurveyComponent'
-import {surveyGetLocalAction} from "../Store/actions/survey.action";
+import {surveyGetLocalAction, exportExcel} from "../Store/actions/survey.action";
 
 
 class Survey extends React.Component {
@@ -11,6 +11,7 @@ class Survey extends React.Component {
   componentDidMount() {
     const store = this.props;
     store.dispatch(surveyGetLocalAction());
+    store.dispatch(exportExcel());
   }
 
   render() {

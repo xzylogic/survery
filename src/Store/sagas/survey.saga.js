@@ -11,6 +11,7 @@ import { HttpHandlerService } from '../../Utilities/HttpService'
 
 const PATH = {
   saveSurvey: 'http://pci.violetqqy.com/pci-operation/api/hospital/saveRecord',
+  exportExcel: 'http://pci.violetqqy.com/pci-operation/api/hospital/exportExcel',
 }
 
 function* surveyStoreLocal(actions) {
@@ -43,8 +44,21 @@ function* saveSurvey(actions) {
   }
 }
 
+const exportExcelService = () => {
+  return HttpHandlerService.get(`${PATH.exportExcel}`).then(value => {
+    let a = document.createElement('a');
+    a.href= value;
+    a.click();
+  });
+}
+
+function* exportExcel() {
+  yield call(exportExcelService);
+}
+
 export const globalSaga = [
   takeLatest(actionTypes.SURVEY_STORE_LOCAL, surveyStoreLocal),
   takeLatest(actionTypes.SURVER_GET_LOCAL, surveyGetLocal),
   takeLatest(actionTypes.SAVE_SURVEY, saveSurvey),
+  takeLatest(actionTypes.EXPORT_EXCEL, exportExcel),
 ];

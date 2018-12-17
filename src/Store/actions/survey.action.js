@@ -6,6 +6,7 @@ export const actionTypes = {
   SURVEY_STORE_LOCAL: 'SURVEY_STORE_LOCAL',
   SURVER_GET_LOCAL: 'SURVER_GET_LOCAL',
   SURVER_UPDATE_LOCAL: 'SURVER_UPDATE_LOCAL',
+  EXPORT_EXCEL: 'EXPORT_EXCEL',
 }
 
 export const submitAgreementAction = () => {
@@ -62,5 +63,11 @@ export const saveSurveyAction = (data, callback, errorHandler) => {
     data: data,
     callback: callback,
     errorHandler: errorHandler
+  }
+}
+
+export const exportExcel = () => {
+  return {
+    type: actionTypes.EXPORT_EXCEL,
   }
 }
