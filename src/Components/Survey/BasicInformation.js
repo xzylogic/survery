@@ -312,6 +312,15 @@ class BasicInformation extends React.Component {
     let dsa_id = localStorage.getItem('dsa_id') && localStorage.getItem('dsa_id').split(',');
     let onChangeHandler = this.onChangeHandler;
 
+    // 通过自定义 moneyKeyboardWrapProps 修复虚拟键盘滚动穿透问题
+    // const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+    // let moneyKeyboardWrapProps;
+    // if (isIPhone) {
+    //   moneyKeyboardWrapProps = {
+    //     onTouchStart: e => e.preventDefault(),
+    //   };
+    // }
+
     const eachGroupNumberLsit = [
       ['（1）PCI小组', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'pciDto'],
       ['（2）电生理组人数', 'totalNum', 'doctorNum', 'masterNum', 'seniorNum', 'mediumNum', 'canSelect', 'otherSubject', 'surgeryNum', 'esDto'],
@@ -370,7 +379,9 @@ class BasicInformation extends React.Component {
             {...getFieldProps('totalBedNum', {onChange: (value) => onChangeHandler('totalBedNum', value),
               initialValue: inputValue.totalBedNum || '',
               rules: [{required: true, message: '请输入核定总床位数'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.totalBedNum || ''}
             // error={isFieldTouched('totalBedNum') && getFieldError('totalBedNum')}
             // onErrorClick={() => Toast.info(getFieldError('totalBedNum'))}
@@ -384,7 +395,9 @@ class BasicInformation extends React.Component {
             {...getFieldProps('openBedNum', {onChange: (value) => onChangeHandler('openBedNum', value),
               initialValue: inputValue.openBedNum || '',
               rules: [{required: true, message: '请输入实际开放总床位数'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.openBedNum || ''}
           />
 
@@ -456,7 +469,9 @@ class BasicInformation extends React.Component {
             {...getFieldProps('wardBedNum', {onChange: (value) => onChangeHandler('wardBedNum', value),
               initialValue: inputValue.wardBedNum || '',
               rules: [{required: true, message: '请输入病房床位数'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.wardBedNum || ''}
           />
 
@@ -468,7 +483,9 @@ class BasicInformation extends React.Component {
             {...getFieldProps('ccuBedNum', {onChange: (value) => onChangeHandler('ccuBedNum', value),
               initialValue: inputValue.ccuBedNum || '',
               rules: [{required: true, message: '请输入CCU床位数'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.ccuBedNum || ''}
           />
 
@@ -480,7 +497,9 @@ class BasicInformation extends React.Component {
             {...getFieldProps('Basic_doctorNum', {onChange: (value) => onChangeHandler('doctorNum', value),
               initialValue: inputValue.doctorNum || '',
               rules: [{required: true, message: '请输入医师人数'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.doctorNum || ''}
           />
 
@@ -492,7 +511,9 @@ class BasicInformation extends React.Component {
             {...getFieldProps('nurseNum', {onChange: (value) => onChangeHandler('nurseNum', value),
               initialValue: inputValue.nurseNum || '',
               rules: [{required: true, message: '请输入护士人数'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.nurseNum || ''}
           />
 
@@ -549,7 +570,9 @@ class BasicInformation extends React.Component {
           {getFieldError('pipeNum') ? <p className='surveyError'>{getFieldError('pipeNum')}</p>:''}
           <InputItem
             {...getFieldProps('pipeNum', {onChange: (value) => onChangeHandler('pipeNum', value), initialValue: inputValue.pipeNum || '', rules: [{required: true, message: '请输入导管室数量'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.pipeNum || ''}
           />
 
@@ -559,7 +582,9 @@ class BasicInformation extends React.Component {
           {getFieldError('averageArea') ? <p className='surveyError'>{getFieldError('averageArea')}</p>:''}
           <InputItem
             {...getFieldProps('averageArea', {onChange: (value) => onChangeHandler('averageArea', value), initialValue: inputValue.averageArea || '', rules: [{required: true, message: '请输入手术区域平均使用面积'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.averageArea || ''}
           />
 
@@ -684,7 +709,9 @@ class BasicInformation extends React.Component {
                       initialValue: inputValue[i.value] || '',
                       // initialValue: inputValue['otherEquipNumberValue'] && inputValue['otherEquipNumberValue'][`otherEquipNumber${i.value}`],
                       rules: [{required: true, message: '请输入填空项的内容'}]})}
-                    type="number"
+                    type="money"
+                    clear
+                    moneyKeyboardAlign="left"
                     placeholder="请输入..."
                     value={inputValue[i.value]}
                   />
@@ -786,7 +813,9 @@ class BasicInformation extends React.Component {
             {...getFieldProps('surgeonNum', {onChange: (value) => onChangeHandler('surgeonNum', value),
               initialValue: inputValue.surgeonNum || '',
               rules: [{required: true, message: '请输入医师总人数'}]})}
-            type="number"
+            type="money"
+            clear
+            moneyKeyboardAlign="left"
             value={inputValue.surgeonNum || ''}
           />
 
@@ -809,7 +838,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`${personValue[1]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[1]),
                     initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[1]],
                     rules: [{required: true, message: '请输入组内共多少人'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[1]]}
                 />
 
@@ -821,7 +852,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`${personValue[2]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[2]),
                     initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[2]],
                     rules: [{required: true, message: '请输入组内博士多少人'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[2]]}
                 />
 
@@ -833,7 +866,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`${personValue[3]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[3]),
                     initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[3]],
                     rules: [{required: true, message: '请输入组内硕士多少人'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[3]]}
                 />
 
@@ -845,7 +880,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`${personValue[4]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[4]),
                     initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[4]],
                     rules: [{required: true, message: '请输入高级职称多少人'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[4]]}
                 />
 
@@ -857,7 +894,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`${personValue[5]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[5]),
                     initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[5]],
                     rules: [{required: true, message: '请输入中级职称多少人'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[5]]}
                 />
 
@@ -902,7 +941,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`${personValue[8]}${index}`, {onChange: (value) => onChangeHandler(personValue[9], value, 'survey', personValue[8]),
                     initialValue: inputValue[personValue[9]] && inputValue[personValue[9]][personValue[8]],
                     rules: [{required: true, message: '请输入目前参与急诊手术的人数'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[9]] && inputValue[personValue[9]][personValue[8]]}
                 />
 
@@ -924,7 +965,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`ns_${personValue[1]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[1]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[1]],
                     rules: [{required: true, message: '请输入人数'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[1]]}
                 />
 
@@ -937,7 +980,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`ns_${personValue[3]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[3]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[3]],
                     rules: [{required: true, message: '请输入专科人数'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[3]]}
                 />
 
@@ -949,7 +994,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`ns_${personValue[4]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[4]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[4]],
                     rules: [{required: true, message: '请输入本科人数'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[4]]}
                 />
 
@@ -961,7 +1008,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`ns_${personValue[5]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[5]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[5]],
                     rules: [{required: true, message: '请输入硕士人数'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[5]]}
                 />
 
@@ -973,7 +1022,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`ns_${personValue[6]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[6]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[6]],
                     rules: [{required: true, message: '请输入博士人数'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[6]]}
                 />
 
@@ -985,7 +1036,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`ns_${personValue[7]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[7]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[7]],
                     rules: [{required: true, message: '请输入高级职称人数'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[7]]}
                 />
 
@@ -997,7 +1050,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`ns_${personValue[8]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[8]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[8]],
                     rules: [{required: true, message: '请输入中级职称人数'}]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[8]]}
                 />
 
@@ -1011,7 +1066,9 @@ class BasicInformation extends React.Component {
                   {...getFieldProps(`ns_${personValue[10]}${index}`, {
                     onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[10]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[10]]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[10]]}
                 />
 
@@ -1022,7 +1079,9 @@ class BasicInformation extends React.Component {
                 <InputItem
                   {...getFieldProps(`ns_${personValue[11]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[11]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[11]]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[11]]}
                 />
 
@@ -1033,7 +1092,9 @@ class BasicInformation extends React.Component {
                 <InputItem
                   {...getFieldProps(`ns_${personValue[12]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[12]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[12]]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[12]]}
                 />
 
@@ -1053,7 +1114,9 @@ class BasicInformation extends React.Component {
                 <InputItem
                   {...getFieldProps(`ns_${personValue[14]}${index}`, {onChange: (value) => onChangeHandler(personValue[15], value, 'survey', personValue[14]),
                     initialValue: inputValue[personValue[15]] && inputValue[personValue[15]][personValue[14]]})}
-                  type="number"
+                  type="money"
+                  clear
+                  moneyKeyboardAlign="left"
                   value={inputValue[personValue[15]] && inputValue[personValue[15]][personValue[14]]}
                 />
                 <WhiteSpace size="lg" />
@@ -1099,7 +1162,9 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[2]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[2]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[2]],
                         rules: [{required: true, message: '请输入手术量'}]})}
-                      type="number"
+                      type="money"
+                      clear
+                      moneyKeyboardAlign="left"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[2]]}
                     />
 
@@ -1111,7 +1176,9 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[3]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[3]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[3]],
                         rules: [{required: true, message: '请输入急诊手术量'}]})}
-                      type="number"
+                      type="money"
+                      clear
+                      moneyKeyboardAlign="left"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[3]]}
                     />
 
@@ -1123,7 +1190,9 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[4]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[4]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[4]],
                         rules: [{required: true, message: '请输入病种比例'}]})}
-                      type="number"
+                      type="money"
+                      clear
+                      moneyKeyboardAlign="left"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[4]]}
                     />
 
@@ -1135,7 +1204,9 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[5]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[5]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[5]],
                         rules: [{required: true, message: '请输入平均住院日'}]})}
-                      type="number"
+                      type="money"
+                      clear
+                      moneyKeyboardAlign="left"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[5]]}
                     />
 
@@ -1147,7 +1218,9 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[6]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[6]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[6]],
                         rules: [{required: true, message: '请输入平均手术费用'}]})}
-                      type="number"
+                      type="money"
+                      clear
+                      moneyKeyboardAlign="left"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[6]]}
                     />
 
@@ -1159,7 +1232,9 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[7]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[7]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[7]],
                         rules: [{required: true, message: '请输入治愈率'}]})}
-                      type="number"
+                      type="money"
+                      clear
+                      moneyKeyboardAlign="left"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[7]]}
                     />
 
@@ -1171,7 +1246,9 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[8]}${index}`, {onChange: (value) => onChangeHandler(operation[9], value, 'survey', operation[8]),
                         initialValue: inputValue[operation[9]] && inputValue[operation[9]][operation[8]],
                         rules: [{required: true, message: '请输入死亡率'}]})}
-                      type="number"
+                      type="money"
+                      clear
+                      moneyKeyboardAlign="left"
                       value={inputValue[operation[9]] && inputValue[operation[9]][operation[8]]}
                     />
 
@@ -1367,7 +1444,9 @@ class BasicInformation extends React.Component {
                 {...getFieldProps('caCount', {onChange: (value) => onChangeHandler('caCount', value),
                   initialValue: inputValue.caCount || '',
                   rules: [{required: true, message: '请输入其他科室每周造影检查数量'}]})}
-                type="number"
+                type="money"
+                clear
+                moneyKeyboardAlign="left"
                 value={inputValue.caCount || ''}
               />
 

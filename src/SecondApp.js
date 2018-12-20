@@ -7,7 +7,7 @@ import './App.css';
 class App extends React.Component {
   render() {
     return (
-      <Router>
+      <Router basename="/survey">
         <Switch>
           {
             routeConfig.map(
