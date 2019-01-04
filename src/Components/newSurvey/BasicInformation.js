@@ -6,7 +6,7 @@ import {
   InputItem,
   Picker,
   WhiteSpace,
-  DatePicker,
+  // DatePicker,
   Button,
   Toast,
   Radio,
@@ -23,8 +23,8 @@ class BasicInformation extends React.Component {
 
   onChangeHandler = (key, value, type, id, i) => {
     const store = this.props;
-    const {inputValue} = store;
-    const {setFieldsValue, getFieldValue} = this.props.form;
+    // const {inputValue} = store;
+    const {setFieldsValue} = this.props.form;
     switch (key) {
       case 'ca_heartSick':
         setFieldsValue({
@@ -42,17 +42,37 @@ class BasicInformation extends React.Component {
     // }
     // console.log(typeof key, typeof value);
     // console.log(type)
-    console.log(key, value, type, id, i);
+    // console.log(key, value, type, id, i);
     if(key === 'hospitalName' || key === 'hospitalLevel'){
       value = value.toString();
     }
 
-    store.dispatch(surveyStoreLocalAction('update', key, value));
+    if(value !== '.'){
+      store.dispatch(surveyStoreLocalAction('update', key, value));
+    }
 
 
     if(key === 'hospitalName'){
       store.dispatch(getHospitalDataAction(value.toString()));
     }
+  }
+
+  numHandler = (rule, value ,callback) => {
+    // console.log(rule)
+    // console.log(typeof value, value)
+    // const store = this.props;
+    // const {setFieldsValue} = this.props.form;
+    // const fieldVl = rule.field;
+
+    if (value && !(+value >= 0)) {
+      // setFieldsValue({
+      //   [fieldVl]: 0
+      // })
+      // store.dispatch(surveyStoreLocalAction('update', fieldVl, ''));
+      callback('请重新输入')
+    }
+    // Note: 必须总是返回一个 callback，否则 validateFieldsAndScroll 无法响应
+    callback()
   }
 
   submit = () => {
@@ -61,7 +81,7 @@ class BasicInformation extends React.Component {
     const { inputValue } = this.props.globalReducer;
     let submitData = Object.assign({}, inputValue);
 
-    console.log(submitData)
+    // console.log(submitData)
     validateFieldsAndScroll({first: true, force: true, scroll:{offsetTop: 200}}, (error) => {
       const store = this.props;
       const {getFieldError} = this.props.form;
@@ -155,7 +175,7 @@ class BasicInformation extends React.Component {
                     {...getFieldProps(`${question.key}`, {onChange: (value) => onChangeHandler(`${question.key}`, value),
                       // initialValue: inputValue[`${question.category}`] && inputValue[`${question.category}`][`${question.key}`],
                       initialValue: inputValue[`${question.key}`] || '',
-                      rules: [{required: true, message: '请输入此空'}]})}
+                      rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                     type="money"
                     clear
                     moneyKeyboardAlign="left"
@@ -174,7 +194,7 @@ class BasicInformation extends React.Component {
                     {...getFieldProps(`${question.key}`, {onChange: (value) => onChangeHandler(`${question.key}`, value),
                       // initialValue: inputValue[`${question.category}`] && inputValue[`${question.category}`][`${question.key}`],
                       initialValue: inputValue[`${question.key}`] || '',
-                      // rules: [{required: true, message: '请输入此空'}]
+                      rules: [{validator: this.numHandler}]
                     })}
                     type="money"
                     clear
@@ -241,7 +261,7 @@ class BasicInformation extends React.Component {
                 <InputItem
                   {...getFieldProps(`op_${operation[1]}${index}`, {onChange: (value) => onChangeHandler(operation[1], value),
                     initialValue: inputValue[operation[1]] || '',
-                    rules: [{required: true, message: '请输入此空'}]})}
+                    rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                   type="money"
                   clear
                   moneyKeyboardAlign="left"
@@ -258,7 +278,7 @@ class BasicInformation extends React.Component {
                       {...getFieldProps(`op_${operation[2]}${index}`, {onChange: (value) => onChangeHandler(operation[2], value),
                         // initialValue: inputValue[operation[8]] && inputValue[operation[8]][operation[2]],
                         initialValue: inputValue[operation[2]] || '',
-                        rules: [{required: true, message: '请输入此空'}]})}
+                        rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                       type="money"
                       clear
                       moneyKeyboardAlign="left"
@@ -273,7 +293,7 @@ class BasicInformation extends React.Component {
                     <InputItem
                       {...getFieldProps(`op_${operation[3]}${index}`, {onChange: (value) => onChangeHandler(operation[3], value),
                         initialValue: inputValue[operation[3]] || '',
-                        rules: [{required: true, message: '请输入此空'}]})}
+                        rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                       type="money"
                       clear
                       moneyKeyboardAlign="left"
@@ -287,7 +307,7 @@ class BasicInformation extends React.Component {
                     <InputItem
                       {...getFieldProps(`op_${operation[4]}${index}`, {onChange: (value) => onChangeHandler(operation[4], value),
                         initialValue: inputValue[operation[4]] || '',
-                        rules: [{required: true, message: '请输入此空'}]})}
+                        rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                       type="money"
                       clear
                       moneyKeyboardAlign="left"
@@ -301,7 +321,7 @@ class BasicInformation extends React.Component {
                     <InputItem
                       {...getFieldProps(`op_${operation[5]}${index}`, {onChange: (value) => onChangeHandler(operation[5], value),
                         initialValue: inputValue[operation[5]] || '',
-                        rules: [{required: true, message: '请输入此空'}]})}
+                        rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                       type="money"
                       clear
                       moneyKeyboardAlign="left"
@@ -325,6 +345,7 @@ class BasicInformation extends React.Component {
           <InputItem
             {...getFieldProps('atTutor', {onChange: (value) => onChangeHandler('atTutor', value),
               initialValue: inputValue.atTutor || '',
+              rules: [{validator: this.numHandler}]
               // rules: [{required: true, message: '请输入此空'}]
             })}
             type="money"
@@ -340,6 +361,7 @@ class BasicInformation extends React.Component {
           <InputItem
             {...getFieldProps('atStudent', {onChange: (value) => onChangeHandler('atStudent', value),
               initialValue: inputValue.atStudent || '',
+              rules: [{validator: this.numHandler}]
               // rules: [{required: true, message: '请输入此空'}]
             })}
             type="money"

@@ -36,9 +36,8 @@ const getQuestionsService = async () => {
 function* getHospitalData(datas) {
   try {
     const data = yield call(getHospitalDataService, datas.data);
-    console.log(data);
-    if (data && data.hospitalName !== null || '') {
-      console.log(1)
+    // console.log(data);
+    if (data && data.hospitalName) {
       yield call([localStorage, 'setItem'], 'inputValue', JSON.stringify(data))
       yield put(updateHospitalDataAction(data));
     }

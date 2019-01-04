@@ -27,7 +27,6 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
       let originDataA = state.inputValue;
       // console.log( originDataA)
       // console.log(typeof originDataA)
-      console.log(originDataA)
       originDataA[action.key] = action.value;
       // console.log( originDataA)
       // console.log(typeof originDataA)
