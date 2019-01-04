@@ -4,13 +4,14 @@ import { Provider } from 'react-redux'
 
 // import App from './App'
 // import configureStore from './Store'
-import SecondApp from './SecondApp'
+// import SecondApp from './SecondApp'
+import ThirdApp from './ThirdApp'
 import configureStore from './Store/survey'
 import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(
   <Provider store={configureStore()}>
-    <SecondApp />
+    <ThirdApp />
   </Provider>,
   document.getElementById('root')
 )

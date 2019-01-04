@@ -3,12 +3,14 @@ import Question from './Pages/Question'
 import Success from './Pages/Success'
 import surveySuccess from './Pages/surveySuccess'
 import ExportExcel from './Pages/ExportExcel'
-import Survey from './Pages/Survey'
+// import Survey from './Pages/Survey'
+import newSurvey from './Pages/newSurvey'
 import Error from './Pages/Error'
 
 export const routeConfig = [{
   path: '/',
-  component: Survey,
+  component: newSurvey,
+  // component: Survey,
   // component: Home,
   exact: true,
 }, {
@@ -18,8 +20,10 @@ export const routeConfig = [{
   path: '/success',
   component: Success,
 }, {
-  path: '/survey',
-  component: Survey,
+  path: '/newSurvey',
+  // path: '/survey',
+  // component: Survey,
+  component: newSurvey,
 }, {
   path: '/surveySuccess',
   component: surveySuccess,

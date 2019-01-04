@@ -3,6 +3,16 @@ import { initialGlobalState } from '../states/survey.state';
 
 export const globalReducer = (state = initialGlobalState, action = {}) => {
   switch (action.type) {
+    case actionTypes.UPDATE_QUESTIONS:
+      return {
+        ...state,
+        ...{questions: action.data}
+      };
+    case actionTypes.UPDATE_HOSPITALDATA:
+      return {
+        ...state,
+        ...{inputValue: action.data}
+      };
     case actionTypes.SUBMIT_AGREEMENT:
       return {
         ...state,
@@ -17,6 +27,7 @@ export const globalReducer = (state = initialGlobalState, action = {}) => {
       let originDataA = state.inputValue;
       // console.log( originDataA)
       // console.log(typeof originDataA)
+      console.log(originDataA)
       originDataA[action.key] = action.value;
       // console.log( originDataA)
       // console.log(typeof originDataA)

@@ -1,17 +1,54 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 import {Toast} from "antd-mobile";
 import {
-  actionTypes, updateInputValueAction,
+  actionTypes, updateInputValueAction, updateQuestionsAction, updateHospitalDataAction,
   appendInputValueAction, surveyUpdateLocalAction,
 } from '../actions/survey.action'
 
-import { HttpHandlerService } from '../../Utilities/HttpService'
+import {HttpHandlerService, HttpOriginService} from '../../Utilities/HttpService'
 
 // import { GetRedirectUrl } from '../../Utilities'
 
 const PATH = {
-  saveSurvey: 'http://pci.violetqqy.com/pci-operation/api/hospital/saveRecord',
-  exportExcel: 'http://pci.violetqqy.com/pci-operation/api/hospital/exportExcel',
+  getQuestions: `${process.env.PUBLIC_URL}/static/newQuestions.json`,
+  getHospitalData: 'https://pci.violetqqy.com/pci-operation/api/hospital/getPciRecord',
+  // saveSurvey: 'http://pci.violetqqy.com/pci-operation/api/hospital/saveRecord',
+  // exportExcel: 'http://pci.violetqqy.com/pci-operation/api/hospital/exportExcel',
+  saveSurvey: 'https://pci.violetqqy.com/pci-operation/api/hospital/savePciRecord',
+  // exportExcel: 'https://pci.violetqqy.com/pci-operation/api/hospital/exportExcel',
+}
+
+function* loadQuestions() {
+  try {
+    const data = yield call(getQuestionsService);
+    if (data) {
+      yield put(updateQuestionsAction(data));
+    }
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const getQuestionsService = async () => {
+  return HttpOriginService.get(`${PATH.getQuestions}`)
+}
+
+function* getHospitalData(datas) {
+  try {
+    const data = yield call(getHospitalDataService, datas.data);
+    console.log(data);
+    if (data && data.hospitalName !== null || '') {
+      console.log(1)
+      yield call([localStorage, 'setItem'], 'inputValue', JSON.stringify(data))
+      yield put(updateHospitalDataAction(data));
+    }
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const getHospitalDataService = async (name) => {
+  return HttpHandlerService.get(`${PATH.getHospitalData}?hospitalName=${name}`)
 }
 
 function* surveyStoreLocal(actions) {
@@ -57,6 +94,8 @@ function* exportExcel() {
 }
 
 export const globalSaga = [
+  takeLatest(actionTypes.LOAD_QUESTIONS, loadQuestions),
+  takeLatest(actionTypes.GET_HOSPITALDATA, getHospitalData),
   takeLatest(actionTypes.SURVEY_STORE_LOCAL, surveyStoreLocal),
   takeLatest(actionTypes.SURVER_GET_LOCAL, surveyGetLocal),
   takeLatest(actionTypes.SAVE_SURVEY, saveSurvey),

@@ -1,4 +1,8 @@
 export const actionTypes = {
+  LOAD_QUESTIONS: 'LOAD_QUESTIONS',
+  UPDATE_QUESTIONS: 'UPDATE_QUESTIONS',
+  GET_HOSPITALDATA: 'GET_HOSPITALDATA',
+  UPDATE_HOSPITALDATA: 'UPDATE_HOSPITALDATA',
   SUBMIT_AGREEMENT: 'SUBMIT_AGREEMENT',
   UPDATE_INPUT_VALUE: 'UPDATE_INPUT_VALUE',
   APPEND_INPUT_VALUE: 'APPEND_INPUT_VALUE',
@@ -7,6 +11,33 @@ export const actionTypes = {
   SURVER_GET_LOCAL: 'SURVER_GET_LOCAL',
   SURVER_UPDATE_LOCAL: 'SURVER_UPDATE_LOCAL',
   EXPORT_EXCEL: 'EXPORT_EXCEL',
+}
+
+export const loadQuestionsAction = () => {
+  return {
+    type: actionTypes.LOAD_QUESTIONS
+  }
+}
+
+export const updateQuestionsAction = (data) => {
+  return {
+    type: actionTypes.UPDATE_QUESTIONS,
+    data: data
+  }
+}
+
+export const getHospitalDataAction = (data) => {
+  return {
+    type: actionTypes.GET_HOSPITALDATA,
+    data: data
+  }
+}
+
+export const updateHospitalDataAction = (data) => {
+  return {
+    type: actionTypes.UPDATE_HOSPITALDATA,
+    data: data
+  }
 }
 
 export const submitAgreementAction = () => {

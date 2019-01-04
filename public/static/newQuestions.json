@@ -1,0 +1,192 @@
+[
+  {
+  "category": "ca",
+  "key": "ca_title",
+  "title": "2018年冠心病介入治疗信息收集表数据上报",
+  "type": "title"
+  },
+  {
+    "category": "ca",
+    "key": "ca",
+    "title": "冠脉动脉造影术多少例？",
+    "type": "input"
+  },
+  {
+    "category": "ca",
+    "key": "pci",
+    "title": "PCI术多少例？",
+    "type": "input"
+  },
+  {
+    "category": "ca",
+    "key": "bracket",
+    "title": "植入支架总数多少枚？",
+    "type": "input"
+  },
+  {
+    "category": "ca",
+    "key": "cpc",
+    "title": "请选择胸痛中心",
+    "type": "selection",
+    "option": [
+      {"label": "是", "value": "是"},
+      {"label": "否", "value": "否"}
+    ]
+  },
+  {
+    "category": "ca",
+    "key": "eo",
+    "title": "急诊手术多少例？",
+    "type": "input"
+  },
+  {
+    "category": "ca",
+    "key": "dtob",
+    "title": "平均D-to-B多少分钟？",
+    "type": "input"
+  },
+  {
+    "category": "ca",
+    "key": "cacp",
+    "title": "并发症多少例？",
+    "type": "input"
+  },
+  {
+    "category": "ca",
+    "key": "caDead",
+    "title": "死亡多少例？",
+    "type": "input"
+  },
+  {
+    "category": "ca",
+    "key": "ca_des",
+    "title": "以下两空格内容是经认证的培训基地中心填写",
+    "type": "des"
+  },
+  {
+    "category": "ca",
+    "key": "caTutor",
+    "title": "冠心病介入治疗培训基地导师人数多少人？",
+    "type": "ifInput"
+  },
+  {
+    "category": "ca",
+    "key": "caStudent",
+    "title": "2018年接收培训学员多少人？",
+    "type": "ifInput"
+  },
+  {
+    "category": "con",
+    "key": "con_title",
+    "title": "2018年结构性心脏病介入信息数据上报",
+    "type": "title"
+  },
+  {
+    "category": "con",
+    "key": "asd",
+    "title": "房间隔缺损多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "pda",
+    "title": "动脉导管未闭多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "vsd",
+    "title": "室间隔缺损多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "pfo",
+    "title": "卵圆孔未闭多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "pvs",
+    "title": "肺动脉瓣狭窄多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "caf",
+    "title": "冠状动脉瘘多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "cafcp",
+    "title": "并发症多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "cafDead",
+    "title": "死亡多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "cafFail",
+    "title": "失败多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "lao",
+    "title": "左心耳封堵多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "laocp",
+    "title": "并发症多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "laoDead",
+    "title": "死亡多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "sas",
+    "title": "主动脉瓣狭窄多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "sascp",
+    "title": "并发症多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "sasDead",
+    "title": "死亡多少例？",
+    "type": "input"
+  },
+  {
+    "category": "con",
+    "key": "con_des",
+    "title": "以下两空格内容是经认证的培训基地中心填写",
+    "type": "des"
+  },
+  {
+    "category": "con",
+    "key": "shdTutor",
+    "title": "先心病介入治疗培训基地导师人数多少人？",
+    "type": "ifInput"
+  },
+  {
+    "category": "con",
+    "key": "shdStudent",
+    "title": "2018年接收培训学员多少人？",
+    "type": "ifInput"
+  }
+]
