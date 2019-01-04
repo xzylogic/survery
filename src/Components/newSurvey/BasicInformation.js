@@ -47,8 +47,13 @@ class BasicInformation extends React.Component {
       value = value.toString();
     }
 
-    if(value !== '.'){
+    if(value !== '.' && key === 'dtob'){
       store.dispatch(surveyStoreLocalAction('update', key, value));
+    }else if(key === 'cpc'){
+      store.dispatch(surveyStoreLocalAction('update', key, value));
+    }else if(value !== '.'){
+      const vl = parseInt(value).toString();
+      store.dispatch(surveyStoreLocalAction('update', key, vl));
     }
 
 
