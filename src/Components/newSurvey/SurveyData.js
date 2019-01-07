@@ -48,3 +48,8 @@ export const hospitalLevel = [
   {label: '二级', value: '二级'},
   {label: '三级', value: '三级'},
 ];
+
+export const ifExpand = [
+  {label: '是', value: '是'},
+  {label: '否', value: '否'},
+];

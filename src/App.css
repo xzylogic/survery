@@ -27,3 +27,11 @@ html:not([data-scale]) .am-list-body div:not(:last-child) .am-list-line::after,
 html:not([data-scale]) .am-list-item:not(:last-child) .am-list-line::after{
   height: 0;
 }
+
+.hospitalName .am-list-line .am-list-content{
+  display: none;
+}
+
+.hospitalName .am-list-line .am-list-extra{
+  flex-basis: 100%;
+}

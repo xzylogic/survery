@@ -12,7 +12,7 @@ import {loadQuestionsAction} from "../../Store/actions/survey.action";
 class Index extends React.Component {
 
   componentDidMount() {
-    document.title = "调查表";
+    document.title = "2018年上海市心血管介入治疗数据统计";
     const store = this.props;
     const { questions } = store.globalReducer;
     if (Array.isArray(questions) && questions.length === 0) {
@@ -26,12 +26,12 @@ class Index extends React.Component {
     return (
       <React.Fragment>
         <div className='survey'>
-          <h3 className='survey_title'>调查表</h3>
+          <h3 className='survey_title'>2018年上海市心血管介入治疗数据统计</h3>
           <div style={{position: 'relative'}}>
             <p
-              className='survey_container'>申明：遵照上海市卫计委的指示和要求，现对全市开展心脏介入治疗的机构（包括民营、部队医院）进行调研。调查表的内容涉及硬件设施、人员结构、工作开展等情况，同时听取基层人员的意见和建议，最终形成调研报告。调查表内容不纳入考核指标，不批评，不公开，其中医疗机构名称或个人信息将不会出现在报告中。</p>
+              className='survey_container'>根据国家心血管介入质控中心、上海市卫计委、上海市卫生监督所的要求，请心脏科负责人填写“2018年上海（经皮）心血管介入治疗”数据，截至1月16日完成。</p>
             <img src={`${process.env.PUBLIC_URL}/images/WechatIMG8.png`} alt="印章"/>
-            <p className='survey_noUnit'>填写数字时请直接填写数量，<span>不用填写计量单位</span></p>
+            <p className='survey_noUnit'>填写数字时请直接填写数量，<span>不用填写计量单位（不能有空格，否者无法提交）</span></p>
           </div>
           {questions ? <BasicInformation questions={questions} inputValue={inputValue}/> : ''}
         </div>
