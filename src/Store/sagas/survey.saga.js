@@ -15,7 +15,7 @@ const PATH = {
   // saveSurvey: 'http://pci.violetqqy.com/pci-operation/api/hospital/saveRecord',
   // exportExcel: 'http://pci.violetqqy.com/pci-operation/api/hospital/exportExcel',
   saveSurvey: 'https://pci.violetqqy.com/pci-operation/api/hospital/savePciRecord',
-  // exportExcel: 'https://pci.violetqqy.com/pci-operation/api/hospital/exportExcel',
+  exportExcel: 'https://pci.violetqqy.com/pci-operation/api/hospital/exportPci',
 }
 
 function* loadQuestions() {

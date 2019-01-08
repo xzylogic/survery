@@ -2,7 +2,7 @@
   "name": "disease-survey",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pci.violetqqy.com/pci-operation",
+  "homepage": "https://pci.violetqqy.com/new-survey",
   "proxy": "https://pci.violetqqy.com",
   "scripts": {
     "start": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired start",

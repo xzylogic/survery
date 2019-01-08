@@ -13,7 +13,7 @@ import {
 } from 'antd-mobile'
 import  createDOMForm  from 'rc-form/lib/createDOMForm';
 import moment from 'moment'
-import {getHospitalDataAction, surveyStoreLocalAction, saveSurveyAction} from "../../Store/actions/survey.action";
+import {surveyStoreLocalAction, saveSurveyAction} from "../../Store/actions/survey.action";
 import { hospitalName, hospitalLevel, ifExpand } from './SurveyData';
 
 const RadioItem = Radio.RadioItem;
@@ -81,9 +81,10 @@ class BasicInformation extends React.Component {
       store.dispatch(surveyStoreLocalAction('update', key, value));
     }
 
-    if(key === 'hospitalName'){
-      store.dispatch(getHospitalDataAction(value.toString()));
-    }
+    //获取医院数据
+    // if(key === 'hospitalName'){
+    //   store.dispatch(getHospitalDataAction(value.toString()));
+    // }
   }
 
   numHandler = (rule, value ,callback) => {
@@ -136,37 +137,21 @@ class BasicInformation extends React.Component {
 
   submit = () => {
     const {validateFieldsAndScroll} = this.props.form; //isFieldTouched, getFieldError, validateFields
-
-    // const { inputValue } = this.props.globalReducer;
-    // let submitData = Object.assign({}, inputValue);
-
-    // console.log(submitData)
     validateFieldsAndScroll({first: true, force: true, scroll:{offsetTop: 200}}, (error) => {
       const store = this.props;
       const {getFieldError, getFieldsValue, getFieldValue, setFieldsValue} = this.props.form;
       const router = this.props.history;
       if (!error) {
-        // Object.keys(submitData).forEach((key)=>{
-        //   if(key === 'hospitalName' || key === 'hospitalLevel'){
-        //     submitData[key] = submitData[key].toString();
-        //   }
-        // })
-        // delete submitData['canSelect0'];
-        // console.log(submitData);
-        // console.log(getFieldsValue());
         setFieldsValue({
           hospitalName: getFieldValue('hospitalName').toString(),
           hospitalLevel: getFieldValue('hospitalLevel').toString(),
         })
-        // console.log(getFieldsValue());
         store.dispatch(saveSurveyAction(getFieldsValue(), () => {
           console.log('提交成功');
           router.push('/surveySuccess');
         }, err => {
           Toast.info(err);
         }))
-        // console.log(value);
-        // console.info('success');
       } else {
         Object.keys(getFieldsValue()).forEach((key)=>{
           getFieldError(key)
@@ -201,20 +186,6 @@ class BasicInformation extends React.Component {
       <React.Fragment>
 
         <List>
-          {/*<p className='info_content'>医院的等级 <span>*</span></p>*/}
-          {/*{getFieldError('hospitalLevel') ? <p className='surveyError'>{getFieldError('hospitalLevel')}</p>:''}*/}
-          {/*<Picker*/}
-            {/*{...getFieldProps('hospitalLevel', {onChange: (value) => onChangeHandler('hospitalLevel', value),*/}
-              {/*initialValue: inputValue.hospitalLevel || '',*/}
-              {/*rules: [{required: true, message: '请选择医院的等级'}]})}*/}
-            {/*value={inputValue.hospitalLevel || ''}*/}
-            {/*data={hospitalLevel}*/}
-            {/*cols={1}>*/}
-            {/*<List.Item arrow="horizontal"> </List.Item>*/}
-          {/*</Picker>*/}
-
-          {/*<WhiteSpace size="lg" />*/}
-
           <p className='info_title'>基本信息</p>
           <p className='info_content'>医院名称 <span>*</span></p>
           {getFieldError('hospitalName') ? <p className='surveyError'>{getFieldError('hospitalName')}</p>:''}
@@ -227,6 +198,18 @@ class BasicInformation extends React.Component {
             cols={1}>
             <List.Item arrow="horizontal" className='hospitalName'> </List.Item>
           </Picker>
+          <WhiteSpace size="lg" />
+
+          <p className='info_content'>科主任姓名<span>*</span></p>
+          {getFieldError('name') ? <p className='surveyError'>{getFieldError('name')}</p>:''}
+          <InputItem
+            {...getFieldProps('name', {onChange: (value) => onChangeHandler('name', value),
+              initialValue: inputValue.name || '',
+              rules: [{required: true, message: '请输入此空'}]
+            })}
+            type="text"
+            value={inputValue.name || ''}
+          />
           <WhiteSpace size="lg" />
 
           <p className='info_content'>医院等级 <span>*</span></p>
@@ -347,15 +330,12 @@ class BasicInformation extends React.Component {
 
         {inputValue.hasCa === '是' && inputValue.car === '是' ? (
           <List>
-            {/*<p className='info_content' style={{color: 'red'}}>以下内容是经认证的培训基地中心填写</p>*/}
-            {/*<WhiteSpace size="lg" />*/}
             <p className='info_content'>冠心病介入治疗培训基地导师人数多少人？<span>*</span></p>
             {getFieldError('caTutor') ? <p className='surveyError'>{getFieldError('caTutor')}</p>:''}
             <InputItem
               {...getFieldProps('caTutor', {onChange: (value) => onChangeHandler('caTutor', value),
                 initialValue: inputValue.caTutor || '',
                 rules: [{required: true, message: '请输入此空'}, {validator: this.numHandler}]
-                // rules: [{required: true, message: '请输入此空'}]
               })}
               type="money"
               clear
@@ -371,7 +351,6 @@ class BasicInformation extends React.Component {
               {...getFieldProps('caStudent', {onChange: (value) => onChangeHandler('caStudent', value),
                 initialValue: inputValue.caStudent || '',
                 rules: [{required: true, message: '请输入此空'}, {validator: this.numHandler}]
-                // rules: [{required: true, message: '请输入此空'}]
               })}
               type="money"
               clear
@@ -642,15 +621,12 @@ class BasicInformation extends React.Component {
 
         {inputValue.hasShd === '是' && inputValue.shdr === '是' ? (
           <List>
-            {/*<p className='info_content' style={{color: 'red'}}>以下内容是经认证的培训基地中心填写</p>*/}
-            {/*<WhiteSpace size="lg" />*/}
             <p className='info_content'>先心病介入治疗培训基地导师人数多少人？<span>*</span></p>
             {getFieldError('shdTutor') ? <p className='surveyError'>{getFieldError('shdTutor')}</p>:''}
             <InputItem
               {...getFieldProps('shdTutor', {onChange: (value) => onChangeHandler('shdTutor', value),
                 initialValue: inputValue.shdTutor || '',
                 rules: [{required: true, message: '请输入此空'}, {validator: this.numHandler}]
-                // rules: [{required: true, message: '请输入此空'}]
               })}
               type="money"
               clear
@@ -666,7 +642,6 @@ class BasicInformation extends React.Component {
               {...getFieldProps('shdStudent', {onChange: (value) => onChangeHandler('shdStudent', value),
                 initialValue: inputValue.shdStudent || '',
                 rules: [{required: true, message: '请输入此空'}, {validator: this.numHandler}]
-                // rules: [{required: true, message: '请输入此空'}]
               })}
               type="money"
               clear
@@ -677,39 +652,6 @@ class BasicInformation extends React.Component {
             <WhiteSpace size="lg" />
           </List>
         ) : ''}
-        
-
-        {/*<WhiteSpace size="lg" />*/}
-        {/*<WhiteSpace size="lg" />*/}
-        
-        {/*<p className='info_content'>填表人 <span>*</span></p>*/}
-        {/*{getFieldError('name') ? <p className='surveyError'>{getFieldError('name')}</p>:''}*/}
-        {/*<InputItem*/}
-          {/*{...getFieldProps('name', {onChange: (value) => onChangeHandler('name', value),*/}
-            {/*initialValue: inputValue.name || '',*/}
-            {/*rules: [{required: true, message: '请输入填表人'}]})}*/}
-          {/*type="text"*/}
-          {/*value={inputValue.name || ''}*/}
-        {/*/>*/}
-
-        {/*<WhiteSpace size="lg" />*/}
-
-        {/*<p className='info_content'>填表日期 <span>*</span></p>*/}
-        {/*{getFieldError('date') ? <p className='surveyError'>{getFieldError('date')}</p>:''}*/}
-        {/*<DatePicker*/}
-          {/*{...getFieldProps('date', {onChange: (value) => onChangeHandler('date', value),*/}
-            {/*initialValue: inputValue.date && new Date(inputValue.date),*/}
-            {/*rules: [{required: true, message: '请输入填表日期'}]})}*/}
-          {/*mode="date"*/}
-          {/*title=""*/}
-          {/*value={inputValue.date && new Date(inputValue.date)}*/}
-          {/*minDate={new Date(`${new Date().getFullYear() - 120}-01-01`)}*/}
-          {/*maxDate={new Date()}*/}
-        {/*>*/}
-          {/*<List.Item arrow="horizontal"> </List.Item>*/}
-        {/*</DatePicker>*/}
-
-        <WhiteSpace size="lg" />
         <WhiteSpace size="lg" />
         <WhiteSpace size="lg" />
 
