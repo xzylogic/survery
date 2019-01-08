@@ -33,12 +33,12 @@ export const getHospitalDataAction = (data) => {
   }
 }
 
-export const updateHospitalDataAction = (data) => {
-  return {
-    type: actionTypes.UPDATE_HOSPITALDATA,
-    data: data
-  }
-}
+// export const updateHospitalDataAction = (data) => {
+//   return {
+//     type: actionTypes.UPDATE_HOSPITALDATA,
+//     data: data
+//   }
+// }
 
 export const submitAgreementAction = () => {
   return {

@@ -1,7 +1,7 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 import {Toast} from "antd-mobile";
 import {
-  actionTypes, updateInputValueAction, updateQuestionsAction, updateHospitalDataAction,
+  actionTypes, updateInputValueAction, updateQuestionsAction,
   appendInputValueAction, surveyUpdateLocalAction,
 } from '../actions/survey.action'
 
@@ -36,10 +36,13 @@ const getQuestionsService = async () => {
 function* getHospitalData(datas) {
   try {
     const data = yield call(getHospitalDataService, datas.data);
+    // console.log(datas);
     // console.log(data);
     if (data && data.hospitalName) {
-      yield call([localStorage, 'setItem'], 'inputValue', JSON.stringify(data))
-      yield put(updateHospitalDataAction(data));
+      yield call([localStorage, 'setItem'], 'inputValue', JSON.stringify(data));
+      yield put(surveyUpdateLocalAction(data));
+    }else{
+      yield put(surveyUpdateLocalAction({'hospitalName': datas.data}));
     }
   } catch (error) {
     throw new Error(error)

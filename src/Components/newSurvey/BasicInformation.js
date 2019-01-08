@@ -77,32 +77,9 @@ class BasicInformation extends React.Component {
       value = value.toString();
     }
 
-    // if(key === 'pci'){
-    //   store.dispatch(surveyStoreLocalAction('update', key, value));
-    //   store.dispatch(surveyStoreLocalAction('update', 'bracket', value));
-    //   return ;
-    // }else if(key === 'bracket'){
-    //   if(Number(value) >= Number(inputValue.pci)){
-    //     store.dispatch(surveyStoreLocalAction('update', key, value));
-    //   }
-    //   return ;
-    // }
-
     if(value !== '.'){
       store.dispatch(surveyStoreLocalAction('update', key, value));
     }
-    // console.log(value)
-    // if(value !== '.' && key === 'dtob'){
-    //   store.dispatch(surveyStoreLocalAction('update', key, value));
-    // }else if(key === 'cpc'){
-    //   store.dispatch(surveyStoreLocalAction('update', key, value));
-    // }else if(value !== '.'){
-    //   const vl = parseInt(value).toString();
-    //   store.dispatch(surveyStoreLocalAction('update', key, vl));
-    // }else{
-    //   store.dispatch(surveyStoreLocalAction('update', key, value));
-    // }
-
 
     if(key === 'hospitalName'){
       store.dispatch(getHospitalDataAction(value.toString()));
@@ -117,6 +94,10 @@ class BasicInformation extends React.Component {
     // const fieldVl = rule.field;
     // console.log(getFieldValue('pci'));
 
+    if(rule.field === 'caTutor' || rule.field === 'shdTutor' || rule.field === 'atTutor'){
+      value < 1 ? callback(' 导师人数必须大于0') : callback();
+      return ;
+    }
     if(rule.field === 'pci'){
       if(+value > +getFieldValue('bracket')){
         callback(' 此空需小于植入支架总数');
@@ -156,13 +137,13 @@ class BasicInformation extends React.Component {
   submit = () => {
     const {validateFieldsAndScroll} = this.props.form; //isFieldTouched, getFieldError, validateFields
 
-    const { inputValue } = this.props.globalReducer;
-    let submitData = Object.assign({}, inputValue);
+    // const { inputValue } = this.props.globalReducer;
+    // let submitData = Object.assign({}, inputValue);
 
     // console.log(submitData)
     validateFieldsAndScroll({first: true, force: true, scroll:{offsetTop: 200}}, (error) => {
       const store = this.props;
-      const {getFieldError} = this.props.form;
+      const {getFieldError, getFieldsValue, getFieldValue, setFieldsValue} = this.props.form;
       const router = this.props.history;
       if (!error) {
         // Object.keys(submitData).forEach((key)=>{
@@ -171,13 +152,14 @@ class BasicInformation extends React.Component {
         //   }
         // })
         // delete submitData['canSelect0'];
-        console.log(submitData);
+        // console.log(submitData);
         // console.log(getFieldsValue());
-        // setFieldsValue({
-        //   hospitalName: getFieldValue('hospitalName').toString(),
-        //   hospitalLevel: getFieldValue('hospitalLevel').toString(),
-        // })
-        store.dispatch(saveSurveyAction(submitData, () => {
+        setFieldsValue({
+          hospitalName: getFieldValue('hospitalName').toString(),
+          hospitalLevel: getFieldValue('hospitalLevel').toString(),
+        })
+        // console.log(getFieldsValue());
+        store.dispatch(saveSurveyAction(getFieldsValue(), () => {
           console.log('提交成功');
           router.push('/surveySuccess');
         }, err => {
@@ -186,7 +168,7 @@ class BasicInformation extends React.Component {
         // console.log(value);
         // console.info('success');
       } else {
-        Object.keys(submitData).forEach((key)=>{
+        Object.keys(getFieldsValue()).forEach((key)=>{
           getFieldError(key)
         })
         // console.log(error);
@@ -430,9 +412,9 @@ class BasicInformation extends React.Component {
                   <div key={index}>
 
                     <p className='info_content'>{operation[0]}<span>*</span></p>
-                    {getFieldError(`op_${operation[1]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[1]}${index}`)}</p>:''}
+                    {getFieldError(`${operation[1]}`) ? <p className='surveyError'>{getFieldError(`${operation[1]}`)}</p>:''}
                     <InputItem
-                      {...getFieldProps(`op_${operation[1]}${index}`, {onChange: (value) => onChangeHandler(operation[1], value),
+                      {...getFieldProps(`${operation[1]}`, {onChange: (value) => onChangeHandler(operation[1], value),
                         initialValue: inputValue[operation[1]] || '',
                         rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                       type="number"
@@ -446,9 +428,9 @@ class BasicInformation extends React.Component {
                     {inputValue[operation[1]] > 0 ? (
                       <List>
                         <p className='info_contentChild'>{operation[6]}<span>*</span></p>
-                        {getFieldError(`op_${operation[2]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[2]}${index}`)}</p>:''}
+                        {getFieldError(`${operation[2]}`) ? <p className='surveyError'>{getFieldError(`${operation[2]}`)}</p>:''}
                         <InputItem
-                          {...getFieldProps(`op_${operation[2]}${index}`, {onChange: (value) => onChangeHandler(operation[2], value),
+                          {...getFieldProps(`${operation[2]}`, {onChange: (value) => onChangeHandler(operation[2], value),
                             // initialValue: inputValue[operation[8]] && inputValue[operation[8]][operation[2]],
                             initialValue: inputValue[operation[2]] || '',
                             rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
@@ -462,9 +444,9 @@ class BasicInformation extends React.Component {
                         <WhiteSpace size="lg" />
 
                         <p className='info_contentChild'>{operation[7]}<span>*</span></p>
-                        {getFieldError(`op_${operation[3]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[3]}${index}`)}</p>:''}
+                        {getFieldError(`${operation[3]}`) ? <p className='surveyError'>{getFieldError(`${operation[3]}`)}</p>:''}
                         <InputItem
-                          {...getFieldProps(`op_${operation[3]}${index}`, {onChange: (value) => onChangeHandler(operation[3], value),
+                          {...getFieldProps(`${operation[3]}`, {onChange: (value) => onChangeHandler(operation[3], value),
                             initialValue: inputValue[operation[3]] || '',
                             rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                           type="money"
@@ -476,9 +458,9 @@ class BasicInformation extends React.Component {
                         <WhiteSpace size="lg" />
 
                         <p className='info_contentChild'>并发症多少例？<span>*</span></p>
-                        {getFieldError(`op_${operation[4]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[4]}${index}`)}</p>:''}
+                        {getFieldError(`${operation[4]}`) ? <p className='surveyError'>{getFieldError(`${operation[4]}`)}</p>:''}
                         <InputItem
-                          {...getFieldProps(`op_${operation[4]}${index}`, {onChange: (value) => onChangeHandler(operation[4], value),
+                          {...getFieldProps(`${operation[4]}`, {onChange: (value) => onChangeHandler(operation[4], value),
                             initialValue: inputValue[operation[4]] || '',
                             rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                           type="money"
@@ -490,9 +472,9 @@ class BasicInformation extends React.Component {
                         <WhiteSpace size="lg" />
 
                         <p className='info_contentChild'>死亡多少例？<span>*</span></p>
-                        {getFieldError(`op_${operation[5]}${index}`) ? <p className='surveyError'>{getFieldError(`op_${operation[5]}${index}`)}</p>:''}
+                        {getFieldError(`${operation[5]}`) ? <p className='surveyError'>{getFieldError(`${operation[5]}`)}</p>:''}
                         <InputItem
-                          {...getFieldProps(`op_${operation[5]}${index}`, {onChange: (value) => onChangeHandler(operation[5], value),
+                          {...getFieldProps(`${operation[5]}`, {onChange: (value) => onChangeHandler(operation[5], value),
                             initialValue: inputValue[operation[5]] || '',
                             rules: [{required: true, message: '请输入此空'},{validator: this.numHandler}]})}
                           type="money"
