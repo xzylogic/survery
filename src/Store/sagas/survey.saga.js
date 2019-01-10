@@ -11,11 +11,11 @@ import {HttpHandlerService, HttpOriginService} from '../../Utilities/HttpService
 
 const PATH = {
   getQuestions: `${process.env.PUBLIC_URL}/static/newQuestions.json`,
-  getHospitalData: 'https://pci.violetqqy.com/pci-operation/api/hospital/getPciRecord',
+  getHospitalData: 'https://test-cloud.medicine-tec.cn/pci-operation/api/hospital/getPciRecord',
   // saveSurvey: 'http://pci.violetqqy.com/pci-operation/api/hospital/saveRecord',
   // exportExcel: 'http://pci.violetqqy.com/pci-operation/api/hospital/exportExcel',
-  saveSurvey: 'https://pci.violetqqy.com/pci-operation/api/hospital/savePciRecord',
-  exportExcel: 'https://pci.violetqqy.com/pci-operation/api/hospital/exportPci',
+  saveSurvey: 'https://test-cloud.medicine-tec.cn/pci-operation/api/hospital/savePciRecord',
+  exportExcel: 'https://test-cloud.medicine-tec.cn/pci-operation/api/hospital/exportPci',
 }
 
 function* loadQuestions() {

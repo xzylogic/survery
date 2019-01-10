@@ -2,8 +2,8 @@
   "name": "disease-survey",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pci.violetqqy.com/new-survey",
-  "proxy": "https://pci.violetqqy.com",
+  "homepage": "https://test-cloud.medicine-tec.cn/new-survey",
+  "proxy": "https://test-cloud.medicine-tec.cn",
   "scripts": {
     "start": "cross-env REACT_APP_APPID=wx6737d318e27dab75 react-app-rewired start",
     "build": "npm run build:prod",
