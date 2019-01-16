@@ -58,6 +58,7 @@ export const hospitalName = [
   {label: '上海交通大学医学院附属仁济医院南院', value: '上海交通大学医学院附属仁济医院南院'},
   {label: '上海交通大学附属第六人民医院东院', value: '上海交通大学附属第六人民医院东院'},
   {label: '上海第十人民医院崇明分院', value: '上海第十人民医院崇明分院'},
+  {label: '上海市东方医院南院', value: '上海市东方医院南院'},
 ];
 
 export const hospitalLevel = [
